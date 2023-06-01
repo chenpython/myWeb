@@ -1,0 +1,14 @@
+.venv
+html
+.vscode
+.env
+data
+__pycache__
+*/__pycache__
+*/*/__pycache__
+*/*/*/__pycache__
+*/*/*/*/__pycache__
+
+logs
+*/*.log
+
