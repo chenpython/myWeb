@@ -1,9 +1,7 @@
 .venv
-html
-js
 .vscode
 .env
-data
+
 __pycache__
 */__pycache__
 */*/__pycache__
@@ -14,3 +12,6 @@ logs
 */*.log
 
 node_modules
+# html
+# js
+# data/
