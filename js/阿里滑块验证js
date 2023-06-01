@@ -1,3 +1,21 @@
+var window = {
+    location: {
+        href: "https://www.szlcsc.com/ipLimited.html",
+        hash: '',
+        search: ''
+    },
+    document: {
+        referrer: "",
+        title: '立创商城_一站式电子元器件采购自营商城_现货元器件交易网-嘉立创电子商城',
+        getElementsByTagName: function getElementsByTagName() { [native code] }
+    },
+    navigator: {
+        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
+    }
+}
+var location = window.location
+var document = window.document
+var navigator = window.navigator
 !function() {
     function cond() {
         return Math.random()
@@ -6905,3 +6923,5 @@
     chkQuerySet(),   // 将 GREY_RATIO 赋值为 t，t 的值为  window[QUERY_KEY] 或者 NAN
     cond() > GREY_RATIO ? STABLE_ACTION() : NEW_ACTION()
 }();
+
+console.log('sss')
