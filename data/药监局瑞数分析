@@ -1,0 +1,53 @@
+最终数据请求
+
+GET https://www.nmpa.gov.cn/zwfw/sdxx/sdxxyp/index.html HTTP/1.1
+Host: www.nmpa.gov.cn
+Connection: keep-alive
+sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
+sec-ch-ua-mobile: ?0
+sec-ch-ua-platform: "Windows"
+Upgrade-Insecure-Requests: 1
+User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Sec-Fetch-Site: same-origin
+Sec-Fetch-Mode: navigate
+Sec-Fetch-Dest: document
+Referer: https://www.nmpa.gov.cn/zwfw/sdxx/sdxxyp/index.html
+Accept-Encoding: gzip, deflate, br
+Accept-Language: zh-CN,zh;q=0.9
+Cookie: acw_tc=3ccdc15516859466519688917e1355a5937b65c2c0e205613a352fec6fe9b1; NfBCSins2OywO=60A_Gigo0rS1wlFXZpa8IjFZ6EeVGCMneBLVXnK..T3fV2R2imfO90VYnS0g5v7BtWZeVs7ialGi0XQ_j_fz9Oaa; NfBCSins2OywP=0Sq23.k_lwjysaPw1Qq_niGWcrPcoNMCzu1DwYTb6KS_kDHNR3ZjPraDGLXU9sWzx1_wiQo8LRIx_f7Ila3ng8sBQ7AtvUhem.y8ydg_DgG1yvsQnVRrf7AKx_4RU6HcTYMUPb.wbLFNhpVf7mKNnyepdELAbAGjAhQXhWRYTnR6Hkb0VjfJN4zML.oG0Twq4lz2WX5Xd23QZzZMGvTNFsqq_xWIiFmpAD5.qUX0fp3W
+
+携带3个cookie：
+  1、来自第一个请求的响应：
+    acw_tc=3ccdc15516859466519688917e1355a5937b65c2c0e205613a352fec6fe9b1
+    NfBCSins2OywO=60A_Gigo0rS1wlFXZpa8IjFZ6EeVGCMneBLVXnK..T3fV2R2imfO90VYnS0g5v7BtWZeVs7ialGi0XQ_j_fz9Oaa
+  2、算法生成：
+    NfBCSins2OywP=0Sq23.k_lwjysaPw1Qq_niGWcrPcoNMCzu1DwYTb6KS_kDHNR3ZjPraDGLXU9sWzx1_wiQo8LRIx_f7Ila3ng8sBQ7AtvUhem.y8ydg_DgG1yvsQnVRrf7AKx_4RU6HcTYMUPb.wbLFNhpVf7mKNnyepdELAbAGjAhQXhWRYTnR6Hkb0VjfJN4zML.oG0Twq4lz2WX5Xd23QZzZMGvTNFsqq_xWIiFmpAD5.qUX0fp3W
+
+
+
+// hook cookie 脚本
+(function() {
+    // 严谨模式 检查所有错误
+    'use strict';
+    // document 为要hook的对象 这里是hook的cookie
+	var cookieTemp = "";
+    Object.defineProperty(document, 'cookie', {
+		// hook set方法也就是赋值的方法 
+		set: function(val) {
+				console.log('Hook捕获到cookie设置->', val);
+				// 这样就可以快速给下面这个代码行下断点
+				// 从而快速定位设置cookie的代码
+                if (val.indexOf("NfBCSins2OywP") !== -1) {
+                    debugger;
+                }
+				cookieTemp = val;
+				return val;
+		},
+		// hook get 方法也就是取值的方法 
+		get: function()
+		{
+			return cookieTemp;
+		}
+    });
+})();
