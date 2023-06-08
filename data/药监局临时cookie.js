@@ -1,47 +1,77 @@
-proxy = function (obj){
+
+// 跟踪变量调试
+proxy = function (obj) {
+    // 基础类型不挂代理监控
+    if (typeof obj !== 'object' || obj === null) {
+        return obj;
+    }
+    var no_trace_eles = ["attachEvent", "ActiveXObject",
+        "msCrypto", "globalStorage", "mozIndexedDB",
+        "webkitIndexedDB", "msIndexedDB", "attachEvent", "execScript",
+        "Request", "fetch", "showModalDialog", "MSBlobBuilder"];   // 对于本身浏览器中执行就无关的值不跟踪
     return new Proxy(obj, {
-        set(target, prop, value){
-            console.log('set', target[Symbol.toStringTag], prop, value);
+        set(target, prop, value) {
+            console.log('设置 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, value);
             return Reflect.set(...arguments);
         },
         // target: 目标对象
         // prop：属性名称
         // prop：属性值
-        get(target, prop, receiver){
-            // if (typeof target[prop] != 'function') {
-            console.log('get', target[Symbol.toStringTag], prop, target[prop]);
-            // }
+        get(target, prop, receiver) {
+            if (no_trace_eles.indexOf(prop) == -1) {
+                console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
+            }
             return target[prop];
         }
     });
 };
 
 
-window = global;
-window.top =window;
-window.DOMParser = function () {
+// ====================== 补充环境变量 ======================
 
-        debugger;
-    };
-window.localStorage = function (item) {
-    var removeItem = function () {};
-
+function DOMParser() {
     debugger;
 };
-window.sessionStorage = function () {
-    debugger;
+function appendChild(aChild) {
+    this.children.push(aChild);
+    console.log('appendChild 添加节点：', aChild);
+    return aChild;
 };
+function removeChild(child) {
+    // var index = this.childNodes.indexOf(child);
+    // if (index === -1) {
+    //     throw new Error('The node to be removed is not a child of this node');
+    // };
 
+    // this.childNodes.splice(index, 1);
+    // child.parentNode = null;
+    console.log('removeChild 删除节点：', child);
+    return child;
+};
+function getAttribute(attr) {
+    var result = null;
 
-Object.defineProperties(window, {
-    [Symbol.toStringTag]: {
-        value: 'Window',
-        configurable: true
+    switch ((attr + "").toLowerCase()) {
+        case 'r':
+            result = 'm'
+            break;
+        case 'selenium':
+            break;
+        case 'driver':
+            break;
+        case 'webdriver':
+            // debugger;
+            break;
+        default:
+            debugger;
+            break;
     }
-}); // proxy 监控打印名称
-window = proxy(window); // 跟踪 window 的取值和变更
 
+    console.log('getAttribute 获取属性：', attr, ' 值：', result);
+    result = proxy(result);
 
+    return result;
+};
 function getElementsByTagName(tagName) {
 
     var result = [];
@@ -81,11 +111,12 @@ function getElementsByTagName(tagName) {
                     configurable: true
                 }
             });
+
             meta = {
                 getAttribute: getAttribute,
-                content: content, // 'mODRARBST2HmtxOkufYhJssTf1N6_MkCLTMfFVX09Ot8hdfv0daSTfCIikk9yP2K',
-                parentNode: document.head
-            }
+                // content: content, // 'mODRARBST2HmtxOkufYhJssTf1N6_MkCLTMfFVX09Ot8hdfv0daSTfCIikk9yP2K',
+                // parentNode: document.head
+            };
             Object.defineProperties(meta, {
                 [Symbol.toStringTag]: {
                     value: 'HTMLMetaElement',
@@ -107,56 +138,144 @@ function getElementsByTagName(tagName) {
             debugger;
             break;
     }
+    result.removeChild = removeChild;
+    result = proxy(result);
+    console.log('getElementsByTagName 获取 tagName：%s，result：%s', tagName, result);
     return result;
 };
+function createElement(tagName) {
+    var result = {};
+
+    switch ((tagName + "").toLowerCase()) {
+
+        case 'div':
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLDivElement',
+                    configurable: true
+                }
+            });
+            result.getElementsByTagName = getElementsByTagName;
+
+            break;
+        case 'a':
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLAnchorElement',
+                    configurable: true
+                }
+            });
+            break;
+        case 'form':
+
+            Object.setPrototypeOf(result, HTMLFormElement.prototype);
+            break;
+        case 'input':
+            result.children = [];
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLInputElement',
+                    configurable: true
+                }
+            });
+            result.toString = myToString('HTMLInputElement');
+            break;
+
+        default:
+            debugger;
+            break;
+    }
+    result = proxy(result);
+    console.log('createElement 创建元素：', tagName, ' 返回：', result);
+    return result;
+};
+function addEventListener(type, listener) {
+    console.log('addEventListener 添加监听器 type：', type, ' listener：', listener);
+
+};
+function XMLHttpRequest() { };
+function getAttribute(attributeName) { };
+
+
+var head = { removeChild: removeChild };
+var IDBFactory = {};
+
+var navigator = {
+    userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36'
+};
+Object.defineProperties(navigator, {
+    [Symbol.toStringTag]: {
+        value: 'navigator',
+        configurable: true
+    }
+});
+
+var localStorage = {
+    removeItem: function (key) { },
+    getItem: function (key) {
+        console.log('获取 localStorage 中 %s，值为：%s', key, undefined)
+    }
+};
+Object.defineProperties(localStorage, {
+    [Symbol.toStringTag]: {
+        value: 'localStorage',
+        configurable: true
+    }
+}); // proxy 监控打印名称
+
+var documentElement = {};
+Object.defineProperties(documentElement, {
+    [Symbol.toStringTag]: {
+        value: 'documentElement',
+        configurable: true
+    }
+});
+
+var sessionStorage = {
+    getItem: function (key) {
+        console.log('获取 sessionStorage 中 %s，值为：%s', key, undefined)
+    }
+};
+Object.defineProperties(sessionStorage, {
+    [Symbol.toStringTag]: {
+        value: 'sessionStorage',
+        configurable: true
+    }
+});
+
+window = global;    // 可以使用 global 已封装的方法
+window.top = window;
+window.name = '';
+window.DOMParser = DOMParser;
+window.indexedDB = IDBFactory;
+window.localStorage = localStorage;
+window.sessionStorage = sessionStorage;
+window.addEventListener = addEventListener;
+window.XMLHttpRequest = XMLHttpRequest;
+window.self = window;
+window.navigator = navigator;
+
+
+Object.defineProperties(window, {
+    [Symbol.toStringTag]: {
+        value: 'Window',
+        configurable: true
+    }
+}); // proxy 监控打印名称
+window = proxy(window); // 跟踪 window 的取值和变更
+
+var cookie = {};
+
+
 
 document = {
-    createElement: function createElement(tagName){
-        var result = {};
-
-        switch ((tagName + "").toLowerCase()) {
-
-            case 'div':
-                Object.defineProperties(result, {
-                    [Symbol.toStringTag]: {
-                        value: 'HTMLDivElement',
-                        configurable: true
-                    }
-                });
-                result.getElementsByTagName = getElementsByTagName;
-
-                break;
-            case 'a':
-                Object.defineProperties(result, {
-                    [Symbol.toStringTag]: {
-                        value: 'HTMLAnchorElement',
-                        configurable: true
-                    }
-                });
-                break;
-            case 'form':
-
-                Object.setPrototypeOf(result, HTMLFormElement.prototype);
-                break;
-            case 'input':
-                result.children = [];
-                Object.defineProperties(result, {
-                    [Symbol.toStringTag]: {
-                        value: 'HTMLInputElement',
-                        configurable: true
-                    }
-                });
-                result.toString = myToString('HTMLInputElement');
-                break;
-
-            default:
-                debugger;
-                break;
-        }
-        // result = laowang_proxy(result);
-        // console.log('createElement ->', tagName, '->', result);
-        return result;
-    }
+    createElement: createElement,
+    removeChild: removeChild,
+    head: head,
+    appendChild: appendChild,
+    getElementsByTagName: getElementsByTagName,
+    cookie: cookie,
+    documentElement: documentElement
 };
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
@@ -166,7 +285,11 @@ Object.defineProperties(document, {
 });
 document = proxy(document);
 
-location = {};
+location = {
+    protocol: "https:",
+    port: "",
+    href: "https://www.nmpa.gov.cn/zwfw/sdxx/sdxxyp/index.html"
+};
 Object.defineProperties(location, {
     [Symbol.toStringTag]: {
         value: 'location',
@@ -175,20 +298,22 @@ Object.defineProperties(location, {
 });
 location = proxy(location);
 
+// ====================== 补充环境变量 ======================
 
+
+// 首页返回的参数值
 $_ts = {
     cd: "qWpqrfAlESLmxGVFqr9drpLDxGGcqrLlDGVSDrLqDsZmqGqFrG9Cm1LWEqAIqGqxJG9Frc3EqGqFqOEkDpGcqrLrDG3RDrLlDGVVkq9lDfLqDsZmDGQRHaAFtf9dqaEqDGqFqp93DG3WcPafqGqFqpLDDpGcqq9CcaELcs3WDGAbcqEqDGEFqS93WGlWcaA3qGqFqfLkDpGFrOldqaEqDGAFrp93DGEWkqAuqGqFrfLoDpGcqrLmDGERWqEqDGqFqp93DG3Woq3rJslcrslJrPJZs_1HjrcHDoKSyiBuN4IhrV1S0IxSX.lezusc5JhvbqWlWaQoiAQ7ceRRIcVxWvRDR27TYUzaMVYNRKybUvg6FTRkxsTPFoRBF1yNQ2YjhCTaMb7.Y6JBMn27QbzYtbTCFKyFtS76puwWMTwVYOe98bw23bzAJ6Q_3OxbxAJwMURNMPzNsDNBhCz6FC7YFoRBF1yNQ2YjhCTaMbzFm1AaFlyqQYEqVnT0UUrKWGrBVlzlivmqDuS3MUrXFnzUQCeBtKSnFTVjMURNMPzNsDNBhCz6FCz9tPlCAkL0RGzrwKe9QmwYFuyXFDrqI2ygxk23F6w.FSYLwbeNhb2nYKLBMUrXFnzUQCeBtKSnFTYMhnluVUxswOASMkY3plyjw6pW3DJ1w0frEs28Mox.Y1Nzwb2XtC2WFbZBF6w.FSYLwbeNhb2nYKN8hnQTsowEQ2wnUkY1IVTc1Cmti6mEUKTcEseRFUxYFPezQDy.tTwuMCZNMox.Y1Nzwb2XtC2WFbe8t1qdYVrPY97aFCZSQ2ylYUSbMKynsmzlxufQFVSjMne.wCz.mKfCMC9XFUxYFPezQDy.tTwuMCe3hPV5K22sYCwKs0ptFo9CwkNLM0zaFDm9EkTQY6JBMn27QbzYtbTCFKg.FVSjMne.wCz.mKfCMC2ItnY_ADTtRbww1vek1oL030quAl7_Y0TuxsTPFoRBF1yNQ2YjhCTaMb7.Y6JBMn27QbzYtbTCFKyFtSzmR0E0V0ff8TmDQCmHtYyHYDw4QYYbxAJwMURNMPzNsDNBhCz6FC7YFoRBF1yNQ2YjhCTaMbzFm1pqFVxTJUR0VuYDWuwwU2eZpT2KVP2DDuS3MUrXFnzUQCeBtKSnFTVjMURNMPzNsDNBhCz6FCz9tPmhHDrppoSzQOwpi92twKztFlWuWmx3xk23F6w.FSYLwbeNhb2nYKLBMUrXFnzUQCeBtKSnFTYMhnmJ3URBQUraYYY7svw3MbpLpONX1arvEs28Mox.Y1Nzwb2XtC2WFbZBF6w.FSYLwbeNhb2nYKN8hnwhHuYUVlwjYbAnITxJKYp18C7N8upnEseRFUxYFPezQDy.tTwuMCZNMox.Y1Nzwb2XtC2WFbe8t1rUMUJvJVpVV6JSKkJRM2xvIuwUMbePxufQFVSjMne.wCz.mKfCMC9XFUxYFPezQDy.tTwuMCe3hPYKwbmasDGn112kH02yKvwYprwRJuJ0EkTQY6JBMn27QbzYtbTCFKg.FVSjMne.wCz.mKfCMC2ItnY.QlmqssL6Fa95QKN91TJhKDJspbTkxsTPFoRBF1yNQ2YjhCTaMb7.Y6JBMn27QbzYtbTCFKyFtSzYVl9ZVKRJVnG4QkStR9aqJVaTAkmDxAJwMURNMPzNsDNBhCz6FC7YFoRBF1yNQ2YjhCTaMbzFm1pUKC2YWYTrRCfztCT5Mag6sTSqs2ebDuS3KmgGK1fiRoJutbYPFYS03beCRCRTKbgfh6maQbx9KnezQDy.tTwuMCZNMox.Y1Nzwb2XtC2WFbe8t1rpYYmOKCYORKN6Ym27Ml94Ib2e12RlxufQFVSjMne.wCz.mKfCMC9XFUxYFPezQDy.tTwuMCe3hPYbckx7R2J1F0TLQk36UVJiMVeXpDe9EkTQY6JBMn27QbzYtbTCFKg.FVSjMne.wCz.mKfCMC2ItnYMATR7RCzn3VyaWK2AwDYKwmrGQTJuxsTPFoRBF1yNQ2YjhCTaMb7.Y6JBMn27QbzYtbTCFKyFtSz9RsA.JDrtkvwjsTxtp20UUlYLV2pCxAJwMURNMPzNsDNBhCz6FC7YFoRBF1yNQ2YjhCTaMbzFm1pbW0yn3seUHbr7QOp9U6G63lre3V2DDuS3MUrXFnzUQCeBtKSnFTVjMURNMPzNsDNBhCz6FCz9tPmbV0w7QqTx1T2l3VJ3K0Ns1VqnRkYgxk23F6w.FSYLwbeNhb2nYKLBMUrXFnzUQCeBtKSnFTYMhnmOQlTKQvEa89T_U0eEtowWIcaCVCTrEs28Mox.Y1Nzwb2XtC2WFbZBF6w.FSYLwbeNhb2nYKN8hnw2I0LrYswRF0R3MmmTQ6W.wVetMurlEseRFUxYFPezQDy.tTwuMCZNMox.Y1Nzwb2XtC2WFbe8t1rXpULaJKrEV0yJ1CL0iC7aF0NkJ0xPxufQFVSjMne.wCz.mKfCMC9XFUxYFPezQDy.tTwuMCe3hPYzqUybwbN639qEJswYFTY7pDmpYnTlEkTQ320fhoxvR1f3wvW7RoxXtlSTRvmDRC2uUoA7MCSf3b2t3TxSpbTO3fRPRbr686wuFKwS3bfSx1zJwoRbKcyQxpRSRblj36w6mbwuFPN6wDxhpKRzQKwTtmYB3DR.QKELUbJ6sCSf3b2t30ejwv32t0T0wbR3UnzNsDNBhCz6FC7YFoRBF1yNQ2YjhCTaMbzFm1pNsDwg3YT6MORvRmrjW2p6YvYShkRqDuS3MUrXFnzUQCeBtKSnFTVjMURNMPzNsDNBhCz6FCz9tPmLJ6wYAKrdFuRZQYeIAlSXJoq_AbN5xk23F6w.FSYLwbeNhb2nYKLBMUrXFnzUQCeBtKSnFTYMhnmXFCSrUURqR2xBAYm6F9yLWUWdVYS6Es28Mox.Y1Nzwb2XtC2WFbZBF6w.FSYLwbeNhb2nYKN8hnwXKoTnRuJLRvmis0JHAsxJQTl6IvmnEseRFUxYFPezQDy.tTwuMCZNMox.Y1Nzwb2XtC2WFbe8t1rNWq2uQ6NBsKe7coeBMczmQlGHU2zcxufQFVSjMne.wCz.mKfCMC9XFUxYFPezQDy.tTwuMCe3hPYL1DepY2S03CrL1vrCMDwjY6zkADz9EkTQY6JBMn27QbzYtbTCFKg.FVSjMne.wCz.mKfCMC2ItnYiVCRJACrztYevFuRV80eXs9G_1lwOxsTPFoRBF1yNQ2YjhCTaMb7.Y6JBMn27QbzYtbTCFKyFtSzZKOLaUKfCIDanRsTJQ0fMAcTAICrDxAJwMURNMPzNsDNBhCz6FC7YFoRBF1yNQ2YjhCTaMbzFpcNzwb2XKG0gcDrBROr0s2JGikpVAleIQbwRiDriY2etpUL0H9adMvTjw92.iUT5M6QTRsROHl2IplrAMDS0JURdwkfOQvRK1CmlJl90wCGcRVf0QVmsAVmcsTppiKxbQ9Sfs0q4RURK3c0SHkR9RqlThK2Cis3nFowvKuSpWD2eAn0SHkR9RqlThK2CiYr9cYJlpYxjMUe5110SHkR9RqlThK2CiVfUwsmAsCw2JuRGIPTNwO2dsGeWsOm9R6pWFvWgWDpHI2wMwDm9FUY8HqN7RKweYlrqMTymMky2WKe0Ior4MKNVAY7LWsLS3KAdcPfNQkyMAvrCYbfjMkVa3ClLWsLS3KAdcPfNQkg7JsgJRKq4JPSzwk9DqaETqG3uipY.w6mnwk0rJuA0HkQnJq0ZJuQCqGlTqkxG3k0crklJJqWxJkEdJqGSiOWSWGQkkkQSWaV1mxOA62.qkBD1sibR2KnjHGQUC0kcjgFXnM7qqqqqqqqqqk9bR9DzSQ7XwfWZpbrln_iXn7HwDlb7QOMqH59Gi5MZhYZkcsA6WOErJk3aWOQorGGDcsEuiOlCcuV0iuAchlfLQlxBY0T5VmypADxbp2plYTez3OmnWKLqKVR1JbNLRKJQJv7aMmpYUoQkqaVkWaQgJGWcWGHaWlWj3bxbhbRj1nNPQDGXRvmAtbmPMPy2R90j3KyThbYXYnNGhCROR1zFwUqBRvmStTNNMPebQvQ.UKw6hCmXFnzwFKqB3KTutTTN3o7NR6ePmKJ7wn29FC3Y3DeGtKpLFpYGMoQNRDfNs1N9RCQX3DyItbpytKYBFrYXM6WNFvw6mKy63c2.RDGYMCTjtKzN3pYBMUqNF6pLmKSahCeOw1zswbABM6xP3rY7QDS.hbTbsCQBMCSGtCzK31eXMD3.F99nhCyT3nzjkKQBMvVStCNx31eXMvA.F2RPhCyjwczjVD7BMvYntCNtMneXwKwGtTR9F1ej3UZ.Ybm9hCNXR1zKFb3BFvRft02dh6JZ31z6KoVBQCxBt6wxFneuwUl.w02nh6JfRcz61Ux4h6Y73czxMCqBwKyXt02TRne0FCl.1ox4h6wOt6YVtvmPFcyTF9e9h6mGR1zTUoVBQUm9t6Y3wceaFPy0RYVjQDYehvpaKcNawDWXwom8tvr_wPyuR97jwCxdhvJXUnN6FbJ9t6JKwombF63.Q0mnh6wSRczS1bEBwURSt6mtQ1eTIK3.QmRGR1enMKmfcnN0MvWXQDN3tvpPQnyaw0Lj8CmLhve6YcN4M63XICztIPe4wbg.ITpjh69N8Dy6mKwuFc2nFCytQPejwKWoru9cUcw9wGQkRPx2wAVDKcWwRqWoKP3OJk9lWkVmqkZniAQnqaAu",
     nsd: 16654
 }
 
-
-
+// 需要保证正确执行的代码片段
 if ($_ts.cd) {
 
     console.log("$_ts: ", $_ts);
     // debugger;
 
-    (function(_$aa, _$fF) {
+    (function (_$aa, _$fF) {
         var _$eG = 0;
         function _$_a() {
             var _$_i = [69];
@@ -205,13 +330,13 @@ if ($_ts.cd) {
         function _$kz(_$_a, _$jZ) {
             var _$$4, _$dW, _$fT;
             !_$jZ ? _$jZ = _$gF : 0,
-            _$$4 = _$_a.length;
+                _$$4 = _$_a.length;
             while (_$$4 > 1)
                 _$$4--,
-                _$fT = _$jZ() % _$$4,
-                _$dW = _$_a[_$$4],
-                _$_a[_$$4] = _$_a[_$fT],
-                _$_a[_$fT] = _$dW;
+                    _$fT = _$jZ() % _$$4,
+                    _$dW = _$_a[_$$4],
+                    _$_a[_$$4] = _$_a[_$fT],
+                    _$_a[_$fT] = _$dW;
             function _$gF() {
                 return Math.floor(_$_A() * 0xFFFFFFFF);
             }
@@ -224,12 +349,12 @@ if ($_ts.cd) {
                 if (_$hN < 4) {
                     if (_$hN === 0) {
                         _$d7 = window,
-                        _$ji = String,
-                        _$ga = Array,
-                        _$jZ = document,
-                        _$_A = Math.random,
-                        _$$4 = Math.round,
-                        _$gm = Date;
+                            _$ji = String,
+                            _$ga = Array,
+                            _$jZ = document,
+                            _$_A = Math.random,
+                            _$$4 = Math.round,
+                            _$gm = Date;
                     } else if (_$hN === 1) {
                         _$j$.lcd = _$_a;
                     } else if (_$hN === 2) {
@@ -269,7 +394,7 @@ if ($_ts.cd) {
             function _$jr(_$_a, _$jZ) {
                 var _$$4, _$dW;
                 _$$4 = _$_a.length,
-                _$$4 -= 1;
+                    _$$4 -= 1;
                 for (_$dW = 0; _$dW < _$$4; _$dW += 2)
                     _$jZ.push(_$eu[_$_a[_$dW]], _$$i[_$_a[_$dW + 1]]);
                 _$jZ.push(_$eu[_$_a[_$$4]]);
@@ -340,7 +465,8 @@ if ($_ts.cd) {
                                 }
                             } else if (_$_u < 24) {
                                 if (_$_u === 20) {
-                                    _$_a = _$jZ.call(_$d7, _$hu);
+                                    _$_a = eval(_$hu);   // call 执行会创建新的window
+                                    // _$_a = _$jZ.call(_$d7, _$hu);
                                 } else if (_$_u === 21) {
                                     _$a_(35, _$$8, _$_i);
                                 } else if (_$_u === 22) {
@@ -373,7 +499,7 @@ if ($_ts.cd) {
                             if (_$_u < 36) {
                                 if (_$_u === 32) {
                                     _$$4 = 0,
-                                    _$dW = 0;
+                                        _$dW = 0;
                                 } else if (_$_u === 33) {
                                     _$jZ = _$j$.nsd;
                                 } else if (_$_u === 34) {
@@ -551,14 +677,14 @@ if ($_ts.cd) {
                 function _$$k(_$_a, _$jZ) {
                     var _$$4, _$dW;
                     _$$4 = _$_a[0],
-                    _$dW = _$_a[1],
-                    _$jZ.push("function ", _$$i[_$$4], "(){var ", _$$i[_$em], "=[", _$dW, "];Array.prototype.push.apply(", _$$i[_$em], ",arguments);return ", _$$i[_$aI], ".apply(this,", _$$i[_$em], ");}");
+                        _$dW = _$_a[1],
+                        _$jZ.push("function ", _$$i[_$$4], "(){var ", _$$i[_$em], "=[", _$dW, "];Array.prototype.push.apply(", _$$i[_$em], ",arguments);return ", _$$i[_$aI], ".apply(this,", _$$i[_$em], ");}");
                 }
                 function _$eJ(_$_a, _$jZ) {
                     var _$$4, _$dW, _$fT;
                     _$$4 = _$j0[_$_a],
-                    _$dW = _$$4.length,
-                    _$dW -= _$dW % 2;
+                        _$dW = _$$4.length,
+                        _$dW -= _$dW % 2;
                     for (_$fT = 0; _$fT < _$dW; _$fT += 2)
                         _$jZ.push(_$eu[_$$4[_$fT]], _$$i[_$$4[_$fT + 1]]);
                     _$$4.length != _$dW ? _$jZ.push(_$eu[_$$4[_$dW]]) : 0;
@@ -572,14 +698,14 @@ if ($_ts.cd) {
                         _$eJ(_$_a, _$$4);
                     else if (_$gF <= 4) {
                         _$eG = "if(",
-                        _$jZ--;
+                            _$jZ--;
                         for (; _$_a < _$jZ; _$_a++)
                             _$$4.push(_$eG, _$$i[_$fJ], "===", _$_a, "){"),
-                            _$eJ(_$_a, _$$4),
-                            _$eG = "}else if(";
+                                _$eJ(_$_a, _$$4),
+                                _$eG = "}else if(";
                         _$$4.push("}else{"),
-                        _$eJ(_$_a, _$$4),
-                        _$$4.push("}");
+                            _$eJ(_$_a, _$$4),
+                            _$$4.push("}");
                     } else {
                         _$fT = 0;
                         for (_$dW = 1; _$dW < 7; _$dW++)
@@ -590,24 +716,24 @@ if ($_ts.cd) {
                         _$eG = "if(";
                         for (; _$_a + _$fT < _$jZ; _$_a += _$fT)
                             _$$4.push(_$eG, _$$i[_$fJ], "<", _$_a + _$fT, "){"),
-                            _$_4(_$_a, _$_a + _$fT, _$$4),
-                            _$eG = "}else if(";
+                                _$_4(_$_a, _$_a + _$fT, _$$4),
+                                _$eG = "}else if(";
                         _$$4.push("}else{"),
-                        _$_4(_$_a, _$jZ, _$$4),
-                        _$$4.push("}");
+                            _$_4(_$_a, _$jZ, _$$4),
+                            _$$4.push("}");
                     }
                 }
                 function _$_F(_$_a, _$jZ, _$$4) {
                     var _$dW, _$fT;
                     _$dW = _$jZ - _$_a,
-                    _$dW == 1 ? _$eJ(_$_a, _$$4) : _$dW == 2 ? (_$$4.push(_$$i[_$fJ], "==", _$_a, "?"),
-                    _$eJ(_$_a, _$$4),
-                    _$$4.push(":"),
-                    _$eJ(_$_a + 1, _$$4)) : (_$fT = ~~((_$_a + _$jZ) / 2),
-                    _$$4.push(_$$i[_$fJ], "<", _$fT, "?"),
-                    _$_F(_$_a, _$fT, _$$4),
-                    _$$4.push(":"),
-                    _$_F(_$fT, _$jZ, _$$4));
+                        _$dW == 1 ? _$eJ(_$_a, _$$4) : _$dW == 2 ? (_$$4.push(_$$i[_$fJ], "==", _$_a, "?"),
+                            _$eJ(_$_a, _$$4),
+                            _$$4.push(":"),
+                            _$eJ(_$_a + 1, _$$4)) : (_$fT = ~~((_$_a + _$jZ) / 2),
+                                _$$4.push(_$$i[_$fJ], "<", _$fT, "?"),
+                                _$_F(_$_a, _$fT, _$$4),
+                                _$$4.push(":"),
+                                _$_F(_$fT, _$jZ, _$$4));
                 }
                 var _$_a, _$jZ, _$$4, _$dW, _$fT, _$ak, _$eh, _$$n, _$em, _$aK, _$aI, _$fJ, _$dI, _$cp, _$c4, _$_2, _$$_, _$du, _$j0;
                 var _$ir, _$am, _$hN = _$_i, _$hu = _$fF[2];
@@ -953,8 +1079,8 @@ if ($_ts.cd) {
             }
         }
     }
-    )([], [[7, 0, 2, 8, 3, 11, 10, 5, 6, 4, 1, 9, ], [87, 1, 32, 76, 16, 79, 83, 78, 65, 23, 35, 18, 40, 96, 30, 56, 64, 94, 45, 85, 13, 21, 44, 92, 9, 82, 43, 59, 72, 60, 38, 24, 88, 68, 61, 3, 22, 8, 55, 41, 5, 71, 58, 57, 48, 64, 93, 86, 2, 11, 84, 74, 8, 64, 94, 45, 6, 17, 44, 15, 80, 39, 53, 28, 36, 95, 63, 67, 63, 14, 33, 4, 19, 7, 12, 52, 54, 75, 31, 81, 62, 91, 0, 51, 90, 89, 66, 73, 50, 70, 34, 27, 49, 25, 63, 42, 2, 63, 26, 46, 37, 10, 69, 20, 77, 63, 47, 29, 63, 63, ], [57, 24, 29, 19, 23, 61, 31, 33, 73, 53, 8, 12, 65, 0, 34, 14, 36, 70, 11, 17, 46, 10, 46, 55, 68, 51, 57, 9, 42, 32, 40, 39, 56, 54, 46, 43, 22, 63, 45, 62, 48, 3, 72, 67, 64, 52, 41, 13, 8, 47, 65, 50, 34, 14, 26, 4, 25, 18, 35, 16, 8, 37, 65, 49, 69, 14, 27, 44, 28, 1, 46, 5, 59, 58, 30, 71, 6, 7, 20, 15, 2, 66, 38, 21, 60, 46, ], [30, 16, 27, 34, 14, 32, 25, 13, 35, 41, 5, 24, 17, 38, 22, 20, 36, 19, 41, 10, 18, 8, 11, 39, 23, 26, 33, 17, 29, 37, 0, 6, 9, 40, 1, 34, 4, 21, 3, 12, 2, 31, 28, 0, 7, 15, ], ]);
+    )([], [[7, 0, 2, 8, 3, 11, 10, 5, 6, 4, 1, 9,], [87, 1, 32, 76, 16, 79, 83, 78, 65, 23, 35, 18, 40, 96, 30, 56, 64, 94, 45, 85, 13, 21, 44, 92, 9, 82, 43, 59, 72, 60, 38, 24, 88, 68, 61, 3, 22, 8, 55, 41, 5, 71, 58, 57, 48, 64, 93, 86, 2, 11, 84, 74, 8, 64, 94, 45, 6, 17, 44, 15, 80, 39, 53, 28, 36, 95, 63, 67, 63, 14, 33, 4, 19, 7, 12, 52, 54, 75, 31, 81, 62, 91, 0, 51, 90, 89, 66, 73, 50, 70, 34, 27, 49, 25, 63, 42, 2, 63, 26, 46, 37, 10, 69, 20, 77, 63, 47, 29, 63, 63,], [57, 24, 29, 19, 23, 61, 31, 33, 73, 53, 8, 12, 65, 0, 34, 14, 36, 70, 11, 17, 46, 10, 46, 55, 68, 51, 57, 9, 42, 32, 40, 39, 56, 54, 46, 43, 22, 63, 45, 62, 48, 3, 72, 67, 64, 52, 41, 13, 8, 47, 65, 50, 34, 14, 26, 4, 25, 18, 35, 16, 8, 37, 65, 49, 69, 14, 27, 44, 28, 1, 46, 5, 59, 58, 30, 71, 6, 7, 20, 15, 2, 66, 38, 21, 60, 46,], [30, 16, 27, 34, 14, 32, 25, 13, 35, 41, 5, 24, 17, 38, 22, 20, 36, 19, 41, 10, 18, 8, 11, 39, 23, 26, 33, 17, 29, 37, 0, 6, 9, 40, 1, 34, 4, 21, 3, 12, 2, 31, 28, 0, 7, 15,],]);
 }
 
-console.log("document = %s, window = %s",document, window );
+console.log("document = %s, window = %s", document, window);
 debugger;
