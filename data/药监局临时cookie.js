@@ -1,4 +1,18 @@
 
+
+// 日志写入文件
+// const fs = require('fs');
+
+// var logFilePath = '/home/feng/workspace/myWeb/logs/node_debug.log'; // 指定日志文件路径
+// const logStream = fs.createWriteStream(logFilePath, { flags: 'a' });
+
+// // 重定向 console.log 到 logStream
+// console.log = function (message) {
+//     logStream.write(`${message}\n`);
+//     process.stdout.write(`${message}\n`); // 可选：将日志同时输出到控制台
+// };
+
+
 // 跟踪变量调试
 proxy = function (obj) {
     // 基础类型不挂代理监控
@@ -8,7 +22,31 @@ proxy = function (obj) {
     var no_trace_eles = ["attachEvent", "ActiveXObject",
         "msCrypto", "globalStorage", "mozIndexedDB",
         "webkitIndexedDB", "msIndexedDB", "attachEvent", "execScript",
-        "Request", "fetch", "showModalDialog", "MSBlobBuilder"];   // 对于本身浏览器中执行就无关的值不跟踪
+        "Request", "fetch", "showModalDialog", "MSBlobBuilder",
+        "CollectGarbage", "UCWebExt", "ucweb", "qb_bridge", "qbbookshelf", "dolphin",
+        "dolphininfo", "dolphinmeta", "qihoo", "safari", "orientation",
+        "LiebaoAutoFill_gameAccountInfo", "LiebaoAdMatchUrl", "NotifyLiebaoEx",
+        "LiebaoBackup_Backup",
+        "LiebaoBackup_GetVersion",
+        "LiebaoBackup_Load",
+        "LiebaoBackup_Recovery",
+        "LiebaoBackup_State",
+        "LiebaoCallRequest",
+        "LiebaoCallRequestAsync",
+        "LiebaoDownloadUrl",
+        "LiebaoGetPrefs",
+        "LiebaoGetUserInfo",
+        "LiebaoGetUUID",
+        "LiebaoGetVersion",
+        "LiebaoInst",
+        "LieBaoLookupDnsAddress",
+        "LiebaoOpenImageOcr",
+        "LiebaoRememberSelection",
+        "LieBaoSendRequest",
+        "LieBaoSetHostAddress",
+        "LiebaoUninsKPDF",
+        "NotifyLiebao",
+        "NotifyLiebaoEx 值为：undefined"];   // 对于本身浏览器中执行就无关的值不跟踪
     return new Proxy(obj, {
         set(target, prop, value) {
             console.log('设置 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, value);
@@ -223,13 +261,27 @@ Object.defineProperties(localStorage, {
     }
 }); // proxy 监控打印名称
 
-var documentElement = {};
+
+var style = {};
+var documentElement = {
+    style: style
+};
+Object.defineProperties(style, {
+    [Symbol.toStringTag]: {
+        value: 'style',
+        configurable: true
+    }
+});
+style = proxy(style);
+
 Object.defineProperties(documentElement, {
     [Symbol.toStringTag]: {
         value: 'documentElement',
         configurable: true
     }
 });
+documentElement = proxy(documentElement);
+
 
 var sessionStorage = {
     getItem: function (key) {
@@ -243,6 +295,15 @@ Object.defineProperties(sessionStorage, {
     }
 });
 
+var chrome = {};
+Object.defineProperties(chrome, {
+    [Symbol.toStringTag]: {
+        value: 'chrome',
+        configurable: true
+    }
+});
+chrome = proxy(chrome);
+
 window = global;    // 可以使用 global 已封装的方法
 window.top = window;
 window.name = '';
@@ -254,6 +315,7 @@ window.addEventListener = addEventListener;
 window.XMLHttpRequest = XMLHttpRequest;
 window.self = window;
 window.navigator = navigator;
+window.chrome = chrome;
 
 
 Object.defineProperties(window, {
@@ -288,7 +350,12 @@ document = proxy(document);
 location = {
     protocol: "https:",
     port: "",
-    href: "https://www.nmpa.gov.cn/zwfw/sdxx/sdxxyp/index.html"
+    href: "https://www.nmpa.gov.cn/zwfw/sdxx/sdxxyp/index.html",
+    search: "",
+    hostname: 'www.nmpa.gov.cn',
+    pathname: '/zwfw/sdxx/sdxxyp/index.html',
+    host: 'www.nmpa.gov.cn',
+    hash: ''
 };
 Object.defineProperties(location, {
     [Symbol.toStringTag]: {
