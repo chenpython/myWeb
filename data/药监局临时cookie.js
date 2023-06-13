@@ -1,8 +1,8 @@
 
 
-// 日志写入文件
-// const fs = require('fs');
+const fs = require('fs');
 
+// 日志写入文件
 // var logFilePath = '/home/feng/workspace/myWeb/logs/node_debug.log'; // 指定日志文件路径
 // const logStream = fs.createWriteStream(logFilePath, { flags: 'a' });
 
@@ -49,7 +49,8 @@ proxy = function (obj) {
         "NotifyLiebaoEx",
         "callPhantom",
     ];   // 对于本身浏览器中执行就无关的值不跟踪
-    return new Proxy(obj, {
+
+    var proxy_obj = new Proxy(obj, {
         set(target, prop, value) {
             console.log('设置 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, value);
             return Reflect.set(...arguments);
@@ -62,15 +63,26 @@ proxy = function (obj) {
                 console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
             }
             return target[prop];
-        }
+        },
+
     });
+    return proxy_obj;
 };
 
 // 首页返回的参数值
+// 读取文件提取指定值传递给 $_ts
+var file_path = '/home/feng/workspace/myWeb/html/药监局首页返回.html';
+var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
+data = res.toString()
+var regex = /[";]*/g    // 替换所有";符号
+matchCd = data.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '');
+matchNsd = data.match(/\$\_ts\.nsd\s*=\s*(.+)/)[1].replace(regex, '');
+
 var $_ts = {
-    cd: "qE2qrrAlEaEqDGVFqf93qGqFqrLrDpGcqq9bcqEqcs3xqGqFqG9Cm1LWDqAwqGqFrpLcDpGFqp9dqGLlDsZmqGqFqfLkDpGFqqaRrr7cqrLlDGVRDqEqDGWFlr93qGqFrfLoDpGFrqatrkqcqrLrDG3RDqEqDGAFrp9EDGqRHaVcqrLDDGQRDmamkcF8qs3SqGVSJygOBg8FVjWF37w8xI6EdRxIoEEeSRbJ7rmF_jxTkDCFyMAqrkWoraiIhqGzKUa2W_NCpKRMJYYr_DTDFKYXRbsbJCfKAnVeKHrCMD9XFUxBZPeXQDy.tC6.MCaNMox.M4xzwK2XKP7f.0Q0sDeUYDnvRo2vRKx.Fje6iKEnRPVySKTTFKg.FUMnMnS.wCz.hdrCMD9XFUxBZPeXQDy.KP5ZWDziAom1i77zwTTaYOE_eTrEpkNSAcD9KDyaMb7.M8zBMc27QbzB7bTTFKg.FUMnMnS.wCz.U.EfJVq_JD3SCUY7RorUYYDbMbzGAoy8A.ayKCz6FC7BZoR7F1yNQbdnhCyaMb7.M8zBMc27QbzBanZPWTmnV0n7WKZTKlpiVie0sCrOVvwnC1l_UbSnFC5nMUYNMPzNwBxBhDz6FC7BZoR7F1yNQbdnUPavJVS6QXNUQYaTVvT6C9zP1OzS1DITAPEdKK2nMdEBMvrXFnzz_Ce7tKSnFC5nMUYNMPzNwBxBU19GHTY_52REWDzBWVODpmRZRbTX1JpMpnQgUD2CZbZ7F6w.FndawbSNhb2nMdEBMvrXFnzz_Ce7Kcg2HbkrVTpvY9elQHryJUA_FDeS_DfPRcqeUD6.MCaNMox.M4xzwK2XtC2CZbZ7F6w.FndawbSNUn72AJfz1KRvUVNmC0fyJDJqW6.si2pJQnVeKHrCMD9XFUxBZPeXQDy.tC6.MCaNMox.M4xzwK2XKP7f6KwrJmJE3Voxpvrfsn28wQSv8omYRPVySKTTFKg.FUMnMnS.wCz.hdrCMD9XFUxBZPeXQDy.KP5ZADNcwsYCs77TpsW6UYy2ylwFY2ENpPD9KDyaMb7.M8zBMc27QbzB7bTTFKg.FUMnMnS.wCz.U.Ef1kSGVVpDeUE0VsNx19du1bzkWur13.ayKCz6FC7BZoR7F1yNQbdnhCyaMb7.M8zBMc27QbzBanZPsKmCM0BLQmRYMly63BR9F03_M97_dnl_UbSnFC5nMUYNMPzNwBxBhDz6FC7BZoR7F1yNQbdnUPav1uZTMQfoFYR9WveLTY2UVvz.tVD7QPEdKK2nMdEBMvrXFnzz_Ce7tKSnFC5nMUYNMPzNwBxBU19GYCTxduYoYmJuQKt.KKT1R6Z6MIRB31QgUD2CZbZ7F6w.FndawbSNhb2nMdEBMvrXFnzz_Ce7Kcg2Y9uyQleLW99N8Fwx82N6YVAzasQawcqeUD6.MCaNMox.M4xzwK2XtC2CZbZ7F6w.FndawbSNUn72V8frA00_JC7uNvmNRlzs1Ch4V0YzAnVeKHrCMD9XFUxBZPeXQDy.tC6.MCaNMox.M4xzwK2XKP7fuYrtHmmbsKbai6WZ1bRWijTWJ9qSpPVySKTTFKg.FUMnMnS.wCz.hdrCMD9XFUxBZPeXQDy.KP5ZYTfNYsmw8deLMPzzIbZ0.0eIAlyIRPD9Kmz8Em9LwHSuQcN23b2b4Dx7wbwbwKkCE1SSQoxPU7WBMvrXFnzz_Ce7tKSnFC5nMUYNMPzNwBxBU19GRVxKZKmNQDpaQso0YvRvV0Np3iyYQ1QgUD2CZbZ7F6w.FndawbSNhb2nMdEBMvrXFnzz_Ce7Kcg2RKKNhsRPsurCFzxV1lp3tYTmeYpKwcqeUD6.MCaNMox.M4xzwK2XtC2CZbZ7F6w.FndawbSNUn72RjyEQDW_FseGZUACR2NDJbkw8CJhAnVeKHrCMD9XFUxBZPeXQDy.tC6.MCaNMox.M4xzwK2XKP7f5TYmMvVu1lBlAbJrUKYhVepDWD3apPVySKTTFKg.FUMnMnS.wCz.hdrCMD9XFUxBZPeXQDy.KP5ZRUxHV0SuWiwh8mTtwP260ULXJmRsAcD9KDyaMb7.M8zBMc27QbzB7bTTFKg.FUMnMnS.wCz.U.EfR6THHTA6SDTlKb2BwoHXhUwJsTlSphayKCz6FC7BZoR7F1yNQbdnhCyaMb7.M8zBMc27QbzBanZPMlrlWsUes2mW1oY.JtRzWb2HIsRcdnl_UbSnFC5nMUYNMPzNwBxBhDz6FC7BZoR7F1yNQbdnUPavFkedRXz7wKrmJOA6nDTUM9mIVm8aAPEdKYSQEMm0RKQzRvwu7KxaMcTnwDM7ADY.wbxThHxj3Cr7wDx14lrB3KQL3CMeQU2Tw2wbQIeXQnQXQ6YC5Tg7UPqLQDMZhDmTQPfbQdQ7wURvwVpbZow2wnT.Mbk4MUJGhKrPwexj3Cr7wDxHe6r0xnyuwUM4U20NMox.M4xzwK2XtC2CZbZ7F6w.FndawbSNUn72FtSCV9JMIbZCy6r3UUzJFOs.i0YLp1VeKHrCMD9XFUxBZPeXQDy.tC6.MCaNMox.M4xzwK2XKP7feKN.ACR6pDMxM9RssDztFtNnimJvwPVySKTTFKg.FUMnMnS.wCz.hdrCMD9XFUxBZPeXQDy.KP5ZMTed1K36FHTa1VTgs9VnTvxKJVYawPD9KDyaMb7.M8zBMc27QbzB7bTTFKg.FUMnMnS.wCz.U.EfMOEnQvw_elSLMOJ5FCnapowtJmeIA.ayKCz6FC7BZoR7F1yNQbdnhCyaMb7.M8zBMc27QbzBanZPFvJXYYMowKpPV0z0wBwbMYYqA9p.dnl_UbSnFC5nMUYNMPzNwBxBhDz6FC7BZoR7F1yNQbdnUPavwYxPswffFPz9RbZCu6NEMoYxH9OQ3PEdKK2nMdEBMvrXFnzz_Ce7tKSnFC5nMUYNMPzNwBxBU19GIYg_jTSBwlwzJbKbsopt3llNVipfA1QgUD2CZbZ7F6w.FndawbSNhb2nMdEBMvrXFnzz_Ce7KoZ.FUMnMT0Hqa29Md0SQ0SL3sa0u0mEUV2bUsO4sTmwQVp5JtYJiDSDF6xxZkf_ImpCWKKz3OzhRlYlVHwzQuwJIvqg5oJSYorGAks1JUrjiKpWwiNqYlJ_A0zVnOf2Rl2JRVdMibx0MKlNWFQ63C3_Jc2N4sGSWmJC3TXvVkw.p9ENWFQ63C3_Jc2N4sfUROx1AlUxFCNepVGNWFQ63C3_Jc2N4sfHYVgaYldZRkq0K6ZNF80g8la0sVLSdCRus2mnHkkdsv2Y3oY2RHx0KsgSMKmvy2YoA2pIAKn2RkRzs6T08dR.V0JGtsV_jbrOHslNMUc2K9YnsYw7FBQ0JCmFtsV_jbrOHslNMUc2hsEZJbp9i_0zFv3craQc.GWrJGEVM6IjQ6WdiO3aJtQCJs3CHsW6.AWDJu7uRDcbqaWuJOVocFZuik3uWkgujOWqqsQCJsi8lSiF_ee8axUa2V41bxm7WsZqmshGwj2cyAqvqR9lqy7rraEcxSgiS1NO_HeqTkcokAvBHLVSQbZOc_fBIBx6nlUubvPJrabBJsEnWkZnWF9nqqAura0njk7CWkA6Ju87qnzDVkxaR57uQYrW3U0CN0zYICJYs0.IRVRNJ2TOijNFQbxiMKrFybSnUKRprai8qOAmquQoqj9ceuxgtCRPd1efFoq.RvkuhCmuFnz23BVB3bpCtCYX4PePMDa.Rcde3bEN3Up0hdTawP2fFDLBdUJatKRbQnd_MCaNRbf9hdN7wc2bFDp47bRg3cyPFo8nRKS9hbm.3hx2MC7X3Kf67bYBF63.3DIZhCw7RczG8Mx9FDLXMCzu7bzaw1yBQCcnFbJjhbyNF.xjMbWXMb2a7bNuFPyzwcd03vENFowGhdpuRKEXMUp7ZcejRopbtCd631SNMKq.MBwvhDfnWnzX4bE7FkRbtC4XWcSLQbq.MBYThDfz3nzXZUV7FDzjtC4XQnSLQKg.MXybRn2zRK0BZKrgtKTG3cdSMCENMKzPhdm6RP2nIPzuyCq7wKJ0t6HyMPSTQbL.Q5yahoYnQnzu5bV7wUxuIndXMKQNQby9h5yBF12nwDWB4CNbtUJuInd73PS6MnzT3BWBQbf0R1zS5CA7wCw0t6ojR1S636V.QHlBQCwXt6p2yPeuQbW.wosgh6JuR1z08X0BwDpat6JPyce0MDA.QC.gR1SSMUYTRBr6hom_Qnz6_bV7Q6mOt6UzQcSuQUq.w8Rvhoxz3KlB_KSb3uq.QD4Lh6wL3nza3XGBw6YSt6efZnegwKZ.ICdzh6fNQUZ.85TBhoTBFnzy7v2Nw1ybwCPnQCS7QUW.FXyPqqVcqTGveK9qqY0ORDj8rTZf3YqorZlv3sVcrsV0vGlCWqEDJGiIWG",
-    nsd: 31881
+    cd: matchCd,
+    nsd: matchNsd
 }
+
 Object.defineProperties($_ts, {
     [Symbol.toStringTag]: {
         value: '$_ts',
@@ -405,7 +417,7 @@ if ($_ts.cd) {
         var _$eG = 0;
         function _$_a() {
             var _$_i = [69];
-            Array.prototype.push.apply(_$_i, arguments);
+            Array?.prototype.push.apply(_$_i, arguments);
             return _$iv.apply(this, _$_i);
         }
         function _$jv(_$_G) {
@@ -766,7 +778,7 @@ if ($_ts.cd) {
                     var _$$4, _$dW;
                     _$$4 = _$_a[0],
                         _$dW = _$_a[1],
-                        _$jZ.push("function ", _$$i[_$$4], "(){var ", _$$i[_$em], "=[", _$dW, "];Array.prototype.push.apply(", _$$i[_$em], ",arguments);return ", _$$i[_$aI], ".apply(this,", _$$i[_$em], ");}");
+                        _$jZ.push("function ", _$$i[_$$4], "(){var ", _$$i[_$em], "=[", _$dW, "];Array?.prototype.push.apply(", _$$i[_$em], ",arguments);return ", _$$i[_$aI], ".apply(this,", _$$i[_$em], ");}");
                 }
                 function _$eJ(_$_a, _$jZ) {
                     var _$$4, _$dW, _$fT;
@@ -1171,4 +1183,3 @@ if ($_ts.cd) {
 }
 
 console.log("document = %s, window = %s", document, window);
-debugger;
