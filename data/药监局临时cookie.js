@@ -1,6 +1,8 @@
 
 
-const fs = require('fs');
+var fs = require('fs');
+var path = require("path");
+
 
 // 日志写入文件
 // var logFilePath = '/home/feng/workspace/myWeb/logs/node_debug.log'; // 指定日志文件路径
@@ -71,7 +73,7 @@ proxy = function (obj) {
 
 // 首页返回的参数值
 // 读取文件提取指定值传递给 $_ts
-var file_path = '/home/feng/workspace/myWeb/html/药监局首页返回.html';
+var file_path = path.join(path.dirname(__dirname), '/html/药监局首页返回.html');
 var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
 data = res.toString()
 var regex = /[";]*/g    // 替换所有";符号

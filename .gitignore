@@ -12,6 +12,7 @@ logs
 */*.log
 
 node_modules
+.idea
 # html
 # js
 # data/

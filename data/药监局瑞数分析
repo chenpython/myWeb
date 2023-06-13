@@ -2,13 +2,13 @@
 
 GET https://www.nmpa.gov.cn/zwfw/sdxx/sdxxyp/index.html HTTP/1.1
 Host: www.nmpa.gov.cn
-Connection: keep-alive
-sec-ch-ua: "Google Chrome";v="113", "Chromium";v="113", "Not-A.Brand";v="24"
-sec-ch-ua-mobile: ?0
-sec-ch-ua-platform: "Windows"
-Upgrade-Insecure-Requests: 1
-User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
+Connection: keep - alive
+sec - ch - ua: "Google Chrome"; v = "113", "Chromium"; v = "113", "Not-A.Brand"; v = "24"
+sec - ch - ua - mobile: ?0
+sec - ch - ua - platform: "Windows"
+Upgrade - Insecure - Requests: 1
+User - Agent: Mozilla / 5.0(Windows NT 10.0; Win64; x64) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 113.0.0.0 Safari / 537.36
+Accept: text / html, application / xhtml + xml, application / xml; q = 0.9, image / avif, image / webp, image / apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7
 Sec-Fetch-Site: same-origin
 Sec-Fetch-Mode: navigate
 Sec-Fetch-Dest: document
@@ -41,6 +41,29 @@ Cookie: acw_tc=3ccdc15516859466519688917e1355a5937b65c2c0e205613a352fec6fe9b1; N
                 if (val.indexOf("NfBCSins2OywP") !== -1) {
                     debugger;
                 }
+				cookieTemp = val;
+				return val;
+		},
+		// hook get 方法也就是取值的方法 
+		get: function()
+		{
+			return cookieTemp;
+		}
+    });
+})();
+
+(function() {
+    // 严谨模式 检查所有错误
+    'use strict';
+    // document 为要hook的对象 这里是hook的cookie
+	var cookieTemp = "";
+    Object.defineProperty(document, 'cookie', {
+		// hook set方法也就是赋值的方法 
+		set: function(val) {
+				console.log('Hook捕获到cookie设置->', val);
+				// 这样就可以快速给下面这个代码行下断点
+				// 从而快速定位设置cookie的代码
+				debugger;
 				cookieTemp = val;
 				return val;
 		},
