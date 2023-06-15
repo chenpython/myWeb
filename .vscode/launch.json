@@ -1,0 +1,120 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Node Inspect",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${file}",
+            "runtimeArgs": [
+                "--inspect"
+            ]
+        }, // node inspect data/药监局临时cookie.js        
+        {
+            "name": "V8 Env",
+            "program": "${workspaceFolder}/tools/v8_debug_env/main.js",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "type": "node"
+        },
+        {
+            "name": "Scrapy Redis",
+            "type": "python",
+            "request": "launch",
+            "envFile": "${workspaceFolder}/.env",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/tinycrawl",
+            "logToFile": true,
+            "justMyCode": false,
+            "args": [
+                "runspider",
+                "${fileBasenameNoExtension}",
+                "-o",
+                "amazon.json"
+            ]
+        },
+        {
+            "name": "Scrapy",
+            "module": "scrapy",
+            "type": "python",
+            "request": "launch",
+            "envFile": "${workspaceFolder}/.env",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}/tinycrawl",
+            "logToFile": true,
+            "justMyCode": false,
+            "args": [
+                "crawl",
+                "${fileBasenameNoExtension}",
+                "-o",
+                "amazon.csv"
+            ]
+            // scrapy crawl japan_otc_drug -a total_gas=1 -a end_date=20141002
+            // scrapy crawl xinjiang_public_resources_trading -a start_page_index=74000 -a end_page_index=5330
+        },
+        {
+            "name": "Beat",
+            "type": "python",
+            "request": "launch",
+            "module": "celery",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "args": [
+                "-A",
+                "celery_app",
+                "beat",
+                "-l",
+                "INFO"
+            ]
+        },
+        {
+            "name": "Worker",
+            "type": "python",
+            "request": "launch",
+            "module": "celery",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "args": [
+                "-A",
+                "celery_app",
+                "worker",
+                "-l",
+                "INFO",
+                "--concurrency=2"
+            ]
+        },
+        {
+            "name": "Current File",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": "${workspaceFolder}/.env",
+            "args": [
+                "test",
+                "20230315"
+            ]
+        },
+        {
+            "name": "main",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tinycrawl/main.py",
+            "console": "integratedTerminal",
+            "justMyCode": false,
+            "envFile": "${workspaceFolder}/.env",
+            "args": [
+                "upload"
+            ]
+        }
+    ]
+}

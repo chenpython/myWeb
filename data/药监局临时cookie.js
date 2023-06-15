@@ -264,7 +264,8 @@ function XMLHttpRequest() { };
 
 
 var head = {
-    removeChild: removeChild
+    removeChild: removeChild,
+    parentElement: parentElement
 };
 Object.defineProperties(head, {
     [Symbol.toStringTag]: {

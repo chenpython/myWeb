@@ -1,18 +1,16 @@
 .venv
-.vscode
+# 不忽略指定文件夹下的某文件，则忽略整个文件夹时必须以 /* 结尾
+.vscode/*
+!/.vscode/launch.json
+
 .env
 
+# 忽略任意路径下 __pycache__ 文件
 __pycache__
-*/__pycache__
-*/*/__pycache__
-*/*/*/__pycache__
-*/*/*/*/__pycache__
 
 logs
 */*.log
 
 node_modules
 .idea
-# html
-# js
-# data/
+tmp
