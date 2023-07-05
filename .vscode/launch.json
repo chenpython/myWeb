@@ -7,6 +7,18 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "药监局调试",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/data/药监局临时cookie.js",
+            "runtimeArgs": [
+                "--inspect"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "Node Inspect",
             "skipFiles": [
                 "<node_internals>/**"
