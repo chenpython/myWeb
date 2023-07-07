@@ -7,6 +7,18 @@
         {
             "type": "node",
             "request": "launch",
+            "name": "甘肃市场监管调试",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/gansu_samr/genner_cookie.js",
+            "runtimeArgs": [
+                "--inspect"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
             "name": "药监局调试",
             "skipFiles": [
                 "<node_internals>/**"
