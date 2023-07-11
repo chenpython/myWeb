@@ -104,7 +104,7 @@ var c = new (function () { });
 var d = Object();
 var e = Object.create({});
 
-// 以下既为实例也为原型
+// 以下方法创造了一个构造函数
 function text() { };
 
 // ============创建对象的方法============
@@ -113,3 +113,24 @@ function text() { };
 // 实例.__proto__ 获取该实例的原型
 // 原型.__proto__ 获取该原型父亲的原型/实例
 // 原型.prototype == 原型自身
+
+
+// 原型链修改（继承指定的原型）
+
+function Tmp() { }; // 创建一个函数（实例+原型）
+var tmp = new Tmp();    // 创建一个实例
+tmp.__proto__ = ({}).__proto__; // 继承指定原型
+Tmp.prototype.__proto__ = ({}).__proto__;
+
+
+// 修改 window 的原型链示例
+
+var window1 = function window1() { name: "window-name-1" };
+var Window1 = {};
+Window1.__proto__ = window1.prototype; // 修改 Window1 的原型
+Object.defineProperties(Window1, {
+    [Symbol.toStringTag]: {
+        value: "window1",
+        configurable: true
+    }
+});// 修改原型的名称
