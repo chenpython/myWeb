@@ -95,9 +95,21 @@ Object.getOwnPropertyDescriptor = function (o, p) {
     return Object.getOwnPropertyDescriptor_.apply(this, arguments);
 }
 
-// 创建对象的方法
-// 1、{}
-// 2、Object.create()
-// 3、class objName { }
-// 4、function objName() { }; new objName;
-// 5、var objName = new Object;
+// ============创建对象的方法============
+
+// 以下均为实例
+var a = {};
+var b = class b { };
+var c = new (function () { });
+var d = Object();
+var e = Object.create({});
+
+// 以下既为实例也为原型
+function text() { };
+
+// ============创建对象的方法============
+
+// 只有实例有 __proto__ 属性
+// 实例.__proto__ 获取该实例的原型
+// 原型.__proto__ 获取该原型父亲的原型/实例
+// 原型.prototype == 原型自身
