@@ -19,19 +19,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "药监局调试",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}/data/药监局临时cookie.js",
-            "runtimeArgs": [
-                "--inspect"
-            ]
-        },
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Node Inspect",
+            "name": "Node-Inspect",
             "skipFiles": [
                 "<node_internals>/**"
             ],
@@ -41,8 +29,8 @@
             ]
         }, // node inspect data/药监局临时cookie.js        
         {
-            "name": "V8 Env",
-            "program": "${workspaceFolder}/tools/v8_debug_env/main.js",
+            "name": "Node-current file",
+            "program": "${file}",
             "request": "launch",
             "skipFiles": [
                 "<node_internals>/**"
@@ -50,7 +38,7 @@
             "type": "node"
         },
         {
-            "name": "Scrapy Redis",
+            "name": "Scrapy-Redis",
             "type": "python",
             "request": "launch",
             "envFile": "${workspaceFolder}/.env",
@@ -85,7 +73,7 @@
             // scrapy crawl xinjiang_public_resources_trading -a start_page_index=74000 -a end_page_index=5330
         },
         {
-            "name": "Beat",
+            "name": "Celery-Beat",
             "type": "python",
             "request": "launch",
             "module": "celery",
@@ -100,7 +88,7 @@
             ]
         },
         {
-            "name": "Worker",
+            "name": "Celery-Worker",
             "type": "python",
             "request": "launch",
             "module": "celery",
@@ -116,7 +104,7 @@
             ]
         },
         {
-            "name": "Current File",
+            "name": "Python-Current File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
@@ -128,17 +116,5 @@
                 "20230315"
             ]
         },
-        {
-            "name": "main",
-            "type": "python",
-            "request": "launch",
-            "program": "${workspaceFolder}/tinycrawl/main.py",
-            "console": "integratedTerminal",
-            "justMyCode": false,
-            "envFile": "${workspaceFolder}/.env",
-            "args": [
-                "upload"
-            ]
-        }
     ]
 }

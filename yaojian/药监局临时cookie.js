@@ -73,7 +73,7 @@ proxy = function (obj) {
 
 // 首页返回的参数值
 // 读取文件提取指定值传递给 $_ts
-var file_path = path.join(path.dirname(__dirname), '/html/药监局首页返回.html');
+var file_path = path.join(path.dirname(__dirname), '/yaojian/药监局首页返回.html');
 var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
 data = res.toString()
 var regex = /[";]*/g    // 替换所有";符号
