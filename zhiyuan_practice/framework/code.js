@@ -1,0 +1,1 @@
+console.log("补充 window 环境");
