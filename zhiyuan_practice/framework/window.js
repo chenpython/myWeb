@@ -42,4 +42,7 @@ Window.prototype.__proto__ = WindowProperties.prototype;
 window = this;
 window.__proto__ = Window.prototype;
 
+Window = FrameworkProxy(Window);
+window = FrameworkProxy(window);
+
 debugger;
