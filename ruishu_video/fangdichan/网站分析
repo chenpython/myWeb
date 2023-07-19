@@ -1,0 +1,19 @@
+www.fangdi.com.cn = www.fangdi.com.cn_rs4; www.fangdi.com_http_ic = www.fangdi.com.cn_80_RS; FSSBBIl1UgzbN7N80T = 4bo86rT3lV99e8FWpR1G2f.HtMUB1SiVoNDn3rXe8Ve0A0uNd1Q_USZxrwdxg7cO_uat1sdOrnRc5DuS6MyVCYx1rKV2WxFsQlHK5aktm7hJvYWCf_.rgBJApktF7H4b5ayE1ABuXla4QoqwPa1CeOxftbmXBLAtcnW_O7WYLRYIfypBflprIQqnaNzVW2g1e8Ql19QkrsRmaYIYZMo9F6ReDD2kPEuiL7.RJmyxL0CTuXJBqB5Svy1cTSx.J_inD5PvpEY0yPf3Kf3UDoRl.uMwDX3bgns046VRsc1Xk4HOO9tm3AIBCSUcsmzcL4GUdgXe5_I34DorZ0.xlgHZC3ow6RC6FUeub3FDa4n2uHvGgUe0VUP6.9Lc4m9hxUEOrtdE
+
+function _$YS() {
+    var _$oN = _$rM(5);
+    if (_$oN) {
+        var _$Ho = _$6U(_$0r);
+        _$uA(_$Ho, _$oN);
+    }
+    if (_$93) {
+        _$93[_$El[430]] = _$qX(6);
+    }
+    _$9$(768, 1); // 真正生成cookie的地方
+}
+
+
+ret = _$0r.call(_$qc, _$z3); // 入口
+
+
+
