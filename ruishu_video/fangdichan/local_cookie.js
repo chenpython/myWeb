@@ -108,6 +108,11 @@ DOMParser = {}
 function removeItem(keyName) {
     console.log("removeItem: ", keyName)
 }
+function openDatabase() {
+    // length: 4
+    // name: "openDatabase"
+}
+
 
 var eval_js = "";
 
@@ -118,12 +123,28 @@ document = {
     getElementsByTagName: getElementsByTagName,
     documentElement: {
         style: {}
-    }, addEventListener: addEventListener
+    },
+    addEventListener: addEventListener,
+    cookie: 'www.fangdi.com_http_ic=www.fangdi.com.cn_80_RS'
 }
 
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
         value: 'document',
+        configurable: true
+    }
+})
+
+function getItem(keyName) {
+    debugger;
+}
+
+sessionStorage = {
+    getItem: getItem
+}
+Object.defineProperties(sessionStorage, {
+    [Symbol.toStringTag]: {
+        value: 'sessionStorage',
         configurable: true
     }
 })
@@ -154,9 +175,9 @@ window_mine = {
     addEventListener: addEventListener,
     localStorage: { removeItem: removeItem },
     globalStorage: {},
-    sessionStorage: {},
+    sessionStorage: sessionStorage,
     name: "",
-
+    openDatabase: openDatabase
 };
 
 window = Object.assign(global, window_mine)
