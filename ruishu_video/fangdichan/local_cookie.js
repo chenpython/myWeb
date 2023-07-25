@@ -6,6 +6,9 @@ myProxy = function myProxy(obj) {
             return target[prop];
         },
         set: function (target, prop, receiver) {
+            if (prop == "$_fpn1") {
+                debugger;
+            }
             console.log("%s set %s -> %s", target, prop, receiver);
             return Reflect.set(...arguments);
         }
@@ -30,10 +33,19 @@ Object.defineProperties(mimetypearray, {
         configurable: true
     }
 })
+
+NetworkInformation = {}
+Object.defineProperties(NetworkInformation, {
+    [Symbol.toStringTag]: {
+        value: 'NetworkInformation',
+        configurable: true
+    }
+})
+
 navigator = {
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
-    mimeTypes: mimetypearray
-
+    mimeTypes: mimetypearray,
+    connection: NetworkInformation
 }
 
 
@@ -112,6 +124,15 @@ function openDatabase() {
     // length: 4
     // name: "openDatabase"
 }
+function getAttribute(attributeName) {
+    var attribute = "";
+    switch (attributeName) {
+        case "selenium":
+            attribute = null;
+            break;
+    }
+    return attribute;
+}
 
 
 var eval_js = "";
@@ -122,7 +143,8 @@ document = {
     characterSet: "UTF-8",
     getElementsByTagName: getElementsByTagName,
     documentElement: {
-        style: {}
+        style: {},
+        getAttribute: getAttribute
     },
     addEventListener: addEventListener,
     cookie: 'www.fangdi.com_http_ic=www.fangdi.com.cn_80_RS'
@@ -136,11 +158,20 @@ Object.defineProperties(document, {
 })
 
 function getItem(keyName) {
-    debugger;
+    if (keyName == "$_YWTU") {
+        return null;
+    } else {
+        debugger;
+    }
+}
+function setItem(keyName, keyValue) {
+    this[keyName] = keyValue;
 }
 
 sessionStorage = {
-    getItem: getItem
+    getItem: getItem,
+    setItem: setItem,
+    length: 0
 }
 Object.defineProperties(sessionStorage, {
     [Symbol.toStringTag]: {
@@ -148,6 +179,16 @@ Object.defineProperties(sessionStorage, {
         configurable: true
     }
 })
+
+localStorage = { removeItem: removeItem, getItem: getItem, setItem: setItem }
+Object.defineProperties(localStorage, {
+    [Symbol.toStringTag]: {
+        value: 'localStorage',
+        configurable: true
+    }
+})
+localStorage = myProxy(localStorage)
+
 
 document = myProxy(document)
 
@@ -173,14 +214,16 @@ window_mine = {
     navigator: navigator,
     DOMParser: DOMParser,
     addEventListener: addEventListener,
-    localStorage: { removeItem: removeItem },
-    globalStorage: {},
+    localStorage: localStorage,
+    // globalStorage: {},
     sessionStorage: sessionStorage,
-    name: "",
+    name: "&vdFm=",
     openDatabase: openDatabase
 };
 
+
 window = Object.assign(global, window_mine)
+window.self = window;
 Object.defineProperties(window, {
     [Symbol.toStringTag]: {
         value: 'window',
@@ -8537,6 +8580,447 @@ function _$1X(_$NI) {
         if (_$$6(_$Px, _$NI))
             return _$be[_$vJ[6]](_$Px, _$NI.length);
     }
+}
+function _$W6(_$NI, _$BT) {
+    var _$QR = _$8l(_$NI);
+    var _$xw = new _$tJ(_$BT);
+    return _$xw._$u6(_$QR, true);
+}
+function _$Ld() {
+    var _$QR = _$8l(_$PT(19) + _$KI._$Hn);
+    return _$dk(_$QR);
+}
+function _$tJ(_$NI, _$BT) {
+    var _$QR = _$Gb()
+        , _$1G = _$QR[0]
+        , _$yG = _$QR[1];
+    if (!_$1G[0][0] && !_$1G[0][1]) {
+        _$F0(_$BT, _$1G, _$yG);
+    }
+    var _$Xq = _$sL(_$NI, _$1G, _$yG);
+    function _$xw(_$4w, _$rx) {
+        var _$QR = _$B8[_$vJ[34]](_$4w.length / 16) + 1, _$xw, _$Px = [], _$Xj = 16 - (_$4w.length % 16), _$XH, _$bN;
+        if (_$rx) {
+            _$Px = _$XH = _$UE();
+        }
+        var _$bF = _$4w[_$vJ[9]](0);
+        _$bN = _$4w.length + _$Xj;
+        for (_$xw = _$4w.length; _$xw < _$bN;)
+            _$bF[_$xw++] = _$Xj;
+        _$bF = _$z0(_$bF);
+        for (_$xw = 0; _$xw < _$QR;) {
+            _$bN = _$bF[_$vJ[9]](_$xw << 2, (++_$xw) << 2);
+            _$bN = _$XH ? _$MJ(_$bN, _$XH) : _$bN;
+            _$XH = _$er(_$Xq, _$bN, 0, _$1G);
+            _$Px = _$Px[_$vJ[29]](_$XH);
+        }
+        return _$9k(_$Px);
+    }
+    ; function _$Px(_$4w, _$rx) {
+        var _$QR, _$xw, _$Px, _$Xj, _$XH = [], _$bN, _$bF;
+        _$4w = _$z0(_$4w);
+        if (_$rx) {
+            _$bF = _$4w[_$vJ[9]](0, 4);
+            _$4w = _$4w[_$vJ[9]](4);
+        }
+        _$QR = _$4w.length / 4;
+        for (_$xw = 0; _$xw < _$QR;) {
+            _$Xj = _$4w[_$vJ[9]](_$xw << 2, (++_$xw) << 2);
+            _$Px = _$er(_$Xq, _$Xj, 1, _$yG);
+            _$XH = _$XH[_$vJ[29]](_$bF ? _$MJ(_$Px, _$bF) : _$Px);
+            _$bF = _$Xj;
+        }
+        _$XH = _$9k(_$XH);
+        _$bN = _$XH[_$XH.length - 1];
+        _$XH[_$vJ[11]](_$XH.length - _$bN, _$bN);
+        return _$XH;
+    }
+    ; var _$Xj = {};
+    _$Xj._$KI = _$xw;
+    _$Xj._$u6 = _$Px;
+    return _$Xj;
+}
+function _$F0(_$NI, _$BT, _$FI) {
+    var _$QR = _$BT[4], _$xw = _$FI[4], _$Px, _$Xj, _$XH, _$bN = [], _$bF = [], _$2n, _$jg, _$N4, _$iW, _$Yz, _$w5;
+    for (_$Px = 0; _$Px < 256; _$Px++) {
+        _$bF[(_$bN[_$Px] = _$Px << 1 ^ (_$Px >> 7) * 283) ^ _$Px] = _$Px;
+    }
+    for (_$Xj = _$XH = 0; !_$QR[_$Xj]; _$Xj ^= _$2n || 1,
+        _$XH = _$bF[_$XH] || 1) {
+        _$iW = _$XH ^ _$XH << 1 ^ _$XH << 2 ^ _$XH << 3 ^ _$XH << 4;
+        _$iW = _$iW >> 8 ^ _$iW & 255 ^ 99;
+        _$QR[_$Xj] = _$iW;
+        _$xw[_$iW] = _$Xj;
+        _$2n = _$bN[_$Xj];
+    }
+    for (_$Px = 0; _$Px < 256; _$Px++) {
+        _$xw[_$QR[_$Px]] = _$Px;
+    }
+    for (_$Xj = 0; _$Xj < 256; _$Xj++) {
+        _$iW = _$QR[_$Xj];
+        _$N4 = _$bN[_$jg = _$bN[_$2n = _$bN[_$Xj]]];
+        _$w5 = _$N4 * 0x1010101 ^ _$jg * 0x10001 ^ _$2n * 0x101 ^ _$Xj * 0x1010100;
+        _$Yz = _$bN[_$iW] * 0x101 ^ _$iW * 0x1010100;
+        for (_$Px = 0; _$Px < 4; _$Px++) {
+            _$BT[_$Px][_$Xj] = _$Yz = _$Yz << 24 ^ _$Yz >>> 8;
+            _$FI[_$Px][_$iW] = _$w5 = _$w5 << 24 ^ _$w5 >>> 8;
+        }
+    }
+    for (_$Px = 0; _$Px < 5; _$Px++) {
+        _$BT[_$Px] = _$BT[_$Px][_$vJ[9]](0);
+        _$FI[_$Px] = _$FI[_$Px][_$vJ[9]](0);
+    }
+}
+function _$sL(_$NI, _$BT, _$FI) {
+    var _$QR = _$NI;
+    if (_$NI.length % 16 !== 0)
+        _$QR = _$aM(_$NI);
+    var _$xw = _$z0(_$QR);
+    var _$Px, _$Xj, _$XH, _$bN, _$bF, _$2n = _$BT[4], _$jg = _$xw.length, _$N4 = 1;
+    var _$bN = _$xw[_$vJ[9]](0);
+    var _$bF = [];
+    for (_$Px = _$jg; _$Px < 4 * _$jg + 28; _$Px++) {
+        _$XH = _$bN[_$Px - 1];
+        if (_$Px % _$jg === 0 || (_$jg === 8 && _$Px % _$jg === 4)) {
+            _$XH = _$2n[_$XH >>> 24] << 24 ^ _$2n[_$XH >> 16 & 255] << 16 ^ _$2n[_$XH >> 8 & 255] << 8 ^ _$2n[_$XH & 255];
+            if (_$Px % _$jg === 0) {
+                _$XH = _$XH << 8 ^ _$XH >>> 24 ^ _$N4 << 24;
+                _$N4 = _$N4 << 1 ^ (_$N4 >> 7) * 283;
+            }
+        }
+        _$bN[_$Px] = _$bN[_$Px - _$jg] ^ _$XH;
+    }
+    for (_$Xj = 0; _$Px; _$Xj++,
+        _$Px--) {
+        _$XH = _$bN[_$Xj & 3 ? _$Px : _$Px - 4];
+        if (_$Px <= 4 || _$Xj < 4) {
+            _$bF[_$Xj] = _$XH;
+        } else {
+            _$bF[_$Xj] = _$FI[0][_$2n[_$XH >>> 24]] ^ _$FI[1][_$2n[_$XH >> 16 & 255]] ^ _$FI[2][_$2n[_$XH >> 8 & 255]] ^ _$FI[3][_$2n[_$XH & 255]];
+        }
+    }
+    return [_$bN, _$bF];
+}
+function _$er(_$NI, _$BT, _$FI, _$iV) {
+    var _$QR = _$NI[_$FI], _$xw = _$BT[0] ^ _$QR[0], _$Px = _$BT[_$FI ? 3 : 1] ^ _$QR[1], _$Xj = _$BT[2] ^ _$QR[2], _$XH = _$BT[_$FI ? 1 : 3] ^ _$QR[3], _$bN, _$bF, _$2n, _$jg = _$QR.length / 4 - 2, _$N4, _$iW = 4, _$Yz = [0, 0, 0, 0], _$w5 = _$iV[0], _$Ng = _$iV[1], _$BU = _$iV[2], _$RN = _$iV[3], _$6q = _$iV[4];
+    for (_$N4 = 0; _$N4 < _$jg; _$N4++) {
+        _$bN = _$w5[_$xw >>> 24] ^ _$Ng[_$Px >> 16 & 255] ^ _$BU[_$Xj >> 8 & 255] ^ _$RN[_$XH & 255] ^ _$QR[_$iW];
+        _$bF = _$w5[_$Px >>> 24] ^ _$Ng[_$Xj >> 16 & 255] ^ _$BU[_$XH >> 8 & 255] ^ _$RN[_$xw & 255] ^ _$QR[_$iW + 1];
+        _$2n = _$w5[_$Xj >>> 24] ^ _$Ng[_$XH >> 16 & 255] ^ _$BU[_$xw >> 8 & 255] ^ _$RN[_$Px & 255] ^ _$QR[_$iW + 2];
+        _$XH = _$w5[_$XH >>> 24] ^ _$Ng[_$xw >> 16 & 255] ^ _$BU[_$Px >> 8 & 255] ^ _$RN[_$Xj & 255] ^ _$QR[_$iW + 3];
+        _$iW += 4;
+        _$xw = _$bN;
+        _$Px = _$bF;
+        _$Xj = _$2n;
+    }
+    for (_$N4 = 0; _$N4 < 4; _$N4++) {
+        _$Yz[_$FI ? 3 & -_$N4 : _$N4] = _$6q[_$xw >>> 24] << 24 ^ _$6q[_$Px >> 16 & 255] << 16 ^ _$6q[_$Xj >> 8 & 255] << 8 ^ _$6q[_$XH & 255] ^ _$QR[_$iW++];
+        _$bN = _$xw;
+        _$xw = _$Px;
+        _$Px = _$Xj;
+        _$Xj = _$XH;
+        _$XH = _$bN;
+    }
+    return _$Yz;
+}
+function _$MJ(_$NI, _$BT) {
+    return [(_$NI[0] ^ _$BT[0]), (_$NI[1] ^ _$BT[1]), (_$NI[2] ^ _$BT[2]), (_$NI[3] ^ _$BT[3])];
+}
+function _$9k(_$NI) {
+    var _$QR = _$NI.length, _$xw = _$gV = 0, _$Px = _$NI.length * 4, _$Xj, _$XH;
+    _$XH = new _$m7(_$Px);
+    while (_$xw < _$QR) {
+        _$Xj = _$NI[_$xw++];
+        _$XH[_$gV++] = (_$Xj >>> 24) & 0xFF;
+        _$XH[_$gV++] = (_$Xj >>> 16) & 0xFF;
+        _$XH[_$gV++] = (_$Xj >>> 8) & 0xFF;
+        _$XH[_$gV++] = _$Xj & 0xFF;
+    }
+    return _$XH;
+}
+function _$1m() {
+    var _$QR = _$V$[_$vJ[93]](_$vJ[58]);
+    for (_$Zi = _$QR.length - 1; _$Zi >= 0; _$Zi--) {
+        if (_$QR[_$Zi][_$vJ[4]]('r') === 'm') {
+            _$QR[_$Zi].parentElement[_$vJ[42]](_$QR[_$Zi]);
+        }
+    }
+    _$KI._$jR = _$KI[_$KI._$jR](_$QR);
+}
+function _$jP(_$NI) {
+    _$NI = _$_N(_$NI);
+    if (_$Gk[_$NI]) {
+        _$Ud(2, 1);
+        return;
+    } else
+        _$Gk[_$NI] = 1;
+    _$Ud(2, _$OD(8));
+    _$V$[_$vJ[72]](_$6t(_$PT(_$NI)));
+    _$Nk();
+}
+function _$eB() {
+    _$J3(_$u6, _$vJ[89], _$wR);
+    _$ws();
+    _$KI.l__ = _$$k;
+    _$wL();
+    _$4M();
+}
+function _$k$() {
+    if (_$u6[_$vJ[41]]) {
+        _$K7 = _$u6[_$vJ[41]];
+        _$u6[_$vJ[41]] = _$QR;
+    } else { }
+    if (!_$Mw()[_$vJ[33]]) {
+        _$Mw()[_$vJ[33]] = _$Mw()[_$vJ[67]] + "//" + _$Mw()[_$vJ[22]] + (_$Mw()[_$vJ[35]] ? ':' + _$Mw()[_$vJ[35]] : '');
+    }
+    function _$QR(_$4w, _$rx, _$UC) {
+        if (_$ie & 1) {
+            _$4w = _$lK(_$4w, true);
+        }
+        return _$K7(_$4w, _$rx, _$UC);
+    }
+}
+function _$Eg() {
+    var _$1G = {}
+        , _$yG = {};
+    _$qo = _$QR;
+    _$lI = _$xw;
+    _$18 = _$Px;
+    _$eC = _$Xj;
+    function _$QR(_$4w, _$rx) {
+        _$1G[_$4w] = _$rx;
+    }
+    function _$xw(_$4w) {
+        return _$1G[_$4w];
+    }
+    function _$Px(_$4w, _$rx) {
+        _$yG[_$4w] = _$rx;
+    }
+    function _$Xj(_$4w) {
+        return _$yG[_$4w];
+    }
+}
+function _$wR() {
+    _$X_();
+    _$II(_$lp, 0);
+    _$II(_$x9, 0);
+}
+function _$ws() {
+    var _$QR = _$zS(5);
+    if (_$QR) {
+        var _$xw = _$5N(_$zh);
+        _$qz(_$xw, _$QR);
+    }
+    if (_$CG) {
+        _$CG[_$vJ[430]] = _$PT(6);
+    }
+    _$hc(768, 1);
+}
+function _$$k(_$NI, _$BT) {
+    var _$1G = 0, _$QR = _$NI.length, _$xw, _$Px, _$yG, _$Xq = _$KI._$O$, _$Zp, _$wW = [], _$Xj = [], _$XH = [], _$bN;
+    var _$bF = _$69();
+    _$yG = _$xd;
+    _$xw = _$lr();
+    _$Zp = _$8T(_$xw);
+    _$bF = _$69();
+    _$Xj = _$2n();
+    _$bF = _$69();
+    _$xw = _$lr();
+    _$XH = new _$m7(_$xw);
+    for (_$Px = 0; _$Px < _$xw; _$Px++) {
+        _$XH[_$Px] = _$2n().join('');
+    }
+    _$XH.push(_$Xj.join(''));
+    _$uQ(_$XH);
+    _$bF = _$69();
+    _$bN = _$XH.join('');
+    _$EQ(_$bN);
+    function _$lr() {
+        var _$QR = _$yG[_$NI[_$vJ[15]](_$1G++)];
+        if (_$QR <= 80) {
+            return _$QR;
+        } else if (_$QR == 81) {
+            return _$yG[_$NI[_$vJ[15]](_$1G++)] + 80;
+        } else if (_$QR == 82) {
+            var _$xw = _$yG[_$NI[_$vJ[15]](_$1G++)]
+                , _$Px = _$yG[_$NI[_$vJ[15]](_$1G++)];
+            return _$xw + _$Px * 86 + 165;
+        } else if (_$QR == 83) {
+            var _$xw = _$yG[_$NI[_$vJ[15]](_$1G++)]
+                , _$Px = _$yG[_$NI[_$vJ[15]](_$1G++)]
+                , _$Xj = _$yG[_$NI[_$vJ[15]](_$1G++)];
+            return _$xw + _$Px * 86 + _$Xj * 86 * 86 + 7560;
+        } else if (_$QR == 84) {
+            var _$xw = _$yG[_$NI[_$vJ[15]](_$1G++)]
+                , _$Px = _$yG[_$NI[_$vJ[15]](_$1G++)]
+                , _$Xj = _$yG[_$NI[_$vJ[15]](_$1G++)];
+            _$eJ = _$yG[_$NI[_$vJ[15]](_$1G++)];
+            return _$xw + _$Px * 86 + _$Xj * 86 * 86 + _$eJ * 86 * 86 * 86 + 643615;
+        } else { }
+    }
+    function _$tw(_$4w) {
+        var _$QR = _$NI[_$vJ[302]](_$1G, _$4w);
+        _$1G += _$4w;
+        return _$QR;
+    }
+    function _$2n() {
+        var _$QR, _$xw, _$Px, _$Xj, _$XH, _$bN = _$lr();
+        var _$bF = new _$m7(_$bN);
+        for (_$QR = 0; _$QR < _$bN; _$QR++) {
+            if (_$QR % 2 == 0) {
+                _$xw = _$lr();
+            } else {
+                _$xw >>= 4;
+            }
+            _$Px = _$xw & 7;
+            _$Xj = _$lr();
+            if (_$Px === 0) {
+                _$bF[_$QR] = _$wW[_$Xj];
+            } else if (_$Px === 3) {
+                _$XH = _$tw(_$Xj);
+                _$wW.push(_$XH);
+                _$bF[_$QR] = _$XH;
+            } else if (_$Px === 1) {
+                _$bF[_$QR] = _$Zp[_$Xj];
+            } else if (_$Px === 2) {
+                _$bF[_$QR] = _$Xq[_$Xj];
+            } else if (_$Px === 4) {
+                _$bF[_$QR] = _$BT[_$Xj];
+            } else { }
+        }
+        return _$bF;
+    }
+}
+function _$wL() {
+    var _$1G = _$u6[_$vJ[608]];
+    if (_$1G) {
+        var _$QR = _$1G[_$vJ[8]];
+        if (_$QR) {
+            _$_m = _$QR[_$vJ[24]];
+            _$H$ = _$QR[_$vJ[17]];
+            _$QR[_$vJ[24]] = _$XH;
+            _$QR[_$vJ[17]] = _$bN;
+        } else {
+            _$u6[_$vJ[608]] = _$bF;
+        }
+    }
+    var _$yG = _$u6[_$vJ[13]];
+    var _$xw = _$94 & 2048;
+    if (_$yG || (_$2W === 11 && !_$xw)) {
+        var _$Xq = [_$vJ[655], _$vJ[211], _$vJ[140], _$vJ[184], _$vJ[563], _$vJ[561], _$vJ[560], _$vJ[166], _$vJ[209], _$vJ[110], _$vJ[425], _$vJ[135], _$vJ[420], _$vJ[652]];
+        _$u6[_$vJ[13]] = _$2n;
+    }
+    var _$Zp = _$u6[_$vJ[463]];
+    if (_$Zp && _$JV(_$Zp)) {
+        _$u6[_$vJ[463]] = _$jg;
+    }
+    if (!(_$94 & 1))
+        return;
+    var _$Px = _$u6[_$vJ[53]];
+    if (_$Px) {
+        var _$Xj = _$Px[_$vJ[8]];
+        _$3M = _$Xj[_$vJ[98]];
+        _$Xj[_$vJ[98]] = _$N4;
+    }
+    function _$XH() {
+        _$CB();
+        this.uri = arguments[1] = _$qX(arguments[1]);
+        return _$_m[_$vJ[12]](this, arguments);
+    }
+    function _$bN() {
+        _$CB();
+        arguments[0] = _$8Z(arguments[0], this.uri, true);
+        return _$H$[_$vJ[12]](this, arguments);
+    }
+    function _$bF() {
+        return _$vV(new _$1G(), true);
+    }
+    function _$2n(_$4w, _$rx) {
+        for (var _$QR = 0; _$QR < _$Xq.length; ++_$QR) {
+            if (_$tz(_$4w, _$Xq[_$QR])) {
+                return _$vV(new _$yG(_$4w), true);
+            }
+        }
+        if (_$rx)
+            return new _$yG(_$4w, _$rx);
+        return new _$yG(_$4w);
+    }
+    function _$jg(_$4w, _$rx) {
+        var _$QR;
+        if (typeof _$4w === _$vJ[7]) {
+            var _$xw = 1;
+            if (_$rx && _$rx[_$vJ[550]] == _$vJ[147]) {
+                _$xw |= 2;
+            }
+            _$QR = _$4w = _$qX(_$4w, _$xw);
+        } else if (_$4w instanceof _$u6[_$vJ[183]]) {
+            _$QR = _$4w.url;
+        }
+        if (_$rx && _$rx[_$vJ[30]] == _$vJ[270] && _$rx[_$vJ[19]]) {
+            _$rx[_$vJ[19]] = _$8Z(_$rx[_$vJ[19]], _$QR, true);
+        }
+        return _$Zp(_$4w, _$rx);
+    }
+    function _$N4() {
+        _$CB();
+        _$SL(this);
+    }
+}
+function _$4M() {
+    var _$1G, _$yG;
+    if (_$CG) {
+        _$1G = _$3U(_$CG[_$vJ[36]]) || _$UN(10000);
+        _$yG = _$1G + 10000;
+        _$CG[_$vJ[36]] = _$yG > 0x77359400 ? _$UN(10000) : _$yG;
+        _$IJ = _$QR;
+    } else {
+        _$IJ = _$xw;
+    }
+    function _$QR() {
+        ++_$1G;
+        if (_$1G >= _$yG) {
+            _$4M();
+        }
+        return _$1G;
+    }
+    function _$xw() {
+        var _$QR = _$u6[_$vJ[0]];
+        if (_$QR === _$X4 || _$rq[_$vJ[6]](_$QR, _$vJ[481]) === 0) {
+            var _$xw = _$3U(_$QR[_$vJ[9]](4));
+            _$xw = _$xw ? _$xw + 1 : _$UN(0x77359400);
+            _$u6[_$vJ[0]] = _$vJ[481] + _$xw;
+        } else {
+            _$xw = _$UN(0x77359400);
+        }
+        return _$xw;
+    }
+}
+function _$qz(_$NI, _$BT) {
+    _$V$[_$vJ[39]] = _$NI + '=' + _$BT + _$do() + _$vJ[494] + _$4C(_$B6);
+}
+function _$do() {
+    return "";
+}
+function _$4C(_$NI) {
+    var _$QR = _$69() + _$NI * 24 * 60 * 60 * 1000;
+    var _$xw = _$vJ[585] + (new _$uB(_$QR))[_$vJ[602]]();
+    if (_$Mw()[_$vJ[67]] === _$vJ[27]) {
+        _$xw += _$vJ[207];
+    }
+    return _$xw;
+}
+function _$AH() {
+    return _$4L + _$69() - _$1z;
+}
+function _$T_(_$NI) {
+    if (typeof _$NI != _$vJ[7]) {
+        return [];
+    }
+    var _$QR = [];
+    for (var _$xw = 0; _$xw < _$NI.length; _$xw++) {
+        _$QR.push(_$NI[_$vJ[15]](_$xw));
+    }
+    return _$QR;
 }
 // 最初生成 cookie 的函数
 function getCookie() {

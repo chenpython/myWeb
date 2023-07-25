@@ -19,3 +19,11 @@ ret = _$0r.call(_$qc, _$z3); // 入口
 $QR = (_$px(_$vJ[139]))();
 
 http://www.fangdi.com.cn/new_house/new_house.html
+
+
+window['name']
+在 function _$8l(_$NI) 中 _$NI 的值类型不对
+
+
+上一次_$mU： 28
+
