@@ -1,0 +1,167 @@
+local_cookie.js:2012 进入hc循环
+local_cookie.js:2015 当前_$mU： 99
+local_cookie.js:2012 进入hc循环
+local_cookie.js:2015 当前_$mU： 344
+local_cookie.js:2015 当前_$mU： 240
+local_cookie.js:5 [object window] get self -> [object window]
+local_cookie.js:5 [object window] get top -> [object Object]
+local_cookie.js:2015 当前_$mU： 258
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 67
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 458
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 193
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 153
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 514
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 274
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 120
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 181
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 450
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 447
+local_cookie.js:5 [object window] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object window] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 19
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 348
+local_cookie.js:2015 当前_$mU： 256
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 147
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 460
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object document] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 488
+local_cookie.js:5 [object window] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object window] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 58
+local_cookie.js:5 [object window] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object window] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 301
+local_cookie.js:5 [object window] get setInterval -> function setInterval(callback, repeat, arg1, arg2, arg3) {
+  validateFunction(callback, 'callback');
+
+  let i, args;
+  switch (arguments.length) {
+    // fast cases
+    case 1:
+    case 2:
+      break;
+    case 3:
+      args = [arg1];
+      break;
+    case 4:
+      args = [arg1, arg2];
+      break;
+    default:
+      args = [arg1, arg2, arg3];
+      for (i = 5; i < arguments.length; i++) {
+        // Extend array dynamically, makes .apply run much faster in v6.0.0
+        args[i - 2] = arguments[i];
+      }
+      break;
+  }
+
+  const timeout = new Timeout(callback, repeat, args, true, true);
+  insert(timeout, timeout._idleTimeout);
+
+  return timeout;
+}
+local_cookie.js:2015 当前_$mU： 180
+local_cookie.js:2015 当前_$mU： 272
+local_cookie.js:2012 进入hc循环
+local_cookie.js:2015 当前_$mU： 354
+local_cookie.js:5 [object window] get navigator -> [object Object]
+local_cookie.js:2015 当前_$mU： 74
+local_cookie.js:2015 当前_$mU： 331
+local_cookie.js:5 [object window] get addEventListener -> function addEventListener() { }
+local_cookie.js:5 [object window] get addEventListener -> function addEventListener() { }
+local_cookie.js:2015 当前_$mU： 116
+local_cookie.js:2012 进入hc循环
+local_cookie.js:2015 当前_$mU： 362
+local_cookie.js:2015 当前_$mU： 209
+local_cookie.js:2015 当前_$mU： 468
+local_cookie.js:2015 当前_$mU： 519
+local_cookie.js:2015 当前_$mU： 88
+local_cookie.js:2012 进入hc循环
+local_cookie.js:2015 当前_$mU： 413
+local_cookie.js:5 [object window] get openDatabase -> function openDatabase() {
+    // length: 4
+    // name: "openDatabase"
+}
+local_cookie.js:5 [object window] get openDatabase -> function openDatabase() {
+    // length: 4
+    // name: "openDatabase"
+}
+local_cookie.js:2015 当前_$mU： 382
+local_cookie.js:5 [object localStorage] get getItem -> function getItem(keyName) {
+    if (keyName == "$_YWTU") {
+        return null;
+    } else {
+        debugger;
+    }
+}
+local_cookie.js:5 [object window] get Math -> [object Math]
+local_cookie.js:5 [object window] get Math -> [object Math]
+local_cookie.js:5 [object window] get Math -> [object Math]
+local_cookie.js:5 [object window] get Math -> [object Math]
+local_cookie.js:5 [object window] get Math -> [object Math]
+local_cookie.js:5 [object window] get Math -> [object Math]
+local_cookie.js:5 [object window] get escape -> function escape() { [native code] }
+local_cookie.js:5 [object localStorage] get setItem -> function setItem(keyName, keyValue) {
+    this[keyName] = keyValue;
+}
+local_cookie.js:12 [object localStorage] set $_YWTU -> PnA.gPKzrd5.HVH9C5h6t7RQDwPXq2TLvgroEJRC1Pg
+local_cookie.js:5 [object window] get escape -> function escape() { [native code] }
+local_cookie.js:5 [object localStorage] get setItem -> function setItem(keyName, keyValue) {
+    this[keyName] = keyValue;
+}
+local_cookie.js:12 [object localStorage] set $_cDro -> 0
+local_cookie.js:2015 当前_$mU： 519
+local_cookie.js:2015 当前_$mU： 243
+local_cookie.js:2012 进入hc循环
+local_cookie.js:2015 当前_$mU： 492
+local_cookie.js:2015 当前_$mU： 494
+local_cookie.js:5 [object localStorage] get $_fpn1 -> undefined
+local_cookie.js:2015 当前_$mU： 291
+local_cookie.js:2015 当前_$mU： 412
+local_cookie.js:2015 当前_$mU： 28
+local_cookie.js:2015 当前_$mU： 146
+local_cookie.js:5 [object window] get $b_onBridgeReady -> function _$uH() {
+        var _$La = [180];
+        Array.prototype.push.apply(_$La, arguments);
+        return _$q2.apply(this, _$La);
+    }
+local_cookie.js:5 [object window] get $b_callHandler -> undefined
+local_cookie.js:2015 当前_$mU： 44
+local_cookie.js:2012 进入hc循环
+local_cookie.js:2015 当前_$mU： 173
+local_cookie.js:2015 当前_$mU： 140
+local_cookie.js:5 [object window] get $bmF0aXZlRmlVyUHJ -> undefined
+local_cookie.js:2015 当前_$mU： 209
+local_cookie.js:2015 当前_$mU： 489
+---- 开始进入不同的循环----
+local_cookie.js:2015 当前_$mU： 33
+local_cookie.js:2012 进入hc循环
+local_cookie.js:2015 当前_$mU： 492
+local_cookie.js:2015 当前_$mU： 249
+local_cookie.js:12 [object localStorage] set $_fpn1 -> 

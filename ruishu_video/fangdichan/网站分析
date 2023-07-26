@@ -27,3 +27,43 @@ window['name']
 
 上一次_$mU： 28
 
+
+localstorage 中 $_fpn1 的值不一样排查：
+情况1：
+    条件：
+        设置 localstorage 的入口：
+                        _$hc(774);
+                        _$mU： 33 时浏览器和本地执行进入不同逻辑
+                            值为 33 时 _$QR 的值已经不一样，从 值 为 44 之后开始排查
+                                当前_$mU： 489 时，_$QR = _$S0(_$vJ[305]); 执行的结果不一样，原因 _$S0 不一样
+                                browser：undefined
+                                local：{}
+                            
+                            
+                        
+
+情况3：
+    条件：
+        当前_$mU： 519
+        browser 进入了     function _$TJ(_$NI)
+        local 进行了下一次循环
+
+
+情况2：
+    条件：
+        当前_$mU： 382
+        _$TJ 方法中 的 _$yG 值不相等
+            browser："$_YWTU=PnA.gPKzrd5.HVH9C5h6t7RQDwPXq2TLvgroEJRC1Pg&$_cDro=0&vdFm="
+            local："&vdFm="
+        _$yc 函数中 _$Xj 值不相等
+            browser：
+                [
+                    "$_YWTU=PnA.gPKzrd5.HVH9C5h6t7RQDwPXq2TLvgroEJRC1Pg",
+                    "$_cDro=0",
+                    "vdFm="
+                ]
+            local：
+                [
+                    "",
+                    "vdFm="
+                ]

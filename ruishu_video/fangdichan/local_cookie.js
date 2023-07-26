@@ -217,7 +217,7 @@ window_mine = {
     localStorage: localStorage,
     // globalStorage: {},
     sessionStorage: sessionStorage,
-    name: "&vdFm=",
+    name: "",
     openDatabase: openDatabase
 };
 
@@ -2008,9 +2008,11 @@ function _$hc(_$jo, _$NI, _$BT, _$FI) {
         return _$q2.apply(this, _$La);
     }
     var _$Ng, _$BU, _$jg, _$lr, _$wW, _$N4, _$iW, _$Zp, _$QR, _$xw, _$Px, _$Xj, _$XH, _$bN, _$bF, _$1G, _$yG, _$Xq, _$2n, _$Yz, _$w5;
+    // debugger;
     var _$mD, _$mU, _$7X = _$jo, _$1Z = _$si[1];
     while (1) {
         _$mU = _$1Z[_$7X++];
+        console.log("当前_$mU：", _$mU);
         if (_$mU < 256) {
             if (_$mU < 64) {
                 if (_$mU < 16) {
