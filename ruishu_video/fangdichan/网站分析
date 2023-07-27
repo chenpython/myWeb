@@ -38,9 +38,8 @@ localstorage 中 $_fpn1 的值不一样排查：
                                 当前_$mU： 489 时，_$QR = _$S0(_$vJ[305]); 执行的结果不一样，原因 _$S0 不一样
                                 browser：undefined
                                 local：{}
+                                已经解决，原因为eval函数的覆盖问题
                             
-                            
-                        
 
 情况3：
     条件：
