@@ -259,14 +259,14 @@ function homeCode(codeStr) {
 }
 // 自执行代码
 eval(home_js_code);
-console.log("代码运行结束");
-console.log(document.cookie)
+console.log("cookie生成结束");
+// console.log(document.cookie)
 
 var cookie_str = document.cookie.split('=')[1]
 const binaryData = Buffer.from(cookie_str, 'binary');
 
 // 将二进制数据写入文件
-fs.writeFile('./cookie', binaryData, (err) => {
+fs.writeFile('/home/feng/workspace/myWeb/ruishu_video/fangdichan/cookie', binaryData, (err) => {
     if (err) {
         console.error('Error writing to file:', err);
         return;
