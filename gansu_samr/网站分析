@@ -2,7 +2,14 @@
 地址：
 http://scjg.gansu.gov.cn/guestweb4/s?siteCode=6200000052&checkHandle=1&pageSize=10&left_right_index=0&searchWord=%E4%BF%9D%E5%81%A5%E9%A3%9F%E5%93%81%E5%A4%87%E6%A1%88
 
-1、实现 override
+
+function _$$K(_$dA, _$eN, _$bS, _$_C) 中
+ _$mr = 10 结果不一致
+ 浏览器：
+     _$dT = HTMLHeadElement 
+
+local：
+    _$dT = undefined
 
 
 
