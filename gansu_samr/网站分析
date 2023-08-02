@@ -3,14 +3,19 @@
 http://scjg.gansu.gov.cn/guestweb4/s?siteCode=6200000052&checkHandle=1&pageSize=10&left_right_index=0&searchWord=%E4%BF%9D%E5%81%A5%E9%A3%9F%E5%93%81%E5%A4%87%E6%A1%88
 
 
-function _$$K(_$dA, _$eN, _$bS, _$_C) 中
- _$mr = 10 结果不一致
- 浏览器：
-     _$dT = HTMLHeadElement 
+报错：
+Cannot use 'in' operator to search for 'MozAppearance' in undefined
 
-local：
-    _$dT = undefined
+watch值：
+_$lR    直接异常值
+_$ls
+_$dT
 
+日志打印：
+'当前 _$mr -> ', _$mr
+
+条件：
+_$mr -> 14 存疑？
 
 
 

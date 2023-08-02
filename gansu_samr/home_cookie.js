@@ -34,7 +34,10 @@ var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
 data = res.toString()
 var regex = /[";]*/g    // 替换所有";符号
 matchCd = data.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '').split(" if ")[0];
-matchNsd = data.match(/\$\_ts\.nsd\s*=\s*(.+)/)[1].replace(regex, '').split(" ")[0];
+matchNsd = parseInt(data.match(/\$\_ts\.nsd\s*=\s*(.+)/)[1].replace(regex, '').split(" ")[0]);
+
+var cntFunc = require("./content.js");
+content = cntFunc.contentHandler();
 
 $_ts = {
     cd: matchCd,
@@ -69,11 +72,15 @@ function addEventListener(type, listener) {
 };
 
 function getAttribute(attributeName) {
-    console.log("getAttribute -> " + attributeName);
+    var result;
+
     switch (attributeName) {
         case "r":
-            return "m";
+            result = "m";
+            break;
     }
+    console.log("getAttribute " + attributeName + " -> " + result);
+    return result;
 };
 
 function removeChild(child) {
@@ -91,7 +98,23 @@ function getElementsByTagName(name) {
         }
     });
     switch (name) {
-
+        case "meta":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+            var metaElem = { content: window.content, getAttribute: getAttribute, parentNode: headElem };
+            Object.defineProperties(metaElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLMetaElement ',
+                    configurable: true
+                }
+            });
+            result[0] = metaElem;
+            break;
         case "script":
             var headElem = { removeChild: removeChild };
             Object.defineProperties(headElem, {
@@ -108,16 +131,18 @@ function getElementsByTagName(name) {
                     configurable: true
                 }
             });
-            ele = proxy(ele);
+
             result[0] = ele;
             result[1] = ele;
             break;
     }
-
+    console.log("getElementsByTagName " + name + "-> " + result);
+    result = proxy(result);
     return result;
 };
 
 function createElement(tagName) {
+
 
     var result = { getElementsByTagName: getElementsByTagName };
 
@@ -141,12 +166,35 @@ function createElement(tagName) {
             break;
     }
 
+    console.log("createElement " + tagName + "-> " + result);
+    result = proxy(result);
     return result
 };
 
+
+style = {};
+Object.defineProperties(style, {
+    [Symbol.toStringTag]: {
+        value: 'style',
+        configurable: true
+    }
+});
+style = proxy(style);
+
+documentElement = { style: style };
+Object.defineProperties(documentElement, {
+    [Symbol.toStringTag]: {
+        value: 'documentElement',
+        configurable: true
+    }
+});
+documentElement = proxy(documentElement);
+
 document = {
     createElement: createElement,
-    getElementsByTagName: getElementsByTagName
+    getElementsByTagName: getElementsByTagName,
+    cookie: "",
+    documentElement: documentElement
 };
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
@@ -163,6 +211,7 @@ function removeItem(keyName) {
 };
 
 function getItem(keyName) {
+    console.log("getItem -> " + keyName);
     return this[keyName];
 };
 
@@ -187,6 +236,17 @@ Object.defineProperties(sessionStorage, {
 });
 sessionStorage = proxy(sessionStorage);
 
+
+navigator = { userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" };
+Object.defineProperties(navigator, {
+    [Symbol.toStringTag]: {
+        value: 'navigator',
+        configurable: true
+    }
+});
+navigator = proxy(navigator);
+
+
 window = global;
 Object.defineProperties(window, {
     [Symbol.toStringTag]: {
@@ -199,6 +259,7 @@ window.top = window;
 window.localStorage = localStorage;
 window.sessionStorage = sessionStorage;
 window.addEventListener = addEventListener;
+window.navigator = navigator;
 
 
 window = proxy(window);
@@ -362,7 +423,8 @@ window = proxy(window);
                             if (_$$m === 24) {
                                 !_$lb ? _$_v += 3 : 0;
                             } else if (_$$m === 25) {
-                                _$_l = _$gx.call(_$jV, _$lL);
+                                _$_l = eval(_$lL);
+                                // _$_l = _$gx.call(_$jV, _$lL);
                             } else if (_$$m === 26) {
                                 _$_h = 0;
                             } else {
