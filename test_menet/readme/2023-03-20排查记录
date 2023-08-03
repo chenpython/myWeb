@@ -1,0 +1,19 @@
+scrapy crawl cde 任务执行一段时间后卡死，日志未刷新
+1、查看进程 ID
+    ps auxf
+    结果：227002
+2、查看进程卡在哪里
+    sudo strace -p 227002
+    结果：
+        strace: Process 227002 attached
+        recvfrom(24,
+    说明卡在从 24 接收数据
+3、查看描述符 24 含义
+    sudo la /proc/227002/fd/
+        结果：
+            24 -> socket:[56069223]
+        表示 24 是 socket 网络通信
+4、显示路由表、实际的网络连接以及每一个网络接口设备的状态信息
+    sudo netstat -aoutnlp     # 直接使用ip地址列出所有处理监听状态的TCP端口，且加上程序名
+5、查看进程执行堆栈：
+    sudo pstack 227002

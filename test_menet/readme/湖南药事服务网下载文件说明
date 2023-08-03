@@ -1,0 +1,13 @@
+1、定位到容器内部路径
+    docker exec -it d85506679fb8 bash
+2、找到下载文件地址
+    cd /root/crawlab_workspace/hunan_pharmaceutical_service_network
+3、压缩文件夹
+    tar -zcvf  total.tar.gz 20221230
+4、回到宿主机，从容器拷贝文件
+    cd /home/picoroot/crawlab/tmp_folder
+    docker cp d85506679fb8:/root/crawlab_workspace/hunan_pharmaceutical_service_network/downloads/total.tar.gz .
+5、解压文件夹
+    tar -xzvf total.tar.gz
+6、本地拷贝远程服务文件
+    scp -r picoroot@192.168.20.11:/home/picoroot/crawlab/tmp_folder/total.tar.gz .

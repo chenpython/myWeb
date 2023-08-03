@@ -1,0 +1,104 @@
+.head {
+    position: relative;
+    height: 70px;
+    padding-left: 25px;
+    border-bottom: 1px solid #ebecec
+}
+
+.content {
+    width: 1000px;
+    min-height: 250px;
+    margin-top: 164px !important;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.left {
+    width: 300px;
+    height: 198px;
+    float: left;
+    background: url(https://img.alicdn.com/imgextra/i1/O1CN01L12MaQ1ZwfYKk7Yrc_!!6000000003259-2-tps-900-594.png) no-repeat;
+    background-size: cover
+}
+
+.right {
+    margin-left: 250px;
+    padding-left: 140px
+}
+
+.contentbg {
+    width: 100%;
+    min-height: 250px
+}
+
+.right p {
+    font-size: 14px;
+    color: #333;
+    line-height: 25px;
+    height: 25px;
+    text-align: left
+}
+
+#nocaptcha {
+    margin-top: 40px;
+    margin-left: 5px;
+    width: 300px !important
+}
+
+#nocaptcha .nc-lang-cnt {
+    color: #fff
+}
+
+#nocaptcha .clickCaptcha_text .nc-lang-cnt {
+    color: #333
+}
+
+#traceid {
+    margin-left: 250px !important;
+    padding-left: 140px !important;
+    font-size: 14px;
+    color: rgba(153, 153, 153, 1)
+}
+
+.nc_bg {
+    background: #fff3ea !important
+}
+
+.btn_slide {
+    background: #ff6a00 !important;
+    border: 0 !important;
+    color: #fff !important;
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 30px;
+    font-weight: 900 !important;
+    line-height: 48px !important
+}
+
+.btn_ok {
+    background: #ff6a00 !important;
+    border: 0 !important;
+    color: #fff !important;
+    width: 48px !important;
+    height: 48px !important;
+    font-size: 30px;
+    font-weight: 900 !important;
+    line-height: 48px !important
+}
+
+.nc_scale {
+    background: rgba(241, 241, 242, 1) !important;
+    height: 48px !important
+}
+
+.nc-lang-cnt {
+    height: 48px !important;
+    margin-left: 10px !important;
+    line-height: 48px !important;
+    font-size: 14px !important
+}
+
+.nc_1_nocaptcha {
+    width: 300px !important;
+    height: 48px !important
+}

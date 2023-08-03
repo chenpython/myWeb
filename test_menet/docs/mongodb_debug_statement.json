@@ -1,0 +1,712 @@
+db.results_who_clinic.aggregate([
+    { $unwind: "$data"
+    },
+    { $group: {
+            "_id": {
+                "version": "$version"
+            },
+            "cnt": {
+                "$sum": 1
+            }
+        }
+    },
+    { $project: {
+            "_id": 0,
+            "version": "$_id.version",
+            "cnt": "$cnt"
+        }
+    },
+    { $sort: { version: -1, type: 1
+        }
+    }
+]);
+
+db.results_hma.find({
+    //"data.attachments.file_url":  "http://www.smpaa.cn/gjsdcg/files/file7250.pdf",
+    //"timestamp": {$exists: true},
+    //"_id": Object("639601b5c7a8ba2c7d11fdbb"),
+    //"version": "20221212 00:05:09",
+    //"website_location": "信息公示-药品挂网公示",
+    //"data.url": "https://ybj.hainan.gov.cn/tps-local/local/web/std/drugSun/getDrugPubPubonlnById/1463355496214228993",
+    //"data.drugCode": "XL01EXS281A001020282407",
+    //"data.adjmPubId": "1598142964964687874",
+    //"data.drug_change_content": {$ne: ""},
+}).sort({timestamp: -1
+}).limit(50);
+
+db.getCollection("results_shanghai_tendering_bidding").aggregate([
+    { $match: {
+            "version": "20221207 15:38:55"
+        }
+    },
+    //{$match: {"data.attachments.file_url": {$regex: "http:\/\/220.197.219.184:8020/upload/file"}}},
+    { $unwind: "$data"
+    },
+    { $unwind: "$data.attachments"
+    },
+    { $project: {
+            "_id": 0,
+            "file_url": "$data.attachments.file_url",
+            "href": "$data.attachments.ori_url",
+            "difference": { $eq: [
+                    "$data.attachments.file_url",
+                    "$data.attachments.ori_url"
+                ]
+            },
+            "page_url": "$data.url",
+            "filename": "$data.attachments.filename",
+            "version": "$version"
+        }
+    },
+    //				{ $match: {"page_url": "http://www.hljypcg.org.cn/xw/queryXwnrForYl?XWID=1002"}},
+    { $sort: {version: -1, file_url: 1
+        }
+    }
+]);
+		
+		
+		
+
+//查看图片地址情况
+db.getCollection("results_shanghai_tendering_bidding").aggregate([
+    { $match: {
+            "version": "20221207 15:38:55"
+        }
+    },
+    { $unwind: "$data"
+    },
+    { $unwind: "$data.images"
+    },
+    {$project: {
+            "_id": 0,
+            "file_url": "$data.images.file_url",
+            "href": "$data.images.ori_url",
+            "filename": "$data.images.filename",
+            "difference": { $eq: [
+                    "$data.images.file_url",
+                    "$data.images.ori_url"
+                ]
+            },
+            "page_url": "$data.url",
+            "version": "$version"
+        }
+    },
+    { $sort: {file_url: 1
+        }
+    }
+]);
+// 统计同名文件
+db.getCollection("results_shanghai_tendering_bidding").aggregate([
+    { $match: {
+            "version": "20221207 15:38:55"
+        }
+    },
+    { $unwind: "$data"
+    },
+    { $unwind: "$data.attachments"
+    },
+    { $group: {
+            "_id": {
+                "filename": "$data.attachments.filename",
+                "page_url": "$data.url",
+                "version": "$version"
+            },
+            "cnt": { $sum: 1
+            }
+        }
+    },
+    { $match: {
+            "cnt": {
+                "$gt": 1
+            }
+        }
+    },
+    { $project: {
+            "_id": 0,
+            "filename": "$_id.filename",
+            "page_url": "$_id.page_url",
+            "version": "$_id.version",
+            "cnt": "$cnt"
+        }
+    },
+    { $sort: {version: -1, file_url: 1
+        }
+    }
+]);
+//统计相同记录
+db.getCollection("results_shanghai_tendering_bidding").aggregate([
+    { $match: {
+            "version": "20221207 15:38:55"
+        }
+    },
+    { $unwind: "$data"
+    },
+    { $group: {
+            "_id": "$data.url",
+            "cnt": { $sum: 1
+            }
+        }
+    },
+    { $match: {
+            "cnt": {
+                "$gt": 1
+            }
+        }
+    },
+    { $sort: {file_url: 1
+        }
+    }
+]);
+
+db.results_hma.aggregate([
+    {$unwind: "$data"
+    },
+    {$project: {
+            "_id": 0,
+            "Productnumber": "$data.Productnumber",
+            "Productname": "$data.Productname",
+            "Domain": "$data.Domain",
+            "Outcome": "$data.Outcome",
+            "Reference Member State (RMS)": "$data.Reference Member State (RMS)",
+            "Type Level": "$data.Type Level",
+            "Documents": "$data.Documents",
+            "Dose Forms": "$data.Dose Forms",
+            "ATC Codes": "$data.ATC Codes",
+            "Concerned Member States (CMS)": "$data.Concerned Member States (CMS)",
+            "Product Link": "$data.Product Link",
+            "Active Substances": "$data.Active Substances",
+            "Marketing authorization holder": "$data.Marketing authorization holder",
+            "Date Of Outcome": "$data.Date Of Outcome",
+            "Updated At": "$data.Updated At"
+        }
+    },
+]);
+
+
+
+db.results_hainan_tendering_bidding.find(
+{
+    "data.drugName": "注射用奥美拉唑钠"
+}).limit(50)
+
+
+db.results_who_clinic.aggregate([
+    { $unwind: "$data"
+    },
+    { $group: {
+            "_id": {
+                "version": "$version"
+            },
+            "cnt": {
+                "$sum": 1
+            }
+        }
+    },
+    { $project: {
+            "_id": 0,
+            "version": "$_id.version",
+            "cnt": "$cnt"
+        }
+    },
+    { $sort: { version: -1, type: 1
+        }
+    }
+]);
+
+db.results_who_clinic.aggregate([
+    {$match: {
+            "version": "20230111 15:53:09"
+        }
+    },
+    { $group: {
+            "_id": "$data.parent_url",
+            "cnt": {$sum: 1
+            }
+        }
+    },
+    {$limit: 100
+    },
+])
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    { $unwind: "$data"
+    },
+    { $group: {
+            "_id": {
+                "version": "$version"
+            },
+            "cnt": {
+                "$sum": 1
+            }
+        }
+    },
+    { $project: {
+            "_id": 0,
+            "version": "$_id.version",
+            "cnt": "$cnt"
+        }
+    },
+    { $sort: { version: -1, type: 1
+        }
+    }
+]);
+
+
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    {$match: {
+            "version": "20230104 15:13:10"
+        }
+    },
+    {$unwind: "$data"
+    },
+    {$group: {
+            "_id": "$data.parent_page",
+            "cnt": {$sum: 1
+            }
+        }
+    },
+    {$match: {
+            "cnt": {$lt: 5
+            }
+        }
+    },
+    {$sort: {_id: 1
+        }
+    }
+]);
+
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    {$match: {
+            "version": "20230104 15:13:10",
+            "data.parent_page": "https://www.hnysfww.com/article_cat.php?id=61&page=11"
+        }
+    },
+    {$unwind: "$data"
+    },
+    {$project: {
+            "_id": 0,
+            "parent_page": "$data.parent_page",
+            "title": "$data.title"
+        }
+    }
+]);
+
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    {$match: {
+            "version": "20230104 15:13:10"
+        }
+    },
+    {$unwind: "$data"
+    },
+    {$match: {
+            "data.attachments": {$ne: []
+            }
+        }
+    },
+    {$unwind: "$data.attachments"
+    },
+    {$group: {
+            "_id": "$data.attachments.file_url",
+            "total": {$sum: 1
+            }
+        }
+    },
+    {$sort: {total: -1
+        }
+    }
+]);
+
+
+db.results_hunan_pharmaceutical_service_network.find({
+    "data.attachments.file_url": "https://www.hnysfww.com/data/article/1662918358979176703.pdf",
+    "version": "20230104 15:13:10"
+})
+
+
+db.results_hma.aggregate([
+    { $match: {
+            "version": "20230104"
+        }
+    },
+    { $unwind: "$data"
+    },
+    {
+      $group: {
+            "_id": {
+                "Productnumber": "$data.Productnumber",
+                "Productname": "$data.Productname",
+                "Outcome": "$data.Outcome",
+                "Reference Member State (RMS)": "$data.Reference Member State (RMS)",
+                "Type Level": "$data.Type Level",
+                "Documents": "$data.Documents",
+                "Dose Forms": "$data.Dose Forms",
+                "ATC Codes": "$data.ATC Codes",
+                "Concerned Member States (CMS)": "$data.Concerned Member States (CMS)",
+                "Product Link": "$data.Product Link",
+                "Active Substances": "$data.Active Substances",
+                "Marketing authorization holder": "$data.Marketing authorization holder",
+                "Date Of Outcome": "$data.Date Of Outcome",
+                "Updated At": "$data.Updated At"
+            },
+            //						,"cnt": { "$sum": 1 }
+        }
+    },
+    {
+      $project: {
+            "_id": 0,
+            //            //						"cnt": "$cnt", 
+            "Active Substances": "$_id.Active Substances",
+            "ATC Codes": "$_id.ATC Codes",
+            "Concerned Member States (CMS)": "$_id.Concerned Member States (CMS)",
+            "Date Of Outcome": "$_id.Date Of Outcome",
+            "Documents": "$_id.Documents",
+            "Domain": "Human",
+            "Dose Forms": "$_id.Dose Forms",
+            "Marketing authorization holder": "$_id.Marketing authorization holder",
+            "Outcome": "$_id.Outcome",
+            "Product Link": "$_id.Product Link",
+            "Productname": "$_id.Productname",
+            "Productnumber": "$_id.Productnumber",
+            "Reference Member State (RMS)": "$_id.Reference Member State (RMS)",
+            "Type Level": "$_id.Type Level",
+            "Updated At": "$_id.Updated At"
+        }
+    },
+    //		 { $count: "Productnumber" }, //统计总数
+    //    { $limit: 50 },
+    //    { $sort: { cnt: -1 } }
+],
+{
+    "allowDiskUse": true
+}) //允许大数据量查询，将查询结果写入临时文件)
+
+
+db.results_hma.aggregate([
+    { $unwind: "$data"
+    },
+    { $group: {
+            "_id": {
+                "version": "$version"
+            },
+            "cnt": {
+                "$sum": 1
+            }
+        }
+    },
+    { $project: {
+            "_id": 0,
+            "version": "$_id.version",
+            "cnt": "$cnt"
+        }
+    },
+    { $sort: { version: -1, type: 1
+        }
+    }
+]);
+
+
+
+db.results_hma.aggregate([
+    {
+      $match: {
+            "version": "20230104",
+            //						"page_url": "https://mri.cts-mrp.eu/portal/v1/odata/ProductSearch?$filter=((DomainKey%20eq%20%27h%27))&$expand=activeSubstances,atcCodes,cms,documents,doseForms,rms,typeLevel,withdrawalReasons&$count=true&$skip=54240&$top=10"
+            //						"data.Active Substances": /0\\. mg/
+            //            "cur_batch_key": "20230103:1120:1130",
+            //            		"data.Productnumber": "FI/H/0129/001" 
+        }
+    },
+    { $group: {
+            //				"_id": null,
+            "_id": "$page_url",
+            "cnt": { $sum: 1
+            },
+        }
+    },
+    //			{$unwind: "$data"},
+    {$sort: {cnt: -1
+        }
+    }
+    //{$limit: 100},
+])
+
+
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    { $unwind: "$data"
+    },
+    { $group: {
+            "_id": {
+                "version": "$version"
+            },
+            "cnt": {
+                "$sum": 1
+            }
+        }
+    },
+    { $project: {
+            "_id": 0,
+            "version": "$_id.version",
+            "cnt": "$cnt"
+        }
+    },
+    { $sort: { version: -1, type: 1
+        }
+    }
+]);
+
+
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    {$match: {
+            "version": "20230104 16:41:40"
+        }
+    },
+    {$unwind: "$data"
+    },
+    {$group: {
+            "_id": "$data.parent_page",
+            "cnt": {$sum: 1
+            }
+        }
+    },
+    //{$match: {"cnt": {$lt: 5}}},
+    {$sort: {_id: 1
+        }
+    }
+]);
+
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    {$match: {
+            "version": "20230104 15:13:10",
+            "data.parent_page": "https://www.hnysfww.com/article_cat.php?id=61&page=11"
+        }
+    },
+    {$unwind: "$data"
+    },
+    {$project: {
+            "_id": 0,
+            "parent_page": "$data.parent_page",
+            "title": "$data.title"
+        }
+    }
+]);
+
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    {$match: {
+            "version": "20230104 16:59:29"
+        }
+    },
+    {$unwind: "$data"
+    },
+    {$match: {
+            "data.attachments": {$ne: []
+            }
+        }
+    },
+    {$unwind: "$data.attachments"
+    },
+    {$group: {
+            "_id": "$data.attachments.file_url",
+            "total": {$sum: 1
+            }
+        }
+    },
+    {$sort: {total: -1
+        }
+    }
+]);
+
+
+db.results_hunan_pharmaceutical_service_network.aggregate([
+    {$match : {
+            "version": "20230104 16:59:29"
+        }
+    },
+    {$unwind: "$data"
+    },
+    {$unwind: "$data.attachments"
+    },
+    {$match: {
+            "data.attachments.filename": { $in: [
+'《医院处方点评管理规范（试行）》（2010年2月10日）（1）.docx',
+'关于印发新型冠状病毒肺炎应急救治设施设计导则（试行）的通知（1）.pdf',
+'关于印发新型抗肿瘤药物临床应用指导原则（2018年版）的通知（1）.docx',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（1）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（10）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（11）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（12）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（13）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（14）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（2）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（3）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（4）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（5）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（6）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（7）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（8）.pdf',
+'国家卫健委关于印发内镜诊疗技术临床应用管理规定及呼吸内镜诊疗技术等13个内镜诊疗技术临床应用管理规范的通知（9）.pdf',
+'国家卫健委印发《第一批日间手术病种手术操作规范（试行）》的通知（1）.xlsx',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（1）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（10）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（11）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（12）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（13）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（2）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（3）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（4）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（5）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（6）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（7）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（8）.pdf',
+'国家卫健委印发儿童血液病、恶性肿瘤相关12个病种诊疗规范（2021年版）（9）.pdf',
+'糖尿病用药：《国家基层糖尿病防治管理指南(2018)》（1）.pdf',
+'糖尿病用药：中国2型糖尿病防治指南（2017版）（1）.pdf',
+'新型冠状病毒肺炎防控方案（第九版）最新版（10）.docx',
+'新型冠状病毒肺炎防控方案（第九版）最新版（11）.docx',
+'新型冠状病毒肺炎防控方案（第九版）最新版（8）.docx',
+'新型冠状病毒肺炎防控方案（第九版）最新版（9）.docx',
+'新型冠状病毒肺炎诊疗方案（试行第九版）及新型冠状病毒感染者转运工作方案（第二版）（15）.pdf',
+'学龄前儿童（3~6）岁运动指南（2020）（1）.pdf',
+'医疗机构内新型冠状病毒感染预防与控制技术指南（第三版）（5）.docx',
+'医疗机构内新型冠状病毒感染预防与控制技术指南（第三版）（6）.docx',
+'医疗机构内新型冠状病毒感染预防与控制技术指南（第三版）（7）.docx',
+'医疗机构内新型冠状病毒感染预防与控制技术指南（第三版）（8）.docx',
+'医疗机构内新型冠状病毒感染预防与控制技术指南（第三版）（9）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（1）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（10）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（11）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（12）.doc',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（13）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（14）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（15）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（16）.doc',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（17）.doc',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（18）.doc',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（2）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（3）.doc',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（4）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（5）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（6）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（7）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（8）.docx',
+'原发性肺癌、成人慢性粒细胞白血病、脑胶质瘤等18个肿瘤诊疗规范（2018年版）（9）.docx'
+                ]
+            },
+        }
+    },
+    {$project: {
+            "_id": 0,
+            "filename": "$data.attachments.filename",
+            "page_url": "$data.url",
+            "file_url": "$data.attachments.file_url"
+        }
+    },
+    {$sort: {filename: 1
+        }
+    }
+])
+
+
+db.results_test.aggregate([
+    { $unwind: "$data"
+    },
+    { $match: {
+            "website_name": "中国临床试验注册中心"
+        }
+    },
+    { $group: {
+            "_id": {
+                "version": "$version",
+                "website_name": "$website_name"
+            },
+            "cnt": {
+                "$sum": 1
+            }
+        }
+    },
+    { $project: {
+            "_id": 0,
+            "version": "$_id.version",
+            "website_name": "$_id.website_name",
+            "cnt": "$cnt"
+        }
+    },
+    { $sort: { version: -1, type: 1
+        }
+    },
+    //{$limit: 30}
+]);
+
+
+db.results_test.aggregate([
+    { $unwind: "$data"
+    },
+    { $match: {
+            "website_name": "湖南药事服务网",
+            "version": "20221229 16:21:42"
+        }
+    },
+    //    { $group: { "_id": { "version": "$version", "website_name": "$website_name"}, "cnt": { "$sum": 1 } } },
+    //    { $project: { "_id": 0, "version": "$_id.version", "website_name": "$_id.website_name", "cnt": "$cnt" } },
+    //    { $sort: { version: -1, type: 1 } },
+    {$limit: 300
+    }
+]);
+
+
+db.results_hma.aggregate([
+    { $match: {
+            "version": "20230103",
+            "cur_batch_key": "20230103:1120:1130",
+            //		"data.Productnumber": "UK/H/0138/001" 
+        }
+    },
+    {$group: {
+            "_id": "$page_url",
+            "cnt": {$sum: 1
+            },
+            "data": {$max: "$data"
+            }
+        }
+    },
+])
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+

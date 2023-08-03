@@ -1,0 +1,426 @@
+1、修改所有爬虫中，正则匹配为空时的异常问题 √
+2、钉钉通知添加通知时间 √
+3、测试中间件异步执行耗时
+4、爬虫时间过长、失败、上传文件报错问题解决 √
+5、去掉每次都添加白名单，改为定时添加 √
+6、创建shell脚本，定时清理crawlab日志 √
+7、item 弹出 images 字段失败 √
+8、mongodb 修改密码
+9、河南省，
+    页面重定向问题；本地获取无异常，服务器404 √
+    药品、耗材携带参数动态获取 √
+10、浙江省，更新 website_domain 值为 "http://www.zjyxcg.cn/"
+11、查看各个网站的文件、图片地址是否准确，重新检查过滤规则 √
+    11.1 查看代码是否为最新版
+    11.2 先看 file_url 是否存在多种链接形式
+    11.3 看 filename 是否有文件名后缀
+    11.4 查看是否有同名文件
+
+
+12、研究网站截图
+13、crawlab多节点部署
+14、查看目前文件上传流程
+    文件耗时瓶颈
+        网络带宽？
+        程序耗时？
+            异步、多线程、多进程
+        系统资源？
+    
+    爬虫运行一段时间卡住？代理问题？流程问题？
+    
+    情况说明：
+        下载文件失败情况多
+        处理附件耗时十几秒，二三十秒不等
+        上传文件耗时存在十几秒之久
+
+        分时间段统计下载和上传文件耗时地址：
+            3秒内：快
+            3~5秒：中等
+            5~8秒：较慢
+            大于8秒：非常慢，检查是否文件太大需要耗时这么久；程序处理大文件可以优化
+
+        丢了一条数据 ×
+        爬虫运行会卡住
+        处理0个附件有时候耗时7秒多
+
+        处理错误链接消耗接近一分钟时间
+            错误文件需要如何处理？
+                修改超时时间从60秒改为15秒 ？
+                将重试次数从3改为1 ？
+                错误文件不再重试 ？
+            部分文件下载成功，上传耗时非常久且失败
+
+            修改处理item流程，附件下载延时会导致图片的下载处于等候状态
+
+        上传失败大多耗时非常久，失败原因？
+            添加超时时间捕获失败原因？
+            except 捕获到内容为空的异常？
+                上传文件经常超时，且上传文件接口速度较慢
+        
+        统计耗时大于5秒的文件地址，看文件大小
+            无下载耗时超过5秒的文件
+               
+        文件处理的进程一直开启的情况下资源消耗详情
+
+
+        调试方案一：
+            去掉重试：整体耗时明显下降
+            打印上传失败错误
+
+        version1 优化方案：
+            没有附件的item处理耗时可以优化 √
+            修改下载附件、图片的流程 √
+                线程安全？数量不一致
+            缩短超时时间：选择合适的超时时间（下载、上传） √
+                        上传超时时间设为 15 秒
+                        下载超时时间设为 5 秒
+        
+        version2 优化方案：
+            添加文件下载或者失败重试机制 √
+            日志重复问题解决
+            时间统计由于异步问题导致统计不准确
+            上传与下载分开重试 √
+        
+        version3 优化方案：
+            处理文件方式采用while循环会浪费cpu资源：定时执行 √
+            
+
+        
+15、各个网站目标爬取数量，实际爬取数量监控
+16、crawlab 网页功能优化
+    批量删除文件
+    git拉取文件
+
+17、服务器记住登录密码
+18、任务失败通知
+
+19、HMA 网站脚本问题：
+    数据重复，在数据爬取下来后进行统计分析重复数据
+    程序在没有抓取结束条件时结束
+    程序经常卡住
+
+    去重数据量正确，表示未丢失数据
+    
+20、文件下载数据丢失问题
+21、hunan_pharmaceutical_service_network
+    几乎在很多页丢失一两条数据: √
+        获取的公告数不对
+        parse_detail 解析出错
+    文件命名有问题 √
+    文件重复问题 √
+    程序中途结束问题
+
+
+1、滑块的部分代码从哪里填充
+2、验证成功后的流程，携带的参数
+4、验证成功的标准，方式
+3、切换ip是否有效
+
+
+需要频繁切换代理的脚本：
+liaoning_tendering_bidding.py
+
+
+1、检查 FDA 两个爬虫数据爬取情况：drug FDA 还在执行 √
+2、检查 WHO 服务器上的程序运行是否正常，chrome是否正常关闭 √
+3、检查 henan_tendering_bidding 数据采集是否异常 √
+4、排查 hainan_tendering_bidding 数据抓取慢的原因 详情页链接改变；response 为空未做处理 √
+5、检查 日本两个网站数据抓取情况：已修改 √
+     japan_otc_drug 八千左右数据
+     japan_prescription 一万三千数据
+6、检查 cde 数据抓取情况：数据正在抓取 √
+
+
+
+1、who 的 chrome 进程数量异常，排查问题和解决
+    237990 238812 239090
+        浏览器关闭正常，打开数量异常 √
+ps auxf | grep "/opt/google/chrome/chrome_crashpad_handler --monitor-self-annotation=ptype=crashpad-handler --database=/tmp/Crashpad --url=https://cl" | wc -l
+2、新疆网站抓取模块 √
+3、修改通知公告执行频率为一周一次   √
+4、cde 上一次执行情况 执行正常，数据量正常 √
+
+5、cde 文件下载开启
+
+6、新疆分批次下载
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=200000 -a end_page_index=300000
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=300000 -a end_page_index=400000
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=400000 -a end_page_index=500000
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=500000 -a end_page_index=600000
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=600000 -a end_page_index=700000
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=700000 -a end_page_index=800000
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=800000 -a end_page_index=900000
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=900000 -a end_page_index=1000000
+scrapy crawl xinjiang_public_resources_trading -a start_page_index=1000000
+
+
+2023-04-06 工作内容
+1、HNA抓取数据观察，抓取完毕导出
+    为什么会有大量重复数据？√
+2、文件上传优化修改 √
+3、新网站抓取  √
+4、redis积压数据 √
+
+
+2023-04-10 工作内容
+1、湖南网站下载 √
+2、河北网站下载 √
+3、upload 上传文件失败  √
+4、tmp 集合 与 目标集合数据量对不上  √
+    new upload：
+        从 0 开始，截至 3000 条
+        数据大量重复，导致存储的数据量很多
+        crawl_time、version 值不会改变
+        同一天出现多个version值
+    old upload：
+        从后截取，数据量不重复
+    
+    下载失败无报错？
+    添加报错内容，测试浙江网站文件  √
+
+5、japan_otc 抓取速度，数据异常  √
+    end_date 失效
+    根据历史数据修改时间批次
+
+    日本非处方药 抓取情况：
+        抓取完成，总共数据 10991
+        抓取时间：20230412 10:00:00 ~ 20230412 19:00:00
+        总共 4 个进程，耗时 9 小时左右，平均每个进程抓取 2700 条数据
+        预估一个进程则需要耗时 36 个小时
+
+    
+6、定时开启同一批次多个scrapy 任务
+7、国外网站抓取速度
+8、scrapy crawl japan_prescription -a total_gas=1   √
+    抓取优化
+    2023-03-31
+
+
+9、drug_fda 抓取结果，优化  √
+    fda 抓取完成，程序属于正常结束
+        存在部分超时链接未成功获取，增加重试次数，延长超时时间  √
+
+    |---------------------------------------------------------------------------
+    |drug_fda 和 orange book 数据抓取情况：
+    |总数：66647
+    |耗时情况：
+    |    3 个并行进程耗时3到4天，共21778 条数据
+    |    2 个并行进程耗时一周左右，分别 2万1千条左右数据
+    |分析：
+    |    并行3个进程，耗时1个礼拜以上，2个礼拜以下时间可抓取完成
+    |    预估一个进程需要耗时 3 个礼拜左右
+    |
+    |orange book 总数：41047
+    |drug fda 总数：25600
+    |
+    |程序可以再优化
+    |---------------------------------------------------------------------------
+
+    1、product_number  空白，自动生成编号，从 001 开始  √
+    2、内容重复：全字段去重  √
+    3、new_drug_application 记录数异常  √
+
+
+10、redis 数据积压  √
+11、pipeline 测试环境兼容  √
+12、WHO 任务日志
+    WHO 网站更新，重新采集 ×
+    任务日志对接完成  √
+        异常情况下任务更新 未完成 ×
+
+12、文件下载
+    长度异常的文件  √
+    报错提示有误  √
+
+13、japan_prescription 解析错误
+    许多商品号找不到对应明细  √
+
+14、japan_otc 和 13、japan_prescription 过滤掉没有数据的查询条件，观察数据量是否正常
+    japan_prescription
+        采集总数： 20861
+        进程数：2
+        耗时：27个小时左右
+        平均进程采集数：10431
+        1 个进程预估 55个小时
+
+20230417
+1、WHO网站变更，重新开发采集脚本
+    采集效率无法满足交付需求，目前需要耗时1个礼拜才能抓取完成
+
+2、黑龙江省市场监督管理局
+3、湖南省市场监督管理局
+4、japan_otc 采集情况  √
+    1个进程，51个小时左右抓取完成 10881 条数据
+    满足需求
+5、drug_fda 采集情况
+    增加遗漏产品号抓取，修改抓取流程，减少重试次数，后的采集情况：
+        4个进程：平均耗时 41 小时，抓取6000条数据
+            A、在 starts_requests 中增加time sleep
+        总共抓取：24145
+        少了近4万多数据
+            A、增加重试次数
+        只有 drug_fda 的数据，缺少 orange_book的
+            A、修复代码逻辑
+    a、查看遗漏数据是否补上
+        丢失12个：
+            17683   无数据
+
+            203492
+            205769
+            205961
+            206078
+            206440
+            208539
+            209414
+            209792
+            210445
+            211658
+            212709
+            213681
+
+6、文件上传会出现进程卡死情况
+    改成多线程执行，避免进程卡死问题
+    
+
+
+20230423
+1、WHO支持多个进程同时执行
+2、多个进程同时执行方案
+    方案一：选择 all_nodes，
+        Q1:需要保证两个进程执行 exists 判断时如果同时
+            得到当前批次不存在的结果，需要保证多个进程只更新一次批次地址池
+        Q2:all_nodes 则不支持参数传入，需要保证多个进程跑同一个批次
+    方案二：
+3、参考其他spider，优化抓取速度
+    修改超时时间；
+    增加请求延时设置；
+    关掉数据完整性设置
+4、who 
+    6天采集43775，网站总数居约70000，需要超过十天完成一个批次
+5、为了保证who、cde、 drugs_fda、japan_otc_drug、japan_prescription 每个月3号给数据的数据及时性
+    japan_otc_drug、japan_prescription
+        每个月5号开始抓取一次全量批次
+        每个月2号抓取一次上个月5号至当前（次月）期间的数据（保证一天之内完成），则次月3号可以给到截至次月1号最新的完整的数据
+        Q1:如何保证version统一？
+        选择方案，每个月第一天获取全量，可以得到上个月最新的和完整的数据  √
+    drugs_fda 由于无法根据时间来区分批次，只能整体批次跑，需要提升效率，保持在一个礼拜内最好是3天内抓取完成
+        一个进程执行需要3天多，暂时满足需求  √
+    cde 需要每日抓取一次，则需要提升抓取速度小于24小时
+        已修改，观察执行效率  √
+    who一个礼拜给一次，需要保证一个礼拜内抓取完
+        修改超时时间后的who程序单进程预估36个小时可以抓取完成，则定时任务在每周六抓取可以满足需求  √
+    hma 一个月给一次，需要保证数据采集及时性，目前预估单进程耗时2天多，满足需求  √
+
+
+20230425 
+1、who 数据量异常，抓取了10几万：
+    属于两个批次同一个爬虫，单词总数理论上需要抓取到68779条，目前一起执行的两个批次分别为五万多条
+    20230424 10:04:45	57320
+    20230424 10:04:51	56149
+    
+2、江西市场监督 的文件没有下载，已修改，需要观察文件下载是否完成
+3、cde 数据抓取异常，反爬措施限制，取消空内容过滤，需要观察程序执行情况
+    观察后发现数据抓取正常  √
+
+4、内蒙市场监督 文件下载  √
+
+5、who_clinic_async 任务终止更新 pg 任务状态
+    滑块解决失败
+
+20230504
+1、cde 执行异常，不会正常结束  √
+    合并修改 middlerware错误日志，不重复打印大量日志
+        bugfix
+            减少并发数，减少延迟数
+        修改完成，观察程序执行情况
+            程序结束，数据量非常少
+            
+2、HMA抓取数据异常
+    大量重复数据
+        修改程序添加批次逻辑
+    丢失较多数据
+        缩短超时时间
+        已修改，待观察
+    
+    ham 程序未抓取完成就结束
+
+3、WHO 滑块验证导致数据无法抓取问题
+    使用who_async脚本，打开浏览器验证
+        观察程序采集情况
+            #nc_1__scale_text 超时
+                替换为 waitForXPath 等待元素加载
+                    页面的ajax改变了页面内容
+            获取不到总页数
+                网页元素改变导致正则匹配错误，已修改
+        
+        关注 chrome进程是否正常结束
+        关注 所有 chrome 进程是否在程序结束后正常关闭
+        a、Cannot connect to host www.chictr.org.cn:443 ssl:default [Temporary failure in name resolution]
+        b、err：net::ERR_NAME_NOT_RESOLVED at https://www.chictr.org.cn/showproj.html?proj=177596
+        c、Invalid response text，err：Exception('Invalid response text')
+        d、滑块解决失败，err：Execution context was destroyed, most likely because of a navigation.
+        e、 https://www.chictr.org.cn/showproj.html?proj=170381 解析页面失败，来源页面：https://www.chictr.org.cn/searchproj.html?page=1050&title=&officialname=&subjectid=&regstatus=&regno=&secondaryid=&applier=&studyleader=&createyear=&sponsor=&secsponsor=&sourceofspends=&studyailment=&studyailmentcode=&studytype=&studystage=&studydesign=&recruitmentstatus=&gender=&agreetosign=&measure=&country=&province=&city=&institution=&institutionlevel=&intercode=&ethicalcommitteesanction=&whetherpublic=&minstudyexecutetime=&maxstudyexecutetime=&btngo=btn
+失败原因：error：Browser closed unexpectedly
+        f、滑块解决失败，err：Navigation Timeout Exceeded: 30000 ms exceeded.
+        g、6：07 的chrome 未关闭，不是定时任务问题
+        h、滑块解决失败，err：Waiting for XPath "//table[@class="table1"] | //div[@class="retrieve-box"]" failed: timeout 20000ms exceeds.
+        i、采集速度慢
+
+        20230508
+            a、代理连接失败重试
+            b、程序异常结束
+            c、更新task info
+
+4、drugs_fda 数据量少
+    a、反爬403
+        数据存在，说明日志打印重复
+            最新代码重新抓取
+            增加重试次数
+    b、数据量少的原因drugs_fda抓取少，导致 orange book 数据量少
+        增加drug_menu重试次数
+    
+    增加抓取频率
+    
+    修改代码，待观察
+
+20230508
+
+henan_tendering_bidding 程序不会正常结束
+    修改 parse_errpr_handler ，返回request 的 copy
+    只打印最后一次报错日志
+    待观察
+
+2023-5-12
+
+1、who：
+    数据量少
+        抓取的页数少
+            source_page 数量不对 1331 个
+            日志中记录的区间批次不对 694 个 --> 总共应该有 source_page 6940 个
+                每页都翻了，但是程序执行过程中存在问题，导致数据库中的source_page 少了五千几
+                但是失败检索队列中并无记录
+                
+        进程结束后有未关闭的相关进程
+        清理失败详情页执行时间较短，可能未执行该任务
+
+
+
+20230517
+who_clinic 
+    1、详情页内容异常
+        异常详情？
+    2、采集10页消耗几个小时，不合理
+        降低并发度为3
+        请求超时时间改为20
+        滑块移动后取消等待时间
+        降低重试次数
+        增加请求并发
+    3、子线程关闭chrome失败，无法控制chrome数量
+    4、关闭 chrome但留下 cat 进程？
+    5、关闭浏览器报错asyncio.exceptions.InvalidStateError: invalid state
+        try-catch 错误
+    6、抓取超过20页
+
+
+
+

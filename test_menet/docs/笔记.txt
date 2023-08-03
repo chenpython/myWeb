@@ -1,0 +1,59 @@
+WSL-Ubuntu 命令行安装Chrome
+官方链接：https://learn.microsoft.com/zh-cn/windows/wsl/tutorials/gui-apps
+
+1. 为Google Chrome浏览器创建源列表文件
+sudo vim /etc/apt/sources.list.d/google-chrome.list
+
+2. 添加源
+将deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main添加到源文件
+
+3. 运行以下命令以下载Google的签名密钥
+wget https://dl.google.com/linux/linux_signing_key.pub
+
+4. 使用apt-key将其添加到密钥环中，以便包管理器可以验证Google Chrome deb包的完整性
+sudo apt-key add linux_signing_key.pub
+
+5. 更新包列表并安装稳定版Google Chrome
+sudo apt update
+sudo apt install google-chrome-stable
+
+6. 从命令行启动Chrome浏览器
+google-chrome-stable
+
+
+
+
+WSL-Ubuntu 安装 unzip
+sudo apt-get install unzip
+
+
+
+WSL-Ubuntu 安装  node.js
+参考链接：https://learn.microsoft.com/zh-cn/windows/dev-environment/javascript/nodejs-on-wsl#install-nvm-nodejs-and-npm
+1、下载 nvm
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+2、链接不上 raw.githubusercontent.com，链接被拒绝
+    解决：添加域名解析 ip
+        sudo vim /etc/hosts
+        添加：199.232.28.133（查找域名最新ip）  raw.githubusercontent.com
+3、重新下载 nvm
+
+
+WSL chrome 中文乱码问题
+    参考链接：https://niconiconi.fun/2023/01/08/wsl-install-chromium/
+    1、sudo dpkg-reconfigure locales
+        选中 en_US.UTF-8 和 zh_CN.UTF-8
+    2、安装中文相关依赖
+        sudo apt install language-pack-zh-hans fonts-droid-fallback ttf-wqy-zenhei ttf-wqy-microhei fonts-arphic-ukai fonts-arphic-uming
+    3、重新打开
+        google-chrome-stable
+
+
+Fildder 无法发送https请求：调用 SSPI 失败，请参见内部异常
+    原因：fildder 的 ssl 证书版本问题
+    1、查看当前网站所需证书版本
+        查看 www.pmda.go.jp:443  请求体：SSL v3 表示 SSL 为 v3 版本
+        查看 www.pmda.go.jp:443  请求体：Version: 3.3 (TLS/1.2) 表示 TLS 版本
+    2、打开 tools -> Options -> HTTPS -> protocole
+        修改 protocole 版本为所需版本
+    参考链接如图：https://blog.51cto.com/u_15127541/3769010

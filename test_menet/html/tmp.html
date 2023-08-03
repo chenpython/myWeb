@@ -1,0 +1,849 @@
+'\n\n\n\n\n\n\n\n\n\r\n\r\n\n\n\n\n\n\n\n\n\n<html>\r\n
+
+<head>\r\n<title>医療用医薬品 添付文書等情報検索 | 独立行政法人\u3000医薬品医療機器総合機構</title>\r\n
+    <meta name="viewport" content="width=device-width, initial-scale=1">\r\n
+    <meta name="keywords" content="PMDA,pmda,医薬品,副作用,被害救済,薬,医療,機器,医薬">\r\n
+    <meta name="description"
+        content="独立行政法人医薬品医療機器総合機構（PMDA）による添付文書等情報検索ページです。医療用医薬品の販売名や成分名などから、添付文書（使用上の注意）や患者向医薬品ガイド、インタビューフォーム、リスク管理計画などを検索できます。">
+    \r\n
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">\r\n
+    <meta http-equiv="X-UA-TextLayoutMetrics" content="gdi">\r\n\r\n
+    <link rel="stylesheet" type="text/css" href="/PmdaSearch/files/common/css/import.css" />\r\n
+    <link rel="stylesheet" type="text/css" href="/PmdaSearch/files/common/css/print.css" />\r\n
+    <script type="text/javascript" src="/PmdaSearch/files/common/js/jquery-3.6.0.min.js"></script>\r\n
+    <script type="text/javascript" src="/PmdaSearch/files/common/js/jquery_cookie.js"></script>\r\n
+    <script type="text/javascript" src="/PmdaSearch/files/common/js/main.js"></script>\r\n
+    <script type="text/javascript" src="/PmdaSearch/js/pmdaCommon.js"></script>\r\n
+    <link rel="stylesheet" type="text/css" href="/PmdaSearch/files/css/search.css" />\r\n\r\n
+</head>\r\n
+
+<body onload="FontSizeInit();">\r\n<!-- Google Tag Manager -->\r\n<noscript><iframe title="GoogleTagManager"
+            src="//www.googletagmanager.com/ns.html?id=GTM-MHGKV3" \r\nheight="0" width="0"
+            style="display:none;visibility:hidden"></iframe></noscript>\r\n
+    <script>(function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+            \'gtm.start\':\r\nnew Date().getTime(),event:\'gtm.js\'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!=\'dataLayer\'?\'&l=\'+l:\'\';j.async=true;j.src=\r\n\'//www.googletagmanager.com/gtm.js?id=\'+i+dl;f.parentNode.insertBefore(j,f);\r\n})(window,document,\'script\',\'dataLayer\',\'GTM-MHGKV3\');</script>
+    \r\n<!-- End Google Tag Manager -->\r\n\r\n<div id="layoutBody"><!-- ++++ local-js ++++ -->\r\n
+        <script>\r\n$(function() {
+                \r\n\t(function () {
+                \r\n\t\tfetchForm($(\'form[name="iyakuSearchActionForm"]\'), \'SearchCond_Iyaku\');\r\n\t\tvar aryCheck = [];\r\n\t\tvar listCategory = document.iyakuSearchActionForm.listCategory;\r\n\t\tvar $checkedSaveSet = $(\'#SaveSet li input:checked\')\r\n\t\tif(listCategory.value == "" && $checkedSaveSet.length === 0){\r\n\t\t\tif($.cookie(\'SearchCheck_Iyaku\')){\r\n\t\t\t\taryCheck = $.cookie(\'SearchCheck_Iyaku\').split(\',\');\r\n\t\t\t\tfor(var i = 0; i < aryCheck.length; i++){\r\n\t\t\t\t\t$(\'#SaveSet li\').eq(parseInt(aryCheck[i])).find(\'input\').attr(\'checked\', true);\r\n\t\t\t\t}\r\n\t\t\t} else {\r\n\t\t\t\tcheckboxDefaultSet($(\'input[type="checkbox"][name^=dispColumnsList]\'), 7);\r\n\t\t\t}\r\n\t\t}\r\n\t\tchangeKoumoku();\r\n\t\tinitKoumokuVal();\r\n\t})();\r\n\t$(\'.saveCond\').on(\'click\', function() {\r\n\t\tsaveForm($(\'form[name="iyakuSearchActionForm"]\'), \'SearchCond_Iyaku\', \'PmdaSearch\', \'iyakuSearch\');\r\n\t\treturn false;\r\n\t});\r\n});\r\n\r\nvar userAgent = window.navigator.userAgent.toLowerCase();\r\nvar uag = "0";\r\nif (userAgent.indexOf(\'opera\') != -1) {\r\n\tuag = "1";\r\n} else if (userAgent.indexOf(\'msie\') != -1) {\r\n\tuag = "1";\r\n} else if (userAgent.indexOf(\'chrome\') != -1) {\r\n\tuag = "2";\r\n} else if (userAgent.indexOf(\'safari\') != -1) {\r\n\tuag = "2";\r\n} else if (userAgent.indexOf(\'firefox\') != -1) {\r\n\tuag = "2";\r\n} else {\r\n\tuag = "1";\r\n}\r\n\r\n// R03年度Info/統合HPリプレイス START\r\nvar locDateKind = ["", "更新", "更新", "提出", "発出", "承認", "保険適用", "承認", "承認", "更新", "発出", "発出", "掲載", "公表", "掲載", "掲載", "発行", "掲載"];\r\n// R03年度Info/統合HPリプレイス END\r\n\r\nfunction FontSizeInit() {\r\n\tvar fs = window.localStorage.getItem("iyakufsizeValue");\r\n\tif( !fs ){\r\n\t\twindow.localStorage.setItem("iyakufsizeValue", 100);\r\n\t\tfs = window.localStorage.getItem("iyakufsizeValue");\r\n\t}\r\n\tdocument.body.style.fontSize = Math.floor(fs) + \'%\';\r\n\r\n\tdateDisp(1, locDateKind);\r\n\tdateDisp(2, locDateKind);\r\n\tdateDisp(3, locDateKind);\r\n\tsinsaKbnDisp(1);\r\n\tsinsaKbnDisp(2);\r\n\tsinsaKbnDisp(3);\r\n\tif($(\'[name="tglOpFlg"]\').val() === \'0\') {\r\n\t\tslideToggle($(\'.SlideTglWrapBtn a\'));\r\n\t}\r\n}\r\n\r\nfunction clearConditionLeft() {\r\n\tvar patn  = new RegExp("relation", "i");\r\n\tvar patn2 = new RegExp("Dt", "i");\r\n\tvar elm = document.iyakuSearchActionForm;\r\n\tfor(var i=elm.length-1; i>=0; i--){\r\n\t\tif( elm.elements[i].type != \'checkbox\' ){\r\n\t\t\tif( elm.elements[i].name != \'ListRows\' && elm.elements[i].name != \'howtoRdSearchSel\' && ! elm.elements[i].name.match(patn) ){\r\n\t\t\t\tif( elm.elements[i].type == "text" ){\r\n\t\t\t\t\telm.elements[i].value = elm.elements[i].defaultValue;\r\n\t\t\t\t} else if( elm.elements[i].type == "radio" ) {\r\n\t\t\t\t\tif( elm.elements[i].value == 1 ){\r\n\t\t\t\t\t\telm.elements[i].checked = true;\r\n\t\t\t\t\t} else {\r\n\t\t\t\t\t\telm.elements[i].checked = false;\r\n\t\t\t\t\t}\r\n\t\t\t\t} else if( elm.elements[i].type == "select-one" || elm.elements[i].type == "select" ){\r\n\t\t\t\t\telm.elements[i].selectedIndex = 0;\r\n\t\t\t\t} else if( elm.elements[i].type == "hidden" ){\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\tvar aryCheck = [];\r\n\tvar listCategory =  document.iyakuSearchActionForm.listCategory;\r\n\tvar $checkedSaveSet = $(\'#SaveSet li input:checked\')\r\n\tif(listCategory.value == "" && $checkedSaveSet.length === 0){\r\n\t\tif($.cookie(\'SearchCheck_Iyaku\')){\r\n\t\t\taryCheck = $.cookie(\'SearchCheck_Iyaku\').split(\',\');\r\n\t\t\tfor(var i = 0; i < aryCheck.length; i++){\r\n\t\t\t\t$(\'#SaveSet li\').eq(parseInt(aryCheck[i])).find(\'input\').attr(\'checked\', true);\r\n\t\t\t}\r\n\t\t} else {\r\n\t\t\tcheckboxDefaultSet($(\'input[type="checkbox"][name^=dispColumnsList]\'), 7);\r\n\t\t}\r\n\t}\r\n\r\n\tchangeKoumoku();\r\n\treturn false;\r\n}\r\n\r\nfunction clearConditionRight() {\r\n\tvar patn  = new RegExp("relation", "i");\r\n\tvar patn2 = new RegExp("Dt", "i");\r\n\tvar elm = document.iyakuSearchActionForm;\r\n\tfor(var i=elm.length-1; i>=0; i--){\r\n\t\tif( elm.elements[i].type != \'checkbox\' ){\r\n\t\t\tif( elm.elements[i].name != \'ListRows\' && (elm.elements[i].name == \'howtoRdSearchSel\' || elm.elements[i].name.match(patn)) ){\r\n\t\t\t\tif( elm.elements[i].type == "text" ){\r\n\t\t\t\t\telm.elements[i].value = elm.elements[i].defaultValue;\r\n\t\t\t\t} else if( elm.elements[i].type == "radio" ) {\r\n\t\t\t\t\tif( elm.elements[i].value == 1 ){\r\n\t\t\t\t\t\telm.elements[i].checked = true;\r\n\t\t\t\t\t} else {\r\n\t\t\t\t\t\telm.elements[i].checked = false;\r\n\t\t\t\t\t}\r\n\t\t\t\t} else if( elm.elements[i].type == "select-one" || elm.elements[i].type == "select" ){\r\n\t\t\t\t\tif( elm.elements[i].name == \'howtoRdSearchSel\' ){\r\n\t\t\t\t\t\telm.elements[i].selectedIndex = 2;\r\n\t\t\t\t\t} else {\r\n\t\t\t\t\t\telm.elements[i].selectedIndex = 0;\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n  document.getElementById(\'syonin1\').style.display="none";\r\n  document.getElementsByName(\'relationDoc1check1\')[0].checked = true;\r\n  document.getElementsByName(\'relationDoc1check2\')[0].checked = true;\r\n\r\n  document.getElementById(\'syonin2\').style.display="none";\r\n  document.getElementsByName(\'relationDoc2check1\')[0].checked = true;\r\n  document.getElementsByName(\'relationDoc2check2\')[0].checked = true;\r\n\r\n  document.getElementById(\'syonin3\').style.display="none";\r\n  document.getElementsByName(\'relationDoc3check1\')[0].checked = true;\r\n  document.getElementsByName(\'relationDoc3check2\')[0].checked = true;\r\n\r\n\treturn false;\r\n}\r\n\r\nfunction bigger() {\r\n\tvar fs = window.localStorage.getItem("iyakufsizeValue");\r\n\tfs *= 1.2;\r\n\tif( fs <= (93 * 1.2) * 1.2 ){\r\n\t\twindow.localStorage.setItem("iyakufsizeValue", fs);\r\n\t\tdocument.body.style.fontSize = Math.floor(fs) + \'%\';\r\n\t}\r\n}\r\n\r\nfunction smaller() {\r\n\tvar fs = window.localStorage.getItem("iyakufsizeValue");\r\n\tfs /= 1.2;\r\n\tif( fs >= (93 / 1.2) / 1.2 ){\r\n\t\twindow.localStorage.setItem("iyakufsizeValue", fs);\r\n\t\tdocument.body.style.fontSize = Math.floor(fs) + \'%\';\r\n\t}\r\n}\r\n\r\nfunction validateSelTxt(id, label) {\r\n\tvar select = document.getElementById("sel" + id);\r\n\tvar text = document.getElementById("txt" + id);\r\n\tif (select && text) {\r\n\t\tvar value = text.value.replace(/^\\s+|\\s+$/g,\'\');\r\n\t\tif (select.selectedIndex > 0) {\r\n\t\t\tif (value == "" || value == "検索語を入力") {\r\n\t\t\t\treturn label + "の検索語を入力してください。";\r\n\t\t\t}\r\n\t\t} else if (value != "" && value != "検索語を入力") {\r\n\t\t\treturn label + "の項目を選択してください。";\r\n\t\t}\r\n\t}\r\n\treturn "";\r\n}\r\n\r\nfunction validateDateFormat(dateId, from, ymd) {\r\n\tvar defaultVal = ymd ? "年月日 [YYYYMMDD]" : "年月 [YYYYMM]"\r\n\tvar date = document.getElementById(dateId);\r\n\tif (date && date.value != defaultVal) {\r\n\t\tif (!completionDate($(date), from, ymd, [defaultVal])) {\r\n\t\t\treturn false;\r\n\t\t}\r\n\t\tif (!ymd && !checkDateFmt(date.value)) {\r\n\t\t\talert( "年月は2014年3月の場合 201403 のように入力してください" );\r\n\t\t\treturn false;\r\n\t\t} else if (ymd && !checkDateFmtLeft(date.value)) {\r\n\t\t\talert( "年月日は2014年3月1日の場合 20140301 のように入力してください" );\r\n\t\t\treturn false;\r\n\t\t}\r\n\t}\r\n\treturn true;\r\n}\r\n\r\nfunction validateRelationSelect(relId, target) {\r\n\tvar relTxt = document.getElementById("txt" + relId);\r\n\tvar relFrom = document.getElementById("txt" + relId + "From");\r\n\tvar relTo = document.getElementById("txt" + relId + "To");\r\n\tvar relSel = document.getElementById("sel" + relId);\r\n\tif (relTxt && relFrom && relTo && relSel) {\r\n\t\tvar value = relTxt.value.replace(/^\\s+|\\s+$/g,\'\');\r\n\t\tif (relSel.selectedIndex == 0) {\r\n\t\t\tif ((value != "" && value != "検索語を入力")\r\n\t\t\t\t|| (relFrom.value != "" && relFrom.value != "年月 [YYYYMM]")\r\n\t\t\t\t|| (relTo.value != "" && relTo.value != "年月 [YYYYMM]")) {\r\n\t\t\t\talert(target + "の文書を選択してください。");\r\n\t\t\t\treturn false;\r\n\t\t\t}\r\n\t\t} else {\r\n\t\t\tif ((value == "" || value == "検索語を入力")\r\n\t\t\t\t\t&& (relFrom.value == "" || relFrom.value == "年月 [YYYYMM]")\r\n\t\t\t\t\t&& (relTo.value == "" || relTo.value == "年月 [YYYYMM]")) {\r\n\t\t\t\talert(target + "の検索条件を入力してください。");\r\n\t\t\t\treturn false;\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\treturn true;\r\n}\r\n\r\nfunction validateConditions() {\r\n\t$(\'input[type="text"]\').each(function (){\r\n\t\t$(this).val($(this).val() === "" ? $(this).prop(\'defaultValue\') :  $(this).val());\r\n\t});\r\n\r\n\tvar countL = checkConditionLeft();\r\n\tvar countR = checkConditionRight();\r\n\r\n\tif (countR == 0 && countL == 0) {\r\n\t\talert("検索条件を入力してください");\r\n\t\treturn false;\r\n\t}\r\n\r\n\tvar joinCond = document.getElementById("selHowToRd").value;\r\n\tif (joinCond == "" && countL != 0) {\r\n\t\talert("「医薬品の添付文書等を調べる」の検索条件をクリアしてください");\r\n\t\treturn false;\r\n\t}\r\n\r\n\tif (joinCond != "" && joinCond != "or" && countR == 0 && countL != 0) {\r\n\t\talert("「特定の文書の記載内容から調べる」の検索条件を入力してください");\r\n\t\treturn false;\r\n\t}\r\n\r\n\tif (joinCond != "" && joinCond != "or" && countR != 0 && countL == 0) {\r\n\t\talert("「医薬品の添付文書等を調べる」の検索条件を入力してください");\r\n\t\treturn false;\r\n\t}\r\n\r\n\tvar selTextError =\r\n\t    validateSelTxt("Koumoku1", "項目内検索1")\r\n\t || validateSelTxt("Koumoku2", "項目内検索2")\r\n\t || validateSelTxt("Koumoku3", "項目内検索3")\r\n\t ;\r\n\tif (selTextError) {\r\n\t\talert(selTextError);\r\n\t\treturn false;\r\n\t}\r\n\r\n\tvar valid =\r\n\t\tvalidateRelationSelect("Relation1", "検索項目1") &&\r\n\t \tvalidateRelationSelect("Relation2", "検索項目2") &&\r\n\t \tvalidateRelationSelect("Relation3", "検索項目3") &&\r\n\t\tvalidateDateFormat("txtUpdateFrom", true, true) &&\r\n\t\tvalidateDateFormat("txtUpdateTo", false, true) &&\r\n\t\tvalidateDateFormat("txtRelation1From", true, false) &&\r\n\t\tvalidateDateFormat("txtRelation1To", false, false) &&\r\n\t\tvalidateDateFormat("txtRelation2From", true, false) &&\r\n\t \tvalidateDateFormat("txtRelation2To", false, false) &&\r\n\t \tvalidateDateFormat("txtRelation3From", true, false) &&\r\n\t \tvalidateDateFormat("txtRelation3To", false, false)\r\n\t ;\r\n\tif (!valid) {\r\n\t\treturn false;\r\n\t}\r\n\r\n\tvar gscd = validateInputGs1Code();\r\n\tif (!gscd) {\r\n\t\treturn false;\r\n\t}\r\n\r\n\tif (countR != 0) {\r\n\t\tvar cond1 = document.getElementById("selRelation1").selectedIndex > 0;\r\n\t\tvar cond2 = document.getElementById("selRelation2").selectedIndex > 0;\r\n\t\tvar cond3 = document.getElementById("selRelation3").selectedIndex > 0;\r\n\t\tif (cond2 && !cond1) {\r\n\t\t\talert("検索項目１の条件を指定してください。");\r\n\t\t\treturn false;\r\n\t\t}\r\n\t\tif (cond3) {\r\n\t\t\tif (!cond2) {\r\n\t\t\t\tif (!cond1) {\r\n\t\t\t\t\talert("検索項目１、検索項目２の条件を指定してください。");\r\n\t\t\t\t\treturn false;\r\n\t\t\t\t} else {\r\n\t\t\t\t\talert("検索項目２の条件を指定してください。");\r\n\t\t\t\t\treturn false;\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\treturn true;\r\n}\r\n\r\nfunction preSubmit() {\r\n\treturn validateConditions();\r\n}\r\n\r\nfunction checkConditionLeft() {\r\n\tvar patn  = new RegExp("relation", "i");\r\n\tvar patn2 = new RegExp("Dt", "i");\r\n\tvar elm = document.iyakuSearchActionForm;\r\n\tvar editCnt = 0;\r\n\tfor(var i=elm.length-1; i>=0; i--){\r\n\t\tif( elm.elements[i].type != \'checkbox\' ){\r\n\t\t\tif( elm.elements[i].name != \'ListRows\' && elm.elements[i].name != \'howtoRdSearchSel\' && ! elm.elements[i].name.match(patn) ){\r\n\t\t\t\tif( elm.elements[i].type == "text" ){\r\n\t\t\t\t\tif( ! elm.elements[i].name.match(patn2) && elm.elements[i].value.replace(/^\\s+|\\s+$/g,\'\') != "" ){\r\n\t\t\t\t\t\teditCnt++;\r\n\t\t\t\t\t} else if( elm.elements[i].name.match(patn2) && elm.elements[i].value != "年月日 [YYYYMMDD]" ){\r\n\t\t\t\t\t\teditCnt++;\r\n\t\t\t\t\t}\r\n\t\t\t\t} else if( elm.elements[i].type == "select-one" || elm.elements[i].type == "select" ){\r\n\t\t\t\t\tif ( elm.elements[i].selectedIndex != 0 ) {\r\n\t\t\t\t\t\tif (elm.elements[i].name.indexOf("HowtoSearch") !== -1) continue;\r\n\t\t\t\t\t\tswitch (elm.elements[i].name) {\r\n\t\t\t\t\t\tcase "effectValue":\r\n\t\t\t\t\t\t\teditCnt++;\r\n\t\t\t\t\t\t\tbreak;\r\n\t\t\t\t\t\tcase "koumoku1Value":\r\n\t\t\t\t\t\tcase "koumoku2Value":\r\n\t\t\t\t\t\tcase "koumoku3Value":\r\n\t\t\t\t\t\t\tif (elm.elements[i].selectedIndex != 0 ||\r\n\t\t\t\t\t\t\t\telm.elements[i+1].value.replace(/^\\s+|\\s+$/g,\'\') != "") {\r\n\t\t\t\t\t\t\t\t\teditCnt++;\r\n\t\t\t\t\t\t\t}\r\n\t\t\t\t\t\t}\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\treturn editCnt;\r\n}\r\n\r\nfunction checkConditionRight() {\r\n\tvar patn  = new RegExp("relation", "i");\r\n\tvar patn2 = new RegExp("Dt", "i");\r\n\tvar elm = document.iyakuSearchActionForm;\r\n\tvar check_elm;\r\n\tvar targ_elm;\r\n\tvar editCnt = 0;\r\n\tfor(var i=elm.length-1; i>=0; i--){\r\n\t\tif( elm.elements[i].type != \'checkbox\' ){\r\n\t\t\tif( elm.elements[i].name != \'ListRows\' && (elm.elements[i].name != \'howtoRdSearchSel\' && elm.elements[i].name.match(patn)) ){\r\n\t\t\t\tif( elm.elements[i].type == "text" ){\r\n\t\t\t\t\tif( ! elm.elements[i].name.match(patn2) && elm.elements[i].value != ""  && elm.elements[i].value != "検索語を入力"){\r\n\t\t\t\t\t} else if( elm.elements[i].name.match(patn) && elm.elements[i].name.match(patn2) && elm.elements[i].value != "年月 [YYYYMM]" ){\r\n\t\t\t\t\t\teditCnt++;\r\n\t\t\t\t\t}\r\n\t\t\t\t} else if( elm.elements[i].type == "select-one" || elm.elements[i].type == "select" ){\r\n\t\t\t\t\tif( elm.elements[i].selectedIndex != 0 && elm.elements[i].value != "" ){\r\n\t\t\t\t\t\teditCnt++;\r\n\t\t\t\t\t}\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}\r\n\t}\r\n\r\n\treturn editCnt;\r\n}\r\n\r\nfunction checkDateFmt(dateval) {\r\n\tif(!dateval.match(/^\\d{4}\\d{2}$/)){\r\n\t\treturn false;\r\n\t}\r\n\r\n\tvar valYear = dateval.substr(0, 4) - 0;\r\n\tvar valMonth = dateval.substr(4, 2) - 1;\r\n\r\n\tif(valMonth >= 0 && valMonth <= 11){\r\n\r\n\t\tvar varDt = new Date(valYear, valMonth, 1);\r\n\t\tif(isNaN(varDt)){\r\n\t\t\treturn false;\r\n\t\t}else if(varDt.getFullYear() == valYear && varDt.getMonth() == valMonth){\r\n\t\t\treturn true;\r\n\t\t}else{\r\n\t\t\treturn false;\r\n\t\t}\r\n\t}else{\r\n\t\treturn false;\r\n\t}\r\n}\r\n\r\nfunction checkDateFmtLeft(dateval) {\r\n\tif(!dateval.match(/^\\d{4}\\d{2}\\d{2}$/)){\r\n\t\treturn false;\r\n\t}\r\n\r\n\tvar valYear  = dateval.substr(0, 4) - 0;\r\n\tvar valMonth = dateval.substr(4, 2) - 1;\r\n\tvar valDay   = dateval.substr(6, 2) - 0;\r\n\r\n\tif(valMonth >= 0 && valMonth <= 11 && valDay >= 1 && valDay <= 31){\r\n\t\tvar varDt = new Date(valYear, valMonth, valDay);\r\n\t\tif(isNaN(varDt)){\r\n\t\t\treturn false;\r\n\t\t}else if(varDt.getFullYear() == valYear && varDt.getMonth() == valMonth && varDt.getDate() == valDay ){\r\n\t\t\treturn true;\r\n\t\t}else{\r\n\t\t\treturn false;\r\n\t\t}\r\n\t}else{\r\n\t\treturn false;\r\n\t}\r\n}\r\n\r\nfunction searchResultDisp(form) {\r\n\tif (!preSubmit()) {\r\n\t\treturn false;\r\n\t}\r\n\r\n\tform.target = \'_blank\';\r\n\treturn true;\r\n}\r\n\r\nfunction sinsaKbnDisp( no ){\r\n\tvar obj;\r\n\tif(no == 1) {\r\n\t\tobj = document.getElementsByName(\'relationDoc1Sel\')[0];\r\n\r\n\t\tif( obj.value == 11 ){\r\n\t\t\tdocument.getElementById(\'syonin1\').style.display="block";\r\n\t\t} else {\r\n\t\t\tdocument.getElementById(\'syonin1\').style.display="none";\r\n\t\t\tdocument.getElementsByName(\'relationDoc1check1\')[0].checked = true;\r\n\t\t\tdocument.getElementsByName(\'relationDoc1check2\')[0].checked = true;\r\n\t\t}\r\n\t} else if(no == 2) {\r\n\t\tobj = document.getElementsByName(\'relationDoc2Sel\')[0];\r\n\t\tif( obj.value == 11 ){\r\n\t\t\tdocument.getElementById(\'syonin2\').style.display="block";\r\n\t\t} else {\r\n\t\t\tdocument.getElementById(\'syonin2\').style.display="none";\r\n\t\t\tdocument.getElementsByName(\'relationDoc2check1\')[0].checked = true;\r\n\t\t\tdocument.getElementsByName(\'relationDoc2check2\')[0].checked = true;\r\n\t\t}\r\n\t} else {\r\n\t\tobj = document.getElementsByName(\'relationDoc3Sel\')[0];\r\n\t\tif( obj.value == 11 ){\r\n\t\t\tdocument.getElementById(\'syonin3\').style.display="block";\r\n\t\t} else {\r\n\t\t\tdocument.getElementById(\'syonin3\').style.display="none";\r\n\t\t\tdocument.getElementsByName(\'relationDoc3check1\')[0].checked = true;\r\n\t\t\tdocument.getElementsByName(\'relationDoc3check2\')[0].checked = true;\r\n\t\t}\r\n\t}\r\n}\r\n\r\nvar iyakuNewKoumokuSelect = [\r\n\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t["","--"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["allsearch","全文検索（文書内全体を対象）"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["precautionsforuse","使用上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["dateofpreparationorrevision","－ア. 作成又は改訂年月"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["sccj","－イ. 日本標準商品分類番号"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["marketinginfo","－ウ. 承認番号、販売開始年月"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["storage","－エ. 貯法、有効期間"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["regulatoryclassification","－カ. 規制区分"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["standardname","－キ. 基準名"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["warnings","－1. 警告"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["contraindications","－2. 禁忌（次の患者には投与しないこと）"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["composition_property","＋3. 組成・性状"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["overviewOfRecipe","\u3000－製法の概要"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["composition","\u3000＋組成"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["additives","\u3000\u3000－添加剤"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["property","\u3000－製剤の性状"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["indicationsorefficacy","－4. 効能又は効果"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["efficacyrelatedprecautions","－5. 効能又は効果に関連する注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["infodoseadmin","－6. 用法及び用量"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["infoprecautionsdosage","－7. 用法及び用量に関連する注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["importantprecautions","－8. 重要な基本的注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["useinspecificpopulations","＋9. 特定の背景を有する患者に関する注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["useinpatientswithcomplicationsorhistoryofdiseasesetc","\u3000－9.1 合併症・既往歴等のある患者"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["patientswithrenalimpairment","\u3000－9.2 腎機能障害患者"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["patientswithhepaticimpairment","\u3000－9.3 肝機能障害患者"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["malesandfemalesofreproductivepotential","\u3000－9.4 生殖能を有する者"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["useinpregnant","\u3000－9.5 妊婦"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["useinnursing","\u3000－9.6 授乳婦"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["pediatricuse","\u3000－9.7 小児等"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["useintheelderly","\u3000－9.8 高齢者"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["interactions","＋10. 相互作用"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["contraindicatedcombination","\u3000－10.1 併用禁忌（併用しないこと）"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["precautionsforcombination","\u3000－10.2 併用注意（併用に注意すること）"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["adverseevents","＋11. 副作用"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["seriousadverseevents","\u3000－11.1 重大な副作用"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["otheradverseevents","\u3000－11.2 その他の副作用"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["influenceonlaboratoryvalues","－12. 臨床検査結果に及ぼす影響"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["overdosage","－13. 過量投与"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["precautionsforapplication","－14. 適用上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["otherprecautions","＋15. その他の注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["informationbasedonclinicaluse","\u3000－15.1 臨床使用に基づく情報"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["informationbasedonnonclinicalstudies","\u3000－15.2 非臨床試験に基づく情報"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["pharmacokinetics","＋16. 薬物動態"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["bloodlevel","\u3000－16.1 血中濃度"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["absorption","\u3000－16.2 吸収"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["distribution","\u3000－16.3 分布"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["metabolism","\u3000－16.4 代謝"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["excretion","\u3000－16.5 排泄"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["specificpopulation","\u3000－16.6 特定の背景を有する患者"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["druganddruginteractions","\u3000－16.7 薬物相互作用"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["pharmacokineticsetc","\u3000－16.8 その他"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["resultsofclinicaltrials","＋17. 臨床成績"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["efficacyandsafety","\u3000－17.1 有効性及び安全性に関する試験"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["postmarketingsurveylancesetc","\u3000－17.2 製造販売後調査等"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["resultsofclinicaltrialsetc","\u3000－17.3 その他"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["efficacypharmacology","＋18. 薬効薬理"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["mechanismofaction","\u3000－18.1 作用機序"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["physchemofactingredients","－19. 有効成分に関する理化学的知見"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["precautionsforhandling","－20. 取扱い上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["conditionsofapproval","－21. 承認条件"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["package","－22. 包装"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["mainliterature","－23. 主要文献"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["addresseeofliteraturerequest","－24. 文献請求先及び問い合わせ先"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["attentionofinsurance","－25. 保険給付上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START>\r\n\t, ["nameaddressmanufact","－26. 製造販売業者等"]\r\n\t// R03年度Info/統合HPリプレイス END\r\n];\r\nvar iyakuOldKoumokuSelect = [\r\n\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t["","--"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["allsearch","全文検索（文書内全体を対象）"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["precautionsforuse","使用上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["dateofpreparationorrevision","－作成又は改訂年月"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["sccj","－日本標準商品分類番号"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["approvalandlicenseno","－承認・許可番号"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["startingdateofmarketing","－販売開始年月"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["storage","－貯法、使用期限等"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["regulatoryclassification","－規制区分"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["standardname","－基準名"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["warnings","－警告"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["contraindicationsall","－禁忌"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["avoidedadministration","－原則禁忌"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["composition_property","＋組成と性状"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["composition","\u3000－組成"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["property","\u3000－製剤の性状"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["indicationsorefficacy","－効能又は効果"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["efficacyrelatedprecautionsall","－効能又は効果に関連する使用上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["infodoseadmin","－用法及び用量"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["infoprecautionsdosageall","－用法及び用量に関連する使用上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["cautiousadministration","－慎重投与"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["importantprecautions","－重要な基本的注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["interactionsall","＋相互作用"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["summaryofcombination","\u3000－相互作用概略"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["contraindicatedcombinationall","\u3000－併用禁忌"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["avoidedcombination","\u3000－原則併用禁忌"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["precautionsforcombinationall","\u3000－併用注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["adverseeventsall","＋副作用"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["overviewofadverseevents","\u3000－副作用等の概要"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["seriousadverseeventsall","\u3000－重大な副作用"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["similarseriousadverseevents","\u3000－重大な副作用(類薬)"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["otheradverseevents","\u3000－その他の副作用"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["useintheelderly","－高齢者への投与"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["useinpregnantornursing","－妊婦，産婦，授乳婦等への投与"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["pediatricuse","－小児等への投与"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["influenceonlaboratoryvalues","－臨床検査結果に及ぼす影響"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["overdosage","－過量投与"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["precautionsforapplication","－適用上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["otherprecautionsall","－その他の注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["pharmacokineticsall","－薬物動態"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["resultsofclinicaltrialsall","－臨床成績"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["efficacypharmacologyall","－薬効薬理"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["physchemofactingredients","－有効成分に関する理化学的知見"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["precautionsforhandlingall","－取扱い上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["conditionsofapproval","－承認条件"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["package","－包装"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["mainliterature","－主要文献"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["addresseeofliteraturerequest","－文献請求先"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["attentionofinsurance","－保険給付上の注意"]\r\n\t// R03年度Info/統合HPリプレイス START\r\n\t, ["nameaddressmanufact","－製造販売業者の氏名又は名称及び住所"]\r\n\t// R03年度Info/統合HPリプレイス END\r\n];\r\nvar isNewReleaseDisp = true;\r\nvar isSwitchRadioDisp = true;\r\nvar isGS1ReleaseDisp = true\r\n\r\nfunction changeKoumoku(){\r\n\tif( isNewReleaseDisp ){\r\n\t\tif( isSwitchRadioDisp ){\r\n\t\t\tvar elem = document.getElementById(\'iyakuKoumokuSelectSwitchRadio\');\r\n\t\t\tif( elem.type == \'radio\' ){\r\n\t\t\t\tif( elem.checked ){\r\n\t\t\t\t\tdeladdselKoumoku(1,true);\r\n\t\t\t\t\tdeladdselKoumoku(2,true);\r\n\t\t\t\t\tdeladdselKoumoku(3,true);\r\n\t\t\t\t} else {\r\n\t\t\t\t\tdeladdselKoumoku(1,false);\r\n\t\t\t\t\tdeladdselKoumoku(2,false);\r\n\t\t\t\t\tdeladdselKoumoku(3,false);\r\n\t\t\t\t}\r\n\t\t\t} else {\r\n\t\t\t\tif( elem.value == 1){\r\n\t\t\t\t\tdeladdselKoumoku(1,true);\r\n\t\t\t\t\tdeladdselKoumoku(2,true);\r\n\t\t\t\t\tdeladdselKoumoku(3,true);\r\n\t\t\t\t} else {\r\n\t\t\t\t\tdeladdselKoumoku(1,false);\r\n\t\t\t\t\tdeladdselKoumoku(2,false);\r\n\t\t\t\t\tdeladdselKoumoku(3,false);\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t}else{\r\n\t\t\tdocument.getElementById(\'iyakuKoumokuSelectSwitchRadio\').value = 1;\r\n\t\t\tdeladdselKoumoku(1,true);\r\n\t\t\tdeladdselKoumoku(2,true);\r\n\t\t\tdeladdselKoumoku(3,true);\r\n\t\t}\r\n\t}else{\r\n\t\tdocument.getElementById(\'iyakuKoumokuSelectSwitchRadio\').value = 2;\r\n\t\tdeladdselKoumoku(1,false);\r\n\t\tdeladdselKoumoku(2,false);\r\n\t\tdeladdselKoumoku(3,false);\r\n\t}\r\n}\r\n\r\nfunction deladdselKoumoku(no,newflg){\r\n\tvar delselid = \'selKoumoku\' + no;\r\n\tvar dele = document.getElementById(delselid);\r\n\tdele.options.length = 0;\r\n\r\n\tif( newflg ){\r\n\t\tfor(var newx = 0 ; newx <iyakuNewKoumokuSelect.length ; newx++){\r\n\t\t\tvar option_add = document.createElement("option");\r\n\t\t\toption_add.value = iyakuNewKoumokuSelect[newx][0];\r\n\t\t\toption_add.innerText = iyakuNewKoumokuSelect[newx][1];\r\n\t\t\tdele.appendChild(option_add);\r\n\t\t}\r\n\t}else{\r\n\t\tfor(var oldx = 0 ; oldx <iyakuOldKoumokuSelect.length ; oldx++){\r\n\t\t\tvar option_add = document.createElement("option");\r\n\t\t\toption_add.value = iyakuOldKoumokuSelect[oldx][0];\r\n\t\t\toption_add.innerText = iyakuOldKoumokuSelect[oldx][1];\r\n\t\t\tdele.appendChild(option_add);\r\n\t\t}\r\n\t}\r\n}\r\n\r\nfunction initKoumokuVal(){\r\n\tvar cond = JSON.parse($.cookie(\'SearchCond_Iyaku\'));\r\n\tif (!cond) {\r\n\t\treturn true;\r\n\t}\r\n\r\n\t$.each(cond, function(i, v) {\r\n\t\tif( i == \'koumoku1Value\'){\r\n\t\t\tvar elem = document.getElementsByName(\'koumoku1Value\')[0].value = v;\r\n\t\t}else if(i == \'koumoku2Value\'){\r\n\t\t\tvar elem = document.getElementsByName(\'koumoku2Value\')[0].value = v;\r\n\t\t}else if(i == \'koumoku3Value\'){\r\n\t\t\tvar elem = document.getElementsByName(\'koumoku3Value\')[0].value = v;\r\n\t\t}else if( i == \'gs1code\'){\r\n\t\t\tif(!isGS1ReleaseDisp){\r\n\t\t\t\tvar elem = document.getElementsByName(\'gs1code\')[0].value = "";\r\n\t\t\t}\r\n\t\t}\r\n\t});\r\n\r\n\treturn true;\r\n}\r\n\r\nfunction validateInputGs1Code() {\r\n\tvar gtext = document.getElementById(\'gscdid\');\r\n\r\n\tif( gtext ){\r\n\t\tif( gtext.value == "" ){\r\n\t\t\treturn true;\r\n\t\t}\r\n\r\n\t\tvar checkmoji = gtext.value.replace(/\\(|\\)|\\（|\\）/g,\'\');\r\n\r\n\t\tif( checkmoji.length < 14 ){\r\n\t\t\talert(\'GS1コードには14桁以上の数字を入力してください\');\r\n\t\t\treturn false;\r\n\t\t}else{\r\n\t\t\tif( checkmoji.length >= 16 ){\r\n\t\t\t\tcheckmoji = checkmoji.substring(0,16);\r\n\t\t\t}else{\r\n\t\t\t\tcheckmoji = checkmoji.substring(0,14);\r\n\t\t\t}\r\n\t\t}\r\n\r\n\t\tif( checkmoji != "" && !(checkmoji.match(/^[0-9０-９]+$/)) ){\r\n\t\t\talert(\'GS1コードに無効な文字が含まれています\');\r\n\t\t\treturn false;\r\n\t\t}else{\r\n\t\t\tcheckmoji = checkmoji.replace(/[０-９]/g, function (s) {\r\n\t            return String.fromCharCode(s.charCodeAt(0) - 65248);\r\n\t        });\r\n\t\t}\r\n\r\n\t\tif( (checkmoji.substr(0,1) != \'0\') && (checkmoji.substr(0,1) != \'1\') && checkmoji.substr(0,1) != \'2\'){\r\n\t\t\talert(\'GS1コードが無効です\');\r\n\t\t\treturn false;\r\n\t\t}\r\n\t}\r\n\r\n\treturn true;\r\n}\r\n</script>
+        \r\n<!-- ++++ /local-js ++++ -->\r\n\r\n\r\n\r\n\r\n<div id="ContentWrap">\r\n<noscript>
+                <p id="NoScriptWarning">当ウェブサイトを快適にご覧いただくには、ブラウザのJavaScript設定を有効（オン）にしていただく必要がございます。</p>
+            </noscript>\r\n<div id="HeaderPopArea" class="HTML5_header">\r\n<div id="HeaderPopAreaInner">\r\n\r\n<a
+                        href="/" id="LogoArea" target="_blank">\r\n<span>Pmda 独立行政法人
+                            医薬品医療機器総合機構</span>\r\n</a><!--/LogoArea-->\r\n\r\n<div id="LinkArea01" class="clearfix">\r\n
+                        <ul>\r\n\r\n<li class="mr_00"><a href="javascript:window.close()"><img class="imglink"
+                                        src="/PmdaSearch/files/common/img/ComHeaderAreaBtnClose.png" alt="画面を閉じる"
+                                        width="118" height="24"></a></li>\r\n\r\n</ul>\r\n</div>
+                    <!--/LinkArea01-->\r\n\r\n<div id="LinkArea02">\r\n\r\n<img class="float_l mr_10"
+                            src="/PmdaSearch/files/common/img/ComHeaderAreaTxtSizettl.png" alt="文字サイズの変更" width="29"
+                            height="22">\r\n\r\n<span id="FontSizeSelect"><a href="javascript:void(0);"
+                                id="TextBtnNormal" class="mr_05 "><span>標準</span></a>\r\n<a href="javascript:void(0);"
+                                id="TextBtnL" class="mr_05"><span>大</span></a>\r\n<a href="javascript:void(0);"
+                                id="TextBtnLl"><span>特大</span></a></span>\r\n</div><!--/LinkArea02-->\r\n</div>
+                <!--/HeaderAreaInner-->\r\n</div><!--/HeaderArea-->\r\n\r\n\r\n<form id="iyakuSearchForm"
+                name="iyakuSearchActionForm" action="/PmdaSearch/iyakuSearch" method="POST"
+                onsubmit="return searchResultDisp(this);"><input type="hidden" name="nccharset"
+                    value="8FEB1898">\r\n\r\n<div id="ContentArea" class="HTML5_section">\r\n<div id="MainContents"
+                        class="clearfix">\r\n<div id="ContentMainArea" class="ComOneCulumn">\r\n\r\n<div
+                                class="PopupArea">\r\n<div class="PopupInner">\r\n\r\n<h1 id="SearchHd">
+                                        \r\n<strong>医療用医薬品 情報検索</strong>\r\n\r\n<span><a target="searchhelp"
+                                                href="/searchhelp_005.html"><img class="imglink"
+                                                    src="/PmdaSearch/files/img/search/SearchBtn01.gif"
+                                                    alt="ご利用にあたっての注意事項" height="35"></a></span>\r\n<span><a
+                                                target="searchhelp_iyaku" href="/searchhelp_009.pdf"><img
+                                                    class="imglink" src="/PmdaSearch/files/img/search/SearchBtn10.gif"
+                                                    alt="情報検索機能の使い方" height="36"></a></span>\r\n\r\n</h1>\r\n\r\n<p
+                                        class="SearchBlock01">\r\n<span><strong>表示件数を選ぶ</strong><br>\r\n \r\n \r\n
+                                            <select id="ListRows" name="ListRows" class="SearchSlct"
+                                                onchange="javascript:setListRows($(this));">\r\n <option value="10"
+                                                    selected="selected">10件</option>
+                                                <option value="20">20件</option>
+                                                <option value="30">30件</option>
+                                                <option value="50">50件</option>
+                                                <option value="100">100件</option>\r\n
+                                            </select>\r\n \r\n</span>\r\n\r\n<span><input name="btnA" value="検索"
+                                                type="image"
+                                                src="/PmdaSearch/files/img/search/SearchBtn07.gif"></span>\r\n<span><a
+                                                href="javascript:void(0)" class="saveCond"><img class="imglink"
+                                                    src="/PmdaSearch/files/img/search/SearchBtn11.gif"
+                                                    alt="検索・表示条件を保存"></a></span>\r\n\r\n</p>\r\n\r\n<div id="SearchTop">
+                                        \r\n<div id="SearchWrap01" class="clearfix">\r\n<div id="SearchWrap01ColA">\r\n
+                                                <div id="SearchtitArea01" class="SearchtitArea clearfix">\r\n<h2
+                                                        class="SearchTit01">医薬品の添付文書等を調べる</h2>\r\n\r\n<span><input
+                                                            value="条件消去" type="image"
+                                                            src="/PmdaSearch/iyakuSearch/../files/img/search/SearchBtn09.gif"
+                                                            onclick="javascript:clearConditionLeft(); return false;"></span>\r\n\r\n
+                                                </div>\r\n<p class="asteriskIndent">
+                                                    ※添付文書が公開されている品目について、その記載内容から検索を行い、検索された、医薬品に関連する文書を一覧表形式で表示します。</p>
+                                                \r\n<h3 class="SearchTit02">一般名・販売名（医薬品の名称）</h3>\r\n\r\n<p
+                                                    class="mb_10"><input id="txtName" name="nameWord"
+                                                        class="SearchIptTxt" type="text" value="" maxlength="80" /></p>
+                                                \r\n\r\n<ul class="SearchList01 mb_5 clearfix">\r\n\t\r\n\t\r\n\t<li>
+                                                        <label><input id="iyakuHowtoNameSearchRadioValue1"
+                                                                name="iyakuHowtoNameSearchRadioValue" type="radio"
+                                                                value="1"
+                                                                checked="checked" /><span>一般名及び販売名</span></label></li>
+                                                    \r\n\t\r\n\t\r\n\t\r\n\t<li><label><input
+                                                                id="iyakuHowtoNameSearchRadioValue2"
+                                                                name="iyakuHowtoNameSearchRadioValue" type="radio"
+                                                                value="2" /><span>一般名のみ</span></label></li>
+                                                    \r\n\t\r\n\t\r\n\t\r\n\t<li><label><input
+                                                                id="iyakuHowtoNameSearchRadioValue3"
+                                                                name="iyakuHowtoNameSearchRadioValue" type="radio"
+                                                                value="3" /><span>販売名のみ</span></label></li>
+                                                    \r\n\t\r\n\t\r\n</ul>\r\n<ul class="SearchList01 mb_20 clearfix">
+                                                    \r\n\t\r\n\t\r\n\t<li><label><input id="howtoMatchRadioValue1"
+                                                                name="howtoMatchRadioValue" type="radio" value="1"
+                                                                checked="checked" /><span>部分一致</span></label></li>
+                                                    \r\n\t\r\n\t\r\n\t\r\n\t<li><label><input id="howtoMatchRadioValue2"
+                                                                name="howtoMatchRadioValue" type="radio"
+                                                                value="2" /><span>前方一致</span></label></li>
+                                                    \r\n\t\r\n\t\r\n</ul>\r\n\r\n<h3 class="SearchTit02">
+                                                    検索結果一覧で表示する文書を選ぶ</h3>\r\n<div class="SlideTglWrap mb_20">
+                                                    \r\n\r\n<input id="tglOpFlg" name="tglOpFlg" type="hidden"
+                                                        value="" />\r\n\r\n<div class="SlideTglWrapBtn">\r\n <a
+                                                            href="javascript:void(0);" class="SlideTglOpen"
+                                                            onclick="javascript:slideToggle($(this), true);"><span>閉じる</span></a>\r\n
+                                                        <span id="SaveSetCtrl">\r\n <input name="allCheck" value="全チェック"
+                                                                type="button"
+                                                                onclick="$(\'#SaveSet [type=\\\'checkbox\\\']\').prop(\'checked\', true)">\r\n
+                                                            <input name="allClear" value="全クリア" type="button"
+                                                                onclick="$(\'#SaveSet [type=\\\'checkbox\\\']\').prop(\'checked\', false)">\r\n
+                                                        </span>\r\n</div>\r\n<div class="SlideTglBox">\r\n<div
+                                                            class="SlideTglBoxInr">\r\n<div id="SaveSet">\r\n<ul
+                                                                    class="SearchList02">\r\n \r\n \r\n \r\n <li>
+                                                                        <label><input id="dispColumnsList01"
+                                                                                name="dispColumnsList[0]"
+                                                                                type="checkbox" value="1" /><input
+                                                                                type="hidden" name="_dispColumnsList[0]"
+                                                                                value="on" /><span>添付文書</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList11"
+                                                                                name="dispColumnsList[1]"
+                                                                                type="checkbox" value="2" /><input
+                                                                                type="hidden" name="_dispColumnsList[1]"
+                                                                                value="on" /><span>患者向医薬品ガイド／ワクチン接種を受ける人へのガイド</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList21"
+                                                                                name="dispColumnsList[2]"
+                                                                                type="checkbox" value="3" /><input
+                                                                                type="hidden" name="_dispColumnsList[2]"
+                                                                                value="on" /><span>インタビューフォーム</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList31"
+                                                                                name="dispColumnsList[3]"
+                                                                                type="checkbox" value="23" /><input
+                                                                                type="hidden" name="_dispColumnsList[3]"
+                                                                                value="on" /><span>医薬品リスク管理計画（RMP）</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList41"
+                                                                                name="dispColumnsList[4]"
+                                                                                type="checkbox" value="25" /><input
+                                                                                type="hidden" name="_dispColumnsList[4]"
+                                                                                value="on" /><span>RMP資材</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n \r\n
+                                                                    \r\n <li><label><input id="dispColumnsList71"
+                                                                                name="dispColumnsList[7]"
+                                                                                type="checkbox" value="4" /><input
+                                                                                type="hidden" name="_dispColumnsList[7]"
+                                                                                value="on" /><span>改訂指示反映履歴および根拠症例</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList81"
+                                                                                name="dispColumnsList[8]"
+                                                                                type="checkbox" value="11" /><input
+                                                                                type="hidden" name="_dispColumnsList[8]"
+                                                                                value="on" /><span>審査報告書／再審査報告書／最適使用推進ガイドライン等</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList91"
+                                                                                name="dispColumnsList[9]"
+                                                                                type="checkbox" value="5" /><input
+                                                                                type="hidden" name="_dispColumnsList[9]"
+                                                                                value="on" /><span>重篤副作用疾患別対応マニュアル</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList101"
+                                                                                name="dispColumnsList[10]"
+                                                                                type="checkbox" value="10" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[10]"
+                                                                                value="on" /><span>くすりのしおり</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList111"
+                                                                                name="dispColumnsList[11]"
+                                                                                type="checkbox" value="13" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[11]"
+                                                                                value="on" /><span>緊急安全性情報／安全性速報</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList121"
+                                                                                name="dispColumnsList[12]"
+                                                                                type="checkbox" value="15" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[12]"
+                                                                                value="on" /><span>医薬品の適正使用等に関するお知らせ</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList131"
+                                                                                name="dispColumnsList[13]"
+                                                                                type="checkbox" value="17" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[13]"
+                                                                                value="on" /><span>厚生労働省発表資料（医薬品関連）</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList141"
+                                                                                name="dispColumnsList[14]"
+                                                                                type="checkbox" value="8" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[14]"
+                                                                                value="on" /><span>医薬品に関する評価中のリスク等の情報</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList151"
+                                                                                name="dispColumnsList[15]"
+                                                                                type="checkbox" value="18" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[15]"
+                                                                                value="on" /><span>医薬品添付文書改訂相談に基づく添付文書改訂</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList161"
+                                                                                name="dispColumnsList[16]"
+                                                                                type="checkbox" value="19" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[16]"
+                                                                                value="on" /><span>DSU（医薬品安全対策情報）</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList171"
+                                                                                name="dispColumnsList[17]"
+                                                                                type="checkbox" value="22" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[17]"
+                                                                                value="on" /><span>PMDA医療安全情報</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n \r\n \r\n <li><label><input
+                                                                                id="dispColumnsList181"
+                                                                                name="dispColumnsList[18]"
+                                                                                type="checkbox" value="9" /><input
+                                                                                type="hidden"
+                                                                                name="_dispColumnsList[18]"
+                                                                                value="on" /><span>医療用医薬品問合せ先</span></label>
+                                                                    </li>\r\n \r\n \r\n \r\n</ul>\r\n</div>
+                                                            <!-- /SaveSet -->\r\n</div><!-- /SlideTglBoxInr -->\r\n
+                                                    </div><!-- /SlideTglBox -->\r\n</div><!-- /SlideTglWrap -->\r\n\r\n
+                                                <h3 class="SearchTit02">薬効分類（医薬品の種類）</h3>\r\n<p class="mb_20">\r\n\r\n
+                                                    <select id="effectValue" name="effectValue" class="SearchSlct">\r\n
+                                                        <option value="">--</option>
+                                                        <option value="11">-中枢神経系用薬</option>
+                                                        <option value="111">\u3000\u3000全身麻酔剤</option>
+                                                        <option value="112">\u3000\u3000催眠鎮静剤，抗不安剤</option>
+                                                        <option value="113">\u3000\u3000抗てんかん剤</option>
+                                                        <option value="114">\u3000\u3000解熱鎮痛消炎剤</option>
+                                                        <option value="115">\u3000\u3000興奮剤，覚醒剤</option>
+                                                        <option value="116">\u3000\u3000抗パーキンソン剤</option>
+                                                        <option value="117">\u3000\u3000精神神経用剤</option>
+                                                        <option value="118">\u3000\u3000総合感冒剤</option>
+                                                        <option value="119">\u3000\u3000その他の中枢神経系用薬</option>
+                                                        <option value="12">-末梢神経用薬</option>
+                                                        <option value="121">\u3000\u3000局所麻酔剤</option>
+                                                        <option value="122">\u3000\u3000骨格筋弛緩剤</option>
+                                                        <option value="123">\u3000\u3000自律神経剤</option>
+                                                        <option value="124">\u3000\u3000鎮けい剤</option>
+                                                        <option value="125">\u3000\u3000発汗剤，止汗剤</option>
+                                                        <option value="129">\u3000\u3000その他の末梢神経系用薬</option>
+                                                        <option value="13">-感覚器用薬</option>
+                                                        <option value="131">\u3000\u3000眼科用剤</option>
+                                                        <option value="132">\u3000\u3000耳鼻科用剤</option>
+                                                        <option value="133">\u3000\u3000鎮暈剤</option>
+                                                        <option value="139">\u3000\u3000その他の感覚器官用薬</option>
+                                                        <option value="19">-その他の神経系及び感覚器官用医薬品</option>
+                                                        <option value="21">-循環器官用薬</option>
+                                                        <option value="211">\u3000\u3000強心剤</option>
+                                                        <option value="212">\u3000\u3000不整脈用剤</option>
+                                                        <option value="213">\u3000\u3000利尿剤</option>
+                                                        <option value="214">\u3000\u3000血圧降下剤</option>
+                                                        <option value="215">\u3000\u3000血管補強剤</option>
+                                                        <option value="216">\u3000\u3000血管収縮剤</option>
+                                                        <option value="217">\u3000\u3000血管拡張剤</option>
+                                                        <option value="218">\u3000\u3000高脂血症用剤</option>
+                                                        <option value="219">\u3000\u3000その他の循環器官用薬</option>
+                                                        <option value="22">-呼吸器官用薬</option>
+                                                        <option value="221">\u3000\u3000呼吸促進剤</option>
+                                                        <option value="222">\u3000\u3000鎮咳剤</option>
+                                                        <option value="223">\u3000\u3000去たん剤</option>
+                                                        <option value="224">\u3000\u3000鎮咳去たん剤</option>
+                                                        <option value="225">\u3000\u3000気管支拡張剤</option>
+                                                        <option value="226">\u3000\u3000含嗽剤</option>
+                                                        <option value="229">\u3000\u3000その他の呼吸器官用薬</option>
+                                                        <option value="23">-消化器官用薬</option>
+                                                        <option value="231">\u3000\u3000止しゃ剤，整腸剤</option>
+                                                        <option value="232">\u3000\u3000消化性潰瘍用剤</option>
+                                                        <option value="233">\u3000\u3000健胃消化剤</option>
+                                                        <option value="234">\u3000\u3000制酸剤</option>
+                                                        <option value="235">\u3000\u3000下剤，浣腸剤</option>
+                                                        <option value="236">\u3000\u3000利胆剤</option>
+                                                        <option value="237">\u3000\u3000複合胃腸剤</option>
+                                                        <option value="239">\u3000\u3000その他の消化器官用薬</option>
+                                                        <option value="24">-ホルモン剤（抗ホルモン剤を含む）</option>
+                                                        <option value="241">\u3000\u3000脳下垂体ホルモン剤</option>
+                                                        <option value="242">\u3000\u3000唾液腺ホルモン剤</option>
+                                                        <option value="243">\u3000\u3000甲状腺，副甲状腺ホルモン剤</option>
+                                                        <option value="244">\u3000\u3000たん白同化ステロイド剤</option>
+                                                        <option value="245">\u3000\u3000副腎ホルモン剤</option>
+                                                        <option value="246">\u3000\u3000男性ホルモン剤</option>
+                                                        <option value="247">\u3000\u3000卵胞ホルモン及び黄体ホルモン剤</option>
+                                                        <option value="248">\u3000\u3000混合ホルモン剤</option>
+                                                        <option value="249">\u3000\u3000その他のホルモン剤（抗ホルモン剤を含む）</option>
+                                                        <option value="25">-泌尿生殖器官及び肛門用薬</option>
+                                                        <option value="251">\u3000\u3000泌尿器官用剤</option>
+                                                        <option value="252">\u3000\u3000生殖器官用剤（性病予防剤を含む。）</option>
+                                                        <option value="253">\u3000\u3000子宮収縮剤</option>
+                                                        <option value="254">\u3000\u3000避妊剤</option>
+                                                        <option value="255">\u3000\u3000痔疾用剤</option>
+                                                        <option value="259">\u3000\u3000その他の泌尿生殖器官及び肛門用薬</option>
+                                                        <option value="26">-外皮用薬</option>
+                                                        <option value="261">\u3000\u3000外皮用殺菌消毒剤</option>
+                                                        <option value="262">\u3000\u3000創傷保護剤</option>
+                                                        <option value="263">\u3000\u3000化膿性疾患用剤</option>
+                                                        <option value="264">\u3000\u3000鎮痛，鎮痒，収歛，消炎剤</option>
+                                                        <option value="265">\u3000\u3000寄生性皮ふ疾患用剤</option>
+                                                        <option value="266">\u3000\u3000皮ふ軟化剤（腐しょく剤を含む。）</option>
+                                                        <option value="267">\u3000\u3000毛髪用剤（発毛剤，脱毛剤，染毛剤，養毛剤</option>
+                                                        <option value="268">\u3000\u3000浴剤</option>
+                                                        <option value="269">\u3000\u3000その他の外皮用薬</option>
+                                                        <option value="27">-歯科口腔用薬</option>
+                                                        <option value="271">\u3000\u3000歯科用局所麻酔剤</option>
+                                                        <option value="272">\u3000\u3000歯髄失活剤</option>
+                                                        <option value="273">\u3000\u3000歯科用鎮痛鎮静剤（根管及び齲窩消毒剤を含</option>
+                                                        <option value="274">\u3000\u3000歯髄乾屍剤（根管充填剤を含む。）</option>
+                                                        <option value="275">\u3000\u3000歯髄覆たく剤</option>
+                                                        <option value="276">\u3000\u3000歯科用抗生物質製剤</option>
+                                                        <option value="279">\u3000\u3000その他の歯科口腔用薬</option>
+                                                        <option value="29">-その他の個々の器官系用医薬品</option>
+                                                        <option value="290">\u3000\u3000その他の個々の器官系用医薬品</option>
+                                                        <option value="31">-ビタミン剤</option>
+                                                        <option value="311">\u3000\u3000ビタミンＡ及びＤ剤</option>
+                                                        <option value="312">\u3000\u3000ビタミンＢ１剤</option>
+                                                        <option value="313">\u3000\u3000ビタミンＢ剤（ビタミンＢ１剤を除く。）</option>
+                                                        <option value="314">\u3000\u3000ビタミンＣ剤</option>
+                                                        <option value="315">\u3000\u3000ビタミンＥ剤</option>
+                                                        <option value="316">\u3000\u3000ビタミンＫ剤</option>
+                                                        <option value="317">\u3000\u3000混合ビタミン剤（ビタミンＡ・Ｄ混合製剤を除く）</option>
+                                                        <option value="319">\u3000\u3000その他のビタミン剤</option>
+                                                        <option value="32">-滋養強壮薬</option>
+                                                        <option value="321">\u3000\u3000カルシウム剤</option>
+                                                        <option value="322">\u3000\u3000無機質製剤</option>
+                                                        <option value="323">\u3000\u3000糖類剤</option>
+                                                        <option value="324">\u3000\u3000有機酸製剤</option>
+                                                        <option value="325">\u3000\u3000たん白アミノ酸製剤</option>
+                                                        <option value="326">\u3000\u3000臓器製剤</option>
+                                                        <option value="327">\u3000\u3000乳幼児用剤</option>
+                                                        <option value="329">\u3000\u3000その他の滋養強壮薬</option>
+                                                        <option value="33">-血液・体液用薬</option>
+                                                        <option value="331">\u3000\u3000血液代用剤</option>
+                                                        <option value="332">\u3000\u3000止血剤</option>
+                                                        <option value="333">\u3000\u3000血液凝固阻止剤</option>
+                                                        <option value="339">\u3000\u3000その他の血液・体液用薬</option>
+                                                        <option value="34">-人工透析用薬</option>
+                                                        <option value="341">\u3000\u3000人工腎臓透析用剤</option>
+                                                        <option value="342">\u3000\u3000腹膜透析用剤</option>
+                                                        <option value="349">\u3000\u3000その他の人工透析用薬</option>
+                                                        <option value="39">-その他の代謝性医薬品</option>
+                                                        <option value="391">\u3000\u3000肝臓疾患用剤</option>
+                                                        <option value="392">\u3000\u3000解毒剤</option>
+                                                        <option value="393">\u3000\u3000習慣性中毒用剤</option>
+                                                        <option value="394">\u3000\u3000痛風治療剤</option>
+                                                        <option value="395">\u3000\u3000酵素製剤</option>
+                                                        <option value="396">\u3000\u3000糖尿病用剤</option>
+                                                        <option value="397">\u3000\u3000総合代謝性製剤</option>
+                                                        <option value="399">\u3000\u3000他に分類されない代謝性医薬品</option>
+                                                        <option value="41">-細胞賦活用薬</option>
+                                                        <option value="411">\u3000\u3000クロロフィル製剤</option>
+                                                        <option value="412">\u3000\u3000色素製剤</option>
+                                                        <option value="419">\u3000\u3000その他の細胞賦活用薬</option>
+                                                        <option value="42">-腫瘍用薬</option>
+                                                        <option value="421">\u3000\u3000アルキル化剤</option>
+                                                        <option value="422">\u3000\u3000代謝拮抗剤</option>
+                                                        <option value="423">\u3000\u3000抗腫瘍性抗生物質製剤</option>
+                                                        <option value="424">\u3000\u3000抗腫瘍性植物成分製剤</option>
+                                                        <option value="429">\u3000\u3000その他の腫瘍用薬</option>
+                                                        <option value="43">-放射性医薬品</option>
+                                                        <option value="430">\u3000\u3000放射性医薬品</option>
+                                                        <option value="44">-アレルギー用薬</option>
+                                                        <option value="441">\u3000\u3000抗ヒスタミン剤</option>
+                                                        <option value="442">\u3000\u3000刺激療法剤</option>
+                                                        <option value="443">\u3000\u3000非特異性免疫原製剤</option>
+                                                        <option value="449">\u3000\u3000その他のアレルギー用薬</option>
+                                                        <option value="49">-その他の組織細胞機能用医薬品</option>
+                                                        <option value="490">\u3000\u3000その他の組織細胞機能用医薬品</option>
+                                                        <option value="51">-生薬</option>
+                                                        <option value="510">\u3000\u3000生薬</option>
+                                                        <option value="52">-漢方製剤</option>
+                                                        <option value="520">\u3000\u3000漢方製剤</option>
+                                                        <option value="59">-その他の生薬及び漢方処方に基づく医薬品</option>
+                                                        <option value="590">\u3000\u3000その他の生薬及び漢方処方に基づく医薬品</option>
+                                                        <option value="61">-抗生物質製剤</option>
+                                                        <option value="611">\u3000\u3000主としてグラム陽性菌に作用するもの</option>
+                                                        <option value="612">\u3000\u3000主としてグラム陰性菌に作用するもの</option>
+                                                        <option value="613">\u3000\u3000主としてグラム陽性・陰性菌に作用するもの</option>
+                                                        <option value="614">\u3000\u3000主としてグラム陽性菌，マイコプラズマに作用するもの
+                                                        </option>
+                                                        <option value="615">\u3000\u3000主としてグラム陽性・陰性菌，リケッチア，クラミジアに作用するもの
+                                                        </option>
+                                                        <option value="616">\u3000\u3000主として抗酸菌に作用するもの</option>
+                                                        <option value="617">\u3000\u3000主としてカビに作用するもの</option>
+                                                        <option value="619">\u3000\u3000その他の抗生物質製剤（複合抗生物質製剤を含む）</option>
+                                                        <option value="62">-化学療法剤</option>
+                                                        <option value="621">\u3000\u3000サルファ剤</option>
+                                                        <option value="622">\u3000\u3000抗結核剤</option>
+                                                        <option value="623">\u3000\u3000抗ハンセン病剤</option>
+                                                        <option value="624">\u3000\u3000合成抗菌剤</option>
+                                                        <option value="625">\u3000\u3000抗ウイルス剤</option>
+                                                        <option value="629">\u3000\u3000その他の化学療法剤</option>
+                                                        <option value="63">-生物学的製剤</option>
+                                                        <option value="631">\u3000\u3000ワクチン類</option>
+                                                        <op...条件< /option>
+                                                            <option value="package">－22. 包装</option>
+                                                            <option value="mainliterature">－23. 主要文献</option>
+                                                            <option value="addresseeofliteraturerequest">－24.
+                                                                文献請求先及び問い合わせ先</option>
+                                                            <option value="attentionofinsurance">－25. 保険給付上の注意</option>
+                                                            <option value="nameaddressmanufact">－26. 製造販売業者等</option>
+                                                            \r\n
+                                                    </select>\r\n \r\n</p>\r\n<p class="mb_20 SearchIptSet01">\r\n\r\n
+                                                    <span class="col1"><input id="txtKoumoku1" name="koumoku1Word"
+                                                            class="SearchIptTxt" type="text" value=""
+                                                            maxlength="80" /></span>\r\n \r\n <span class="col2">\r\n
+                                                        \r\n <select id="koumoku1HowtoSearch" name="koumoku1HowtoSearch"
+                                                            class="SearchSlct">\r\n <option value="and">AND</option>
+                                                            <option value="not">NOT</option>
+                                                            <option value="or">OR</option>\r\n
+                                                        </select>\r\n \r\n </span>\r\n</p>\r\n\r\n<h3
+                                                    class="SearchTit02">項目内検索2</h3>\r\n<p class="mb_10">\r\n\r\n <select
+                                                        id="selKoumoku2" name="koumoku2Value"
+                                                        class="SearchSlct">\r\n\r\n \t\r\n <option value="">--</option>
+                                                        <option value="allsearch">全文検索（文書内全体を対象）</option>
+                                                        <option value="precautionsforuse">使用上の注意</option>
+                                                        <option value="dateofpreparationorrevision">－ア. 作成又は改訂年月
+                                                        </option>
+                                                        <option value="sccj">－イ. 日本標準商品分類番号</option>
+                                                        <option value="marketinginfo">－ウ. 承認番号、販売開始年月</option>
+                                                        <option value="storage">－エ. 貯法、有効期間</option>
+                                                        <option value="regulatoryclassification">－カ. 規制区分</option>
+                                                        <option value="standardname">－キ. 基準名</option>
+                                                        <option value="warnings">－1. 警告</option>
+                                                        <option value="contraindications">－2. 禁忌（次の患者には投与しないこと）</option>
+                                                        <option value="composition_property">＋3. 組成・性状</option>
+                                                        <option value="overviewOfRecipe">\u3000－製法の概要</option>
+                                                        <option value="composition">\u3000＋組成</option>
+                                                        <option value="additives">\u3000\u3000－添加剤</option>
+                                                        <option value="property">\u3000－製剤の性状</option>
+                                                        <option value="indicationsorefficacy">－4. 効能又は効果</option>
+                                                        <option value="efficacyrelatedprecautions">－5. 効能又は効果に関連する注意
+                                                        </option>
+                                                        <option value="infodoseadmin">－6. 用法及び用量</option>
+                                                        <option value="infoprecautionsdosage">－7. 用法及び用量に関連する注意</option>
+                                                        <option value="importantprecautions">－8. 重要な基本的注意</option>
+                                                        <option value="useinspecificpopulations">＋9. 特定の背景を有する患者に関する注意
+                                                        </option>
+                                                        <option
+                                                            value="useinpatientswithcomplicationsorhistoryofdiseasesetc">
+                                                            \u3000－9.1 合併症・既往歴等のある患者</option>
+                                                        <option value="patientswithrenalimpairment">\u3000－9.2 腎機能障害患者
+                                                        </option>
+                                                        <option value="patientswithhepaticimpairment">\u3000－9.3 肝機能障害患者
+                                                        </option>
+                                                        <option value="malesandfemalesofreproductivepotential">
+                                                            \u3000－9.4 生殖能を有する者</option>
+                                                        <option value="useinpregnant">\u3000－9.5 妊婦</option>
+                                                        <option value="useinnursing">\u3000－9.6 授乳婦</option>
+                                                        <option value="pediatricuse">\u3000－9.7 小児等</option>
+                                                        <option value="useintheelderly">\u3000－9.8 高齢者</option>
+                                                        <option value="interactions">＋10. 相互作用</option>
+                                                        <option value="contraindicatedcombination">\u3000－10.1
+                                                            併用禁忌（併用しないこと）</option>
+                                                        <option value="precautionsforcombination">\u3000－10.2
+                                                            併用注意（併用に注意すること）</option>
+                                                        <option value="adverseevents">＋11. 副作用</option>
+                                                        <option value="seriousadverseevents">\u3000－11.1 重大な副作用</option>
+                                                        <option value="otheradverseevents">\u3000－11.2 その他の副作用</option>
+                                                        <option value="influenceonlaboratoryvalues">－12. 臨床検査結果に及ぼす影響
+                                                        </option>
+                                                        <option value="overdosage">－13. 過量投与</option>
+                                                        <option value="precautionsforapplication">－14. 適用上の注意</option>
+                                                        <option value="otherprecautions">＋15. その他の注意</option>
+                                                        <option value="informationbasedonclinicaluse">\u3000－15.1
+                                                            臨床使用に基づく情報</option>
+                                                        <option value="informationbasedonnonclinicalstudies">\u3000－15.2
+                                                            非臨床試験に基づく情報</option>
+                                                        <option value="pharmacokinetics">＋16. 薬物動態</option>
+                                                        <option value="bloodlevel">\u3000－16.1 血中濃度</option>
+                                                        <option value="absorption">\u3000－16.2 吸収</option>
+                                                        <option value="distribution">\u3000－16.3 分布</option>
+                                                        <option value="metabolism">\u3000－16.4 代謝</option>
+                                                        <option value="excretion">\u3000－16.5 排泄</option>
+                                                        <option value="specificpopulation">\u3000－16.6 特定の背景を有する患者
+                                                        </option>
+                                                        <option value="druganddruginteractions">\u3000－16.7 薬物相互作用
+                                                        </option>
+                                                        <option value="pharmacokineticsetc">\u3000－16.8 その他</option>
+                                                        <option value="resultsofclinicaltrials">＋17. 臨床成績</option>
+                                                        <option value="efficacyandsafety">\u3000－17.1 有効性及び安全性に関する試験
+                                                        </option>
+                                                        <option value="postmarketingsurveylancesetc">\u3000－17.2
+                                                            製造販売後調査等</option>
+                                                        <option value="resultsofclinicaltrialsetc">\u3000－17.3 その他
+                                                        </option>
+                                                        <option value="efficacypharmacology">＋18. 薬効薬理</option>
+                                                        <option value="mechanismofaction">\u3000－18.1 作用機序</option>
+                                                        <option value="physchemofactingredients">－19. 有効成分に関する理化学的知見
+                                                        </option>
+                                                        <option value="precautionsforhandling">－20. 取扱い上の注意</option>
+                                                        <option value="conditionsofapproval">－21. 承認条件</option>
+                                                        <option value="package">－22. 包装</option>
+                                                        <option value="mainliterature">－23. 主要文献</option>
+                                                        <option value="addresseeofliteraturerequest">－24. 文献請求先及び問い合わせ先
+                                                        </option>
+                                                        <option value="attentionofinsurance">－25. 保険給付上の注意</option>
+                                                        <option value="nameaddressmanufact">－26. 製造販売業者等</option>\r\n
+                                                    </select>\r\n\r\n</p>\r\n<p class="mb_20 SearchIptSet01">\r\n\r\n
+                                                    <span class="col1"><input id="txtKoumoku2" name="koumoku2Word"
+                                                            class="SearchIptTxt" type="text" value=""
+                                                            maxlength="80" /></span>\r\n <span class="col2">\r\n \r\n
+                                                        <select id="koumoku2HowtoSearch" name="koumoku2HowtoSearch"
+                                                            class="SearchSlct">\r\n <option value="and">AND</option>
+                                                            <option value="not">NOT</option>
+                                                            <option value="or">OR</option>\r\n
+                                                        </select>\r\n \r\n </span>\r\n</p>\r\n\r\n<h3
+                                                    class="SearchTit02">項目内検索3</h3>\r\n<p class="mb_10">\r\n\r\n <select
+                                                        id="selKoumoku3" name="koumoku3Value" class="SearchSlct">\r\n
+                                                        \t\r\n <option value="">--</option>
+                                                        <option value="allsearch">全文検索（文書内全体を対象）</option>
+                                                        <option value="precautionsforuse">使用上の注意</option>
+                                                        <option value="dateofpreparationorrevision">－ア. 作成又は改訂年月
+                                                        </option>
+                                                        <option value="sccj">－イ. 日本標準商品分類番号</option>
+                                                        <option value="marketinginfo">－ウ. 承認番号、販売開始年月</option>
+                                                        <option value="storage">－エ. 貯法、有効期間</option>
+                                                        <option value="regulatoryclassification">－カ. 規制区分</option>
+                                                        <option value="standardname">－キ. 基準名</option>
+                                                        <option value="warnings">－1. 警告</option>
+                                                        <option value="contraindications">－2. 禁忌（次の患者には投与しないこと）</option>
+                                                        <option value="composition_property">＋3. 組成・性状</option>
+                                                        <option value="overviewOfRecipe">\u3000－製法の概要</option>
+                                                        <option value="composition">\u3000＋組成</option>
+                                                        <option value="additives">\u3000\u3000－添加剤</option>
+                                                        <option value="property">\u3000－製剤の性状</option>
+                                                        <option value="indicationsorefficacy">－4. 効能又は効果</option>
+                                                        <option value="efficacyrelatedprecautions">－5. 効能又は効果に関連する注意
+                                                        </option>
+                                                        <option value="infodoseadmin">－6. 用法及び用量</option>
+                                                        <option value="infoprecautionsdosage">－7. 用法及び用量に関連する注意</option>
+                                                        <option value="importantprecautions">－8. 重要な基本的注意</option>
+                                                        <option value="useinspecificpopulations">＋9. 特定の背景を有する患者に関する注意
+                                                        </option>
+                                                        <option
+                                                            value="useinpatientswithcomplicationsorhistoryofdiseasesetc">
+                                                            \u3000－9.1 合併症・既往歴等のある患者</option>
+                                                        <option value="patientswithrenalimpairment">\u3000－9.2 腎機能障害患者
+                                                        </option>
+                                                        <option value="patientswithhepaticimpairment">\u3000－9.3 肝機能障害患者
+                                                        </option>
+                                                        <option value="malesandfemalesofreproductivepotential">
+                                                            \u3000－9.4 生殖能を有する者</option>
+                                                        <option value="useinpregnant">\u3000－9.5 妊婦</option>
+                                                        <option value="useinnursing">\u3000－9.6 授乳婦</option>
+                                                        <option value="pediatricuse">\u3000－9.7 小児等</option>
+                                                        <option value="useintheelderly">\u3000－9.8 高齢者</option>
+                                                        <option value="interactions">＋10. 相互作用</option>
+                                                        <option value="contraindicatedcombination">\u3000－10.1
+                                                            併用禁忌（併用しないこと）</option>
+                                                        <option value="precautionsforcombination">\u3000－10.2
+                                                            併用注意（併用に注意すること）</option>
+                                                        <option value="adverseevents">＋11. 副作用</option>
+                                                        <option value="seriousadverseevents">\u3000－11.1 重大な副作用</option>
+                                                        <option value="otheradverseevents">\u3000－11.2 その他の副作用</option>
+                                                        <option value="influenceonlaboratoryvalues">－12. 臨床検査結果に及ぼす影響
+                                                        </option>
+                                                        <option value="overdosage">－13. 過量投与</option>
+                                                        <option value="precautionsforapplication">－14. 適用上の注意</option>
+                                                        <option value="otherprecautions">＋15. その他の注意</option>
+                                                        <option value="informationbasedonclinicaluse">\u3000－15.1
+                                                            臨床使用に基づく情報</option>
+                                                        <option value="informationbasedonnonclinicalstudies">\u3000－15.2
+                                                            非臨床試験に基づく情報</option>
+                                                        <option value="pharmacokinetics">＋16. 薬物動態</option>
+                                                        <option value="bloodlevel">\u3000－16.1 血中濃度</option>
+                                                        <option value="absorption">\u3000－16.2 吸収</option>
+                                                        <option value="distribution">\u3000－16.3 分布</option>
+                                                        <option value="metabolism">\u3000－16.4 代謝</option>
+                                                        <option value="excretion">\u3000－16.5 排泄</option>
+                                                        <option value="specificpopulation">\u3000－16.6 特定の背景を有する患者
+                                                        </option>
+                                                        <option value="druganddruginteractions">\u3000－16.7 薬物相互作用
+                                                        </option>
+                                                        <option value="pharmacokineticsetc">\u3000－16.8 その他</option>
+                                                        <option value="resultsofclinicaltrials">＋17. 臨床成績</option>
+                                                        <option value="efficacyandsafety">\u3000－17.1 有効性及び安全性に関する試験
+                                                        </option>
+                                                        <option value="postmarketingsurveylancesetc">\u3000－17.2
+                                                            製造販売後調査等</option>
+                                                        <option value="resultsofclinicaltrialsetc">\u3000－17.3 その他
+                                                        </option>
+                                                        <option value="efficacypharmacology">＋18. 薬効薬理</option>
+                                                        <option value="mechanismofaction">\u3000－18.1 作用機序</option>
+                                                        <option value="physchemofactingredients">－19. 有効成分に関する理化学的知見
+                                                        </option>
+                                                        <option value="precautionsforhandling">－20. 取扱い上の注意</option>
+                                                        <option value="conditionsofapproval">－21. 承認条件</option>
+                                                        <option value="package">－22. 包装</option>
+                                                        <option value="mainliterature">－23. 主要文献</option>
+                                                        <option value="addresseeofliteraturerequest">－24. 文献請求先及び問い合わせ先
+                                                        </option>
+                                                        <option value="attentionofinsurance">－25. 保険給付上の注意</option>
+                                                        <option value="nameaddressmanufact">－26. 製造販売業者等</option>\r\n
+                                                    </select>\r\n \r\n</p>\r\n<p class="mb_00 SearchIptSet01">\r\n\r\n
+                                                    <span class="col1"><input id="txtKoumoku3" name="koumoku3Word"
+                                                            class="SearchIptTxt" type="text" value=""
+                                                            maxlength="80" /></span>\r\n \r\n <span class="col2">\r\n
+                                                        \r\n <select id="koumoku3HowtoSearch" name="koumoku3HowtoSearch"
+                                                            class="SearchSlct">\r\n <option value="and">AND</option>
+                                                            <option value="not">NOT</option>
+                                                            <option value="or">OR</option>\r\n
+                                                        </select>\r\n \r\n </span>\r\n</p>\r\n\r\n\r\n\r\n <br>\r\n <h3
+                                                    class="SearchTit02">GS1コード</h3>\r\n <p class="mb_20">\r\n \r\n
+                                                    <input id="gscdid" name="gs1code" class="SearchIptTxt" type="text"
+                                                        value="" maxlength="80" />\r\n \r\n </p>\r\n\r\n\r\n\r\n\r\n\r\n
+                                            </div><!-- / #SearchWrap01ColA -->\r\n\r\n<div id="SearchWrap01ColB">
+                                                \r\n\r\n<div id="SearchtitArea02" class="SearchtitArea clearfix">\r\n<h2
+                                                        class="SearchTit01">特定の文書の記載内容から調べる</h2>\r\n\r\n<span><input
+                                                            value="条件消去" type="image"
+                                                            src="/PmdaSearch/iyakuSearch/../files/img/search/SearchBtn09.gif"
+                                                            onClick="javascript:clearConditionRight(); return false;"></span>\r\n\r\n
+                                                </div>\r\n<p class="asteriskIndent">
+                                                    \r\n※「特定の文書の記載内容から調べる」では、添付文書以外の特定の文書の全文検索又は関連する日付で検索ができます\r\n（左側の「医薬品の添付文書等を調べる」とは検索方法が異なります）。\r\n
+                                                </p>\r\n\r\n<div class="SearchBox01 mb_20">\r\n<p
+                                                        class="SearchIptSet01 mb_00">\r\n <span
+                                                            class="col1">添付文書の記載内容と合わせて検索する場合は、「医薬品の添付文書等を調べる」の項目にも条件を入力し、右のプルダウンを選択してください。</span>\r\n
+                                                        <span class="col2">\r\n \r\n <select id="selHowToRd"
+                                                                name="howtoRdSearchSel" class="SearchSlct">\r\n <option
+                                                                    value="">しない</option>
+                                                                <option value="and">AND(全てを含む)</option>
+                                                                <option value="or" selected="selected">OR(いずれかを含む)
+                                                                </option>
+                                                                <option value="not">NOT(いずれも含まない)</option>\r\n
+                                                            </select>\r\n \r\n </span>\r\n</p>\r\n</div>
+                                                <!-- /SearchBox01 -->\r\n\r\n<h3 class="SearchTit02 ml_10">
+                                                    検索対象の文書（添付文書以外）</h3>\r\n\r\n<p class="ml_20">検索項目1</p>\r\n<div
+                                                    class="SearchBox02 mb_10">\r\n<p class="mb_10">\r\n\r\n <select
+                                                            id="selRelation1" name="relationDoc1Sel" class="SearchSlct"
+                                                            onkeyup="this.blur(); this.focus();"
+                                                            onchange="dateDisp(1, locDateKind); sinsaKbnDisp(1);">\r\n
+                                                            <option value="">--</option>
+                                                            <option value="2">患者向医薬品ガイド／ワクチン接種を受ける人へのガイド</option>
+                                                            <option value="3">インタビューフォーム</option>
+                                                            <option value="23">医薬品リスク管理計画（RMP）</option>
+                                                            <option value="4">改訂指示反映履歴および根拠症例</option>
+                                                            <option value="11">審査報告書／再審査報告書等</option>
+                                                            <option value="20">保険適用される公知申請品目に関する情報</option>
+                                                            <option value="24">最適使用推進ガイドライン</option>
+                                                            <option value="24_1">抗がん剤併用療法に関する報告書の情報</option>
+                                                            <option value="5">重篤副作用疾患別対応マニュアル</option>
+                                                            <option value="13">緊急安全性情報</option>
+                                                            <option value="14">安全性速報</option>
+                                                            <option value="15">医薬品の適正使用等に関するお知らせ</option>
+                                                            <option value="17">厚生労働省発表資料（医薬品関連）</option>
+                                                            <option value="8">医薬品に関する評価中のリスク等の情報</option>
+                                                            <option value="18">医薬品添付文書改訂相談に基づく添付文書改訂</option>
+                                                            <option value="19">DSU（医薬品安全対策情報）</option>
+                                                            <option value="22">PMDA医療安全情報</option>\r\n
+                                                        </select>\r\n \r\n</p>\r\n<div id="syonin1"
+                                                        style="display:none">\r\n <p class="mb_10">\r\n <span
+                                                                class="col1">\r\n \r\n <input id="relationDoc1check11"
+                                                                    name="relationDoc1check1" style="margin-left:40px"
+                                                                    type="checkbox" value="on"
+                                                                    checked="checked" /><input type="hidden"
+                                                                    name="_relationDoc1check1" value="on" />審査\r\n
+                                                                <input id="relationDoc1check21"
+                                                                    name="relationDoc1check2" style="margin-left:60px"
+                                                                    type="checkbox" value="on"
+                                                                    checked="checked" /><input type="hidden"
+                                                                    name="_relationDoc1check2" value="on" />再審査\r\n \r\n
+                                                            </span>\r\n </p>\r\n</div>\r\n<p
+                                                        class="mb_10 SearchIptSet01">\r\n\r\n <span class="col1"><input
+                                                                id="txtRelation1" name="relationDoc1Word"
+                                                                class="SearchIptTxt" type="text" value=""
+                                                                maxlength="80" /></span>\r\n\r\n <span class="col2">\r\n
+                                                            \r\n <select id="relationDoc1HowtoSearch"
+                                                                name="relationDoc1HowtoSearch" class="SearchSlct">\r\n
+                                                                <option value="and">AND</option>
+                                                                <option value="not">NOT</option>
+                                                                <option value="or">OR</option>\r\n
+                                                            </select>\r\n \r\n </span>\r\n</p>\r\n<p
+                                                        class="SearchIptSet02 mb_00">\r\n <span
+                                                            id="relationDoc1DateDisp" class="col0"></span><span
+                                                            class="col1">年月で検索</span>\r\n \r\n <span class="col2"><input
+                                                                id="txtRelation1From" name="relationDoc1FrDt"
+                                                                class="SearchIptTxt" type="text" value="" /></span>\r\n
+                                                        \r\n <span class="col3">～</span>\r\n \r\n <span
+                                                            class="col4"><input id="txtRelation1To"
+                                                                name="relationDoc1ToDt" class="SearchIptTxt" type="text"
+                                                                value="" /></span>\r\n \r\n</p>\r\n</div>
+                                                <!-- /SearchBox02 -->\r\n<p class="text-right mb_20">\r\n\r\n <select
+                                                        id="relationDocHowtoSearchBetween12"
+                                                        name="relationDocHowtoSearchBetween12" class="SearchSlct">\r\n
+                                                        <option value="and">AND</option>
+                                                        <option value="not">NOT</option>
+                                                        <option value="or">OR</option>\r\n
+                                                    </select>\r\n \r\n</p>\r\n\r\n<p class="ml_20">検索項目2</p>\r\n<div
+                                                    class="SearchBox02 mb_10">\r\n<p class="mb_10">\r\n\r\n <select
+                                                            id="selRelation2" name="relationDoc2Sel" class="SearchSlct"
+                                                            onkeyup="this.blur(); this.focus();"
+                                                            onchange="dateDisp(2, locDateKind); sinsaKbnDisp(2);">\r\n
+                                                            <option value="">--</option>
+                                                            <option value="2">患者向医薬品ガイド／ワクチン接種を受ける人へのガイド</option>
+                                                            <option value="3">インタビューフォーム</option>
+                                                            <option value="23">医薬品リスク管理計画（RMP）</option>
+                                                            <option value="4">改訂指示反映履歴および根拠症例</option>
+                                                            <option value="11">審査報告書／再審査報告書等</option>
+                                                            <option value="20">保険適用される公知申請品目に関する情報</option>
+                                                            <option value="24">最適使用推進ガイドライン</option>
+                                                            <option value="24_1">抗がん剤併用療法に関する報告書の情報</option>
+                                                            <option value="5">重篤副作用疾患別対応マニュアル</option>
+                                                            <option value="13">緊急安全性情報</option>
+                                                            <option value="14">安全性速報</option>
+                                                            <option value="15">医薬品の適正使用等に関するお知らせ</option>
+                                                            <option value="17">厚生労働省発表資料（医薬品関連）</option>
+                                                            <option value="8">医薬品に関する評価中のリスク等の情報</option>
+                                                            <option value="18">医薬品添付文書改訂相談に基づく添付文書改訂</option>
+                                                            <option value="19">DSU（医薬品安全対策情報）</option>
+                                                            <option value="22">PMDA医療安全情報</option>\r\n
+                                                        </select>\r\n \r\n</p>\r\n<div id="syonin2"
+                                                        style="display:none">\r\n <p class="mb_10">\r\n <span
+                                                                class="col1">\r\n \r\n <input id="relationDoc2check11"
+                                                                    name="relationDoc2check1" style="margin-left:40px"
+                                                                    type="checkbox" value="on"
+                                                                    checked="checked" /><input type="hidden"
+                                                                    name="_relationDoc2check1" value="on" />審査\r\n
+                                                                <input id="relationDoc2check21"
+                                                                    name="relationDoc2check2" style="margin-left:60px"
+                                                                    type="checkbox" value="on"
+                                                                    checked="checked" /><input type="hidden"
+                                                                    name="_relationDoc2check2" value="on" />再審査\r\n \r\n
+                                                            </span>\r\n </p>\r\n</div>\r\n<p
+                                                        class="mb_10 SearchIptSet01">\r\n\r\n<span class="col1"><input
+                                                                id="txtRelation2" name="relationDoc2Word"
+                                                                class="SearchIptTxt" type="text" value=""
+                                                                maxlength="80" /></span>\r\n\r\n <span class="col2">\r\n
+                                                            \r\n <select id="relationDoc2HowtoSearch"
+                                                                name="relationDoc2HowtoSearch" class="SearchSlct">\r\n
+                                                                <option value="and">AND</option>
+                                                                <option value="not">NOT</option>
+                                                                <option value="or">OR</option>\r\n
+                                                            </select>\r\n \r\n </span>\r\n</p>\r\n<p
+                                                        class="SearchIptSet02 mb_00">\r\n <span
+                                                            id="relationDoc2DateDisp" class="col0"></span><span
+                                                            class="col1">年月で検索</span>\r\n \r\n <span class="col2"><input
+                                                                id="txtRelation2From" name="relationDoc2FrDt"
+                                                                class="SearchIptTxt" type="text" value="" /></span>\r\n
+                                                        \r\n <span class="col3">～</span>\r\n \r\n <span
+                                                            class="col4"><input id="txtRelation2To"
+                                                                name="relationDoc2ToDt" class="SearchIptTxt" type="text"
+                                                                value="" /></span>\r\n \r\n</p>\r\n</div>
+                                                <!-- /SearchBox02 -->\r\n<p class="text-right mb_20">\r\n\r\n <select
+                                                        id="relationDocHowtoSearchBetween23"
+                                                        name="relationDocHowtoSearchBetween23" class="SearchSlct">\r\n
+                                                        <option value="and">AND</option>
+                                                        <option value="not">NOT</option>
+                                                        <option value="or">OR</option>\r\n
+                                                    </select>\r\n \r\n</p>\r\n\r\n<p class="ml_20">検索項目3</p>\r\n<div
+                                                    class="SearchBox02 mb_10">\r\n<p class="mb_10">\r\n\r\n <select
+                                                            id="selRelation3" name="relationDoc3Sel" class="SearchSlct"
+                                                            onkeyup="this.blur(); this.focus();"
+                                                            onchange="dateDisp(3, locDateKind); sinsaKbnDisp(3);">\r\n
+                                                            <option value="">--</option>
+                                                            <option value="2">患者向医薬品ガイド／ワクチン接種を受ける人へのガイド</option>
+                                                            <option value="3">インタビューフォーム</option>
+                                                            <option value="23">医薬品リスク管理計画（RMP）</option>
+                                                            <option value="4">改訂指示反映履歴および根拠症例</option>
+                                                            <option value="11">審査報告書／再審査報告書等</option>
+                                                            <option value="20">保険適用される公知申請品目に関する情報</option>
+                                                            <option value="24">最適使用推進ガイドライン</option>
+                                                            <option value="24_1">抗がん剤併用療法に関する報告書の情報</option>
+                                                            <option value="5">重篤副作用疾患別対応マニュアル</option>
+                                                            <option value="13">緊急安全性情報</option>
+                                                            <option value="14">安全性速報</option>
+                                                            <option value="15">医薬品の適正使用等に関するお知らせ</option>
+                                                            <option value="17">厚生労働省発表資料（医薬品関連）</option>
+                                                            <option value="8">医薬品に関する評価中のリスク等の情報</option>
+                                                            <option value="18">医薬品添付文書改訂相談に基づく添付文書改訂</option>
+                                                            <option value="19">DSU（医薬品安全対策情報）</option>
+                                                            <option value="22">PMDA医療安全情報</option>\r\n
+                                                        </select>\r\n \r\n</p>\r\n<div id="syonin3"
+                                                        style="display:none">\r\n <p class="mb_10">\r\n <span
+                                                                class="col1">\r\n \r\n <input id="relationDoc3check11"
+                                                                    name="relationDoc3check1" style="margin-left:40px"
+                                                                    type="checkbox" value="on"
+                                                                    checked="checked" /><input type="hidden"
+                                                                    name="_relationDoc3check1" value="on" />審査\r\n
+                                                                <input id="relationDoc3check21"
+                                                                    name="relationDoc3check2" style="margin-left:60px"
+                                                                    type="checkbox" value="on"
+                                                                    checked="checked" /><input type="hidden"
+                                                                    name="_relationDoc3check2" value="on" />再審査\r\n \r\n
+                                                            </span>\r\n </p>\r\n</div>\r\n<p
+                                                        class="mb_10 SearchIptSet01">\r\n\r\n <span class="col1"><input
+                                                                id="txtRelation3" name="relationDoc3Word"
+                                                                class="SearchIptTxt" type="text" value=""
+                                                                maxlength="80" /></span>\r\n \r\n <span
+                                                            class="col2">\r\n \r\n <select id="relationDoc3HowtoSearch"
+                                                                name="relationDoc3HowtoSearch" class="SearchSlct">\r\n
+                                                                <option value="and">AND</option>
+                                                                <option value="not">NOT</option>
+                                                                <option value="or">OR</option>\r\n
+                                                            </select>\r\n \r\n </span>\r\n</p>\r\n<p
+                                                        class="SearchIptSet02 mb_00">\r\n <span
+                                                            id="relationDoc3DateDisp" class="col0"></span><span
+                                                            class="col1">年月で検索</span>\r\n \r\n <span class="col2"><input
+                                                                id="txtRelation3From" name="relationDoc3FrDt"
+                                                                class="SearchIptTxt" type="text" value="" /></span>\r\n
+                                                        \r\n <span class="col3">～</span>\r\n \r\n <span
+                                                            class="col4"><input id="txtRelation3To"
+                                                                name="relationDoc3ToDt" class="SearchIptTxt" type="text"
+                                                                value="" /></span>\r\n \r\n</p>\r\n</div>
+                                                <!-- /SearchBox02 -->\r\n</div><!-- / #SearchWrap01ColB -->\r\n</div>
+                                        <!-- / #SearchWrap01 -->\r\n</div><!--- / .SearchScrollInr -->\r\n\r\n<p
+                                        class="SearchBlock01">\r\n<span><strong>表示件数を選ぶ</strong><br>\r\n\r\n <select
+                                                id="ListRows" name="ListRows" class="SearchSlct"
+                                                onchange="javascript:setListRows($(this));">\r\n <option value="10"
+                                                    selected="selected">10件</option>
+                                                <option value="20">20件</option>
+                                                <option value="30">30件</option>
+                                                <option value="50">50件</option>
+                                                <option value="100">100件</option>\r\n
+                                            </select>\r\n \r\n</span>\r\n\r\n<span><input name="btnA" value="検索"
+                                                type="image"
+                                                src="/PmdaSearch/files/img/search/SearchBtn07.gif"></span>\r\n<span><a
+                                                href="javascript:void(0)" class="saveCond"><img class="imglink"
+                                                    src="/PmdaSearch/files/img/search/SearchBtn11.gif"
+                                                    alt="検索・表示条件を保存"></a></span>\r\n\r\n</p>\r\n\r\n\r\n\r\n<input
+                                        id="listCategory" name="listCategory" type="hidden" value="" />\r\n\r\n</div>
+                                <!-- / .PopupInner -->\r\n</div><!-- / .PopupArea -->\r\n\r\n</div>
+                        <!-- / #ContentMainArea -->\r\n\r\n</div><!-- / #MainContents .clearfix -->\r\n\r\n<div
+                        class="HTML5_section">\r\n\r\n<div id="FooterArea01">\r\n<div class="FooterAreaInner">\r\n</div>
+                            <!--/FooterAreaInner-->\r\n</div><!--/FooterArea01-->\r\n\r\n\r\n<div id="FooterArea02">\r\n
+                            <div class="FooterAreaInner clearfix">\r\n<div class="footerlogo">
+                                    <p>Pmda 独立行政法人 医薬品医療機器総合機構</p>
+                                </div>\r\n<div class="footeraddress">
+                                    <p>〒100-0013\u3000東京都千代田区霞が関3-3-2\u3000新霞が関ビル</p>
+                                </div>\r\n\r\n<div class="footerbtn"><a href="javascript:window.close()"><img
+                                            class="imglink" src="/PmdaSearch/files/common/img/ComHeaderAreaBtnClose.png"
+                                            alt="画面を閉じる" width="118" height="24"></a></div>\r\n\r\n</div>
+                            <!--/FooterAreaInner-->\r\n</div><!--/FooterArea02-->\r\n\r\n<div id="FooterArea03">\r\n<p>
+                                Copyright &copy; Pharmaceuticals and Medical Devices Agency, All Rights reserved.</p>
+                            \r\n</div><!--/FooterArea03-->\r\n</div><!-- / .HTML5_section -->\r\n\r\n</div>
+                <!-- / #ContentArea .HTML5_section -->\r\n\r\n\r\n</form>\r\n\r\n</div><!--/ContentWrap-->\r\n\r\n\r\n
+        <script type="text/javascript" src="/PmdaSearch/js/watermark.js"></script>
+    </div>\r\n\r\n
+    <script type="text/javascript"
+        src="/bnith__2VUcSxVZ07Wc5tmDUHHII2ny_M4OeERj4yPOFvhIhZgx0eTAjSPuRsZTL8fUYxjE"></script>
+    <script language="JavaScript"
+        type="text/javascript">const _0x35e8 = [\'visitorId\',\'18127kSXadA\',\'356575NPKVMA\',\'7306axxsAH\',\'get\',\'657833TzFjkt\',\'717302TQdBjl\',\'34lMHocq\',\'x-bni-rncf=1688974776490;expires=Thu, 01 Jan 2037 00:00:00 UTC;path=/;\',\'61XMWbpU\',\'cookie\',\';expires=Thu, 01 Jan 2037 00:00:00 UTC;path=/;\',\'then\',\'651866OSUgMa\',\'811155xdatvf\',\'x-bni-fpc=\'];function _0x258e(_0x5954fe,_0x43567d){return _0x258e=function(_0x35e81f,_0x258e26){_0x35e81f=_0x35e81f-0x179;let _0x1280dc=_0x35e8[_0x35e81f];return _0x1280dc;},_0x258e(_0x5954fe,_0x43567d);}(function(_0x5674de,_0xdcf1af){const _0x512a29=_0x258e;while(!![]){try{const _0x55f636=parseInt(_0x512a29(0x17b))+-parseInt(_0x512a29(0x179))*parseInt(_0x512a29(0x17f))+-parseInt(_0x512a29(0x183))+-parseInt(_0x512a29(0x184))+parseInt(_0x512a29(0x187))*parseInt(_0x512a29(0x17d))+parseInt(_0x512a29(0x188))+parseInt(_0x512a29(0x17c));if(_0x55f636===_0xdcf1af)break;else _0x5674de[\'push\'](_0x5674de[\'shift\']());}catch(_0xd3a1ce){_0x5674de[\'push\'](_0x5674de[\'shift\']());}}}(_0x35e8,0x6b42d));function getClientIdentity(){const _0x47e86b=_0x258e,_0x448fbc=FingerprintJS[\'load\']();_0x448fbc[_0x47e86b(0x182)](_0x4bb924=>_0x4bb924[_0x47e86b(0x17a)]())[_0x47e86b(0x182)](_0x2f8ca1=>{const _0x44872c=_0x47e86b,_0xa48f50=_0x2f8ca1[_0x44872c(0x186)];document[_0x44872c(0x180)]=_0x44872c(0x185)+_0xa48f50+_0x44872c(0x181),document[_0x44872c(0x180)]=_0x44872c(0x17e);});}getClientIdentity();</script>
+</body>\n\r\n
+
+</html>\r\n'

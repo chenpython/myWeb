@@ -1,0 +1,17 @@
+登录地址：https://login.taobao.com/newlogin/login.do?appName=taobao&fromSite=0&_bx-v=2.5.1
+
+滑块为风控，在输入账号密码时就会出现
+
+
+当前问题：
+  如何定位到滑块元素，元素为js动态加载
+  pyppteer 的 content 与网页 source page 的内容不一致
+    pyppteer 导致，requests 请求返回的数据正常
+
+  滑块页和非滑块页有什么区分标志
+    eagleeye-trace 的 content 不一样
+
+  滑块地址：
+  src="https://login.taobao.com:443//newlogin/account/check.do/_____tmd_____/punish?x5secdata=xdec15fad03d559165e33ec42f8ea401b3b5edb1f64454aeae1691053101a-717315356a-1443198347abaac2daa__bx__login.taobao.com%3A443%2Fnewlogin%2Faccount%2Fcheck.do&x5step=2&action=captcha&pureCaptcha=true&ncLanguage=zh_CN"
+
+

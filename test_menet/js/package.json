@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "extract-stealth-evasions": "^2.7.1",
+    "puppeteer": "^19.6.3"
+  }
+}
