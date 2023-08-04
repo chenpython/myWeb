@@ -108,7 +108,8 @@ class PyppteerChromeBrowser:
         if proxy:
             self.options['args'].append(f'--proxy-server={proxy}')
 
-        self.path = '/usr/bin/google-chrome-stable'
+        # self.path = '/usr/bin/google-chrome-stable'
+        self.path = '/usr/local/bin/chromedriver'
 
     async def __aenter__(self):
         self.browser = await launch(
@@ -138,15 +139,15 @@ class PyppteerChromeBrowser:
         return slow_distance
 
     async def move_to_gap(self, page):
-        before_move_content = await page.content()
+        # before_move_content = await page.content()
 
         # div = await page.querySelector('div[id="page"]'
         #                                )  # 可以拿到 “请按住滑块，拖动到最右边” 区域内容
-        div = await page.querySelector('iframe[id="baxia-dialog-content"]')
-        div_text = await page.evaluate('(element) => element.textContent', div)
-        print("Text content of the element:", div_text)
-        body = await page.querySelector("body[class='chl-reg']")
-        scripts = await page.querySelector('script')
+        # div = await page.querySelector('iframe[id="baxia-dialog-content"]')
+        # div_text = await page.evaluate('(element) => element.textContent', div)
+        # print("Text content of the element:", div_text)
+        # body = await page.querySelector("body[class='chl-reg']")
+        # scripts = await page.querySelector('script')
 
         # result = await page.evaluate(scripts)
 
@@ -199,50 +200,50 @@ def login_pyppteer(url):
                 # content = await page.content()
                 # print(content)
 
-                element = await page.querySelector('a[class="h"]')
-                bounding_box = await element.boundingBox()
+                # element = await page.querySelector('a[class="h"]')
+                # bounding_box = await element.boundingBox()
 
-                if bounding_box:
-                    # Calculate the coordinates of the center of the element
-                    x = bounding_box['x'] + bounding_box['width'] / 2
-                    y = bounding_box['y'] + bounding_box['height'] / 2
+                # if bounding_box:
+                #     # Calculate the coordinates of the center of the element
+                #     x = bounding_box['x'] + bounding_box['width'] / 2
+                #     y = bounding_box['y'] + bounding_box['height'] / 2
 
-                    # Move the mouse cursor to the center of the element
-                    await page.mouse.move(x, y)
-                    await page.mouse.click(x, y)
-                    await page.waitForNavigation(waitUntil='networkidle0')
+                #     # Move the mouse cursor to the center of the element
+                #     await page.mouse.move(x, y)
+                #     await page.mouse.click(x, y)
+                #     await page.waitForNavigation(waitUntil='networkidle0')
 
-                    await asyncio.sleep(2)
+                #     await asyncio.sleep(2)
 
-                before_input_content = await page.content()
-                username = await page.querySelector('input[name="fm-login-id"]'
-                                                    )
-                await username.type('2427219623@qq.com')
-                # await asyncio.sleep(3)
-                password = await page.querySelector(
-                    'input[name="fm-login-password"]')
-                await password.type("feng33314")
-                # await asyncio.sleep(3)
-                after_input_content = await page.content()
+                # before_input_content = await page.content()
+                # username = await page.querySelector('input[name="fm-login-id"]'
+                #                                     )
+                # await username.type('2427219623@qq.com')
+                # # await asyncio.sleep(3)
+                # password = await page.querySelector(
+                #     'input[name="fm-login-password"]')
+                # await password.type("feng33314")
+                # # await asyncio.sleep(3)
+                # after_input_content = await page.content()
 
-                submit = await page.querySelector(
-                    "button[class='fm-button fm-submit password-login']")
-                await submit.click()
-                await asyncio.sleep(2)
+                # submit = await page.querySelector(
+                #     "button[class='fm-button fm-submit password-login']")
+                # await submit.click()
+                # await asyncio.sleep(2)
 
-                after_submit_content = await page.content()
-                if '账号名/邮箱/手机号' not in after_submit_content:
+                # after_submit_content = await page.content()
+                # if '账号名/邮箱/手机号' not in after_submit_content:
 
-                    await page.close()
-                    print("完成一次登录")
+                #     await page.close()
+                #     print("完成一次登录")
 
-                    continue
+                #     continue
 
                 await pyppteer_instance.move_to_gap(page)  # 移动滑块
                 await asyncio.sleep(2)
 
             await asyncio.sleep(2)
-            result_content = await page.content()  # 最终数据内容
+            # result_content = await page.content()  # 最终数据内容
 
         print('登录结束')
 
@@ -251,7 +252,8 @@ def login_pyppteer(url):
 
 if __name__ == "__main__":
     url = "https://www.taobao.com/"
-    nc_src = "https://login.taobao.com:443//newlogin/login.do/_____tmd_____/punish?x5secdata=xddbfe152a7b502c8151e1225e641b3cea6e548f1948a7f3b01691055365a-717315356a-1443198347abaac2daa__bx__login.taobao.com%3A443%2Fnewlogin%2Flogin.do&x5step=2&action=captcha&pureCaptcha=true&ncLanguage=zh_CN"
-    login_pyppteer(url)
+    nc_src = "https://login.taobao.com/newlogin/login.do?appName=taobao&fromSite=0&_bx-v=2.5.1"
+
+    login_pyppteer(nc_src)
     # login_interface()
     print("-" * 50 + "end" + "-" * 50)
