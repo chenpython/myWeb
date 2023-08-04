@@ -1,0 +1,27 @@
+https://www.jd.com/
+
+
+关键字：盐酸氨基葡萄糖
+
+京东所需内容：
+    商品图片
+    价格
+    累计评价
+        单独链接：https://api.m.jd.com/?
+            appid=item-v3&
+            functionId=pc_club_productCommentSummaries&client=pc&clientVersion=1.0.0&
+            t=1691113660677&referenceIds=3538708&
+            categoryIds=13314%2C21909%2C21917&
+            loginType=3&
+            bbtf=&shield=&uuid=
+        只要将 referenceIds 替换为商品ID即可获取
+    规格
+        不同规格的对应价格
+            
+    工商执照，需要验证码
+        //mall.jd.com/showLicence-110131.html
+        店铺可以拼接地址进入执照访问页
+        https://mall.jd.com/showLicence-110131.html
+            post请求携带验证码即可获取工商执照信息
+            先采用 ddddcr 库实现，查看识别准确率再考虑是否切换付费服务
+
