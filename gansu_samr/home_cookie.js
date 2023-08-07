@@ -19,6 +19,9 @@ proxy = function (obj) {
         // prop：属性名称
         // prop：属性值
         get(target, prop, receiver) {
+            // if (prop == "mimeTypes") {
+            //     debugger;
+            // }
             console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
             return target[prop];
         },
@@ -236,8 +239,19 @@ Object.defineProperties(sessionStorage, {
 });
 sessionStorage = proxy(sessionStorage);
 
+mimeTypes = [];
+Object.defineProperties(mimeTypes, {
+    [Symbol.toStringTag]: {
+        value: 'MimeTypeArray',
+        configurable: true
+    }
+});
+mimeTypes = proxy(mimeTypes);
 
-navigator = { userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36" };
+navigator = {
+    userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+    mimeTypes: mimeTypes
+};
 Object.defineProperties(navigator, {
     [Symbol.toStringTag]: {
         value: 'navigator',
@@ -260,6 +274,8 @@ window.localStorage = localStorage;
 window.sessionStorage = sessionStorage;
 window.addEventListener = addEventListener;
 window.navigator = navigator;
+window.name = ''
+window.self = window;
 
 
 window = proxy(window);

@@ -15,7 +15,19 @@ _$dT
 '当前 _$mr -> ', _$mr
 
 条件：
-_$mr -> 14 存疑？
+home_cookie.js:25 获取 location 的属性：protocol 值为：https:
+后，当前 _$mr ->  56 无法复现
 
+_$m2[0] == 'https:' && _$m2[1] == 'protocol' && _$m2[2] == 7
+
+_$m2[1] == 'protocol' 可以定位到 browser 的循环
+
+_$m2[1] == 'mimeTypes' 报错位置
+
+
+
+
+循环位置：
+$m2 = _$_v._$kb(),
 
 
