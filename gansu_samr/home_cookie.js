@@ -260,6 +260,26 @@ Object.defineProperties(navigator, {
 });
 navigator = proxy(navigator);
 
+indexedDB = {};
+Object.defineProperties(indexedDB, {
+    [Symbol.toStringTag]: {
+        value: 'IDBFactory',
+        configurable: true
+    }
+});
+indexedDB = proxy(indexedDB);
+
+
+DOMParser = function DOMParser() {
+    debugger;
+};
+Object.defineProperties(DOMParser, {
+    [Symbol.toStringTag]: {
+        value: 'DOMParser',
+        configurable: true
+    }
+});
+DOMParser = proxy(DOMParser);
 
 window = global;
 Object.defineProperties(window, {
@@ -274,9 +294,10 @@ window.localStorage = localStorage;
 window.sessionStorage = sessionStorage;
 window.addEventListener = addEventListener;
 window.navigator = navigator;
-window.name = ''
+window.name = '';
 window.self = window;
-
+window.indexedDB = indexedDB;
+window.DOMParser = DOMParser;
 
 window = proxy(window);
 
@@ -439,7 +460,23 @@ window = proxy(window);
                             if (_$$m === 24) {
                                 !_$lb ? _$_v += 3 : 0;
                             } else if (_$$m === 25) {
-                                _$_l = eval(_$lL);
+                                var check_strs = new RegExp(/[\w\$]+<=49\?\([\w.\$\(\)]+,[\w.\$\(\)\[\]=]+,(([\w\$]+)\[[\w\$]+\+\+[\s]*\]=([[\w\$]+)\(\))\)/).exec(_$lL);
+                                var start_index = check_strs.index;
+                                var target_str = check_strs[2];
+                                var result_str = check_strs[1];
+                                var func_str = check_strs[3];
+                                // var repalce_cnt = 'statment = window.check_(' + func_str + ', "' + result_str + '", "' + target_str + '=true;"),eval(statment)'
+                                var repalce_cnt = '(' + func_str + '.toString().indexOf("try{return (window instanceof Window);}catch(e){}") == -1 )?(' +
+                                    result_str + '):(' +
+                                    target_str + '=true)'
+                                // var repalce_cnt = 'if(' + func_str + '.toString().indexOf("try{return (window instanceof Window);}catch(e){}") != -1 ){' +
+                                //     result_str + ';}else{' +
+                                //     target_str + '=true;};'
+                                var update_cnt = check_strs[0].replace(result_str, repalce_cnt);
+                                _$lL_ = _$lL.substring(0, start_index) +
+                                    update_cnt + _$lL.substring(start_index + check_strs[0].length, _$lL.length)
+
+                                _$_l = eval(_$lL_);
                                 // _$_l = _$gx.call(_$jV, _$lL);
                             } else if (_$$m === 26) {
                                 _$_h = 0;
