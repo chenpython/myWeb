@@ -109,7 +109,7 @@ class PyppteerChromeBrowser:
             self.options['args'].append(f'--proxy-server={proxy}')
 
         # self.path = '/usr/bin/google-chrome-stable'
-        self.path = '/usr/local/bin/chromedriver'
+        self.path = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 
     async def __aenter__(self):
         self.browser = await launch(
@@ -171,6 +171,23 @@ class PyppteerChromeBrowser:
         await page.mouse.up()
 
 
+async def iframe(page):
+    iframe = await page.Jx('//iframe[id="J_Member"]')
+    # page = await page.waitForSelector('iframe')
+
+    if not iframe:
+        return page
+
+    for item in iframe:
+        iframe_url = await page.evaluate('item => item.src', item)
+
+    await page.goto(iframe_url)
+    await page.waitForNavigation(waitUntil='networkidle0')
+    await asyncio.sleep(2)
+
+    return page
+
+
 def login_pyppteer(url):
 
     async def open_taobao(url):
@@ -195,55 +212,61 @@ def login_pyppteer(url):
                 # 防止页面识别出脚本(反爬虫关键语句)
                 await stealth(page)
 
-                await page.goto(url)
+                await page.goto(url, timeout=60000)
 
-                # content = await page.content()
-                # print(content)
+                enter_content = await page.content()
+                page = await iframe(page)
 
-                # element = await page.querySelector('a[class="h"]')
-                # bounding_box = await element.boundingBox()
+                # print(enter_content)
 
-                # if bounding_box:
-                #     # Calculate the coordinates of the center of the element
-                #     x = bounding_box['x'] + bounding_box['width'] / 2
-                #     y = bounding_box['y'] + bounding_box['height'] / 2
+                element = await page.querySelector('a[class="h"]')
+                bounding_box = await element.boundingBox()
 
-                #     # Move the mouse cursor to the center of the element
-                #     await page.mouse.move(x, y)
-                #     await page.mouse.click(x, y)
-                #     await page.waitForNavigation(waitUntil='networkidle0')
+                if bounding_box:
+                    # Calculate the coordinates of the center of the element
+                    x = bounding_box['x'] + bounding_box['width'] / 2
+                    y = bounding_box['y'] + bounding_box['height'] / 2
 
-                #     await asyncio.sleep(2)
+                    # Move the mouse cursor to the center of the element
+                    await page.mouse.move(x, y)
+                    await page.mouse.click(x, y)
+                    await page.waitForNavigation(waitUntil='networkidle0',
+                                                 timeout=100000)
 
-                # before_input_content = await page.content()
-                # username = await page.querySelector('input[name="fm-login-id"]'
-                #                                     )
-                # await username.type('2427219623@qq.com')
-                # # await asyncio.sleep(3)
-                # password = await page.querySelector(
-                #     'input[name="fm-login-password"]')
-                # await password.type("feng33314")
-                # # await asyncio.sleep(3)
-                # after_input_content = await page.content()
+                    await asyncio.sleep(2)
 
-                # submit = await page.querySelector(
-                #     "button[class='fm-button fm-submit password-login']")
-                # await submit.click()
-                # await asyncio.sleep(2)
+                enter_content = await page.content()
 
-                # after_submit_content = await page.content()
-                # if '账号名/邮箱/手机号' not in after_submit_content:
+                before_input_content = await page.content()
 
-                #     await page.close()
-                #     print("完成一次登录")
+                username = await page.querySelector('input[name="fm-login-id"]'
+                                                    )
+                await username.type('2427219623@qq.com')
+                # await asyncio.sleep(3)
+                password = await page.querySelector(
+                    'input[name="fm-login-password"]')
+                await password.type("feng33314")
+                # await asyncio.sleep(3)
+                after_input_content = await page.content()
 
-                #     continue
+                submit = await page.querySelector(
+                    "button[class='fm-button fm-submit password-login']")
+                await submit.click()
+                await asyncio.sleep(2)
+
+                after_submit_content = await page.content()
+                if '账号名/邮箱/手机号' not in after_submit_content:
+
+                    await page.close()
+                    print("完成一次登录")
+
+                    continue
 
                 await pyppteer_instance.move_to_gap(page)  # 移动滑块
                 await asyncio.sleep(2)
 
+            result_content = await page.content()  # 最终数据内容
             await asyncio.sleep(2)
-            # result_content = await page.content()  # 最终数据内容
 
         print('登录结束')
 
@@ -252,8 +275,8 @@ def login_pyppteer(url):
 
 if __name__ == "__main__":
     url = "https://www.taobao.com/"
-    nc_src = "https://login.taobao.com/newlogin/login.do?appName=taobao&fromSite=0&_bx-v=2.5.1"
+    # nc_src = "https://login.taobao.com/newlogin/login.do?appName=taobao&fromSite=0&_bx-v=2.5.1"
 
-    login_pyppteer(nc_src)
+    login_pyppteer(url)
     # login_interface()
     print("-" * 50 + "end" + "-" * 50)
