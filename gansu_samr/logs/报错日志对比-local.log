@@ -1,7 +1,94 @@
-/home/feng/.nvm/versions/node/v18.13.0/bin/node --inspect ./gansu_samr/home_cookie.js
 获取 Window 的属性：$_ts 值为：[object Object]
 获取 Window 的属性：execScript 值为：undefined
 获取 Window 的属性：eval 值为：function eval() { [native code] }
+获取 documentElement 的属性：constructor 值为：function Object() { [native code] }
+获取 document 的属性：constructor 值为：function Object() { [native code] }
+获取 document 的属性：createElement 值为：function createElement(tagName) {
+
+
+    var result = { getElementsByTagName: getElementsByTagName };
+
+    tagName = tagName.toLowerCase();
+    switch (tagName) {
+        case "div":
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLDivElement',
+                    configurable: true
+                }
+            });
+            break;
+        default:
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLUnknownElement',
+                    configurable: true
+                }
+            });
+            break;
+    }
+
+    console.log("createElement " + tagName + "-> " + result);
+    result = proxy(result);
+    return result
+}
+获取 document 的属性：getElementsByTagName 值为：function getElementsByTagName(name) {
+
+    var result = [];
+    Object.defineProperties(result, {
+        [Symbol.toStringTag]: {
+            value: 'HTMLCollection',
+            configurable: true
+        }
+    });
+    switch (name) {
+        case "meta":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+            var metaElem = { content: window.content, getAttribute: getAttribute, parentNode: headElem };
+            Object.defineProperties(metaElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLMetaElement ',
+                    configurable: true
+                }
+            });
+            result[0] = metaElem;
+            break;
+        case "script":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+
+            var ele = { getAttribute: getAttribute, parentElement: headElem };
+            Object.defineProperties(ele, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLScriptElement',
+                    configurable: true
+                }
+            });
+
+            result[0] = ele;
+            result[1] = ele;
+            break;
+    }
+    console.log("getElementsByTagName " + name + "-> " + result);
+    result = proxy(result);
+    return result;
+}
+获取 document 的属性：cookie 值为：
+获取 document 的属性：documentElement 值为：[object documentElement]
+获取 documentElement 的属性：constructor 值为：function Object() { [native code] }
+获取 document 的属性：__proto__ 值为：[object Object]
+获取 document 的属性：cookie 值为：
 获取 Window 的属性：$_ts 值为：[object Object]
 获取 Window 的属性：document 值为：[object document]
 获取 Window 的属性：top 值为：[object Window]
@@ -174,7 +261,7 @@ createElement div-> [object HTMLDivElement]
     result = proxy(result);
     return result;
 }
-getElementsByTagName i->
+getElementsByTagName i-> 
 设置 HTMLDivElement 的属性：innerHTML 值为：<!--[if gt IE 4]><i></i><![endif]-->
 获取 HTMLCollection 的属性：0 值为：undefined
 获取 Window 的属性：ActiveXObject 值为：undefined
@@ -231,7 +318,7 @@ getElementsByTagName i->
     result = proxy(result);
     return result;
 }
-getElementsByTagName base->
+getElementsByTagName base-> 
 获取 HTMLCollection 的属性：length 值为：0
 获取 Window 的属性：addEventListener 值为：function addEventListener(type, listener) {
     console.log("addEventListener -> type: " + type + " listener: " + listener);
@@ -256,6 +343,174 @@ addEventListener -> type: load listener: function _$dA(){var _$is=[10];Array.pro
 获取 Window 的属性：indexedDB 值为：[object IDBFactory]
 获取 Window 的属性：top 值为：[object Window]
 设置 Window 的属性：_$i0 值为：function _$mP(){var _$lP;if(_$lj)return;_$lj=1,_$ey(_$nC,_$hC[51],_$b8),_$lP=_$mC(),_$_1[335](_$iO[41],_$_1[336]()),_$h8(_$nC[_$cf[56]],_$dA);function _$dA(_$dA){var _$eN,_$bS,_$_C,_$mr,_$lR,_$ht;_$eN=_$cf[3],_$bS=_$_1[37][_$cf[26]](_$dA[_$cf[12]]);if(_$bS===_$cf[21])(_$eN=_$cf[43],_$_C=_$cz(_$dA), !_$_C|| !_$_C._$kl?_$aq(506,_$dA,_$eN,_$dA[_$cf[11]](_$eN)):_$lP||_$lz?_$aq(506,_$dA,_$eN,_$_C._$cx):0);else if(_$bS===_$cf[1])(_$eN=_$cf[14],_$_C=_$cz(_$dA), !_$_C|| !_$_C._$kl?_$aq(506,_$dA,_$eN,_$dA[_$cf[11]](_$eN)):_$lP||_$lz?_$aq(506,_$dA,_$eN,_$_C._$cx):_$dA[_$cf[13]](_$eN,_$fG[87]),_$mU(_$dA));else if(_$lP&&_$jC(_$dA,_$eN))(_$mr=_$dA[_$cf[11]](_$eN),_$aq(506,_$dA,_$eN,_$_1[333](_$mr)));else if(_$bS===_$cf[32]){if(_$dA[_$cf[11]](_$dl[54])===_$dl[59]){_$dA[_$dl[73]][_$fG[31]](_$dA);return true;}}else _$bS===_$cf[56]?_$_1[12]&&_$_1[12]<_$iO[12]?0:(_$lR=_$dA[_$cf[11]](_$cf[38]),_$lR?( typeof _$lR===_$cf[46]?_$lR=_$km(_$lR):0,_$ht=_$_f(_$lR,1),_$dA._$bZ=_$dA[_$cf[38]]=new _$_J(_$ht)):0):_$af(_$bS,_$dA);_$el(_$dA);return false;}}
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  28  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  2
+当前 _$mr ->  28  _$ls ->  3
+当前 _$mr ->  28  _$ls ->  4
+当前 _$mr ->  28  _$ls ->  5
+当前 _$mr ->  28  _$ls ->  6
+当前 _$mr ->  28  _$ls ->  7
+当前 _$mr ->  28  _$ls ->  8
+当前 _$mr ->  28  _$ls ->  9
+当前 _$mr ->  28  _$ls ->  10
+当前 _$mr ->  28  _$ls ->  11
+当前 _$mr ->  28  _$ls ->  12
+当前 _$mr ->  28  _$ls ->  13
+当前 _$mr ->  28  _$ls ->  14
+当前 _$mr ->  28  _$ls ->  15
+当前 _$mr ->  28  _$ls ->  16
+当前 _$mr ->  95  _$ls ->  17
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  29  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  29  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  40  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  16  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  73  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  96  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  40  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  7  _$ls ->  2
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  73  _$ls ->  4
+当前 _$mr ->  30  _$ls ->  3
+当前 _$mr ->  96  _$ls ->  3
+当前 _$mr ->  60  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  12  _$ls ->  4
+当前 _$mr ->  48  _$ls ->  5
+当前 _$mr ->  0  _$ls ->  6
+当前 _$mr ->  53  _$ls ->  5
+当前 _$mr ->  50  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  40  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  15  _$ls ->  4
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  9  _$ls ->  4
+当前 _$mr ->  50  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  28  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  45  _$ls ->  4
 获取 Window 的属性：setInterval 值为：function setInterval(callback, repeat, arg1, arg2, arg3) {
   validateFunction(callback, 'callback');
 
@@ -285,6 +540,58 @@ addEventListener -> type: load listener: function _$dA(){var _$is=[10];Array.pro
 
   return timeout;
 }
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  53  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  23  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  47  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  47  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  39  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
 获取 document 的属性：getElementsByTagName 值为：function getElementsByTagName(name) {
 
     var result = [];
@@ -338,17 +645,188 @@ addEventListener -> type: load listener: function _$dA(){var _$is=[10];Array.pro
     return result;
 }
 getElementsByTagName script-> [object HTMLScriptElement],[object HTMLScriptElement]
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 HTMLCollection 的属性：length 值为：2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  97  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 HTMLCollection 的属性：1 值为：[object HTMLScriptElement]
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
 getAttribute r -> m
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 HTMLCollection 的属性：1 值为：[object HTMLScriptElement]
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
 获取 HTMLCollection 的属性：1 值为：[object HTMLScriptElement]
+当前 _$mr ->  10  _$ls ->  3
 removeChild -> [object HTMLScriptElement]
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  88  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  97  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 HTMLCollection 的属性：0 值为：[object HTMLScriptElement]
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
 getAttribute r -> m
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 HTMLCollection 的属性：0 值为：[object HTMLScriptElement]
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
 获取 HTMLCollection 的属性：0 值为：[object HTMLScriptElement]
+当前 _$mr ->  10  _$ls ->  3
 removeChild -> [object HTMLScriptElement]
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  88  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  97  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  25  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  41  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  4  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  58  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  13  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  63  _$ls ->  3
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  13  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  63  _$ls ->  1
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  57  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  8  _$ls ->  2
+当前 _$mr ->  57  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  41  _$ls ->  2
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  44  _$ls ->  3
 获取 Window 的属性：addEventListener 值为：function addEventListener(type, listener) {
     console.log("addEventListener -> type: " + type + " listener: " + listener);
 }
@@ -356,9 +834,96 @@ removeChild -> [object HTMLScriptElement]
     console.log("addEventListener -> type: " + type + " listener: " + listener);
 }
 addEventListener -> type: load listener: function _$dA(){var _$dA,_$eN,_$bS,_$_C,_$mr,_$lR;if(_$$O._$g3)(_$eN=_$_v._$kb(),_$dA=_$_v._$kb(),_$eN[1]=_$dT[1],_$eN[3]=_$dT[3]);else{_$eN=[],_$dA=new _$_Z(_$$O._$_c),_$eN[1]=_$dT[1].concat([arguments]),_$eN[3]=_$dT[3].concat([_$dA]),_$bS=_$$O._$j1;for(_$_C=2;_$_C<_$bS.length;_$_C++ )_$dA[_$_C]=_$hv(_$bS[_$_C],_$eN);}_$eN[0]=arguments,_$eN[2]=_$dA,_$dA[0]=this,_$dA[1]=arguments,_$$O._$_K.charCodeAt?_$$O._$_K=_$nf(_$$O._$_K):0,_$$K(_$$O,0,_$$O._$_K.length,_$eN),_$mr=_$eN[4],_$lR=_$eN[5],_$$O._$g3?(_$_v._$aS(_$eN),_$_v._$aS(_$dA)):0;if(_$mr===1)return _$lR;}
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  29  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  29  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
 获取 Window 的属性：location 值为：[object location]
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 location 的属性：protocol 值为：https:
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  11  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：XMLHttpRequest 值为：undefined
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：Request 值为：class {
       constructor(input, init = {}) {
         if (input === kInit) {
@@ -492,151 +1057,2954 @@ addEventListener -> type: load listener: function _$dA(){var _$dA,_$eN,_$bS,_$_C
             throw TypeError(`'${init.method}' is not a valid HTTP method.`);
           }
           if (forbiddenMethods.indexOf(method.toUpperCase()) !== -1) {
-            throw TypeError(`'${init…thod cannot have body.");
-        }
-        let initBody = null;
-        if (init.body !== void 0 && init.body != null) {
-          const [extractedBody, contentType] = extractBody(init.body, request.keepalive);
-          initBody = extractedBody;
-          if (contentType && !this[kHeaders][kHeadersList].contains("content-type")) {
-            this[kHeaders].append("content-type", contentType);
-          }
-        }
-        const inputOrInitBody = initBody ?? inputBody;
-        if (inputOrInitBody != null && inputOrInitBody.source == null) {
-          if (initBody != null && init.duplex == null) {
-            throw new TypeError("RequestInit: duplex option is required when sending a body.");
-          }
-          if (request.mode !== "same-origin" && request.mode !== "cors") {
-            throw new TypeError('If request is made from ReadableStream, mode should be "same-origin" or "cors"');
-          }
-          request.useCORSPreflightFlag = true;
-        }
-        let finalBody = inputOrInitBody;
-        if (initBody == null && inputBody != null) {
-          if (util.isDisturbed(inputBody.stream) || inputBody.stream.locked) {
-            throw new TypeError("Cannot construct a Request with a Request object that has already been used.");
-          }
-          if (!TransformStream) {
-            TransformStream = require("stream/web").TransformStream;
-          }
-          const identityTransform = new TransformStream();
-          inputBody.stream.pipeThrough(identityTransform);
-          finalBody = {
-            source: inputBody.source,
-            length: inputBody.length,
-            stream: identityTransform.readable
-          };
-        }
-        this[kState].body = finalBody;
-      }
-      get method() {
-        webidl.brandCheck(this, Request);
-        return this[kState].method;
-      }
-      get url() {
-        webidl.brandCheck(this, Request);
-        return URLSerializer(this[kState].url);
-      }
-      get headers() {
-        webidl.brandCheck(this, Request);
-        return this[kHeaders];
-      }
-      get destination() {
-        webidl.brandCheck(this, Request);
-        return this[kState].destination;
-      }
-      get referrer() {
-        webidl.brandCheck(this, Request);
-        if (this[kState].referrer === "no-referrer") {
-          return "";
-        }
-        if (this[kState].referrer === "client") {
-          return "about:client";
-        }
-        return this[kState].referrer.toString();
-      }
-      get referrerPolicy() {
-        webidl.brandCheck(this, Request);
-        return this[kState].referrerPolicy;
-      }
-      get mode() {
-        webidl.brandCheck(this, Request);
-        return this[kState].mode;
-      }
-      get credentials() {
-        return this[kState].credentials;
-      }
-      get cache() {
-        webidl.brandCheck(this, Request);
-        return this[kState].cache;
-      }
-      get redirect() {
-        webidl.brandCheck(this, Request);
-        return this[kState].redirect;
-      }
-      get integrity() {
-        webidl.brandCheck(this, Request);
-        return this[kState].integrity;
-      }
-      get keepalive() {
-        webidl.brandCheck(this, Request);
-        return this[kState].keepalive;
-      }
-      get isReloadNavigation() {
-        webidl.brandCheck(this, Request);
-        return this[kState].reloadNavigation;
-      }
-      get isHistoryNavigation() {
-        webidl.brandCheck(this, Request);
-        return this[kState].historyNavigation;
-      }
-      get signal() {
-        webidl.brandCheck(this, Request);
-        return this[kSignal];
-      }
-      get body() {
-        webidl.brandCheck(this, Request);
-        return this[kState].body ? this[kState].body.stream : null;
-      }
-      get bodyUsed() {
-        webidl.brandCheck(this, Request);
-        return !!this[kState].body && util.isDisturbed(this[kState].body.stream);
-      }
-      get duplex() {
-        webidl.brandCheck(this, Request);
-        return "half";
-      }
-      clone() {
-        webidl.brandCheck(this, Request);
-        if (this.bodyUsed || this.body?.locked) {
-          throw new TypeError("unusable");
-        }
-        const clonedRequest = cloneRequest(this[kState]);
-        const clonedRequestObject = new Request(kInit);
-        clonedRequestObject[kState] = clonedRequest;
-        clonedRequestObject[kRealm] = this[kRealm];
-        clonedRequestObject[kHeaders] = new Headers();
-        clonedRequestObject[kHeaders][kHeadersList] = clonedRequest.headersList;
-        clonedRequestObject[kHeaders][kGuard] = this[kHeaders][kGuard];
-        clonedRequestObject[kHeaders][kRealm] = this[kHeaders][kRealm];
-        const ac = new AbortController();
-        if (this.signal.aborted) {
-          ac.abort(this.signal.reason);
-        } else {
-          this.signal.addEventListener("abort", () => {
-            ac.abort(this.signal.reason);
-          }, { once: true });
-        }
-        clonedRequestObject[kSignal] = ac.signal;
-        return clonedRequestObject;
-      }
-    }…
+            throw TypeEr
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：fetch 值为：async function fetch(input, init = undefined) {
     return lazyUndici().fetch(input, init);
   }
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  63  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  11  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  39  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  39  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  18  _$ls ->  3
+当前 _$mr ->  10  _$ls ->  2
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
 设置 Window 的属性：_$kS 值为：function _$jQ(_$dA){return _$ly(_$dA[_$cf[67]](1));}
 设置 Window 的属性：_$nt 值为：function _$ks(){var _$jA=[128];Array.prototype.push.apply(_$jA,arguments);return _$aq.apply(this,_$jA);}
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  10  _$ls ->  3
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  54  _$ls ->  2
+当前 _$mr ->  53  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  75  _$ls ->  1
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  2
+当前 _$mr ->  71  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  29  _$ls ->  5
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  2  _$ls ->  1
+当前 _$mr ->  2  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  8  _$ls ->  2
+当前 _$mr ->  47  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  64  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  29  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  64  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  29  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  64  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  29  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  64  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  29  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  64  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  29  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  64  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  29  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  64  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  29  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  54  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  54  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  54  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  34  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  59  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  54  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  29  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  28  _$ls ->  1
+当前 _$mr ->  29  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  28  _$ls ->  1
+当前 _$mr ->  9  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  47  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  4
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  30  _$ls ->  2
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  30  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  48  _$ls ->  5
+当前 _$mr ->  56  _$ls ->  6
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  5  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  30  _$ls ->  4
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  29  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  30  _$ls ->  4
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  29  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  27  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  41  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  47  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  50  _$ls ->  1
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  82  _$ls ->  2
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  84  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  4
+ 当前 _$mr ->  31  _$ls ->  5
+ 当前 _$mr ->  31  _$ls ->  6
+ 当前 _$mr ->  29  _$ls ->  7
+ 当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  82  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  84  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  5
+当前 _$mr ->  31  _$ls ->  6
+当前 _$mr ->  29  _$ls ->  7
+当前 _$mr ->  1  _$ls ->  6
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  30  _$ls ->  1
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  30  _$ls ->  1
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  30  _$ls ->  1
+ 当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  43  _$ls ->  0
+当前 _$mr ->  41  _$ls ->  2
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  60  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  30  _$ls ->  1
+ 当前 _$mr ->  56  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  47  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
 获取 sessionStorage 的属性：getItem 值为：function getItem(keyName) {
     console.log("getItem -> " + keyName);
     return this[keyName];
@@ -649,7 +4017,22 @@ getItem -> _$rc
 }
 getItem -> _$rc
 获取 localStorage 的属性：_$rc 值为：undefined
-获取 document 的属性：getElementsByTagName 值为：function getElementsByTagName(name) {
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
+ 获取 document 的属性：getElementsByTagName 值为：function getElementsByTagName(name) {
 
     var result = [];
     Object.defineProperties(result, {
@@ -701,27 +4084,1153 @@ getItem -> _$rc
     result = proxy(result);
     return result;
 }
-获取 Window 的属性：content 值为：fofAtbiByMy1t1wDvXGpSIJ9np3r5qiOq2JQ7XREaFj1riX_xEGKjjmGUs.isOIU2fYwcDzABE5eo0eqhgxkPaJhHYNt4nAjZMDuLhNWFjaItahYcKoRVCyND6u3bXuyZcKb7._zCzR13gix2uubZx4rbvw5ApvXGMlIKcCLpuDMAUv.mnqOtkayoPLk2UWhHOFdzTqrJ17DUgFtTl0sFE4pl5IhXQZuhUT.3cWx7Mr8f9K2vdl_gY2.Y39_E5ptwO6GeWiF8hl1QjhCDW7RP3afupIAGqeaEXIJYNSHsBM_2joic6nl_vjqV6VEWRR31Gl4EFqbQuFAR_r_hFLA20NZngyTZ433FyhGm4iYGVs2hqMQGHVXdoZKz48L9DJzQxUAIdHZo5g
-getElementsByTagName meta-> [object HTMLMetaElement ]
-获取 HTMLCollection 的属性：length 值为：1
-获取 HTMLCollection 的属性：0 值为：[object HTMLMetaElement ]
-getAttribute r -> m
-removeChild -> [object HTMLMetaElement ]
+ 获取 Window 的属性：content 值为：fofAtbiByMy1t1wDvXGpSIJ9np3r5qiOq2JQ7XREaFj1riX_xEGKjjmGUs.isOIU2fYwcDzABE5eo0eqhgxkPaJhHYNt4nAjZMDuLhNWFjaItahYcKoRVCyND6u3bXuyZcKb7._zCzR13gix2uubZx4rbvw5ApvXGMlIKcCLpuDMAUv.mnqOtkayoPLk2UWhHOFdzTqrJ17DUgFtTl0sFE4pl5IhXQZuhUT.3cWx7Mr8f9K2vdl_gY2.Y39_E5ptwO6GeWiF8hl1QjhCDW7RP3afupIAGqeaEXIJYNSHsBM_2joic6nl_vjqV6VEWRR31Gl4EFqbQuFAR_r_hFLA20NZngyTZ433FyhGm4iYGVs2hqMQGHVXdoZKz48L9DJzQxUAIdHZo5g
+ getElementsByTagName meta-> [object HTMLMetaElement ]
+ 获取 HTMLCollection 的属性：length 值为：1
+ 获取 HTMLCollection 的属性：0 值为：[object HTMLMetaElement ]
+ getAttribute r -> m
+ removeChild -> [object HTMLMetaElement ]
+ 当前 _$mr ->  12  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  2
+ 获取 Window 的属性：Math 值为：[object Math]
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  12  _$ls ->  3
+ 当前 _$mr ->  48  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  5
+ 当前 _$mr ->  0  _$ls ->  4
+ 获取 Window 的属性：Math 值为：[object Math]
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  13  _$ls ->  4
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  9  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  49  _$ls ->  2
 获取 Window 的属性：Math 值为：[object Math]
+当前 _$mr ->  30  _$ls ->  3
+当前 _$mr ->  53  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  24  _$ls ->  0
+ 当前 _$mr ->  55  _$ls ->  0
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  38  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  2
+ 当前 _$mr ->  48  _$ls ->  3
+ 当前 _$mr ->  0  _$ls ->  4
+ 当前 _$mr ->  0  _$ls ->  3
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  12  _$ls ->  0
+ 当前 _$mr ->  48  _$ls ->  1
+ 当前 _$mr ->  0  _$ls ->  2
+ 当前 _$mr ->  49  _$ls ->  1
+ 当前 _$mr ->  28  _$ls ->  0
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  43  _$ls ->  0
+ 当前 _$mr ->  41  _$ls ->  2
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  56  _$ls ->  3
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  5  _$ls ->  1
+ 当前 _$mr ->  38  _$ls ->  0
+ 当前 _$mr ->  12  _$ls ->  1
+ 当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  53  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  13  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  52  _$ls ->  2
+ 当前 _$mr ->  3  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  24  _$ls ->  1
+ 当前 _$mr ->  71  _$ls ->  1
+ 当前 _$mr ->  31  _$ls ->  2
+ 当前 _$mr ->  103  _$ls ->  3
+ 当前 _$mr ->  20  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  0
+ 当前 _$mr ->  31  _$ls ->  1
+ 当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  24  _$ls ->  1
+当前 _$mr ->  71  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  103  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
 获取 Window 的属性：Math 值为：[object Math]
-获取 Window 的属性：Math 值为：[object Math]
-获取 Window 的属性：Math 值为：[object Math]
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  53  _$ls ->  4
+当前 _$mr ->  30  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  28  _$ls ->  1
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  40  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
 获取 Window 的属性：parseFloat 值为：function parseFloat() { [native code] }
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  73  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  30  _$ls ->  2
+当前 _$mr ->  29  _$ls ->  2
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  24  _$ls ->  4
+当前 _$mr ->  71  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  84  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  41  _$ls ->  2
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  8  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  29  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  51  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：self 值为：[object Window]
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
 获取 Window 的属性：top 值为：[object Window]
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  54  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
 设置 document 的属性：cookie 值为：enable_undefined=true; Secure
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  51  _$ls ->  0
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  30  _$ls ->  1
 获取 document 的属性：cookie 值为：enable_undefined=true; Secure
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  39  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  21  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  2  _$ls ->  1
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
 获取 Window 的属性：Math 值为：[object Math]
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  2  _$ls ->  2
+当前 _$mr ->  41  _$ls ->  2
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  57  _$ls ->  1
+当前 _$mr ->  63  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：location 值为：[object location]
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 location 的属性：port 值为：
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  58  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 location 的属性：protocol 值为：https:
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  60  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  30  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  23  _$ls ->  0
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  58  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  11  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  30  _$ls ->  2
+当前 _$mr ->  9  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  35  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  57  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  54  _$ls ->  0
+当前 _$mr ->  58  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  11  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
 设置 Window 的属性：fetch 值为：function _$dA(){var _$dA,_$eN,_$bS,_$_C,_$mr,_$lR;if(_$$O._$g3)(_$eN=_$_v._$kb(),_$dA=_$_v._$kb(),_$eN[1]=_$dT[1],_$eN[3]=_$dT[3]);else{_$eN=[],_$dA=new _$_Z(_$$O._$_c),_$eN[1]=_$dT[1].concat([arguments]),_$eN[3]=_$dT[3].concat([_$dA]),_$bS=_$$O._$j1;for(_$_C=2;_$_C<_$bS.length;_$_C++ )_$dA[_$_C]=_$hv(_$bS[_$_C],_$eN);}_$eN[0]=arguments,_$eN[2]=_$dA,_$dA[0]=this,_$dA[1]=arguments,_$$O._$_K.charCodeAt?_$$O._$_K=_$nf(_$$O._$_K):0,_$$K(_$$O,0,_$$O._$_K.length,_$eN),_$mr=_$eN[4],_$lR=_$eN[5],_$$O._$g3?(_$_v._$aS(_$eN),_$_v._$aS(_$dA)):0;if(_$mr===1)return _$lR;}
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：fetch 值为：function _$dA(){var _$dA,_$eN,_$bS,_$_C,_$mr,_$lR;if(_$$O._$g3)(_$eN=_$_v._$kb(),_$dA=_$_v._$kb(),_$eN[1]=_$dT[1],_$eN[3]=_$dT[3]);else{_$eN=[],_$dA=new _$_Z(_$$O._$_c),_$eN[1]=_$dT[1].concat([arguments]),_$eN[3]=_$dT[3].concat([_$dA]),_$bS=_$$O._$j1;for(_$_C=2;_$_C<_$bS.length;_$_C++ )_$dA[_$_C]=_$hv(_$bS[_$_C],_$eN);}_$eN[0]=arguments,_$eN[2]=_$dA,_$dA[0]=this,_$dA[1]=arguments,_$$O._$_K.charCodeAt?_$$O._$_K=_$nf(_$$O._$_K):0,_$$K(_$$O,0,_$$O._$_K.length,_$eN),_$mr=_$eN[4],_$lR=_$eN[5],_$$O._$g3?(_$_v._$aS(_$eN),_$_v._$aS(_$dA)):0;if(_$mr===1)return _$lR;}
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  11  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：Request 值为：class {
       constructor(input, init = {}) {
         if (input === kInit) {
@@ -855,169 +5364,407 @@ removeChild -> [object HTMLMetaElement ]
             throw TypeError(`'${init.method}' is not a valid HTTP method.`);
           }
           if (forbiddenMethods.indexOf(method.toUpperCase()) !== -1) {
-            throw TypeError(`'${init…thod cannot have body.");
-        }
-        let initBody = null;
-        if (init.body !== void 0 && init.body != null) {
-          const [extractedBody, contentType] = extractBody(init.body, request.keepalive);
-          initBody = extractedBody;
-          if (contentType && !this[kHeaders][kHeadersList].contains("content-type")) {
-            this[kHeaders].append("content-type", contentType);
-          }
-        }
-        const inputOrInitBody = initBody ?? inputBody;
-        if (inputOrInitBody != null && inputOrInitBody.source == null) {
-          if (initBody != null && init.duplex == null) {
-            throw new TypeError("RequestInit: duplex option is required when sending a body.");
-          }
-          if (request.mode !== "same-origin" && request.mode !== "cors") {
-            throw new TypeError('If request is made from ReadableStream, mode should be "same-origin" or "cors"');
-          }
-          request.useCORSPreflightFlag = true;
-        }
-        let finalBody = inputOrInitBody;
-        if (initBody == null && inputBody != null) {
-          if (util.isDisturbed(inputBody.stream) || inputBody.stream.locked) {
-            throw new TypeError("Cannot construct a Request with a Request object that has already been used.");
-          }
-          if (!TransformStream) {
-            TransformStream = require("stream/web").TransformStream;
-          }
-          const identityTransform = new TransformStream();
-          inputBody.stream.pipeThrough(identityTransform);
-          finalBody = {
-            source: inputBody.source,
-            length: inputBody.length,
-            stream: identityTransform.readable
-          };
-        }
-        this[kState].body = finalBody;
-      }
-      get method() {
-        webidl.brandCheck(this, Request);
-        return this[kState].method;
-      }
-      get url() {
-        webidl.brandCheck(this, Request);
-        return URLSerializer(this[kState].url);
-      }
-      get headers() {
-        webidl.brandCheck(this, Request);
-        return this[kHeaders];
-      }
-      get destination() {
-        webidl.brandCheck(this, Request);
-        return this[kState].destination;
-      }
-      get referrer() {
-        webidl.brandCheck(this, Request);
-        if (this[kState].referrer === "no-referrer") {
-          return "";
-        }
-        if (this[kState].referrer === "client") {
-          return "about:client";
-        }
-        return this[kState].referrer.toString();
-      }
-      get referrerPolicy() {
-        webidl.brandCheck(this, Request);
-        return this[kState].referrerPolicy;
-      }
-      get mode() {
-        webidl.brandCheck(this, Request);
-        return this[kState].mode;
-      }
-      get credentials() {
-        return this[kState].credentials;
-      }
-      get cache() {
-        webidl.brandCheck(this, Request);
-        return this[kState].cache;
-      }
-      get redirect() {
-        webidl.brandCheck(this, Request);
-        return this[kState].redirect;
-      }
-      get integrity() {
-        webidl.brandCheck(this, Request);
-        return this[kState].integrity;
-      }
-      get keepalive() {
-        webidl.brandCheck(this, Request);
-        return this[kState].keepalive;
-      }
-      get isReloadNavigation() {
-        webidl.brandCheck(this, Request);
-        return this[kState].reloadNavigation;
-      }
-      get isHistoryNavigation() {
-        webidl.brandCheck(this, Request);
-        return this[kState].historyNavigation;
-      }
-      get signal() {
-        webidl.brandCheck(this, Request);
-        return this[kSignal];
-      }
-      get body() {
-        webidl.brandCheck(this, Request);
-        return this[kState].body ? this[kState].body.stream : null;
-      }
-      get bodyUsed() {
-        webidl.brandCheck(this, Request);
-        return !!this[kState].body && util.isDisturbed(this[kState].body.stream);
-      }
-      get duplex() {
-        webidl.brandCheck(this, Request);
-        return "half";
-      }
-      clone() {
-        webidl.brandCheck(this, Request);
-        if (this.bodyUsed || this.body?.locked) {
-          throw new TypeError("unusable");
-        }
-        const clonedRequest = cloneRequest(this[kState]);
-        const clonedRequestObject = new Request(kInit);
-        clonedRequestObject[kState] = clonedRequest;
-        clonedRequestObject[kRealm] = this[kRealm];
-        clonedRequestObject[kHeaders] = new Headers();
-        clonedRequestObject[kHeaders][kHeadersList] = clonedRequest.headersList;
-        clonedRequestObject[kHeaders][kGuard] = this[kHeaders][kGuard];
-        clonedRequestObject[kHeaders][kRealm] = this[kHeaders][kRealm];
-        const ac = new AbortController();
-        if (this.signal.aborted) {
-          ac.abort(this.signal.reason);
-        } else {
-          this.signal.addEventListener("abort", () => {
-            ac.abort(this.signal.reason);
-          }, { once: true });
-        }
-        clonedRequestObject[kSignal] = ac.signal;
-        return clonedRequestObject;
-      }
-    }…
+            throw TypeEr
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  11  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
 设置 Window 的属性：Request 值为：function _$dA(){var _$dA,_$eN,_$bS,_$_C,_$mr,_$lR;if(_$$O._$g3)(_$eN=_$_v._$kb(),_$dA=_$_v._$kb(),_$eN[1]=_$dT[1],_$eN[3]=_$dT[3]);else{_$eN=[],_$dA=new _$_Z(_$$O._$_c),_$eN[1]=_$dT[1].concat([arguments]),_$eN[3]=_$dT[3].concat([_$dA]),_$bS=_$$O._$j1;for(_$_C=2;_$_C<_$bS.length;_$_C++ )_$dA[_$_C]=_$hv(_$bS[_$_C],_$eN);}_$eN[0]=arguments,_$eN[2]=_$dA,_$dA[0]=this,_$dA[1]=arguments,_$$O._$_K.charCodeAt?_$$O._$_K=_$nf(_$$O._$_K):0,_$$K(_$$O,0,_$$O._$_K.length,_$eN),_$mr=_$eN[4],_$lR=_$eN[5],_$$O._$g3?(_$_v._$aS(_$eN),_$_v._$aS(_$dA)):0;if(_$mr===1)return _$lR;}
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
 设置 Window 的属性：$_ts 值为：[object Object]
 获取 Window 的属性：$_ts 值为：[object Object]
 获取 Window 的属性：showModalDialog 值为：undefined
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  104  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  58  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  51  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：navigator 值为：[object navigator]
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 navigator 的属性：userAgent 值为：Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 navigator 的属性：standalone 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  97  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  8  _$ls ->  2
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：MSBlobBuilder 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  5  _$ls ->  1
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 navigator 的属性：webkitPersistentStorage 值为：undefined
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
 获取 document 的属性：documentElement 值为：[object documentElement]
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
 获取 documentElement 的属性：style 值为：[object style]
+当前 _$mr ->  14  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  8  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：UCWebExt 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：ucweb 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  8  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：qb_bridge 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：qbbookshelf 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  8  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  38  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：dolphin 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：dolphininfo 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  38  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：dolphinmeta 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  38  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  1  _$ls ->  4
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  42  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：chrome 值为：undefined
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：qihoo 值为：undefined
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：safari 值为：undefined
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：orientation 值为：undefined
-获取 Window 的属性：ActiveXObject 值为：undefined
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  32  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  42  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  51  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  49  _$ls ->  2
+当前 _$mr ->  4  _$ls ->  3
+获取 Window 的属性：ActiveXObject 值为：undefined《正常报错，截至目前数据一致》
 当前 _$mr ->  12  _$ls ->  0
 当前 _$mr ->  49  _$ls ->  1
 当前 _$mr ->  0  _$ls ->  2
@@ -1570,7 +6317,7 @@ removeChild -> [object HTMLMetaElement ]
 当前 _$mr ->  38  _$ls ->  0
 当前 _$mr ->  38  _$ls ->  1
 当前 _$mr ->  31  _$ls ->  2
-当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  3《定位：_$m2[1] == "appScanSetPageLoaded"》
 当前 _$mr ->  0  _$ls ->  2
 获取 Window 的属性：appScanSetPageLoaded 值为：undefined
 当前 _$mr ->  12  _$ls ->  1
@@ -1587,11 +6334,19 @@ removeChild -> [object HTMLMetaElement ]
 当前 _$mr ->  0  _$ls ->  3
 当前 _$mr ->  52  _$ls ->  2
 当前 _$mr ->  3  _$ls ->  1
+_$if 的值需要关注
 当前 _$mr ->  3  _$ls ->  1
 当前 _$mr ->  12  _$ls ->  0
 当前 _$mr ->  24  _$ls ->  1
 当前 _$mr ->  90  _$ls ->  1
 当前 _$mr ->  31  _$ls ->  0
+此时 _$m2[0]  的值不一致，local 为 global，browser 为 window
+原因：_$if 值不一致
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  8  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+此时 _$m2[0]  的值不一致，local 为 "queueMicrotask"，browser 为 "self"
 当前 _$mr ->  49  _$ls ->  1
 当前 _$mr ->  8  _$ls ->  2
 当前 _$mr ->  3  _$ls ->  1
@@ -1650,11 +6405,7 @@ removeChild -> [object HTMLMetaElement ]
 当前 _$mr ->  31  _$ls ->  0
 当前 _$mr ->  49  _$ls ->  1
 当前 _$mr ->  8  _$ls ->  2
-当前 _$mr ->  3  _$ls ->  1
-当前 _$mr ->  31  _$ls ->  0
-当前 _$mr ->  49  _$ls ->  1
-当前 _$mr ->  8  _$ls ->  2
-当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  3  _$ls ->  1《开始不一致，browser循环多》
 当前 _$mr ->  31  _$ls ->  0
 当前 _$mr ->  49  _$ls ->  1
 当前 _$mr ->  8  _$ls ->  2
@@ -1878,6 +6629,7 @@ removeChild -> [object HTMLMetaElement ]
 当前 _$mr ->  49  _$ls ->  1
 当前 _$mr ->  0  _$ls ->  2
 获取 navigator 的属性：languages 值为：undefined
+定位：_$m2[1] == "languages"
 当前 _$mr ->  12  _$ls ->  1
 当前 _$mr ->  61  _$ls ->  2
 当前 _$mr ->  3  _$ls ->  1
@@ -1932,9 +6684,8 @@ removeChild -> [object HTMLMetaElement ]
 当前 _$mr ->  49  _$ls ->  0
 当前 _$mr ->  30  _$ls ->  1
 当前 _$mr ->  49  _$ls ->  1
+由于try{return (window instanceof Window);}catch(e 的原因导致不一致
 当前 _$mr ->  56  _$ls ->  0
-当前 _$mr ->  49  _$ls ->  -1(可定位)
+当前 _$mr ->  49  _$ls ->  -1
 当前 _$mr ->  30  _$ls ->  0
 当前 _$mr ->  49  _$ls ->  0
-TypeError: Cannot read properties of undefined
-_$dT 为 undefined，无法执行 tostring方法

@@ -19,7 +19,7 @@ proxy = function (obj) {
         // prop：属性名称
         // prop：属性值
         get(target, prop, receiver) {
-            // if (prop == "mimeTypes") {
+            // if (prop == "protocol") {
             //     debugger;
             // }
             console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
@@ -54,7 +54,7 @@ location = {
     "ancestorOrigins": {},
     "href": "https://scjg.gansu.gov.cn/guestweb4/s?siteCode=6200000052&checkHandle=1&pageSize=10&left_right_index=0&searchWord=%E4%BF%9D%E5%81%A5%E9%A3%9F%E5%93%81%E5%A4%87%E6%A1%88",
     "origin": "https://scjg.gansu.gov.cn",
-    "protocol": "https:",
+    "protocol": "http:",
     "host": "scjg.gansu.gov.cn",
     "hostname": "scjg.gansu.gov.cn",
     "port": "",
@@ -193,11 +193,23 @@ Object.defineProperties(documentElement, {
 });
 documentElement = proxy(documentElement);
 
+
+function getElementById(id) {
+    var result = null;
+    switch (id) {
+        case "root-hammerhead-shadow-ui":
+            break;
+    }
+    console.log("getElementById " + id + "-> " + result);
+    return result;
+}
+
 document = {
     createElement: createElement,
     getElementsByTagName: getElementsByTagName,
     cookie: "",
-    documentElement: documentElement
+    documentElement: documentElement,
+    getElementById: getElementById
 };
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
@@ -214,8 +226,9 @@ function removeItem(keyName) {
 };
 
 function getItem(keyName) {
-    console.log("getItem -> " + keyName);
-    return this[keyName];
+    var result = this[keyName];
+    console.log("getItem " + keyName + "-> " + result);
+    return result;
 };
 
 localStorage = {
@@ -250,7 +263,8 @@ mimeTypes = proxy(mimeTypes);
 
 navigator = {
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
-    mimeTypes: mimeTypes
+    mimeTypes: mimeTypes,
+    appVersion: "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
 };
 Object.defineProperties(navigator, {
     [Symbol.toStringTag]: {
@@ -281,6 +295,18 @@ Object.defineProperties(DOMParser, {
 });
 DOMParser = proxy(DOMParser);
 
+function webkitRequestFileSystem() {
+    var result = null;
+    console.log("webkitRequestFileSystem -> " + result);
+    return result;
+};
+
+function MutationObserver() {
+    var result = null;
+    console.log("MutationObserver -> " + result);
+    return result;
+};
+
 window = global;
 Object.defineProperties(window, {
     [Symbol.toStringTag]: {
@@ -298,6 +324,8 @@ window.name = '';
 window.self = window;
 window.indexedDB = indexedDB;
 window.DOMParser = DOMParser;
+window.webkitRequestFileSystem = webkitRequestFileSystem;
+window.MutationObserver = MutationObserver;
 
 window = proxy(window);
 
@@ -460,7 +488,8 @@ window = proxy(window);
                             if (_$$m === 24) {
                                 !_$lb ? _$_v += 3 : 0;
                             } else if (_$$m === 25) {
-                                var check_strs = new RegExp(/[\w\$]+<=49\?\([\w.\$\(\)]+,[\w.\$\(\)\[\]=]+,(([\w\$]+)\[[\w\$]+\+\+[\s]*\]=([[\w\$]+)\(\))\)/).exec(_$lL);
+                                // 替换 <= 49
+                                var check_strs = new RegExp(/[\w\$]+<=49\?\([\w.\$\(\)]+,[\w.\$\(\)\[\]=]+,(([\w\$]+\[[\w\$]+\+\+[\s]*\])=([[\w\$]+)\(\))\)/).exec(_$lL);
                                 var start_index = check_strs.index;
                                 var target_str = check_strs[2];
                                 var result_str = check_strs[1];
@@ -473,10 +502,9 @@ window = proxy(window);
                                 //     result_str + ';}else{' +
                                 //     target_str + '=true;};'
                                 var update_cnt = check_strs[0].replace(result_str, repalce_cnt);
-                                _$lL_ = _$lL.substring(0, start_index) +
+                                cnt_1 = _$lL.substring(0, start_index) +
                                     update_cnt + _$lL.substring(start_index + check_strs[0].length, _$lL.length)
-
-                                _$_l = eval(_$lL_);
+                                _$_l = eval(cnt_1);
                                 // _$_l = _$gx.call(_$jV, _$lL);
                             } else if (_$$m === 26) {
                                 _$_h = 0;
