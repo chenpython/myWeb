@@ -19,7 +19,7 @@ proxy = function (obj) {
         // prop：属性名称
         // prop：属性值
         get(target, prop, receiver) {
-            // if (prop == "protocol") {
+            // if (prop == "battery") {
             //     debugger;
             // }
             console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
@@ -187,7 +187,7 @@ style = proxy(style);
 documentElement = { style: style };
 Object.defineProperties(documentElement, {
     [Symbol.toStringTag]: {
-        value: 'documentElement',
+        value: 'HTMLHtmlElement',
         configurable: true
     }
 });
@@ -204,12 +204,18 @@ function getElementById(id) {
     return result;
 }
 
+function addEventListener(element, type, listener) {
+    console.log("addEventListener -> " + type);
+    return null;
+}
+
 document = {
     createElement: createElement,
     getElementsByTagName: getElementsByTagName,
     cookie: "",
     documentElement: documentElement,
-    getElementById: getElementById
+    getElementById: getElementById,
+    addEventListener: addEventListener
 };
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
@@ -274,7 +280,28 @@ Object.defineProperties(navigator, {
 });
 navigator = proxy(navigator);
 
-indexedDB = {};
+function open(a, b) {
+    var result = undefined;
+    if (a == "EkcP" && b == 1) {
+        result = {
+            onerror: null,
+            onupgradeneeded: null
+        };
+        Object.defineProperties(result, {
+            [Symbol.toStringTag]: {
+                value: 'IDBOpenDBRequest',
+                configurable: true
+            }
+        });
+    }
+
+    console.log("open " + a + " " + b + "-> " + result);
+    return result;
+}
+
+indexedDB = {
+    open: open
+};
 Object.defineProperties(indexedDB, {
     [Symbol.toStringTag]: {
         value: 'IDBFactory',
@@ -301,11 +328,26 @@ function webkitRequestFileSystem() {
     return result;
 };
 
-function MutationObserver() {
-    var result = null;
-    console.log("MutationObserver -> " + result);
+MutationObserver = function MutationObserver(callback) {
+    var result = {
+        observe: observe
+    };
+    Object.defineProperties(result, {
+        [Symbol.toStringTag]: {
+            value: 'MutationObserver',
+            configurable: true
+        }
+    });
+    console.log("MutationObserver callback: " + callback + " -> " + result);
     return result;
 };
+
+function observe(target, options) {
+    var result = undefined;
+    console.log("observe " + target + "-> " + result);
+    return result;
+};
+
 
 window = global;
 Object.defineProperties(window, {
@@ -502,8 +544,9 @@ window = proxy(window);
                                 //     result_str + ';}else{' +
                                 //     target_str + '=true;};'
                                 var update_cnt = check_strs[0].replace(result_str, repalce_cnt);
-                                cnt_1 = _$lL.substring(0, start_index) +
-                                    update_cnt + _$lL.substring(start_index + check_strs[0].length, _$lL.length)
+                                var cnt_1 = _$lL.substring(0, start_index) +
+                                    update_cnt + _$lL.substring(start_index + check_strs[0].length, _$lL.length);
+                                debugger;
                                 _$_l = eval(cnt_1);
                                 // _$_l = _$gx.call(_$jV, _$lL);
                             } else if (_$$m === 26) {
