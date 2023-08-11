@@ -184,7 +184,7 @@ Object.defineProperties(style, {
 });
 style = proxy(style);
 
-documentElement = { style: style };
+documentElement = { style: style, getAttribute: getAttribute };
 Object.defineProperties(documentElement, {
     [Symbol.toStringTag]: {
         value: 'HTMLHtmlElement',
@@ -233,13 +233,23 @@ function removeItem(keyName) {
 
 function getItem(keyName) {
     var result = this[keyName];
+    if (result == undefined) {
+        result = null;
+    }
     console.log("getItem " + keyName + "-> " + result);
     return result;
 };
 
+function setItem(keyName, value) {
+    this[keyName] = value;
+    console.log("setItem " + keyName + "-> " + value);
+};
+
+
 localStorage = {
     removeItem: removeItem,
-    getItem: getItem
+    getItem: getItem,
+    setItem: setItem
 };
 Object.defineProperties(localStorage, {
     [Symbol.toStringTag]: {
@@ -249,7 +259,7 @@ Object.defineProperties(localStorage, {
 });
 localStorage = proxy(localStorage);
 
-sessionStorage = { getItem: getItem };
+sessionStorage = { getItem: getItem, setItem: setItem };
 Object.defineProperties(sessionStorage, {
     [Symbol.toStringTag]: {
         value: 'sessionStorage',

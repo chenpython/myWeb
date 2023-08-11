@@ -3,25 +3,22 @@
 http://scjg.gansu.gov.cn/guestweb4/s?siteCode=6200000052&checkHandle=1&pageSize=10&left_right_index=0&searchWord=%E4%BF%9D%E5%81%A5%E9%A3%9F%E5%93%81%E5%A4%87%E6%A1%88
 
 
-报错：
-Cannot use 'in' operator to search for 'MozAppearance' in undefined
 
-watch值：
-_$lR    直接异常值
-_$ls
-_$dT
 
 日志打印：
 '当前 _$mr -> ', _$mr
 '当前 _$mr -> ', _$mr, ' _$ls -> ', _$ls
 '当前 _$mr -> ', _$mr, ' _$ls -> ', _$ls, '_$m2 -> ', _$m2
-
-
+'当前 _$mr -> ', _$mr, ' _$ls -> ', _$ls, ' _$m2 -> ', _$m2, ' _$if -> ', _$if
+'当前 _$mr -> ', _$mr, ' _$ls -> ', _$ls, ' _$m2 -> ', _$m2, ' _$cs -> ', _$cs
 
 
 
 循环位置：
-$m2 = _$_v._$kb(),
+取值：
+    $m2 = _$_v._$kb(),
+arguments：
+    _$hJ[_$ij++]
 
 
 
@@ -34,7 +31,15 @@ _$m2[0]==11.678 && _$m2[1]=='parseFloat' && _$m2[2]=='11.678'&& _$m2[3]==21
 
 _$if 的值不一样，导致逻辑不对
 
-报错：
+最初不一致的地方：
+
+    _$m2[0] == true && _$m2[1] == 19 && _$m2[2] == 'length' && _$m2[3] == 39
+
+
+    _$m2[0] == 15 && _$m2[1] == 19 && _$m2[2] == 'length' && _$m2[3] == 39
+
+_$cs 的值不一样，导致逻辑不对
+    从哪里不一致的？
 
 
 
