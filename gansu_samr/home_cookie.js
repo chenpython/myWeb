@@ -19,7 +19,7 @@ proxy = function (obj) {
         // prop：属性名称
         // prop：属性值
         get(target, prop, receiver) {
-            // if (prop == "battery") {
+            // if (prop == "cookie") {
             //     debugger;
             // }
             console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
@@ -32,11 +32,11 @@ proxy = function (obj) {
 
 // 首页返回的参数值
 // 读取文件提取指定值传递给 $_ts
-var file_path = path.join(path.dirname(__dirname), '/gansu_samr/anlysis_session/index.html');
+var file_path = path.join(path.dirname(__dirname), '/gansu_samr/home_html');
 var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
 data = res.toString()
 var regex = /[";]*/g    // 替换所有";符号
-matchCd = data.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '').split(" if ")[0];
+matchCd = data.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '').split("if")[0];
 matchNsd = parseInt(data.match(/\$\_ts\.nsd\s*=\s*(.+)/)[1].replace(regex, '').split(" ")[0]);
 
 var cntFunc = require("./content.js");
@@ -549,11 +549,13 @@ window = proxy(window);
                                 // var repalce_cnt = 'statment = window.check_(' + func_str + ', "' + result_str + '", "' + target_str + '=true;"),eval(statment)'
                                 var repalce_cnt = '(' + func_str + '.toString().indexOf("try{return (window instanceof Window);}catch(e){}") == -1 )?(' +
                                     result_str + '):(' +
-                                    target_str + '=true)'
+                                    target_str + '=true))'
                                 // var repalce_cnt = 'if(' + func_str + '.toString().indexOf("try{return (window instanceof Window);}catch(e){}") != -1 ){' +
                                 //     result_str + ';}else{' +
                                 //     target_str + '=true;};'
-                                var update_cnt = check_strs[0].replace(result_str, repalce_cnt);
+                                // var update_cnt = check_strs[0].replace(result_str, repalce_cnt);
+                                var replace_length = check_strs[0].indexOf(result_str);
+                                var update_cnt = check_strs[0].substring(0, replace_length) + repalce_cnt + check_strs[0].substring(replace_length + repalce_cnt.length,)
                                 var cnt_1 = _$lL.substring(0, start_index) +
                                     update_cnt + _$lL.substring(start_index + check_strs[0].length, _$lL.length);
                                 debugger;
@@ -1111,4 +1113,20 @@ window = proxy(window);
 }
 )([], [[6, 8, 7, 0, 1, 10, 3, 2, 11, 5, 4, 9,], [92, 78, 49, 29, 65, 72, 6, 32, 8, 53, 9, 69, 37, 74, 20, 81, 52, 24, 16, 12, 17, 64, 91, 11, 82, 71, 31, 68, 26, 58, 85, 27, 88, 48, 13, 34, 90, 84, 7, 1, 2, 3, 70, 10, 73, 39, 51, 57, 23, 67, 5, 93, 62, 45, 35, 83, 43, 50, 20, 30, 75, 36, 79, 80, 55, 21, 4, 66, 20, 81, 52, 38, 14, 44, 12, 47, 18, 42, 87, 28, 77, 89, 19, 60, 19, 33, 15, 59, 56, 40, 42, 46, 86, 19, 63, 36, 19, 61, 54, 0, 41, 22, 25, 76, 19,], [50, 7, 27, 20, 13, 34, 43, 49, 43, 18, 22, 28, 50, 30, 44, 5, 29, 19, 53, 51, 43, 38, 54, 21, 11, 40, 31, 4, 10, 41, 20, 8, 46, 12, 23, 42, 0, 36, 17, 55, 15, 37, 35, 20, 48, 26, 39, 45, 6, 32, 42, 52, 36, 33, 9, 15, 2, 20, 14, 16, 24, 42, 3, 36, 47, 9, 15, 25, 20, 1, 43,], [10, 16, 5, 25, 6, 27, 12, 25, 17, 2, 1, 22, 28, 3, 36, 21, 18, 7, 34, 14, 20, 42, 8, 37, 15, 24, 38, 7, 29, 40, 33, 9, 26, 0, 4, 19, 11, 30, 31, 41, 23, 32, 13, 20, 35, 39,],]);
 
-console.log('程序结束，cookie 值：', document.cookie);
+_$$e();
+
+console.log('生成Cookie结束');
+// console.log('程序结束，cookie 值：', document.cookie);
+var cookie_str = document.cookie.split('=')[1]
+const binaryData = Buffer.from(cookie_str, 'binary');
+
+// 将二进制数据写入文件
+fs.writeFile('/home/feng/workspace/myWeb/gansu_samr/cookie', binaryData, (err) => {
+    if (err) {
+        console.error('Error writing to file:', err);
+        return;
+    }
+    console.log('Data has been written to output.bin successfully.');
+});
+
+console.log("程序结束");

@@ -1,4 +1,4 @@
-function contentHandler(filePath = '/gansu_samr/anlysis_session/index.html') {
+function contentHandler(filePath = '/gansu_samr/home_html') {
     var fs = require('fs');
     var path = require("path");
 
