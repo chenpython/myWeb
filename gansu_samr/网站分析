@@ -13,14 +13,14 @@ http://scjg.gansu.gov.cn/guestweb4/s?siteCode=6200000052&checkHandle=1&pageSize=
 '当前 _$mr -> ', _$mr, ' _$ls -> ', _$ls, ' _$m2 -> ', _$m2, ' _$fn -> ', _$fn
 
 
-_$cB = _$gK._$jR(),
-_$jI = 0;
-for (_$$B = _$gv; _$$B < _$ki; _$$B++) {
-_$g5 = _$j6[_$$B];
+_$ii = _$$G._$bz(),
+_$iR = 0;
+for (_$lw = _$_P; _$lw < _$$Z; _$lw++) {
+    _$fZ = _$_n[_$lw];
+    if (_$fZ <= 63)
+        _$fZ <= 15 ? _$fZ <= 3 ? _$fZ <= 0 ? (_$_7 = _$ii[--_$iR],
 
-_$g4[0] == 8 && _$g4[1] == 7 && _$g4[2] == 7
-
-'当前 _$g5 -> ', _$g5, ' _$$B -> ', _$$B, '_$cB -> ', _$cB
+'当前 _$fZ -> ', _$fZ, ' _$lw -> ', _$lw, '_$ii -> ', _$ii
 
 
 循环位置：
