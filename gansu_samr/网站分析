@@ -3,71 +3,52 @@
 http://scjg.gansu.gov.cn/guestweb4/s?siteCode=6200000052&checkHandle=1&pageSize=10&left_right_index=0&searchWord=%E4%BF%9D%E5%81%A5%E9%A3%9F%E5%93%81%E5%A4%87%E6%A1%88
 
 
-报错：
-Cannot use 'in' operator to search for 'MozAppearance' in undefined
 
-watch值：
-_$lR    直接异常值
-_$ls
-_$dT
+
 
 日志打印：
-'当前 _$mr -> ', _$mr
-'当前 _$mr -> ', _$mr, ' _$ls -> ', _$ls
-'当前 _$mr -> ', _$mr, ' _$ls -> ', _$ls, '_$m2 -> ', _$m2
+
+local：
+// _$iO = _$$c._$dq(),
+//     _$_R = 0;
+// for (_$aF = _$gV; _$aF < _$_T; _$aF++) {
+//     _$$U = _$aJ[_$aF];
+//     if (_$$U <= 63)
+//         _$$U <= 15 ? _$$U <= 3 ? _$$U <= 0 ? (_$gR = _$iO[--_$_R],
 
 
-条件：
-home_cookie.js: 25 获取 location 的属性：protocol 值为：https:
-后，当前 _$mr -> 56 无法复现
+[13, 39]
 
-_$m2[0] == 'https:' && _$m2[1] == 'protocol' && _$m2[2] == 7
+[1, 20, 53]
+_$iO[0] === 13 && _$iO[1] == 39 && _$iO[2] == 53
 
-_$m2[1] == 'protocol' 可以定位到 browser 的循环
+[false, 'http', 23]
+_$iO[0].length === 224 && _$iO[1] == 53 && _$iO[2] == 19
 
-_$m2[1] == 'mimeTypes' 报错位置
+_$dB[0].length === 224 && _$dB[1] == 53 && _$dB[2] == 19
 
-_$m2[0].toString() == 'function anonymous(\n) {\ntry{return (window instanceof Window);}catch(e){}\n}'
+'当前 _$$U -> ', _$$U, ' _$aF -> ', _$aF, ' _$iO -> ', _$iO
 
+'当前 _$$U -> ', _$$U, ' _$aF -> ', _$aF, ' _$iO -> ', _$iO, ' _$dx -> ', _$dx
 
+[Array(224), 53, 19]
 
-循环位置：
-$m2 = _$_v._$kb(),
-
-
-
-    2023 - 8 - 9
-1、先定位local报错位置
-_$dT.toString() 报错， _$dT为undefined
-找出local和browser的区别，观察 _$dT 的值
-
-分析：
-_$mr == 49 && _$ls == -1 此条件无法定位
-local报错，
-        browser 未到达这个步骤，先执行了  __filename;}cat 报错
-产生差别得位置？
-            获取 location 的属性：protocol
-后local多执行了一段
-
-定位不一致位置：
-_$m2[1] == "appScanSetPageLoaded"
-                watch 相关值
-
-_$m2[0] == "try{return (window instanceof Window);}catch(e){}"
-
-已解决
-
-2、错误2
-定位条件：
-_$m2[1] == "getElementById" && _$m2[2] == "root-hammerhead-shadow-ui"
-已解决
+browser：
+_$$4[0] === 1 && _$$4[1] == 20 && _$$4[2] == 53
+'当前 _$$U  -> ', _$ht, ' _$aF -> ', _$cs, ' _$iO -> ', _$gx
+_$dy[0].indexOf("try{return __dirname;}catch(e){}") != -1
 
 
-3、报错：TypeError: _$gT[_$cf[2]] is not a function
-    _$m2[0] == 'pfb2_0'
-    从 当前 _$mr -> 0  _$ls -> 2 _$m2 -> (2)[Proxy, 'webkitRequestFileSystem'] 开始不一致
-    window 的 webkitRequestFileSystem
-定位条件：_$m2[1] == "MutationObserver"
+// _$dy = _$fc._$aO(),
+//     _$c9 = 0;
+// for (_$d1 = _$_C; _$d1 < _$fK; _$d1++) {
+//     _$b4 = _$iT[_$d1];
+//     if (_$b4 <= 63)
+//         _$b4 <= 15 ? _$b4 <= 3 ? _$b4 <= 0 ? (_$_o = _$dy[--_$c9],
 
 
-重点：正式生成Cookie的位置？
+异常位置
+[Proxy, 'open', 58]
+
+
+
