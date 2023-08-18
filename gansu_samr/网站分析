@@ -18,8 +18,8 @@ _$dT
 
 
 条件：
-home_cookie.js:25 获取 location 的属性：protocol 值为：https:
-后，当前 _$mr ->  56 无法复现
+home_cookie.js: 25 获取 location 的属性：protocol 值为：https:
+后，当前 _$mr -> 56 无法复现
 
 _$m2[0] == 'https:' && _$m2[1] == 'protocol' && _$m2[2] == 7
 
@@ -30,45 +30,44 @@ _$m2[1] == 'mimeTypes' 报错位置
 _$m2[0].toString() == 'function anonymous(\n) {\ntry{return (window instanceof Window);}catch(e){}\n}'
 
 
-_$mr = 18 && _$m2 = true
 
 循环位置：
 $m2 = _$_v._$kb(),
 
 
 
-2023-8-9 
+    2023 - 8 - 9
 1、先定位local报错位置
-    _$dT.toString() 报错， _$dT为undefined
-    找出local和browser的区别，观察 _$dT 的值
-    
-    分析：
-        _$mr == 49 && _$ls == -1 此条件无法定位
-        local报错，
+_$dT.toString() 报错， _$dT为undefined
+找出local和browser的区别，观察 _$dT 的值
+
+分析：
+_$mr == 49 && _$ls == -1 此条件无法定位
+local报错，
         browser 未到达这个步骤，先执行了  __filename;}cat 报错
-        产生差别得位置？
-            获取 location 的属性：protocol 
-                后local多执行了一段
-            
-            定位不一致位置：
-                _$m2[1] == "appScanSetPageLoaded"
+产生差别得位置？
+            获取 location 的属性：protocol
+后local多执行了一段
+
+定位不一致位置：
+_$m2[1] == "appScanSetPageLoaded"
                 watch 相关值
 
-    _$m2[0] == "try{return (window instanceof Window);}catch(e){}"
+_$m2[0] == "try{return (window instanceof Window);}catch(e){}"
 
 已解决
 
 2、错误2
-    定位条件：
-        _$m2[1] == "getElementById" && _$m2[2] == "root-hammerhead-shadow-ui"
+定位条件：
+_$m2[1] == "getElementById" && _$m2[2] == "root-hammerhead-shadow-ui"
 已解决
 
 
 3、报错：TypeError: _$gT[_$cf[2]] is not a function
- _$m2[0] == 'pfb2_0'
-    从 当前 _$mr ->  0  _$ls ->  2 _$m2 ->  (2) [Proxy, 'webkitRequestFileSystem'] 开始不一致
+    _$m2[0] == 'pfb2_0'
+    从 当前 _$mr -> 0  _$ls -> 2 _$m2 -> (2)[Proxy, 'webkitRequestFileSystem'] 开始不一致
     window 的 webkitRequestFileSystem
-    定位条件：_$m2[1] == "MutationObserver"
+定位条件：_$m2[1] == "MutationObserver"
 
 
 重点：正式生成Cookie的位置？
