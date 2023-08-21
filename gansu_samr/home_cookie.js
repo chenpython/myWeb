@@ -674,7 +674,7 @@ if ($_ts.cd) {
                                     var update_cnt = match_str.substring(0, replace_length) + repalce_cnt + match_str.substring(replace_length + repalce_cnt.length,)
                                     var cnt_1 = _$_W.substring(0, start_index) +
                                         update_cnt + _$_W.substring(start_index + check_strs[0].length, _$_W.length);
-                                    cnt_1 = cnt_1.replace("_$gq=[]", "_$gq=[];_$gq=proxy(_$gq)")
+                                    cnt_1 = cnt_1.replace("_$gq=[]", "_$gq=[],_$gq=proxy(_$gq)")
                                     debugger;
                                     _$_l = eval(cnt_1);
                                     // _$_I = _$e_.call(_$_A, _$_W);
