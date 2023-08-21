@@ -1,0 +1,681 @@
+/usr/local/bin/node --inspect ./gansu_samr/home_cookie.js
+获取 Window 的属性：$_ts 值为：Object
+获取 Window 的属性：execScript 值为：undefined
+获取 Window 的属性：eval 值为：function eval() { [native code] }
+获取 Window 的属性：$_ts 值为：Object
+获取 Window 的属性：document 值为：Proxy
+获取 Window 的属性：top 值为：Window
+获取 Window 的属性：setTimeout 值为：function setTimeout(callback, after, arg1, arg2, arg3) {
+  validateCallback(callback);
+
+  let i, args;
+  switch (arguments.length) {
+    // fast cases
+    case 1:
+    case 2:
+      break;
+    case 3:
+      args = [arg1];
+      break;
+    case 4:
+      args = [arg1, arg2];
+      break;
+    default:
+      args = [arg1, arg2, arg3];
+      for (i = 5; i < arguments.length; i++) {
+        // Extend array dynamically, makes .apply run much faster in v6.0.0
+        args[i - 2] = arguments[i];
+      }
+      break;
+  }
+
+  const timeout = new Timeout(callback, after, args, false, true);
+  insert(timeout, timeout._idleTimeout);
+
+  return timeout;
+}
+获取 Window 的属性：setInterval 值为：function setInterval(callback, repeat, arg1, arg2, arg3) {
+  validateCallback(callback);
+
+  let i, args;
+  switch (arguments.length) {
+    // fast cases
+    case 1:
+    case 2:
+      break;
+    case 3:
+      args = [arg1];
+      break;
+    case 4:
+      args = [arg1, arg2];
+      break;
+    default:
+      args = [arg1, arg2, arg3];
+      for (i = 5; i < arguments.length; i++) {
+        // Extend array dynamically, makes .apply run much faster in v6.0.0
+        args[i - 2] = arguments[i];
+      }
+      break;
+  }
+
+  const timeout = new Timeout(callback, repeat, args, true, true);
+  insert(timeout, timeout._idleTimeout);
+
+  return timeout;
+}
+获取 Window 的属性：eval 值为：function eval() { [native code] }
+获取 Window 的属性：escape 值为：function escape() { [native code] }
+获取 Window 的属性：Number 值为：function Number() { [native code] }
+获取 Window 的属性：decodeURIComponent 值为：function decodeURIComponent() { [native code] }
+获取 Window 的属性：isFinite 值为：function isFinite() { [native code] }
+获取 Window 的属性：location 值为：Proxy
+获取 Window 的属性：RegExp 值为：function RegExp() { [native code] }
+获取 Window 的属性：$_ts 值为：Object
+获取 Window 的属性：clearInterval 值为：function clearInterval(timer) {
+  // clearTimeout and clearInterval can be used to clear timers created from
+  // both setTimeout and setInterval, as specified by HTML Living Standard:
+  // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-setinterval
+  clearTimeout(timer);
+}
+获取 Window 的属性：CollectGarbage 值为：undefined
+获取 Window 的属性：DOMParser 值为：function DOMParser() {
+    debugger;
+}
+获取 Window 的属性：ActiveXObject 值为：undefined
+获取 Window 的属性：JSON 值为：JSON
+获取 Window 的属性：localStorage 值为：Proxy
+获取 Window 的属性：sessionStorage 值为：Proxy
+设置 localStorage 的属性：___TS___ 值为：___TS___
+获取 localStorage 的属性：removeItem 值为：function removeItem(keyName) {
+    delete this[keyName];
+    console.log("removeItem -> ", keyName);
+}
+removeItem ->  ___TS___
+设置 localStorage 的属性：__#classType 值为：localStorage
+获取 document 的属性：createElement 值为：function createElement(tagName) {
+
+
+    var result = { getElementsByTagName: getElementsByTagName };
+
+    tagName = tagName.toLowerCase();
+    switch (tagName) {
+        case "div":
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLDivElement',
+                    configurable: true
+                }
+            });
+            break;
+        default:
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLUnknownElement',
+                    configurable: true
+                }
+            });
+            break;
+    }
+
+    console.log("createElement " + tagName + "-> " + result);
+    result = proxy(result);
+    return result
+}
+createElement div-> [object HTMLDivElement]
+获取 HTMLDivElement 的属性：getElementsByTagName 值为：function getElementsByTagName(name) {
+
+    var result = [];
+    Object.defineProperties(result, {
+        [Symbol.toStringTag]: {
+            value: 'HTMLCollection',
+            configurable: true
+        }
+    });
+    switch (name) {
+        case "meta":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+            var metaElem = { content: window.content, getAttribute: getAttribute, parentNode: headElem };
+            Object.defineProperties(metaElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLMetaElement ',
+                    configurable: true
+                }
+            });
+            result[0] = metaElem;
+            break;
+        case "script":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+
+            var ele = { getAttribute: getAttribute, parentElement: headElem };
+            Object.defineProperties(ele, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLScriptElement',
+                    configurable: true
+                }
+            });
+
+            result[0] = ele;
+            result[1] = ele;
+            break;
+    }
+    console.log("getElementsByTagName " + name + "-> " + result);
+    result = proxy(result);
+    return result;
+}
+getElementsByTagName i->
+设置 HTMLDivElement 的属性：innerHTML 值为：<!--[if gt IE 4]><i></i><![endif]-->
+获取 HTMLCollection 的属性：0 值为：undefined
+获取 Window 的属性：ActiveXObject 值为：undefined
+获取 Window 的属性：msCrypto 值为：undefined
+获取 document 的属性：getElementsByTagName 值为：function getElementsByTagName(name) {
+
+    var result = [];
+    Object.defineProperties(result, {
+        [Symbol.toStringTag]: {
+            value: 'HTMLCollection',
+            configurable: true
+        }
+    });
+    switch (name) {
+        case "meta":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+            var metaElem = { content: window.content, getAttribute: getAttribute, parentNode: headElem };
+            Object.defineProperties(metaElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLMetaElement ',
+                    configurable: true
+                }
+            });
+            result[0] = metaElem;
+            break;
+        case "script":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+
+            var ele = { getAttribute: getAttribute, parentElement: headElem };
+            Object.defineProperties(ele, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLScriptElement',
+                    configurable: true
+                }
+            });
+
+            result[0] = ele;
+            result[1] = ele;
+            break;
+    }
+    console.log("getElementsByTagName " + name + "-> " + result);
+    result = proxy(result);
+    return result;
+}
+getElementsByTagName base->
+获取 HTMLCollection 的属性：length 值为：0
+获取 Window 的属性：addEventListener 值为：function addEventListener(type, listener) {
+    console.log("addEventListener -> type: " + type + " listener: " + listener);
+}
+获取 Window 的属性：addEventListener 值为：function addEventListener(type, listener) {
+    console.log("addEventListener -> type: " + type + " listener: " + listener);
+}
+addEventListener -> type: load listener: function _$dA(){var _$is=[10];Array.prototype.push.apply(_$is,arguments);return _$j9.apply(this,_$is);}
+获取 Window 的属性：clearInterval 值为：function clearInterval(timer) {
+  // clearTimeout and clearInterval can be used to clear timers created from
+  // both setTimeout and setInterval, as specified by HTML Living Standard:
+  // https://html.spec.whatwg.org/multipage/timers-and-user-prompts.html#dom-setinterval
+  clearTimeout(timer);
+}
+设置 Window 的属性：clearInterval 值为：function _$eZ(){var _$jA=[175];Array.prototype.push.apply(_$jA,arguments);return _$aq.apply(this,_$jA);}
+获取 Window 的属性：clearInterval 值为：function _$eZ(){var _$jA=[175];Array.prototype.push.apply(_$jA,arguments);return _$aq.apply(this,_$jA);}
+获取 Window 的属性：document 值为：Proxy
+获取 Window 的属性：name 值为：
+获取 Window 的属性：localStorage 值为：Proxy
+获取 Window 的属性：globalStorage 值为：undefined
+获取 Window 的属性：sessionStorage 值为：Proxy
+获取 Window 的属性：indexedDB 值为：Proxy
+获取 Window 的属性：top 值为：Window
+设置 Window 的属性：_$i0 值为：function _$mP(){var _$lP;if(_$lj)return;_$lj=1,_$ey(_$nC,_$hC[51],_$b8),_$lP=_$mC(),_$_1[335](_$iO[41],_$_1[336]()),_$h8(_$nC[_$cf[56]],_$dA);function _$dA(_$dA){var _$eN,_$bS,_$_C,_$mr,_$lR,_$ht;_$eN=_$cf[3],_$bS=_$_1[37][_$cf[26]](_$dA[_$cf[12]]);if(_$bS===_$cf[21])(_$eN=_$cf[43],_$_C=_$cz(_$dA), !_$_C|| !_$_C._$kl?_$aq(506,_$dA,_$eN,_$dA[_$cf[11]](_$eN)):_$lP||_$lz?_$aq(506,_$dA,_$eN,_$_C._$cx):0);else if(_$bS===_$cf[1])(_$eN=_$cf[14],_$_C=_$cz(_$dA), !_$_C|| !_$_C._$kl?_$aq(506,_$dA,_$eN,_$dA[_$cf[11]](_$eN)):_$lP||_$lz?_$aq(506,_$dA,_$eN,_$_C._$cx):_$dA[_$cf[13]](_$eN,_$fG[87]),_$mU(_$dA));else if(_$lP&&_$jC(_$dA,_$eN))(_$mr=_$dA[_$cf[11]](_$eN),_$aq(506,_$dA,_$eN,_$_1[333](_$mr)));else if(_$bS===_$cf[32]){if(_$dA[_$cf[11]](_$dl[54])===_$dl[59]){_$dA[_$dl[73]][_$fG[31]](_$dA);return true;}}else _$bS===_$cf[56]?_$_1[12]&&_$_1[12]<_$iO[12]?0:(_$lR=_$dA[_$cf[11]](_$cf[38]),_$lR?( typeof _$lR===_$cf[46]?_$lR=_$km(_$lR):0,_$ht=_$_f(_$lR,1),_$dA._$bZ=_$dA[_$cf[38]]=new _$_J(_$ht)):0):_$af(_$bS,_$dA);_$el(_$dA);return false;}}
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  28  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  2
+当前 _$mr ->  28  _$ls ->  3
+当前 _$mr ->  28  _$ls ->  4
+当前 _$mr ->  28  _$ls ->  5
+当前 _$mr ->  28  _$ls ->  6
+当前 _$mr ->  28  _$ls ->  7
+当前 _$mr ->  28  _$ls ->  8
+当前 _$mr ->  28  _$ls ->  9
+当前 _$mr ->  28  _$ls ->  10
+当前 _$mr ->  28  _$ls ->  11
+当前 _$mr ->  28  _$ls ->  12
+当前 _$mr ->  28  _$ls ->  13
+当前 _$mr ->  28  _$ls ->  14
+当前 _$mr ->  28  _$ls ->  15
+当前 _$mr ->  28  _$ls ->  16
+当前 _$mr ->  95  _$ls ->  17
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  29  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  29  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  56  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  40  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  16  _$ls ->  0
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  73  _$ls ->  2
+当前 _$mr ->  50  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  96  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  40  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  52  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  7  _$ls ->  2
+当前 _$mr ->  55  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  73  _$ls ->  4
+当前 _$mr ->  30  _$ls ->  3
+当前 _$mr ->  96  _$ls ->  3
+当前 _$mr ->  60  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  12  _$ls ->  4
+当前 _$mr ->  48  _$ls ->  5
+当前 _$mr ->  0  _$ls ->  6
+当前 _$mr ->  53  _$ls ->  5
+当前 _$mr ->  50  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  40  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  27  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  15  _$ls ->  4
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  9  _$ls ->  4
+当前 _$mr ->  50  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  28  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  4
+当前 _$mr ->  0  _$ls ->  5
+当前 _$mr ->  45  _$ls ->  4
+获取 Window 的属性：setInterval 值为：function setInterval(callback, repeat, arg1, arg2, arg3) {
+  validateCallback(callback);
+
+  let i, args;
+  switch (arguments.length) {
+    // fast cases
+    case 1:
+    case 2:
+      break;
+    case 3:
+      args = [arg1];
+      break;
+    case 4:
+      args = [arg1, arg2];
+      break;
+    default:
+      args = [arg1, arg2, arg3];
+      for (i = 5; i < arguments.length; i++) {
+        // Extend array dynamically, makes .apply run much faster in v6.0.0
+        args[i - 2] = arguments[i];
+      }
+      break;
+  }
+
+  const timeout = new Timeout(callback, repeat, args, true, true);
+  insert(timeout, timeout._idleTimeout);
+
+  return timeout;
+}
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  53  _$ls ->  3
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  49  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  23  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  47  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  47  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  39  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  18  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  36  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
+获取 document 的属性：getElementsByTagName 值为：function getElementsByTagName(name) {
+
+    var result = [];
+    Object.defineProperties(result, {
+        [Symbol.toStringTag]: {
+            value: 'HTMLCollection',
+            configurable: true
+        }
+    });
+    switch (name) {
+        case "meta":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+            var metaElem = { content: window.content, getAttribute: getAttribute, parentNode: headElem };
+            Object.defineProperties(metaElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLMetaElement ',
+                    configurable: true
+                }
+            });
+            result[0] = metaElem;
+            break;
+        case "script":
+            var headElem = { removeChild: removeChild };
+            Object.defineProperties(headElem, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLHeadElement',
+                    configurable: true
+                }
+            });
+
+            var ele = { getAttribute: getAttribute, parentElement: headElem };
+            Object.defineProperties(ele, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLScriptElement',
+                    configurable: true
+                }
+            });
+
+            result[0] = ele;
+            result[1] = ele;
+            break;
+    }
+    console.log("getElementsByTagName " + name + "-> " + result);
+    result = proxy(result);
+    return result;
+}
+getElementsByTagName script-> [object HTMLScriptElement],[object HTMLScriptElement]
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+获取 HTMLCollection 的属性：length 值为：2
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  15  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  97  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+获取 HTMLCollection 的属性：1 值为：HTMLScriptElement
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
+getAttribute r -> m
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+获取 HTMLCollection 的属性：1 值为：HTMLScriptElement
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+获取 HTMLCollection 的属性：1 值为：HTMLScriptElement
+当前 _$mr ->  10  _$ls ->  3
+removeChild -> [object HTMLScriptElement]
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  88  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  97  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+获取 HTMLCollection 的属性：0 值为：HTMLScriptElement
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  12  _$ls ->  2
+当前 _$mr ->  48  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+当前 _$mr ->  53  _$ls ->  3
+getAttribute r -> m
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  61  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+获取 HTMLCollection 的属性：0 值为：HTMLScriptElement
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  31  _$ls ->  2
+当前 _$mr ->  31  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  4
+获取 HTMLCollection 的属性：0 值为：HTMLScriptElement
+当前 _$mr ->  10  _$ls ->  3
+removeChild -> [object HTMLScriptElement]
+当前 _$mr ->  24  _$ls ->  0
+当前 _$mr ->  88  _$ls ->  0
+当前 _$mr ->  20  _$ls ->  0
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  97  _$ls ->  2
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  49  _$ls ->  1
+当前 _$mr ->  28  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  25  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  48  _$ls ->  1
+当前 _$mr ->  41  _$ls ->  2
+当前 _$mr ->  12  _$ls ->  0
+当前 _$mr ->  17  _$ls ->  1
+当前 _$mr ->  4  _$ls ->  0
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  3  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  12  _$ls ->  1
+当前 _$mr ->  48  _$ls ->  2
+当前 _$mr ->  0  _$ls ->  3
+当前 _$mr ->  0  _$ls ->  2
+当前 _$mr ->  56  _$ls ->  1
+当前 _$mr ->  31  _$ls ->  0
+当前 _$mr ->  58  _$ls ->  1
