@@ -38,7 +38,7 @@ var file_path = path.join(path.dirname(__dirname), home_html_path);
 var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
 data = res.toString()
 var regex = /[";]*/g    // 替换所有";符号
-matchCd = data.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '').split("if")[0];
+matchCd = data.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '');
 matchNsd = parseInt(data.match(/\$\_ts\.nsd\s*=\s*(.+)/)[1].replace(regex, '').split(" ")[0]);
 
 var cntFunc = require("./content.js");
@@ -83,6 +83,15 @@ function getAttribute(attributeName) {
     switch (attributeName) {
         case "r":
             result = "m";
+            break;
+        case "selenium":
+            result = null;
+            break;
+        case "driver":
+            result = null;
+            break;
+        case "webdriver":
+            result = null;
             break;
     }
     console.log("getAttribute " + attributeName + " -> " + result);
@@ -147,10 +156,18 @@ function getElementsByTagName(name) {
     return result;
 };
 
+function appendChild(aChild) {
+    var result = {};
+    console.log("appendChild " + aChild + " -> " + result);
+};
+
 function createElement(tagName) {
 
 
-    var result = { getElementsByTagName: getElementsByTagName };
+    var result = {
+        getElementsByTagName: getElementsByTagName,
+        appendChild: appendChild
+    };
 
     tagName = tagName.toLowerCase();
     switch (tagName) {
@@ -158,6 +175,30 @@ function createElement(tagName) {
             Object.defineProperties(result, {
                 [Symbol.toStringTag]: {
                     value: 'HTMLDivElement',
+                    configurable: true
+                }
+            });
+            break;
+        case "a":
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLLinkElement',
+                    configurable: true
+                }
+            });
+            break;
+        case "form":
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLFormElement',
+                    configurable: true
+                }
+            });
+            break;
+        case "input":
+            Object.defineProperties(result, {
+                [Symbol.toStringTag]: {
+                    value: 'HTMLInputElement',
                     configurable: true
                 }
             });
@@ -237,7 +278,9 @@ document = {
     documentElement: documentElement,
     getElementById: getElementById,
     addEventListener: addEventListener,
-    createExpression: createExpression
+    createExpression: createExpression,
+    visibilityState: 'visible',
+    body: null
 };
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
@@ -299,10 +342,32 @@ Object.defineProperties(mimeTypes, {
 });
 mimeTypes = proxy(mimeTypes);
 
+
+DeprecatedStorageQuota = {};
+Object.defineProperties(DeprecatedStorageQuota, {
+    [Symbol.toStringTag]: {
+        value: 'DeprecatedStorageQuota',
+        configurable: true
+    }
+});
+
+NetworkInformation = {};
+Object.defineProperties(NetworkInformation, {
+    [Symbol.toStringTag]: {
+        value: 'NetworkInformation',
+        configurable: true
+    }
+});
 navigator = {
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     mimeTypes: mimeTypes,
-    appVersion: "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36"
+    appVersion: "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
+    webkitPersistentStorage: DeprecatedStorageQuota,
+    languages: ['zh-CN'],
+    webdriver: false,
+    platform: "Win32",
+    maxTouchPoints: 0,
+    connection: NetworkInformation
 };
 Object.defineProperties(navigator, {
     [Symbol.toStringTag]: {
@@ -315,10 +380,7 @@ navigator = proxy(navigator);
 function open(a, b) {
     var result = undefined;
     if (a == "EkcP" && b == 1) {
-        result = {
-            onerror: null,
-            onupgradeneeded: null
-        };
+        result = {};
         Object.defineProperties(result, {
             [Symbol.toStringTag]: {
                 value: 'IDBOpenDBRequest',
@@ -387,6 +449,37 @@ function XMLHttpRequest() {
 };
 
 
+WebKitMutationObserver = {
+    observe: observe
+};
+Object.defineProperties(WebKitMutationObserver, {
+    [Symbol.toStringTag]: {
+        value: 'WebKitMutationObserver',
+        configurable: true
+    }
+});
+
+NodeList = [];
+Object.defineProperties(NodeList, {
+    [Symbol.toStringTag]: {
+        value: 'NodeList',
+        configurable: true
+    }
+});
+
+MutationRecord = {
+    type: "childList",
+    addedNodes: NodeList
+};
+Object.defineProperties(MutationRecord, {
+    [Symbol.toStringTag]: {
+        value: 'MutationRecord',
+        configurable: true
+    }
+});
+
+chrome = {};
+
 window = global;
 Object.defineProperties(window, {
     [Symbol.toStringTag]: {
@@ -405,9 +498,12 @@ window.self = window;
 window.indexedDB = indexedDB;
 window.DOMParser = DOMParser;
 window.webkitRequestFileSystem = webkitRequestFileSystem;
+window.WebKitMutationObserver = WebKitMutationObserver;
 window.MutationObserver = MutationObserver;
 window.open = open;
 window.XMLHttpRequest = XMLHttpRequest;
+window.MutationRecord = MutationRecord;
+window.chrome = chrome;
 
 window = proxy(window);
 
@@ -578,7 +674,7 @@ if ($_ts.cd) {
                                     var update_cnt = match_str.substring(0, replace_length) + repalce_cnt + match_str.substring(replace_length + repalce_cnt.length,)
                                     var cnt_1 = _$_W.substring(0, start_index) +
                                         update_cnt + _$_W.substring(start_index + check_strs[0].length, _$_W.length);
-                                    // cnt_1 = cnt_1.replace("_$dx=[]", "_$dx=[];_$dx=proxy(_$dx);")
+                                    cnt_1 = cnt_1.replace("_$gq=[]", "_$gq=[];_$gq=proxy(_$gq)")
                                     debugger;
                                     _$_l = eval(cnt_1);
                                     // _$_I = _$e_.call(_$_A, _$_W);

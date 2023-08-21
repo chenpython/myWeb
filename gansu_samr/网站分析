@@ -3,52 +3,76 @@
 http://scjg.gansu.gov.cn/guestweb4/s?siteCode=6200000052&checkHandle=1&pageSize=10&left_right_index=0&searchWord=%E4%BF%9D%E5%81%A5%E9%A3%9F%E5%93%81%E5%A4%87%E6%A1%88
 
 
+当前分析：
+1、overrid 执行流程异常，dirname 报错后未进入第三次异常
+2、local 同 overrid，流程异常
 
 
 
 日志打印：
 
 local：
-// _$iO = _$$c._$dq(),
-//     _$_R = 0;
-// for (_$aF = _$gV; _$aF < _$_T; _$aF++) {
-//     _$$U = _$aJ[_$aF];
-//     if (_$$U <= 63)
-//         _$$U <= 15 ? _$$U <= 3 ? _$$U <= 0 ? (_$gR = _$iO[--_$_R],
+_$$U = _$$b._$dm(),
+_$k$ = 0;
+for (_$_Z = _$ge; _$_Z < _$hH; _$_Z++) {
+    _$gz = _$_l[_$_Z];
+    if (_$gz <= 63)
+
+日志打印：
+'当前 _$$U -> ', _$gz, ' _$aF -> ', _$_Z, ' _$iO -> ', _$$U,
+
+'当前 _$$U -> ', _$gz, ' _$aF -> ', _$_Z, ' _$iO -> ', _$$U, ' _$dx -> ', _$dx
+
+异常位置
+[/function \S+?\(\){\S+/, 'test', 8]
+
+_$$U.length == 3 &&  _$$U[1] == 'test' &&  _$$U[2] == 8
+
+分析原因：
+1、386的大数组数据异常
+    50: ƒ removeChild()
+    48: false
+    26: ƒ send()
+    20: ƒ open()
+    21: ƒ appendChild()
+    这些值对不上
 
 
-[13, 39]
-
-[1, 20, 53]
-_$iO[0] === 13 && _$iO[1] == 39 && _$iO[2] == 53
-
-[false, 'http', 23]
-_$iO[0].length === 224 && _$iO[1] == 53 && _$iO[2] == 19
-
-_$dB[0].length === 224 && _$dB[1] == 53 && _$dB[2] == 19
-
-'当前 _$$U -> ', _$$U, ' _$aF -> ', _$aF, ' _$iO -> ', _$iO
-
-'当前 _$$U -> ', _$$U, ' _$aF -> ', _$aF, ' _$iO -> ', _$iO, ' _$dx -> ', _$dx
+_$iO[0].indexOf("try{return __dirname;}catch(e){}") != -1
 
 [Array(224), 53, 19]
 
 browser：
+
+日志打印：
+'当前 _$$U -> ',_$d1, ' _$aF -> ', _$bx, ' _$iO -> ', _$d6
+
+
+
+
 _$$4[0] === 1 && _$$4[1] == 20 && _$$4[2] == 53
 '当前 _$$U  -> ', _$ht, ' _$aF -> ', _$cs, ' _$iO -> ', _$gx
 _$dy[0].indexOf("try{return __dirname;}catch(e){}") != -1
 
 
-// _$dy = _$fc._$aO(),
-//     _$c9 = 0;
-// for (_$d1 = _$_C; _$d1 < _$fK; _$d1++) {
-//     _$b4 = _$iT[_$d1];
-//     if (_$b4 <= 63)
-//         _$b4 <= 15 ? _$b4 <= 3 ? _$b4 <= 0 ? (_$_o = _$dy[--_$c9],
 
-
-异常位置
-[Proxy, 'open', 58]
+'当前 _$$U -> ', _$_9, ' _$aF -> ', _$gw, ' _$iO -> ', _$h1
+_$h1[0].indexOf("try{return __dirname;}catch(e){}") != -1
 
 
 
+
+
+
+
+
+
+
+vscode 替换报错：
+VM13:3  TypeError[\s\w.=\r\n\t\('\):\$,<>@\[\]]+Show less
+^[\(\)\w\$\s]+@[\s\w:///.]+$
+
+^[^当][\s\S{}=;<>\[\]\{\}]+$
+
+\n{2}
+^\}$
