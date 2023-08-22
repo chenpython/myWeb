@@ -19,53 +19,40 @@ for (_$_Z = _$ge; _$_Z < _$hH; _$_Z++) {
     if (_$gz <= 63)
 
 日志打印：
-'当前 _$$U -> ', _$gz, ' _$aF -> ', _$_Z, ' _$iO -> ', _$$U,
+'当前 _$$U -> ', _$gz, ' _$aF -> ', _$_Z, ' _$iO -> ', _$$U
 
 '当前 _$$U -> ', _$gz, ' _$aF -> ', _$_Z, ' _$iO -> ', _$$U, ' _$dx -> ', _$dx
 
 异常位置
-[/function \S+?\(\){\S+/, 'test', 8]
+[, 'getOwnPropertyDescriptor', Proxy, '__proto__', 0]
 
-_$$U.length == 3 &&  _$$U[1] == 'test' &&  _$$U[2] == 8
+_$$U.length == 5 &&  _$$U[1] == 'getOwnPropertyDescriptor' &&  _$$U[3] == '__proto__' && _$$U[4] == 0
 
 分析原因：
-1、386的大数组数据异常
-    50: ƒ removeChild()
-    48: false
-    26: ƒ send()
-    20: ƒ open()
-    21: ƒ appendChild()
-    这些值对不上
 
 
-_$iO[0].indexOf("try{return __dirname;}catch(e){}") != -1
+
+[-1, 1, 'function _$]
+
+_$$U.length == 3 &&  _$$U[1] == 'getOwnPropertyDescriptor' &&  _$$U[2] == 61
+
+ &&  _$$U[2].indexOf('function') != -1
+
+xy, 'visibilityState', 137, 16]
+
+_$$U.length == 4 &&  _$$U[1] == 'visibilityState' &&  _$$U[2] == 137 &&  _$$U[3] == 16
+
 
 [Array(224), 53, 19]
 
 browser：
 
 日志打印：
-'当前 _$$U -> ',_$d1, ' _$aF -> ', _$bx, ' _$iO -> ', _$d6
+'当前 _$$U -> ',_$jT , ' _$aF -> ', _$jL, ' _$iO -> ', _$jH
 
+_$$U.length == 3 &&  _$$U[1] == 'getOwnPropertyDescriptor' &&  _$$U[2] == 61
 
-
-
-_$$4[0] === 1 && _$$4[1] == 20 && _$$4[2] == 53
-'当前 _$$U  -> ', _$ht, ' _$aF -> ', _$cs, ' _$iO -> ', _$gx
-_$dy[0].indexOf("try{return __dirname;}catch(e){}") != -1
-
-
-
-'当前 _$$U -> ', _$_9, ' _$aF -> ', _$gw, ' _$iO -> ', _$h1
-_$h1[0].indexOf("try{return __dirname;}catch(e){}") != -1
-
-
-
-
-
-
-
-
+_$jH.length == 5 && _$jH[1] == 'getOwnPropertyDescriptor' &&  _$jH[3] == '__proto__' && _$jH[4] == 0
 
 
 vscode 替换报错：

@@ -49,7 +49,13 @@ $_ts = {
     cd: matchCd,
     nsd: matchNsd
 }
-
+Object.defineProperties($_ts, {
+    [Symbol.toStringTag]: {
+        value: '$_ts',
+        configurable: true
+    }
+});
+$_ts = proxy($_ts);
 
 location = {
     "ancestorOrigins": {},
@@ -279,8 +285,10 @@ document = {
     getElementById: getElementById,
     addEventListener: addEventListener,
     createExpression: createExpression,
-    visibilityState: 'visible',
-    body: null
+    visibilityState: 'hidden',
+    body: null,
+    removeChild: removeChild,
+    appendChild: appendChild,
 };
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
@@ -358,23 +366,48 @@ Object.defineProperties(NetworkInformation, {
         configurable: true
     }
 });
+
+getOwnPropertyDescriptorOrg = Object.getOwnPropertyDescriptor;
+Object.getOwnPropertyDescriptor = function getOwnPropertyDescriptor(obj, prop) {
+    if (obj[Symbol.toStringTag] == 'navigator' && prop == 'webdriver'){
+        return;
+    }
+    return getOwnPropertyDescriptorOrg(obj, prop);
+
+}
+
+
+Navigator = function Navigator(){
+    throw TypeError("Illegal constructor");
+};
+Navigator.prototype.webdriver = false;
+function webdriver(){return false};
+
+Object.defineProperties(Navigator.prototype, {
+    [Symbol.toStringTag]: {
+        value: 'navigator',
+        configurable: true
+    },
+    webdriver:{
+        configurable: true,
+        enumerable: true,
+        get: webdriver,
+        set: undefined
+    }
+});
+
 navigator = {
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     mimeTypes: mimeTypes,
     appVersion: "5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     webkitPersistentStorage: DeprecatedStorageQuota,
     languages: ['zh-CN'],
-    webdriver: false,
     platform: "Win32",
     maxTouchPoints: 0,
     connection: NetworkInformation
 };
-Object.defineProperties(navigator, {
-    [Symbol.toStringTag]: {
-        value: 'navigator',
-        configurable: true
-    }
-});
+
+navigator.__proto__ = Navigator;
 navigator = proxy(navigator);
 
 function open(a, b) {
@@ -442,12 +475,29 @@ function observe(target, options) {
     return result;
 };
 
-function XMLHttpRequest() {
-    var result = undefined;
-    console.log("XMLHttpRequest ");
-    return result;
+function xmlRequestOpen(method, url) {
+    console.log("xmlRequestOpen  method", + method + " -> ", url);
+};
+function xmlRequestSend(body) {
+    console.log("xmlRequestSend  -> ", body);
 };
 
+function XMLHttpRequest() {
+    console.log("XMLHttpRequest -> ", null);
+};
+
+XMLHttpRequestResult = {
+    open: xmlRequestOpen,
+    send: xmlRequestSend
+};
+Object.defineProperties(XMLHttpRequestResult, {
+    [Symbol.toStringTag]: {
+        value: 'XMLHttpRequest',
+        configurable: true
+    }
+});
+
+XMLHttpRequest.prototype = XMLHttpRequestResult;
 
 WebKitMutationObserver = {
     observe: observe
@@ -504,6 +554,7 @@ window.open = open;
 window.XMLHttpRequest = XMLHttpRequest;
 window.MutationRecord = MutationRecord;
 window.chrome = chrome;
+window.clientInformation  = navigator;
 
 window = proxy(window);
 
@@ -594,9 +645,7 @@ if ($_ts.cd) {
                     _$e_.push(_$$c[_$_I[_$fw]], _$kE[_$_I[_$fw + 1]]);
                 _$e_.push(_$$c[_$_I[_$kx]]);
             }
-            function _$gp() {
-                return '\x74\x6f\x53\x74\x72\x69\x6e\x67';
-            }
+            function _$gp(){return'\x74\x6f\x53\x74\x72\x69\x6e\x67';}
             var _$_I, _$e_, _$kx, _$fw, _$eC, _$cU, _$cY, _$__, _$dn, _$$y, _$be, _$dq, _$bs, _$i3, _$_a, _$kE, _$fo, _$_Q, _$dZ, _$$a, _$cs, _$hj, _$$c;
             var _$bA, _$iP, _$dG = _$e1, _$hP = _$fy[1];
             while (1) {
@@ -674,7 +723,7 @@ if ($_ts.cd) {
                                     var update_cnt = match_str.substring(0, replace_length) + repalce_cnt + match_str.substring(replace_length + repalce_cnt.length,)
                                     var cnt_1 = _$_W.substring(0, start_index) +
                                         update_cnt + _$_W.substring(start_index + check_strs[0].length, _$_W.length);
-                                    cnt_1 = cnt_1.replace("_$gq=[]", "_$gq=[],_$gq=proxy(_$gq)")
+                                    // cnt_1 = cnt_1.replace("_$gN=[];", "_$gN=[],_$gN=proxy(_$gN);")
                                     debugger;
                                     _$_l = eval(cnt_1);
                                     // _$_I = _$e_.call(_$_A, _$_W);
