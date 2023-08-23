@@ -18,41 +18,52 @@ for (_$_Z = _$ge; _$_Z < _$hH; _$_Z++) {
     _$gz = _$_l[_$_Z];
     if (_$gz <= 63)
 
-日志打印：
+
+
+_$gq _$_l
+
+'->>>>>>> ', _$gz, '->>>>>>> ', _$$U, '->>>>>>> ', _$_l, '->>>>>>> ', _$gq
+
+_$$5[1] == 'all'
+
+'->>>>>>> ', _$$n, '->>>>>>> ', _$$5, '->>>>>>> ', _$aI, '->>>>>>> ', _$$Q
+
 '当前 _$$U -> ', _$gz, ' _$aF -> ', _$_Z, ' _$iO -> ', _$$U
 
 '当前 _$$U -> ', _$gz, ' _$aF -> ', _$_Z, ' _$iO -> ', _$$U, ' _$dx -> ', _$dx
 
 异常位置
-[, 'getOwnPropertyDescriptor', Proxy, '__proto__', 0]
 
-_$$U.length == 5 &&  _$$U[1] == 'getOwnPropertyDescriptor' &&  _$$U[3] == '__proto__' && _$$U[4] == 0
-
-分析原因：
+ [Proxy, 'all']
 
 
+_$$U.length == 5 &&  _$$U[1] == 'test' &&  _$$U[3] == 'toString' && _$$U[4] == 51
 
-[-1, 1, 'function _$]
 
-_$$U.length == 3 &&  _$$U[1] == 'getOwnPropertyDescriptor' &&  _$$U[2] == 61
+[Proxy, 'action', 55, Proxy, 31]
 
- &&  _$$U[2].indexOf('function') != -1
 
-xy, 'visibilityState', 137, 16]
+_$$5[1] == 'action'
 
-_$$U.length == 4 &&  _$$U[1] == 'visibilityState' &&  _$$U[2] == 137 &&  _$$U[3] == 16
+_$_l 的值不一致
+_$gq 的值不一致，长度不一致
+
+长数组的值不一致
+
+_$$U.length == 2 &&  _$$U[1] == 'all' &&  _$$U[2] == 137 &&  _$$U[3] == 16
 
 
 [Array(224), 53, 19]
 
 browser：
 
+'当前 _$$U -> '_$cz, ' _$$U -> ', _$eA, ' _$_l -> ', _$gG, ' _$gq -> ', _$_p
+
+
 日志打印：
-'当前 _$$U -> ',_$jT , ' _$aF -> ', _$jL, ' _$iO -> ', _$jH
+'当前 _$$U -> ', _$$H , ' _$aF -> ', _$aA, ' _$iO -> ', _$e0
 
-_$$U.length == 3 &&  _$$U[1] == 'getOwnPropertyDescriptor' &&  _$$U[2] == 61
-
-_$jH.length == 5 && _$jH[1] == 'getOwnPropertyDescriptor' &&  _$jH[3] == '__proto__' && _$jH[4] == 0
+_$js.length == 5 && _$js[1] == 'action' && _$hQ[2] == 55 && _$hQ[4] == 31
 
 
 vscode 替换报错：

@@ -55,7 +55,7 @@ Object.defineProperties($_ts, {
         configurable: true
     }
 });
-$_ts = proxy($_ts);
+// $_ts = proxy($_ts);
 
 location = {
     "ancestorOrigins": {},
@@ -277,6 +277,44 @@ function createExpression(xpathText, namespaceURLMapper) {
     return result;
 };
 
+
+html = {};
+Object.defineProperties(html, {
+    [Symbol.toStringTag]: {
+        value: 'HTMLHtmlElement',
+        configurable: true
+    }
+});
+head = {};
+Object.defineProperties(head, {
+    [Symbol.toStringTag]: {
+        value: 'HTMLHeadElement',
+        configurable: true
+    }
+});
+meta = {};
+Object.defineProperties(meta, {
+    [Symbol.toStringTag]: {
+        value: 'HTMLMetaElement',
+        configurable: true
+    }
+});
+title = {};
+Object.defineProperties(title, {
+    [Symbol.toStringTag]: {
+        value: 'HTMLTitleElement',
+        configurable: true
+    }
+});
+documentAll = [
+    html, head, meta, meta, title
+]
+Object.defineProperties(documentAll, {
+    [Symbol.toStringTag]: {
+        value: 'HTMLAllCollection',
+        configurable: true
+    }
+});
 document = {
     createElement: createElement,
     getElementsByTagName: getElementsByTagName,
@@ -289,6 +327,7 @@ document = {
     body: null,
     removeChild: removeChild,
     appendChild: appendChild,
+    all: documentAll
 };
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
@@ -381,11 +420,18 @@ Navigator = function Navigator(){
     throw TypeError("Illegal constructor");
 };
 Navigator.prototype.webdriver = false;
+
+
+toStringOrg = Object.toString;
+function myToString(){
+    return "function get webdriver() { [native code] }";
+};
 function webdriver(){return false};
+webdriver.toString = myToString; 
 
 Object.defineProperties(Navigator.prototype, {
     [Symbol.toStringTag]: {
-        value: 'navigator',
+        value: 'Navigator',
         configurable: true
     },
     webdriver:{
@@ -393,7 +439,8 @@ Object.defineProperties(Navigator.prototype, {
         enumerable: true,
         get: webdriver,
         set: undefined
-    }
+    },
+
 });
 
 navigator = {
@@ -404,10 +451,14 @@ navigator = {
     languages: ['zh-CN'],
     platform: "Win32",
     maxTouchPoints: 0,
-    connection: NetworkInformation
+    connection: NetworkInformation,   
+    // [Symbol.toPrimitive]:{
+    //     value: "getOwnPropertyDescriptor"
+    // }
 };
 
-navigator.__proto__ = Navigator;
+Object.setPrototypeOf(navigator, Navigator.prototype);
+// navigator.__proto__ = Navigator;
 navigator = proxy(navigator);
 
 function open(a, b) {
@@ -557,6 +608,42 @@ window.chrome = chrome;
 window.clientInformation  = navigator;
 
 window = proxy(window);
+
+function replaceWindowChecking(cnt){
+    var check_strs = new RegExp(/[\w\$]+<=30\?\([\w\$,=\[\]\s><\(\)\+-]+:(\([\w\$]+\(\),[\w\$]+=[\w\$]+\[[\w\$]+\],(([\w\$]+\[[\w\$\+-\[\]\s]+\])=([\w\$]+)\(\))\))/).exec(cnt);
+    var start_index = check_strs.index;
+    var match_str = check_strs[0];
+    var match_code_block = check_strs[1];
+    var need_update_str = check_strs[2];
+    var result_variate = check_strs[3];
+    var check_variate = check_strs[4];
+    var repalce_cnt = '(' + check_variate + '.toString().indexOf("window instanceof Window") == -1 )?(' +
+        need_update_str + '):(' +
+        result_variate + '=true))'
+    var replace_length = match_str.indexOf(need_update_str);
+    var update_cnt = match_str.substring(0, replace_length) + repalce_cnt + match_str.substring(replace_length + repalce_cnt.length,)
+    var cnt_1 = cnt.substring(0, start_index) +
+        update_cnt + cnt.substring(start_index + check_strs[0].length, cnt.length);
+    // cnt_1 = cnt_1.replace("_$gN=[];", "_$gN=[],_$gN=proxy(_$gN);")
+    return cnt_1;
+};
+
+function replaceDomAll(cnt){
+    var check_strs = new RegExp(/[\w\$]+<=41\?\([\w\$=\[\]\s><\(\)\+-]+,(([\w\$]+)=([\w\$]+\[[\s\S\-]+\])==([\w\$]+?)),([\w\$]+\[[\s\S\-]+?)\)/).exec(cnt);
+    var start_index = check_strs.index;
+    var match_str = check_strs[0];
+    var match_code_block = check_strs[1];
+    var need_update_str = check_strs[2];
+    var result_variate = check_strs[3];
+    var compare_variate = check_strs[4];
+    var set_code = check_strs[5];
+    var repalce_cnt = 'window.result_variate = ' + result_variate + ', window.compare_variate = '+ compare_variate + ',' + need_update_str + '= window.result_variate == ' + compare_variate + ',(( window.result_variate === window.documentAll )&&( window.compare_variate == undefined))?(' + need_update_str + '=true,'+ set_code+'):';
+    var update_index = match_str.indexOf(match_code_block);
+    var update_str = match_str.substring(0, update_index)  + repalce_cnt + match_str.substring(update_index+match_code_block.length + 1, match_str.length)
+    var endCnt = cnt.substring(0, check_strs.index) + update_str + cnt.substring(check_strs.index + match_str.length, cnt.length);
+    return endCnt
+};
+
 
 
 if ($_ts.cd) {
@@ -709,23 +796,10 @@ if ($_ts.cd) {
                                 }
                             } else if (_$iP < 24) {
                                 if (_$iP === 20) {
-                                    var check_strs = new RegExp(/[\w\$]+<=30\?\([\w\$,=\[\]\s><\(\)\+-]+:(\([\w\$]+\(\),[\w\$]+=[\w\$]+\[[\w\$]+\],(([\w\$]+\[[\w\$\+-\[\]\s]+\])=([\w\$]+)\(\))\))/).exec(_$_W);
-                                    var start_index = check_strs.index;
-                                    var match_str = check_strs[0];
-                                    var match_code_block = check_strs[1];
-                                    var need_update_str = check_strs[2];
-                                    var result_variate = check_strs[3];
-                                    var check_variate = check_strs[4];
-                                    var repalce_cnt = '(' + check_variate + '.toString().indexOf("window instanceof Window") == -1 )?(' +
-                                        need_update_str + '):(' +
-                                        result_variate + '=true))'
-                                    var replace_length = match_str.indexOf(need_update_str);
-                                    var update_cnt = match_str.substring(0, replace_length) + repalce_cnt + match_str.substring(replace_length + repalce_cnt.length,)
-                                    var cnt_1 = _$_W.substring(0, start_index) +
-                                        update_cnt + _$_W.substring(start_index + check_strs[0].length, _$_W.length);
-                                    // cnt_1 = cnt_1.replace("_$gN=[];", "_$gN=[],_$gN=proxy(_$gN);")
+                                    updateCnt = replaceWindowChecking(_$_W);
+                                    rightCnt = replaceDomAll(updateCnt);
                                     debugger;
-                                    _$_l = eval(cnt_1);
+                                    _$_l = eval(rightCnt);
                                     // _$_I = _$e_.call(_$_A, _$_W);
                                 } else if (_$iP === 21) {
                                     _$c4(35, _$dn, _$$y);
