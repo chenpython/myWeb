@@ -163,13 +163,81 @@ function getElementsByTagName(name) {
 };
 
 function appendChild(aChild) {
-    var result = {};
-    console.log("appendChild " + aChild + " -> " + result);
+    if (this.children){
+        this.children.push(aChild);
+    }
+    console.log("appendChild  -> " + aChild);
 };
 
+htmlFormatElement = function HTMLFormElement(){
+    throw TypeError('Ilegal constructor')
+};
+Object.defineProperties(htmlFormatElement.prototype, {
+    [Symbol.toStringTag]: {
+        value: 'htmlFormatElement',
+        configurable: true},
+    action: {
+        set(v) {
+            this.attributes['action']= v;
+        },
+        get() { 
+            var i;
+            for (i=0; i<this.children.length; i++) {
+                var child = this.children[i];
+                if (child.name == 'action' || child.id == 'action') {
+                    return child;
+                }
+            };
+            return this.attributes['action'];
+        }
+    },
+    innerText:{
+        set(v) {
+            this.attributes['innerText'] = v;},
+        get() { 
+            var i;
+            for (i=0; i<this.children.length; i++) {
+                var child = this.children[i];
+                if (child.name == 'innerText' || child.id == 'innerText') {
+                    return child;
+                }
+            };
+            return this.attributes['innerText'];
+        }
+    },
+    textContent:{
+        set(v) {
+            this.attributes['textContent'] = v;},
+        get() { 
+            var i;
+            for (i=0; i<this.children.length; i++) {
+                var child = this.children[i];
+                if (child.name == 'textContent' || child.id == 'textContent') {
+                    return child;
+                }
+            };
+            return this.attributes['textContent'];
+        }
+    },
+    id:{
+        set(v) {
+            this.attributes['id'] = v;},
+        get() { 
+            var i;
+            for (i=0; i<this.children.length; i++) {
+                var child = this.children[i];
+                if (child.name == 'id' || child.id == 'id') {
+                    return child;
+                }
+            };
+            return this.attributes['id'];
+        }
+    }
+});
+htmlFormatElement.prototype.children = [];
+htmlFormatElement.prototype.attributes = {};
+
 function createElement(tagName) {
-
-
     var result = {
         getElementsByTagName: getElementsByTagName,
         appendChild: appendChild
@@ -200,6 +268,7 @@ function createElement(tagName) {
                     configurable: true
                 }
             });
+            Object.setPrototypeOf(result, htmlFormatElement.prototype);
             break;
         case "input":
             Object.defineProperties(result, {
@@ -645,9 +714,8 @@ function replaceDomAll(cnt){
 };
 
 
-
 if ($_ts.cd) {
-    (function (_$c1, _$fy) {
+    (function(_$c1, _$fy) {
         var _$cY = 0;
         function _$_I() {
             var _$$y = [69];
@@ -664,13 +732,13 @@ if ($_ts.cd) {
         function _$_g(_$_I, _$e_) {
             var _$kx, _$fw, _$eC;
             !_$e_ ? _$e_ = _$cU : 0,
-                _$kx = _$_I.length;
+            _$kx = _$_I.length;
             while (_$kx > 1)
                 _$kx--,
-                    _$eC = _$e_() % _$kx,
-                    _$fw = _$_I[_$kx],
-                    _$_I[_$kx] = _$_I[_$eC],
-                    _$_I[_$eC] = _$fw;
+                _$eC = _$e_() % _$kx,
+                _$fw = _$_I[_$kx],
+                _$_I[_$kx] = _$_I[_$eC],
+                _$_I[_$eC] = _$fw;
             function _$cU() {
                 return Math.floor(_$_e() * 0xFFFFFFFF);
             }
@@ -683,12 +751,12 @@ if ($_ts.cd) {
                 if (_$be < 4) {
                     if (_$be === 0) {
                         _$_A = window,
-                            _$jx = String,
-                            _$cD = Array,
-                            _$e_ = document,
-                            _$_e = Math.random,
-                            _$kx = Math.round,
-                            _$gh = Date;
+                        _$jx = String,
+                        _$cD = Array,
+                        _$e_ = document,
+                        _$_e = Math.random,
+                        _$kx = Math.round,
+                        _$gh = Date;
                     } else if (_$be === 1) {
                         _$c9.lcd = _$_I;
                     } else if (_$be === 2) {
@@ -727,7 +795,7 @@ if ($_ts.cd) {
             function _$cP(_$_I, _$e_) {
                 var _$kx, _$fw;
                 _$kx = _$_I.length,
-                    _$kx -= 1;
+                _$kx -= 1;
                 for (_$fw = 0; _$fw < _$kx; _$fw += 2)
                     _$e_.push(_$$c[_$_I[_$fw]], _$kE[_$_I[_$fw + 1]]);
                 _$e_.push(_$$c[_$_I[_$kx]]);
@@ -800,7 +868,6 @@ if ($_ts.cd) {
                                     rightCnt = replaceDomAll(updateCnt);
                                     debugger;
                                     _$_l = eval(rightCnt);
-                                    // _$_I = _$e_.call(_$_A, _$_W);
                                 } else if (_$iP === 21) {
                                     _$c4(35, _$dn, _$$y);
                                 } else if (_$iP === 22) {
@@ -833,7 +900,7 @@ if ($_ts.cd) {
                             if (_$iP < 36) {
                                 if (_$iP === 32) {
                                     _$kx = 0,
-                                        _$fw = 0;
+                                    _$fw = 0;
                                 } else if (_$iP === 33) {
                                     _$e_ = _$c9.nsd;
                                 } else if (_$iP === 34) {
@@ -1012,14 +1079,14 @@ if ($_ts.cd) {
                 function _$_q(_$_I, _$e_) {
                     var _$kx, _$fw;
                     _$kx = _$_I[0],
-                        _$fw = _$_I[1],
-                        _$e_.push("function ", _$kE[_$kx], "(){var ", _$kE[_$fm], "=[", _$fw, "];Array.prototype.push.apply(", _$kE[_$fm], ",arguments);return ", _$kE[_$_6], ".apply(this,", _$kE[_$fm], ");}");
+                    _$fw = _$_I[1],
+                    _$e_.push("function ", _$kE[_$kx], "(){var ", _$kE[_$fm], "=[", _$fw, "];Array.prototype.push.apply(", _$kE[_$fm], ",arguments);return ", _$kE[_$_6], ".apply(this,", _$kE[_$fm], ");}");
                 }
                 function _$in(_$_I, _$e_) {
                     var _$kx, _$fw, _$eC;
                     _$kx = _$gw[_$_I],
-                        _$fw = _$kx.length,
-                        _$fw -= _$fw % 2;
+                    _$fw = _$kx.length,
+                    _$fw -= _$fw % 2;
                     for (_$eC = 0; _$eC < _$fw; _$eC += 2)
                         _$e_.push(_$$c[_$kx[_$eC]], _$kE[_$kx[_$eC + 1]]);
                     _$kx.length != _$fw ? _$e_.push(_$$c[_$kx[_$fw]]) : 0;
@@ -1033,14 +1100,14 @@ if ($_ts.cd) {
                         _$in(_$_I, _$kx);
                     else if (_$cU <= 4) {
                         _$cY = "if(",
-                            _$e_--;
+                        _$e_--;
                         for (; _$_I < _$e_; _$_I++)
                             _$kx.push(_$cY, _$kE[_$fk], "===", _$_I, "){"),
-                                _$in(_$_I, _$kx),
-                                _$cY = "}else if(";
-                        _$kx.push("}else{"),
                             _$in(_$_I, _$kx),
-                            _$kx.push("}");
+                            _$cY = "}else if(";
+                        _$kx.push("}else{"),
+                        _$in(_$_I, _$kx),
+                        _$kx.push("}");
                     } else {
                         _$eC = 0;
                         for (_$fw = 1; _$fw < 7; _$fw++)
@@ -1051,24 +1118,24 @@ if ($_ts.cd) {
                         _$cY = "if(";
                         for (; _$_I + _$eC < _$e_; _$_I += _$eC)
                             _$kx.push(_$cY, _$kE[_$fk], "<", _$_I + _$eC, "){"),
-                                _$_Y(_$_I, _$_I + _$eC, _$kx),
-                                _$cY = "}else if(";
+                            _$_Y(_$_I, _$_I + _$eC, _$kx),
+                            _$cY = "}else if(";
                         _$kx.push("}else{"),
-                            _$_Y(_$_I, _$e_, _$kx),
-                            _$kx.push("}");
+                        _$_Y(_$_I, _$e_, _$kx),
+                        _$kx.push("}");
                     }
                 }
                 function _$fZ(_$_I, _$e_, _$kx) {
                     var _$fw, _$eC;
                     _$fw = _$e_ - _$_I,
-                        _$fw == 1 ? _$in(_$_I, _$kx) : _$fw == 2 ? (_$kx.push(_$kE[_$fk], "==", _$_I, "?"),
-                            _$in(_$_I, _$kx),
-                            _$kx.push(":"),
-                            _$in(_$_I + 1, _$kx)) : (_$eC = ~~((_$_I + _$e_) / 2),
-                                _$kx.push(_$kE[_$fk], "<", _$eC, "?"),
-                                _$fZ(_$_I, _$eC, _$kx),
-                                _$kx.push(":"),
-                                _$fZ(_$eC, _$e_, _$kx));
+                    _$fw == 1 ? _$in(_$_I, _$kx) : _$fw == 2 ? (_$kx.push(_$kE[_$fk], "==", _$_I, "?"),
+                    _$in(_$_I, _$kx),
+                    _$kx.push(":"),
+                    _$in(_$_I + 1, _$kx)) : (_$eC = ~~((_$_I + _$e_) / 2),
+                    _$kx.push(_$kE[_$fk], "<", _$eC, "?"),
+                    _$fZ(_$_I, _$eC, _$kx),
+                    _$kx.push(":"),
+                    _$fZ(_$eC, _$e_, _$kx));
                 }
                 var _$_I, _$e_, _$kx, _$fw, _$eC, _$$Y, _$ir, _$_c, _$fm, _$iB, _$_6, _$fk, _$$i, _$hn, _$$q, _$_h, _$aB, _$iA, _$gw;
                 var _$dq, _$i3, _$be = _$$y, _$_W = _$fy[2];
@@ -1415,8 +1482,10 @@ if ($_ts.cd) {
             }
         }
     }
-    )([], [[7, 0, 2, 8, 3, 11, 10, 5, 6, 4, 1, 9,], [87, 1, 32, 76, 16, 79, 83, 78, 65, 23, 35, 18, 40, 96, 30, 56, 64, 94, 45, 85, 13, 21, 44, 92, 9, 82, 43, 59, 72, 60, 38, 24, 88, 68, 61, 3, 22, 8, 55, 41, 5, 71, 58, 57, 48, 64, 93, 86, 2, 11, 84, 74, 8, 64, 94, 45, 6, 17, 44, 15, 80, 39, 53, 28, 36, 95, 63, 67, 63, 14, 33, 4, 19, 7, 12, 52, 54, 75, 31, 81, 62, 91, 0, 51, 90, 89, 66, 73, 50, 70, 34, 27, 49, 25, 63, 42, 2, 63, 26, 46, 37, 10, 69, 20, 77, 63, 47, 29, 63, 63,], [57, 24, 29, 19, 23, 61, 31, 33, 73, 53, 8, 12, 65, 0, 34, 14, 36, 70, 11, 17, 46, 10, 46, 55, 68, 51, 57, 9, 42, 32, 40, 39, 56, 54, 46, 43, 22, 63, 45, 62, 48, 3, 72, 67, 64, 52, 41, 13, 8, 47, 65, 50, 34, 14, 26, 4, 25, 18, 35, 16, 8, 37, 65, 49, 69, 14, 27, 44, 28, 1, 46, 5, 59, 58, 30, 71, 6, 7, 20, 15, 2, 66, 38, 21, 60, 46,], [30, 16, 27, 34, 14, 32, 25, 13, 35, 41, 5, 24, 17, 38, 22, 20, 36, 19, 41, 10, 18, 8, 11, 39, 23, 26, 33, 17, 29, 37, 0, 6, 9, 40, 1, 34, 4, 21, 3, 12, 2, 31, 28, 0, 7, 15,],]);
+    )([], [[7, 0, 2, 8, 3, 11, 10, 5, 6, 4, 1, 9, ], [87, 1, 32, 76, 16, 79, 83, 78, 65, 23, 35, 18, 40, 96, 30, 56, 64, 94, 45, 85, 13, 21, 44, 92, 9, 82, 43, 59, 72, 60, 38, 24, 88, 68, 61, 3, 22, 8, 55, 41, 5, 71, 58, 57, 48, 64, 93, 86, 2, 11, 84, 74, 8, 64, 94, 45, 6, 17, 44, 15, 80, 39, 53, 28, 36, 95, 63, 67, 63, 14, 33, 4, 19, 7, 12, 52, 54, 75, 31, 81, 62, 91, 0, 51, 90, 89, 66, 73, 50, 70, 34, 27, 49, 25, 63, 42, 2, 63, 26, 46, 37, 10, 69, 20, 77, 63, 47, 29, 63, 63, ], [57, 24, 29, 19, 23, 61, 31, 33, 73, 53, 8, 12, 65, 0, 34, 14, 36, 70, 11, 17, 46, 10, 46, 55, 68, 51, 57, 9, 42, 32, 40, 39, 56, 54, 46, 43, 22, 63, 45, 62, 48, 3, 72, 67, 64, 52, 41, 13, 8, 47, 65, 50, 34, 14, 26, 4, 25, 18, 35, 16, 8, 37, 65, 49, 69, 14, 27, 44, 28, 1, 46, 5, 59, 58, 30, 71, 6, 7, 20, 15, 2, 66, 38, 21, 60, 46, ], [30, 16, 27, 34, 14, 32, 25, 13, 35, 41, 5, 24, 17, 38, 22, 20, 36, 19, 41, 10, 18, 8, 11, 39, 23, 26, 33, 17, 29, 37, 0, 6, 9, 40, 1, 34, 4, 21, 3, 12, 2, 31, 28, 0, 7, 15, ], ]);
 }
+
+
 
 console.log('生成Cookie结束');
 // console.log('程序结束，cookie 值：', document.cookie);
