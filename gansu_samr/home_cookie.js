@@ -19,9 +19,9 @@ proxy = function (obj) {
         // prop：属性名称
         // prop：属性值
         get(target, prop, receiver) {
-            if (prop == "cookie") {
-                debugger;
-            }
+            // if (prop == "cookie") {
+            //     debugger;
+            // }
             console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
             return target[prop];
         },
@@ -33,7 +33,13 @@ proxy = function (obj) {
 
 // 首页返回的参数值
 // 读取文件提取指定值传递给 $_ts
-var home_html_path = '/overwrite/scjg.gansu.gov.cn/longurls/s%3FsiteCo-b8bf619'
+// var home_html_path = '/overwrite/scjg.gansu.gov.cn/longurls/s%3FsiteCo-b8bf619'
+// var home_html_path = '/gansu_samr/home_html';
+// var cookiePath = '/home/feng/workspace/myWeb/gansu_samr/cookie';
+
+var home_html_path = '/gansu_samr/detail_html';
+var cookiePath = '/home/feng/workspace/myWeb/gansu_samr/detail_cookie';
+
 var file_path = path.join(path.dirname(__dirname), home_html_path);
 var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
 data = res.toString()
@@ -675,6 +681,12 @@ window.XMLHttpRequest = XMLHttpRequest;
 window.MutationRecord = MutationRecord;
 window.chrome = chrome;
 window.clientInformation  = navigator;
+window.setTimeout = function setTimeout(code, delay){
+    if (code.toString().indexOf("debugger") == -1) {
+        return code();
+    }
+};
+window.setInterval = function setInterval(code, delay){};
 
 window = proxy(window);
 
@@ -866,7 +878,7 @@ if ($_ts.cd) {
                                 if (_$iP === 20) {
                                     updateCnt = replaceWindowChecking(_$_W);
                                     rightCnt = replaceDomAll(updateCnt);
-                                    debugger;
+                                    // debugger;
                                     _$_l = eval(rightCnt);
                                 } else if (_$iP === 21) {
                                     _$c4(35, _$dn, _$$y);
@@ -1493,7 +1505,7 @@ var cookie_str = document.cookie.split('=')[1]
 const binaryData = Buffer.from(cookie_str, 'binary');
 
 // 将二进制数据写入文件
-fs.writeFile('/home/feng/workspace/myWeb/gansu_samr/cookie', binaryData, (err) => {
+fs.writeFile(cookiePath, binaryData, (err) => {
     if (err) {
         console.error('Error writing to file:', err);
         return;
