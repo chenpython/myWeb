@@ -16,3 +16,4 @@ node_modules
 tmp
 
 !/gansu_samr/logs
+.python-version
