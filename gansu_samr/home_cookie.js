@@ -1,7 +1,39 @@
-const { debug } = require('console');
+const cheerio = require('cheerio');
 var fs = require('fs');
 var path = require("path");
 
+window = global;
+Object.defineProperties(window, {
+    [Symbol.toStringTag]: {
+        value: 'Window',
+        configurable: true
+    }
+});
+
+function getTsParameters(html_text) {
+    const $ = cheerio.load(html_text);
+    const scriptContents = [];
+
+    $('script').each((index, element) => {
+        scriptContents.push($(element).html());
+    });
+
+    ts_js = scriptContents[0];
+    eval(ts_js);
+};
+
+function getHtmlContent(html_text) {
+    const $ = cheerio.load(html_text);
+    const metaContents = [];
+    $('meta').each((index, element) => {
+        const content = $(element).attr('content');
+        if (content) {
+            metaContents.push(content);
+        }
+    });
+    var content = metaContents[1];
+    return content;
+};
 
 // 跟踪变量调试
 proxy = function (obj) {
@@ -34,34 +66,37 @@ proxy = function (obj) {
 // 首页返回的参数值
 // 读取文件提取指定值传递给 $_ts
 // var home_html_path = '/overwrite/scjg.gansu.gov.cn/longurls/s%3FsiteCo-b8bf619'
-// var home_html_path = '/gansu_samr/home_html';
-// var cookiePath = '/home/feng/workspace/myWeb/gansu_samr/cookie';
+var home_html_path = '/gansu_samr/home_html';
+var cookiePath = '/home/feng/workspace/myWeb/gansu_samr/cookie';
 
-var home_html_path = '/gansu_samr/detail_html';
-var cookiePath = '/home/feng/workspace/myWeb/gansu_samr/detail_cookie';
+// var home_html_path = '/gansu_samr/detail_html';
+// var cookiePath = '/home/feng/workspace/myWeb/gansu_samr/detail_cookie';
 
 var file_path = path.join(path.dirname(__dirname), home_html_path);
 var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
 data = res.toString()
-var regex = /[";]*/g    // 替换所有";符号
-matchCd = data.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '');
-matchNsd = parseInt(data.match(/\$\_ts\.nsd\s*=\s*(.+)/)[1].replace(regex, '').split(" ")[0]);
 
-var cntFunc = require("./content.js");
-const { spawn } = require('child_process');
-content = cntFunc.contentHandler(home_html_path);
-
-$_ts = {
-    cd: matchCd,
-    nsd: matchNsd
-}
-Object.defineProperties($_ts, {
-    [Symbol.toStringTag]: {
-        value: '$_ts',
-        configurable: true
-    }
-});
+// var regex = /[";]*/g    // 替换所有";符号
+// matchCd = data.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '');
+// matchNsd = parseInt(data.match(/\$\_ts\.nsd\s*=\s*(.+)/)[1].replace(regex, '').split(" ")[0]);
+// $_ts = {
+//     cd: matchCd,
+//     nsd: matchNsd
+// }
+// Object.defineProperties($_ts, {
+//     [Symbol.toStringTag]: {
+//         value: '$_ts',
+//         configurable: true
+//     }
+// });
 // $_ts = proxy($_ts);
+
+// var cntFunc = require("./content.js");
+// const { spawn } = require('child_process');
+// content = cntFunc.contentHandler(home_html_path);
+
+getTsParameters(data)
+content = getHtmlContent(data)
 
 location = {
     "ancestorOrigins": {},
@@ -656,13 +691,7 @@ Object.defineProperties(MutationRecord, {
 
 chrome = {};
 
-window = global;
-Object.defineProperties(window, {
-    [Symbol.toStringTag]: {
-        value: 'Window',
-        configurable: true
-    }
-});
+
 window.location = location;
 window.top = window;
 window.localStorage = localStorage;
@@ -1514,3 +1543,22 @@ fs.writeFile(cookiePath, binaryData, (err) => {
 });
 
 console.log("程序结束");
+
+
+// function getHtmlContent(html_text) {
+//     var matches = html_text.match(/<meta[^>]*content=["']([^"']*)["'][^>]*>/gi);
+//     var contentValues = matches.map((match) => {
+//         const contentValueRegex = /content=["']([^"']*)["']/i;
+//         const result = contentValueRegex.exec(match);
+//         return result ? result[1] : null;
+//     });
+//     var content = contentValues[1];
+//     return content;
+// };
+
+// function getTsParameters(html_text) {
+//     var regex = /[";]*/g    // 替换所有";符号
+//     var matchCd = html_text.match(/\$\_ts\.cd\s*=\s*(.+)/)[1].replace(regex, '');
+//     var matchNsd = parseInt(html_text.match(/\$\_ts\.nsd\s*=\s*(.+)/)[1].replace(regex, '').split(" ")[0]);
+//     return [matchCd, matchNsd];
+// };
