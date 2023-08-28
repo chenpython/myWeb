@@ -1,0 +1,25 @@
+查询地址
+http://scjg.hubei.gov.cn/zfxxgk/zcwj/qtwj/
+详情地址
+http://scjg.hubei.gov.cn/zfxxgk/zcwj/qtwj/202308/t20230828_4813376.shtml
+
+
+
+循环入口：
+_$dY = _$dH[1],
+_$du = _$fQ._$hn(),
+_$dO = 0;
+for (_$aR = _$cH; _$aR < _$$n; _$aR++) {
+    _$_X = _$f4[_$aR];
+    if (_$_X <= 63)
+
+日志打印：
+
+local：
+
+'->>>>>>> ', _$_X, '->>>>>>> ', _$du
+
+browser：
+
+'->>>>>>> ', _$_X, '->>>>>>> ', _$du
+
