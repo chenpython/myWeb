@@ -16,6 +16,7 @@
         },
         // hook get 方法也就是取值的方法 
         get: function () {
+            debugger;
             return cookieTemp;
         }
     });
