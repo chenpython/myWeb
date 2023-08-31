@@ -1,9 +1,11 @@
+
+// 需要在执行index页面后才执行
 // hook cookie 方法
 (function () {
     // 严谨模式 检查所有错误
     'use strict';
     // document 为要hook的对象 这里是hook的cookie
-    var cookieTemp = "";
+    var cookieTemp = (document.cookie == undefined)?"":document.cookie;
     Object.defineProperty(document, 'cookie', {
         // hook set方法也就是赋值的方法 
         set: function (val) {
@@ -16,6 +18,7 @@
         },
         // hook get 方法也就是取值的方法 
         get: function () {
+            console.log('Hook捕获到cookie获取->', cookieTemp);
             debugger;
             return cookieTemp;
         }

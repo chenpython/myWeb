@@ -12,7 +12,7 @@ Object.defineProperties(window, {
 
 
 function getHtmlContent(html_text) {
-    const $ = cheerio.load(html_text);
+    const $ = cheerio.load(html_text,);
     const metaContents = [];
     $('meta').each((index, element) => {
         const content = $(element)[0].attribs['content'];
@@ -43,7 +43,7 @@ proxy = function (obj) {
         // prop：属性名称
         // prop：属性值
         get(target, prop, receiver) {
-            if (prop == "cookie") {
+            if (prop == "content") {
                 debugger;
             }
             console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
@@ -66,8 +66,6 @@ data = res.toString()
 
 js_content = fs.readFileSync(path.join(path.dirname(__dirname), link_js), { encoding: 'utf8', flag: 'r' }).toString();
 
-content = getHtmlContent(data)
-eval(js_content);
 
 location = {
     "ancestorOrigins": {},
@@ -426,7 +424,8 @@ document = {
     body: null,
     removeChild: removeChild,
     appendChild: appendChild,
-    all: documentAll
+    all: documentAll,
+    characterSet: 'UTF-8'
 };
 Object.defineProperties(document, {
     [Symbol.toStringTag]: {
@@ -698,6 +697,8 @@ window.XMLHttpRequest = XMLHttpRequest;
 window.MutationRecord = MutationRecord;
 window.chrome = chrome;
 window.clientInformation = navigator;
+window.TEMPORARY = 0;
+
 window.setTimeout = function setTimeout(code, delay) {
     if (code.toString().indexOf("debugger") == -1) {
         return code();
@@ -707,6 +708,12 @@ window.setInterval = function setInterval(code, delay) { };
 
 window = proxy(window);
 
+
+content = getHtmlContent(data)
+eval(js_content);
+
+
+debugger;
 function _$Gn() {
     return 5
 }
@@ -1364,7 +1371,7 @@ function _$tG(_$wF) {
         _$ql = _$HF[_$qA()](_$wF);
     } else {
         var _$yB = _$HF[_$pT()];
-        debugger;
+        debugger ;
         _$ql = _$yB[_$mm()](_$HF, _$wF);
     }
     if (_$b4 !== _$EB.push) {
@@ -1737,6 +1744,7 @@ function _$Fa() {
 }
 _$v0();
 _$i1();
+;
 
 console.log('生成Cookie结束');
 // console.log('程序结束，cookie 值：', document.cookie);
