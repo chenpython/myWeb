@@ -43,7 +43,7 @@ proxy = function (obj) {
         // prop：属性名称
         // prop：属性值
         get(target, prop, receiver) {
-            if (prop == "content") {
+            if (prop == "cookie") {
                 debugger;
             }
             console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
@@ -680,13 +680,11 @@ chrome = {};
 
 
 window.location = location;
-window.top = window;
 window.localStorage = localStorage;
 window.sessionStorage = sessionStorage;
 window.addEventListener = addEventListener;
 window.navigator = navigator;
 window.name = '';
-window.self = window;
 window.indexedDB = indexedDB;
 window.DOMParser = DOMParser;
 window.webkitRequestFileSystem = webkitRequestFileSystem;
@@ -707,13 +705,14 @@ window.setTimeout = function setTimeout(code, delay) {
 window.setInterval = function setInterval(code, delay) { };
 
 window = proxy(window);
-
+window.top = window;
+window.self = window;
 
 content = getHtmlContent(data)
 eval(js_content);
 
-
 debugger;
+
 function _$Gn() {
     return 5
 }
@@ -1372,7 +1371,8 @@ function _$tG(_$wF) {
     } else {
         var _$yB = _$HF[_$pT()];
         debugger ;
-        _$ql = _$yB[_$mm()](_$HF, _$wF);
+        _$ql = eval( _$wF);
+        // _$ql = _$yB[_$mm()](_$HF, _$wF);
     }
     if (_$b4 !== _$EB.push) {
         _$EB.push = _$b4;

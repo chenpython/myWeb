@@ -3,11 +3,22 @@ http://www.chinadrugtrials.org.cn/clinicaltrials.searchlist.dhtml
 FSSBBIl1UgzbN7N80T
 
 
-document.cookie['FSSBBIl1UgzbN7N80T'] = 'FSSBBIl1UgzbN7N80T=3t7tpXacIgJXncuogdVKQC1m3_ayvG59CS76UtUOAWL4pO7rQpBPnhfcOAGVn2wHv5km70GH1wErkOARg9TBcckUu5i2u3325Bh6pm7toMJGppjFqLgS1UlgaF1jI76WoSoF1oqQlX7vkOxXVbJ59KQitOCA6OspOVO_xexJuGSwKgZxO87u2wwuViB9L7u9MCbW'
 
 local:
 
- if (_$yB[_$ql[_$wF]] !== _$HC)  ReferenceError: _$HC is not defined
+问题一：
+        return _$CZ.join(_$lG())
+
+        _$tG(_$yQ(_$yB));    _$yB 不一致
+
+
+'_$DJ -> ', _$DJ, '_$EY -> ', _$EY, '_$gZ -> ', _$gZ
+
+_$CZ ->  (7) ['h1+7XCjOY', ...]
+
+_$CZ[0] == 'h1+7XCjOY'
+
+_$Ac[_$bB.call(_$ql, _$y        _$wF 值
 
 
 _$tG(_$yQ(_$yB)); _$wF 值不一样
@@ -17,7 +28,11 @@ return function(_$ql, _$EB) {
     if (_$wF === _$HC) {
          _$wF 是 string
 
-$Ha(_$E8(_$EB[_$ro()] TypeError: Cannot read properties of undefined (reading 'toString')
+f (_$EM[_$om()] === _$EM) {
+_$yB=='q@+4_t'
+
+$Ha(_$E8(_$EB[_$ro()]
+    TypeError: Cannot read properties of undefined (reading 'toString')
 
 当前问题：
 1、browser debug 无法定位到 cookie 生成
