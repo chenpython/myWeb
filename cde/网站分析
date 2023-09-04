@@ -6,33 +6,32 @@ FSSBBIl1UgzbN7N80T
 
 local:
 
-问题一：
-        return _$CZ.join(_$lG())
+  var _$wF = _$F9(5); 生成最终cookie
 
-        _$tG(_$yQ(_$yB));    _$yB 不一致
+function _$oJ(_$yB) {
+    var _$wF = _$DQ(_$yB);
+    if (_$wF && _$wF !== _$HC) {
+        _$EO(_$FQ(_$Gl), _$wF);
+    }
+}
+function _$AS(_$D8) {
+    var _$EB, _$ql;
+    _$Fu();
+    _$Bv();
+    _$z1(4, _$Gd(_$w0()));
+    _$D8 = _$D8 || 255;
+    var _$Ac = 0;
+    var _$Dl = new _$G4(128)
+      , _$EB = 0;
+    _$Dl[_$EB++] = 1;
+    _$Dl[_$EB++] = _$D8;
+    _$Dl[_$EB++] = _$HC;
+    _$Dl[_$EB++] = _$ED([_$GQ, _$fO]);
+    _$Dl[_$EB++] = _$nr;
+    _$Dl[_$EB++] = _$GC;
+    _$Dl[_$EB++] = _$DK();报错
 
 
-'_$DJ -> ', _$DJ, '_$EY -> ', _$EY, '_$gZ -> ', _$gZ
-
-_$CZ ->  (7) ['h1+7XCjOY', ...]
-
-_$CZ[0] == 'h1+7XCjOY'
-
-_$Ac[_$bB.call(_$ql, _$y        _$wF 值
-
-
-_$tG(_$yQ(_$yB)); _$wF 值不一样
-
-var _$wF;
-return function(_$ql, _$EB) {
-    if (_$wF === _$HC) {
-         _$wF 是 string
-
-f (_$EM[_$om()] === _$EM) {
-_$yB=='q@+4_t'
-
-$Ha(_$E8(_$EB[_$ro()]
-    TypeError: Cannot read properties of undefined (reading 'toString')
 
 当前问题：
 1、browser debug 无法定位到 cookie 生成
