@@ -20,7 +20,7 @@ function getHtmlContent(html_text) {
             metaContents.push(content);
         }
     });
-    var content = metaContents[1];
+    var content = metaContents[4];
     return content;
 };
 
@@ -68,9 +68,8 @@ proxy = function (obj) {
 };
 
 
-var home_html_path = '/cde/home_html';
+var home_html_path = '/cde/home_success_1_.htm';
 var link_js = '/cde/link.js';
-var exec_js = '/cde/exec.js'
 var cookiePath = '/home/feng/workspace/myWeb/cde/cookie';
 
 
@@ -79,7 +78,6 @@ var res = fs.readFileSync(file_path, { encoding: 'utf8', flag: 'r' });
 data = res.toString()
 
 js_content = fs.readFileSync(path.join(path.dirname(__dirname), link_js), { encoding: 'utf8', flag: 'r' }).toString();
-// exec_content = fs.readFileSync(path.join(path.dirname(__dirname), exec_js), { encoding: 'utf8', flag: 'r' }).toString();
 
 
 location = {
@@ -484,7 +482,12 @@ Object.defineProperties(localStorage, {
 });
 localStorage = proxy(localStorage);
 
-sessionStorage = { getItem: getItem, setItem: setItem };
+sessionStorage = { 
+    getItem: getItem, 
+    setItem: setItem, 
+    $_YWTU: '1pqWcrLXGNq400Rma5gQ4XT7T0tTAF_PjJmV.t83beA',
+    $_cDro: '0'
+};
 Object.defineProperties(sessionStorage, {
     [Symbol.toStringTag]: {
         value: 'sessionStorage',
@@ -727,7 +730,7 @@ window.self = window;
 content = getHtmlContent(data);
 exec_content = getExecContent(data);
 eval(js_content);
-window.eval(exec_content);
+window.eval('debugger;' + exec_content);
 
 
 console.log('生成Cookie结束');

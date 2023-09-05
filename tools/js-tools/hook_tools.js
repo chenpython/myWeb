@@ -25,6 +25,18 @@
     });
 })();
 
+
+
+// 清空定时任务
+end = setInterval(function() {}, 1000000);
+for (let i = 1; i<= end; i++){clearInterval(i)};
+end = setTimeout(function() {}, 1000000);
+for (let i = 1; i<= end; i++){clearTimeout(i)};
+
+
+
+
+
 // hook 指定 cookie 方法
 (function () {
     // 严谨模式 检查所有错误
@@ -138,3 +150,4 @@ Object.defineProperties(Window1, {
         configurable: true
     }
 });// 修改原型的名称
+

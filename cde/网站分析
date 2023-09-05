@@ -1,46 +1,16 @@
 http://www.chinadrugtrials.org.cn/clinicaltrials.searchlist.dhtml
 
-FSSBBIl1UgzbN7N80T
-
-
-
-local:
-
-  var _$wF = _$F9(5); 生成最终cookie
-
-function _$oJ(_$yB) {
-    var _$wF = _$DQ(_$yB);
-    if (_$wF && _$wF !== _$HC) {
-        _$EO(_$FQ(_$Gl), _$wF);
-    }
-}
-function _$AS(_$D8) {
-    var _$EB, _$ql;
-    _$Fu();
-    _$Bv();
-    _$z1(4, _$Gd(_$w0()));
-    _$D8 = _$D8 || 255;
-    var _$Ac = 0;
-    var _$Dl = new _$G4(128)
-      , _$EB = 0;
-    _$Dl[_$EB++] = 1;
-    _$Dl[_$EB++] = _$D8;
-    _$Dl[_$EB++] = _$HC;
-    _$Dl[_$EB++] = _$ED([_$GQ, _$fO]);
-    _$Dl[_$EB++] = _$nr;
-    _$Dl[_$EB++] = _$GC;
-    _$Dl[_$EB++] = _$DK();报错
-
-
-
 当前问题：
-1、browser debug 无法定位到 cookie 生成
-    流程：先从document拿cookie，再设置enable，再设置真正的cookie
+1、详情页的cookie无法确认流程
 
-    第一个FSSBBIl1UgzbN7Nenable=true  没有hook 到，从校验处开始
 
-        获取cookie
-            var _$CI = _$D2.call(_$Hz[_$q9()], _$le()); 
+2、sessionstorage 从home处生成
+VM10:39   (f) [Storage getItem func] ['$_YWTU'] ===> amPQcXBqgQeeBJB2G_zBNq9hAbA_H.pxsa_j7ipQ680 
+VM10:39   (f) [Storage getItem func] ['$_cDro'] ===> 0 
 
-2、overrid debug 无法定位 cookie 生成
-3、local debug 报错
+
+入口：
+_$ss[_$lB()](_$wi, _$te);
+
+报错位置：
+_$iq();
