@@ -13,4 +13,10 @@ VM10:39   (f) [Storage getItem func] ['$_cDro'] ===> 0
 _$ss[_$lB()](_$wi, _$te);
 
 报错位置：
-_$iq();
+_$cR();   ---> var _$dt = _$c7();    
+---->      
+    return _$nZ + 82; 
+        ----> function _$ie(_$sC, _$qK)  
+           定位条件： var _$dt = _$c7(); 
+           原因：_$sC 长度值不一致
+           解决方式：hook网页请求的外部js文件
