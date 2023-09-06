@@ -4,8 +4,36 @@
 (function () {
     // 严谨模式 检查所有错误
     'use strict';
-    // document 为要hook的对象 这里是hook的cookie
-    var cookieTemp = (document.cookie == undefined)?"":document.cookie;
+    function formStr(str_){
+        return str_.trim().replace(' ', '')
+    };
+    function formCookieStr(cookie){
+        var cookieObj = {};
+        var key, value;
+        var cookie_list = cookie.split("; ");
+        for(var i = 0; i < cookie_list.length; i++){
+            key = cookie_list[i].split("=")[0];
+            key = formStr(key);
+            value = cookie_list[i].split("=")[1];
+            value = formStr(value);
+            cookieObj[key] = value;
+        };
+        return cookieObj;
+
+    }
+    function unionObj(cookieObj){
+        var keys = Object.keys(cookieObj);
+        var cookie = "";
+        for(var i=0; i < keys.length; i++){
+            cookie += keys[i] + "=" + cookieObj[keys[i]] + ";";
+        }
+        return cookie;
+    };
+    var cookieTemp = {};
+    if (document.cookie) {
+        cookieTemp = formCookieStr(document.cookie)
+    }
+  
     Object.defineProperty(document, 'cookie', {
         // hook set方法也就是赋值的方法 
         set: function (val) {
@@ -13,14 +41,15 @@
             // 从而快速定位设置cookie的代码
             console.log('Hook捕获到cookie设置->', val);
             debugger;
-            cookieTemp = val;
-            return val;
+            var cookieTemp_ = formCookieStr(val)
+            cookieTemp = Object.assign(cookieTemp, cookieTemp_);
         },
         // hook get 方法也就是取值的方法 
         get: function () {
-            console.log('Hook捕获到cookie获取->', cookieTemp);
+            var rightCookie = unionObj(cookieTemp);
+            console.log('Hook捕获到cookie获取->', rightCookie);
             debugger;
-            return cookieTemp;
+            return rightCookie;
         }
     });
 })();

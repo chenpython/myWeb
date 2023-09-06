@@ -1,22 +1,51 @@
 http://www.chinadrugtrials.org.cn/clinicaltrials.searchlist.dhtml
 
 当前问题：
-1、详情页的cookie无法确认流程
+1、浏览器详情页cookie正常生成流程无法debug
 
 
-2、sessionstorage 从home处生成
-VM10:39   (f) [Storage getItem func] ['$_YWTU'] ===> amPQcXBqgQeeBJB2G_zBNq9hAbA_H.pxsa_j7ipQ680 
-VM10:39   (f) [Storage getItem func] ['$_cDro'] ===> 0 
+浏览器报错：DOMException: Failed to execute 'openDatabase' on 'Window': Access to the WebDatabase API is denied in non-secure contexts.
 
+ this._$oX = _$eF[_$lv()](_$b5(), _$gq(), _$b5(), 1024 * 1024); 
+
+"FSSBBIl1UgzbN7N80T=30wcEUzu2nlINDkgSKLPKka2MK7P9SDBsUZT_PI.WT_SUVEr7IFCmVod3hx.MnleY_ffEbIaG2V9B3r.sFIBsThpDRSKw3uAQ2uBY1m3d88adlkGrzG9oQ8d470p8e06QJZDReQovtxrWCmVutIhNuB4uv7KwYnOQiy4daqfZzFGEUtWuoMtQGvCDV.N5gtekER3",
+
+ if (!_$te || _$tp.length !== _$c2 + 1 || _$sM[31] !== _$tp[_
+
+
+_$sM[31] !== _$tp[_$c2]  条件符合导致逻辑错误
+
+
+    var _$te = _$s0(_$d6()); ---> _$te 结果不一致
+
+function _$d6() {
+    var _$te = _$vI(_$f2(_$vY(21)) + _$r1()[2] + _$bS(function() {
+        return _$MG;
+    }));
+    _$ts(4096, _$te.length !== 32);
+    return _$so(_$te);
+
+执行结果不一致
+
+$bz = _$vf(_$bz); 不一致
 
 入口：
 _$ss[_$lB()](_$wi, _$te);
 
-报错位置：
-_$cR();   ---> var _$dt = _$c7();    
----->      
-    return _$nZ + 82; 
-        ----> function _$ie(_$sC, _$qK)  
-           定位条件： var _$dt = _$c7(); 
-           原因：_$sC 长度值不一致
-           解决方式：hook网页请求的外部js文件
+
+browser:
+判断cookie处
+function _$d6(_$rK) {
+    var _$pc = _$v8;
+    var _$tj = _$bn();
+    var _$tq = _$rL(_$uf(_$dh));
+    if (_$tq && _$tq.length >= _$fg) {
+        _$pc = _$tF.call(_$tq, 0);
+        var _$qX = _$vP(_$sV.call(_$tq, 1));
+        var _$td = _$qX[_$uV + 1];
+        for (var _$sQ = 0; _$sQ < _$uV + 1; _$sQ++) {
+            _$qX[_$sQ] ^= _$td;
+        }
+        _$tj = _$qX[_$jn()](0, _$uV + 1);
+        var _$hy = _$qX[_$jn()](_$uV + 2);
+    }
