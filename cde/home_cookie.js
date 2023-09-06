@@ -65,9 +65,9 @@ proxy = function (obj) {
 };
 
 
-var home_html_path = '/cde/home_success_1_.htm';
+var home_html_path = '/cde/detail_html';
 var link_js = '/cde/detail_cookie_link.js';
-var cookiePath = '/home/feng/workspace/myWeb/cde/cookie';
+var cookiePath = '/home/feng/workspace/myWeb/cde/detail_cookie';
 
 
 var file_path = path.join(path.dirname(__dirname), home_html_path);

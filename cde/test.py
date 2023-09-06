@@ -3,10 +3,10 @@ import urllib
 import requests
 
 
-def getCookie(html_text):
+def getCookie(html_text, url_path):
     print('开始生成cookie')
 
-    cookie_resp = requests.post('http://127.0.0.1:2229/cde_home_cookie', data={
+    cookie_resp = requests.post('http://127.0.0.1:2229' + url_path, data={
         'html_text': html_text
     }, timeout=None)
 
@@ -40,7 +40,7 @@ def home() -> None:
 
     with open("/home/feng/workspace/myWeb/cde/home_html", "wb") as f:
         f.write(resp.content)
-    cookie_t_str = getCookie(resp.text)
+    cookie_t_str = getCookie(resp.text, '/v2/cde_home_cookie')
     # with open("/home/feng/workspace/myWeb/cde/首页返回.html", "w") as f:
     #     f.write(resp.text)
 
@@ -57,10 +57,13 @@ def home() -> None:
         f.write(resp1.content)
 
     print('开始请求详情页')
-
-    # cookie_t_str = getCookie(resp1.text)
-    # cookies_t = {cookie_t_str.split('=')[0]: cookie_t_str.split("=")[1].split(';')[0]}
-    # cookies = {**cookies_s, **cookies_t}
+    # with open("/home/feng/workspace/myWeb/cde/detail_html", "wb") as f:
+    #     f.write(resp.content)
+    cookie_t_str = getCookie(resp1.text,'/v2/cde_detail_cookie')
+    # with open("/home/feng/workspace/myWeb/gansu_samr/detail_cookie", "r") as f:
+    #     cookie_t_str = f.read()
+    cookies_t = {cookie_t_str.split('=')[0]: cookie_t_str.split("=")[1].split(';')[0]}
+    cookies = {**cookies_s, **cookies_t}
 
     detail_common_args = '&sort=desc&sort2=&rule=CTR&secondLevel=0&currentpage=1&keywords=&reg_no=&indication=&case_no=&drugs_name=&drugs_type=&appliers=&communities=&researchers=&agencies=&state='
     detail_args = {
