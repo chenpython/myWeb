@@ -14,28 +14,29 @@ Object.defineProperties(window, {
 function getHtmlContent(html_text) {
     const $ = cheerio.load(html_text,);
     const metaContents = [];
-    $('meta').each((index, element) => {
+    $('meta[id="9DhefwqGPrzGxEp9hPaoag"]').each((index, element) => {
         const content = $(element)[0].attribs['content'];
         if (content) {
             metaContents.push(content);
         }
     });
-    var content = metaContents[4];
+    var content = metaContents[0];
     return content;
 };
 
 function getExecContent(html_text) {
     const $ = cheerio.load(html_text,);
     const metaContents = [];
-    $('script').each((index, element) => {
+    $('script[type="text/javascript"][r="m"]').each((index, element) => {
         const content = $(element)[0];
         if (content) {
             metaContents.push(content);
         }
     });
-    var content = metaContents[1].children[0].data;
-    return content;
+    var exec_code_content = metaContents[1].children[0].data;
+    return exec_code_content;
 };
+
 
 // 跟踪变量调试
 proxy = function (obj) {
@@ -46,19 +47,16 @@ proxy = function (obj) {
 
     var proxy_obj = new Proxy(obj, {
         set(target, prop, value) {
-            // if (prop == "cookie") {
-            //     debugger;
-            // }
+            if (prop == "cookie") {
+                debugger;
+            }
             console.log('设置 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, value);
             return Reflect.set(...arguments);
         },
-        // target: 目标对象
-        // prop：属性名称
-        // prop：属性值
         get(target, prop, receiver) {
-            // if (prop == "cookie") {
-            //     debugger;
-            // }
+            if (prop == "cookie") {
+                debugger;
+            }
             console.log('获取 %s 的属性：%s 值为：%s', target[Symbol.toStringTag], prop, target[prop]);
             return target[prop];
         },
@@ -68,9 +66,9 @@ proxy = function (obj) {
 };
 
 
-var home_html_path = '/cde/home_success_1_.htm';
-var link_js = '/cde/link.js';
-var cookiePath = '/home/feng/workspace/myWeb/cde/cookie';
+var home_html_path = '/cde/success_home.html';
+var link_js = '/cde/detail_cookie_link.js';
+var cookiePath = '/home/feng/workspace/myWeb/cde/detail_cookie';
 
 
 var file_path = path.join(path.dirname(__dirname), home_html_path);
@@ -428,13 +426,13 @@ Object.defineProperties(documentAll, {
 document = {
     createElement: createElement,
     getElementsByTagName: getElementsByTagName,
-    cookie: "FSSBBIl1UgzbN7N80T=30wcEUzu2nlINDkgSKLPKka2MK7P9SDBsUZT_PI.WT_SUVEr7IFCmVod3hx.MnleY_ffEbIaG2V9B3r.sFIBsThpDRSKw3uAQ2uBY1m3d88adlkGrzG9oQ8d470p8e06QJZDReQovtxrWCmVutIhNuB4uv7KwYnOQiy4daqfZzFGEUtWuoMtQGvCDV.N5gtekER3",
     documentElement: documentElement,
     getElementById: getElementById,
     addEventListener: addEventListener,
     createExpression: createExpression,
     visibilityState: 'hidden',
     body: null,
+    cookie_: {"FSSBBIl1UgzbN7N80T": "397TGOGMWD442tlytKhGlNiUPpkH1Ajnh3i72fMFuK6mZAgNqQl862.SdQC.ISN9RL0WNrpLcwBw7mv7I_C4eweXHVzbth8IriZej.3KdU4KsN3FVuXGH9Yij4jYjmpJyN35aUms7fP3FlSt.qTTA9_IW1p7ARuCG4YvE_Oknhl1pwzojyhD5J7bl8OtVqmO_kNyTsVSuGr2GZn8uwEW4Uk2A"},
     removeChild: removeChild,
     appendChild: appendChild,
     all: documentAll,
@@ -444,6 +442,23 @@ Object.defineProperties(document, {
     [Symbol.toStringTag]: {
         value: 'document',
         configurable: true
+    },
+    cookie: {
+        get: function() {
+            var cookieList = [];
+            var att;
+            for (att in this.cookie_) {
+                cookieList.push(att + "=" + this.cookie_[att]);
+            };
+            return cookieList.join(";");
+        },
+        set: function(value) {
+            var cookieKey = value.split("=")[0];
+            var cookieValue = value.split("=")[1];
+            cookieKey = cookieKey.trim().replace(" ", "");
+            cookieValue = cookieValue.trim().replace(" ", "");
+            this.cookie_[cookieKey] = cookieValue;
+        }
     }
 });
 document = proxy(document);
@@ -472,7 +487,18 @@ function setItem(keyName, value) {
 localStorage = {
     removeItem: removeItem,
     getItem: getItem,
-    setItem: setItem
+    setItem: setItem,
+    FSSBB48: "470552:1",
+    $_f1: "Dw3Au.0k5f2nKwZPxHMUiHhe47Q",
+    FSSBB14: "470552:438:",
+    FSSBB3: "470552:AO2DK._6Iiehbh765gZEia",
+    $_f0: "bPDdOo9zc_ruy.7NU5ZzQJvtX80",
+    $_fh0: "W7ONyYG2S2TTMnB6tSNM7CMqHsZ",
+    FSSBB93: "470552:1",
+    FSSBB42: "470552:2",
+    $_YWTU: '1pqWcrLXGNq400Rma5gQ4XT7T0tTAF_PjJmV.t83beA',
+    $_cDro: '0'
+    
 };
 Object.defineProperties(localStorage, {
     [Symbol.toStringTag]: {
@@ -559,6 +585,14 @@ Object.defineProperties(Navigator.prototype, {
 
 });
 
+plugins = [];
+Object.defineProperties(plugins, {
+    [Symbol.toStringTag]: {
+        value: 'PluginArray ',
+        configurable: true
+    }
+});
+
 navigator = {
     userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36",
     mimeTypes: mimeTypes,
@@ -568,9 +602,7 @@ navigator = {
     platform: "Win32",
     maxTouchPoints: 0,
     connection: NetworkInformation,
-    // [Symbol.toPrimitive]:{
-    //     value: "getOwnPropertyDescriptor"
-    // }
+    plugins: plugins
 };
 
 Object.setPrototypeOf(navigator, Navigator.prototype);
