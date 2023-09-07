@@ -1,35 +1,20 @@
 http://www.chinadrugtrials.org.cn/clinicaltrials.searchlist.dhtml
 
 当前问题：
-1、_$ta 的值有问题导致流程异常
-    if (_$ez && _$ez.length >= _$qz) {
-        _$a3 = _$u4.call(_$ez, 0);
-        var _$mM = _$uU(_$vi.call(_$ez, 1));
-        var _$ov = _$mM[_$vd + 1];
-        for (var _$s0 = 0; _$s0 < _$vd + 1; _$s0++) {
-            _$mM[_$s0] ^= _$ov;
-        }
-        _$ta = _$mM[_$nm()](0, _$vd + 1);
-        var _$ok = _$mM[_$nm()](_$vd + 2);
-    }
+1、String.prototype.charCodeAt called on null or undefined
 
-入口：
-_$ss[_$lB()](_$wi, _$te);
+倒数第二个执行函数
+_$oF();
+
+function _$oF() {
+    if (_$rU)
+        /$/.test(_$mi());
+    _$ch(_$sb(), _$sb(), _$sb(), _$sb(), _$sb(), _$sb());
+    _$ir(); --- 报错
+
+定位条件：ccjpMusprnotaa|ua|ee||brUtys
+
+var _$wc, _$vO;   _$wc 值被污染
+_$wd = window;
 
 
-browser:
-判断cookie处
-function _$d6(_$rK) {
-    var _$pc = _$v8;
-    var _$tj = _$bn();
-    var _$tq = _$rL(_$uf(_$dh));
-    if (_$tq && _$tq.length >= _$fg) {
-        _$pc = _$tF.call(_$tq, 0);
-        var _$qX = _$vP(_$sV.call(_$tq, 1));
-        var _$td = _$qX[_$uV + 1];
-        for (var _$sQ = 0; _$sQ < _$uV + 1; _$sQ++) {
-            _$qX[_$sQ] ^= _$td;
-        }
-        _$tj = _$qX[_$jn()](0, _$uV + 1);
-        var _$hy = _$qX[_$jn()](_$uV + 2);
-    }

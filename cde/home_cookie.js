@@ -14,28 +14,29 @@ Object.defineProperties(window, {
 function getHtmlContent(html_text) {
     const $ = cheerio.load(html_text,);
     const metaContents = [];
-    $('meta').each((index, element) => {
+    $('meta[id="9DhefwqGPrzGxEp9hPaoag"]').each((index, element) => {
         const content = $(element)[0].attribs['content'];
         if (content) {
             metaContents.push(content);
         }
     });
-    var content = metaContents[4];
+    var content = metaContents[0];
     return content;
 };
 
 function getExecContent(html_text) {
     const $ = cheerio.load(html_text,);
     const metaContents = [];
-    $('script').each((index, element) => {
+    $('script[type="text/javascript"][r="m"]').each((index, element) => {
         const content = $(element)[0];
         if (content) {
             metaContents.push(content);
         }
     });
-    var content = metaContents[1].children[0].data;
-    return content;
+    var exec_code_content = metaContents[1].children[0].data;
+    return exec_code_content;
 };
+
 
 // 跟踪变量调试
 proxy = function (obj) {
@@ -65,7 +66,7 @@ proxy = function (obj) {
 };
 
 
-var home_html_path = '/cde/detail_html';
+var home_html_path = '/cde/success_home.html';
 var link_js = '/cde/detail_cookie_link.js';
 var cookiePath = '/home/feng/workspace/myWeb/cde/detail_cookie';
 
@@ -431,7 +432,7 @@ document = {
     createExpression: createExpression,
     visibilityState: 'hidden',
     body: null,
-    cookie_: {"FSSBBIl1UgzbN7N80T": "3ao1A_PPOantx1XS4DEABttfZ5g1UHvozQfEABVeX7ApAy89RER68LjHN7wKcmn7cDHaqa8ruAyq6rkALeTBOpci5_8pZKBHKrrLLc1R9ThHVobhAfAxb5d1QRKzaGaUqQru9b8UI3Sgh.9b0Lw9H7Exg4fwio5iFDS_ZCkKWe9NzgzYNFcw4GBORehUUSfsFrGpGuse8lbbpYwmEr1yJEMqc3JsB.qZ42Uh9zlmS5QMcbdo0QzfGMQz.LSEqZ68.yJJzPwpVFxOydSBYGpsI524Ao4J_e__KXagnbtAvAWxa3q"},
+    cookie_: {"FSSBBIl1UgzbN7N80T": "397TGOGMWD442tlytKhGlNiUPpkH1Ajnh3i72fMFuK6mZAgNqQl862.SdQC.ISN9RL0WNrpLcwBw7mv7I_C4eweXHVzbth8IriZej.3KdU4KsN3FVuXGH9Yij4jYjmpJyN35aUms7fP3FlSt.qTTA9_IW1p7ARuCG4YvE_Oknhl1pwzojyhD5J7bl8OtVqmO_kNyTsVSuGr2GZn8uwEW4Uk2A"},
     removeChild: removeChild,
     appendChild: appendChild,
     all: documentAll,

@@ -6,6 +6,9 @@ import requests
 def getCookie(html_text, url_path):
     print('开始生成cookie')
 
+    # with open("/home/feng/workspace/myWeb/cde/" + html_text, "r") as f:
+    #     html_text = f.read()
+
     cookie_resp = requests.post('http://127.0.0.1:2229' + url_path, data={
         'html_text': html_text
     }, timeout=None)
@@ -41,11 +44,11 @@ def home() -> None:
     with open("/home/feng/workspace/myWeb/cde/home_html", "wb") as f:
         f.write(resp.content)
     cookie_t_str = getCookie(resp.text, '/v2/cde_home_cookie')
-    # with open("/home/feng/workspace/myWeb/cde/首页返回.html", "w") as f:
-    #     f.write(resp.text)
+    # # with open("/home/feng/workspace/myWeb/cde/首页返回.html", "w") as f:
+    # #     f.write(resp.text)
 
-    # with open("/home/feng/workspace/myWeb/cde/cookie", "r") as f:
-    #     cookie_t_str = f.read()
+    # # with open("/home/feng/workspace/myWeb/cde/cookie", "r") as f:
+    # #     cookie_t_str = f.read()
 
     cookies_t = {cookie_t_str.split('=')[0]: cookie_t_str.split("=")[1].split(';')[0]}
     cookies = {**cookies_s, **cookies_t}
@@ -57,28 +60,31 @@ def home() -> None:
         f.write(resp1.content)
 
     print('开始请求详情页')
-    # with open("/home/feng/workspace/myWeb/cde/detail_html", "wb") as f:
+    # with open("/home/feng/workspace/myWeb/cde/success_home.html", "wb") as f:
     #     f.write(resp.content)
     cookie_t_str = getCookie(resp1.text,'/v2/cde_detail_cookie')
-    # with open("/home/feng/workspace/myWeb/gansu_samr/detail_cookie", "r") as f:
-    #     cookie_t_str = f.read()
-    cookies_t = {cookie_t_str.split('=')[0]: cookie_t_str.split("=")[1].split(';')[0]}
-    cookies = {**cookies_s, **cookies_t}
+    if cookie_t_str:
+        # with open("/home/feng/workspace/myWeb/gansu_samr/detail_cookie", "r") as f:
+        #     cookie_t_str = f.read()
+        cookies_t = {cookie_t_str.split('=')[0]: cookie_t_str.split("=")[1].split(';')[0]}
+        cookies = {**cookies_s, **cookies_t}
 
-    detail_common_args = '&sort=desc&sort2=&rule=CTR&secondLevel=0&currentpage=1&keywords=&reg_no=&indication=&case_no=&drugs_name=&drugs_type=&appliers=&communities=&researchers=&agencies=&state='
-    detail_args = {
-        'id': '1967ac1f28cc42da9fd5c8e4366f92ac',
-        'ckm_index': '1',
-    }
-    payload = urllib.parse.urlencode(
-        detail_args) + detail_common_args
+        detail_common_args = '&sort=desc&sort2=&rule=CTR&secondLevel=0&currentpage=1&keywords=&reg_no=&indication=&case_no=&drugs_name=&drugs_type=&appliers=&communities=&researchers=&agencies=&state='
+        detail_args = {
+            'id': '1967ac1f28cc42da9fd5c8e4366f92ac',
+            'ckm_index': '1',
+        }
+        payload = urllib.parse.urlencode(
+            detail_args) + detail_common_args
 
-    url = "http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml"
+        url = "http://www.chinadrugtrials.org.cn/clinicaltrials.searchlistdetail.dhtml"
 
-    resp = requests.post(url, headers=headers,params=payload, timeout=20, cookies=cookies)
-    print(resp.status_code)
-    with open("/home/feng/workspace/myWeb/cde/success_detail.html", "wb") as f:
-        f.write(resp1.content)
+        resp = requests.post(url, headers=headers,params=payload, timeout=20, cookies=cookies)
+        print(resp.status_code)
+        with open("/home/feng/workspace/myWeb/cde/success_detail.html", "wb") as f:
+            f.write(resp1.content)
+    else:
+        print("cookie 异常")
 
     print('程序结束')
 
