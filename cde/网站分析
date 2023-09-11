@@ -3,18 +3,25 @@ http://www.chinadrugtrials.org.cn/clinicaltrials.searchlist.dhtml
 当前问题：
 1、String.prototype.charCodeAt called on null or undefined
 
-倒数第二个执行函数
-_$oF();
 
-function _$oF() {
-    if (_$rU)
-        /$/.test(_$mi());
-    _$ch(_$sb(), _$sb(), _$sb(), _$sb(), _$sb(), _$sb());
-    _$ir(); --- 报错
+2、vm执行问题
+TypeError: Cannot read properties of undefined (reading 'ceil')
 
-定位条件：ccjpMusprnotaa|ua|ee||brUtys
+_$HH = window;
+_$GF = String;
+_$mP();
+_$iZ(_$zh(), _$hC()); 可能出错位置；
+_$FR = _$GF.fromCharCode;
+_$xm = _$GG.ceil; 报错位置
 
-var _$wc, _$vO;   _$wc 值被污染
-_$wd = window;
 
+function _$iZ(_$ES, _$Bl) {
+    _$Bl = _$aj.call(_$jK(_$Bl), '|');
+    _$ES = _$jK(_$ES);
+    var _$zS, _$ch = _$GL.call(_$ES, 0, 2), _$yr;
+    for (_$zS = 0; _$zS < _$Bl.length; _$zS++) {
+        _$yr = _$GL.call(_$ES, 2 + _$zS * 2, 2);
+        _$HH[_$ch + _$yr] = _$HH[_$Bl[_$zS]];
+    }
+}
 
