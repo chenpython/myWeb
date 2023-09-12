@@ -91,7 +91,7 @@ class PyppteerChromeBrowser:
 
         # 初始化浏览器配置
         self.options = {
-            'ignoreDefaultArgs': ['--enable-automation'],  # 去掉检测驱动提示
+            # 'ignoreDefaultArgs': ['--enable-automation'],  # 去掉检测驱动提示
             # 设置浏览器外观
             'args': [
                 "--start-maximized",
@@ -109,7 +109,7 @@ class PyppteerChromeBrowser:
             self.options['args'].append(f'--proxy-server={proxy}')
 
         # self.path = '/usr/bin/google-chrome-stable'
-        self.path = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+        self.path = '/usr/bin/google-chrome-stable'
 
     async def __aenter__(self):
         self.browser = await launch(

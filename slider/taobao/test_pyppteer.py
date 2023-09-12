@@ -1,18 +1,19 @@
 import asyncio
+import time
+
 from pyppeteer import launch
 from pyppeteer.errors import PageError
 from pyppeteer_stealth import stealth
-
 from selenium import webdriver
-import time
 
 
 def pyppteer_browser():
 
     async def open_browser():
-        url = "https://login.taobao.com/newlogin/login.do?appName=taobao&fromSite=0&_bx-v=2.5.1"
+        # url = "https://login.taobao.com/newlogin/login.do?appName=taobao&fromSite=0&_bx-v=2.5.1"
+        url = "https://www.taobao.com/"
         options = {
-            'ignoreDefaultArgs': ['--enable-automation'],  # 去掉检测驱动提示
+            # 'ignoreDefaultArgs': ['--enable-automation'],  # 去掉检测驱动提示
             # 设置浏览器外观
             'args': [
                 "--start-maximized",
@@ -24,9 +25,9 @@ def pyppteer_browser():
         browser = await launch(
             headless=False,
             # 必须为 True，否则报错：Most likely you need to configure your SUID sandbox correctly
-            # options=options,
-            executablePath=
-            '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+            options=options,
+            executablePath='/usr/bin/google-chrome-stable', # ubuntu
+            # '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',   # MacOS
             # 通过 chrome 地址栏输入 chrome://version/ 路径获取 chrome://version/ 确定执行路径
             autoClose=False)
 
@@ -49,7 +50,8 @@ def pyppteer_browser():
 
         print("end")
 
-    asyncio.get_event_loop().run_until_complete(open_browser())
+    loop = asyncio.new_event_loop()
+    loop.run_until_complete(open_browser())
 
 
 def selenium_browser():
