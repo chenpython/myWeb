@@ -1,27 +1,95 @@
 http://www.chinadrugtrials.org.cn/clinicaltrials.searchlist.dhtml
 
 当前问题：
-1、String.prototype.charCodeAt called on null or undefined
+2、window需要清空，在函数执行结束后，否则依旧存在环境污染
+1、走的逻辑不对
+
+_$eL();
+_$jJ();
+_$eo();
+var _$jB, _$qS = {};
+var _$e3, _$ot;
+var _$ix, _$bE;
+_$dk(); ---出错位置
 
 
-2、vm执行问题
-TypeError: Cannot read properties of undefined (reading 'ceil')
-
-_$HH = window;
-_$GF = String;
-_$mP();
-_$iZ(_$zh(), _$hC()); 可能出错位置；
-_$FR = _$GF.fromCharCode;
-_$xm = _$GG.ceil; 报错位置
-
-
-function _$iZ(_$ES, _$Bl) {
-    _$Bl = _$aj.call(_$jK(_$Bl), '|');
-    _$ES = _$jK(_$ES);
-    var _$zS, _$ch = _$GL.call(_$ES, 0, 2), _$yr;
-    for (_$zS = 0; _$zS < _$Bl.length; _$zS++) {
-        _$yr = _$GL.call(_$ES, 2 + _$zS * 2, 2);
-        _$HH[_$ch + _$yr] = _$HH[_$Bl[_$zS]];
+function _$dk() {
+    _$gN();
+    var _$do = _$wh[_$bL()];
+    if (_$do || _$wb === 11) {
+        var _$sF = [_$ka(), _$nA(), _$pT(), _$j3(), _$gK(), _$co(), _$oE(), _$mI(), _$cw(), _$gv(), _$cq(), _$e6(), _$gC(), _$br()];
+        _$wh[_$bL()] = function(_$gw, _$ay) {
+            for (var _$ta = 0; _$ta < _$sF.length; ++_$ta) {
+                if (_$sU(_$gw, _$sF[_$ta])) {
+                    return _$ow(new _$do(_$gw), false);
+                }
+            }
+            if (_$ay)
+                return new _$do(_$gw,_$ay);
+            return new _$do(_$gw);
+        }
+        ;
+    }
+    var _$oh = _$wh[_$bd()];
+    if (_$oh) {
+        var _$lo = _$oh[_$jL()];
+        if (_$lo) {
+            _$e3 = _$lo[_$dK()];
+            _$ot = _$lo[_$iO()];
+            _$lo[_$dK()] = function() {
+                _$bv();
+                arguments[1] = _$es(arguments[1]);
+                return _$e3[_$gJ()](this, arguments);
+            }
+            ;
+        } else {
+            _$wh[_$bd()] = function() {
+                return _$ow(new _$oh(), false);
+            }
+            ;
+        }
+    }
+    if (_$wh[_$ge()]) {
+        _$ix = _$wh[_$ge()];
+        _$wh[_$ge()] = function(_$ta, _$ay) {
+            var _$gw = 1;
+            if (_$ay && _$ay[_$e1()] == _$ds()) {
+                _$gw |= 2;
+            }
+            _$ta = _$es(_$ta, _$gw);
+            return new _$ix(_$ta,_$ay);
+        }
+        ;
+    }
+    if (_$wh[_$hQ()]) {
+        _$bE = _$wh[_$hQ()];
+        _$wh[_$hQ()] = function(_$gw, _$ay) {
+            if (typeof _$gw === _$mF()) {
+                var _$ta = 1;
+                if (_$ay && _$ay[_$e1()] == _$ds()) {
+                    _$ta |= 2;
+                }
+                _$gw = _$es(_$gw, _$ta);
+            }
+            return _$bE[_$gJ()](this, arguments);
+        }
+        ;
+    }
+    if (_$wh[_$pz()]) {
+        _$dy = _$wh[_$pz()][_$jL()][_$rt()];
+        _$wh[_$pz()][_$jL()][_$rt()] = function() {
+            _$ud(7);
+            _$dy[_$gJ()](this, arguments);
+        }
+        ;
     }
 }
 
+
+var _$td = 1;
+_$ht = _$b4("qzs|u`v");
+;;var _$r1;
+;_$cN = _$f6();
+_$hq();
+_$gM();
+_$kU();
