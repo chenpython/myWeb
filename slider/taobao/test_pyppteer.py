@@ -2,7 +2,6 @@ import asyncio
 import time
 
 from pyppeteer import launch
-from pyppeteer.errors import PageError
 from pyppeteer_stealth import stealth
 from selenium import webdriver
 
@@ -17,7 +16,7 @@ def pyppteer_browser():
             # 设置浏览器外观
             'args': [
                 "--start-maximized",
-                "--window-size=1920,1080",
+                # "--window-size=1920,1080",
                 # '--disable-infobars',
                 # '--no-sandbox',  # Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
             ]
@@ -45,13 +44,17 @@ def pyppteer_browser():
         await stealth(page)
 
         await page.goto(url)
+        time.sleep(10)
 
         await browser.close()
 
-        print("end")
+        time.sleep(3)
+
+        
 
     loop = asyncio.new_event_loop()
     loop.run_until_complete(open_browser())
+    print("end")
 
 
 def selenium_browser():

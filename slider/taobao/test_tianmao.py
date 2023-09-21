@@ -95,9 +95,9 @@ class PyppteerChromeBrowser:
             # 设置浏览器外观
             'args': [
                 "--start-maximized",
-                "--window-size=1920,1080",
-                '--disable-infobars',
-                '--no-sandbox',  # Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
+                # "--window-size=1920,1080",
+                # '--disable-infobars',
+                # '--no-sandbox',  # Running as root without --no-sandbox is not supported. See https://crbug.com/638180.
             ],
             # 'dumpio':
             # True,  # 把无头浏览器进程的 stderr 核 stdout pip 到主程序，也就是设置为 True 的话，chromium console 的输出就会在主程序中被打印出来
@@ -113,8 +113,7 @@ class PyppteerChromeBrowser:
 
     async def __aenter__(self):
         self.browser = await launch(
-            headless=
-            False,  # 必须为 True，否则报错：Most likely you need to configure your SUID sandbox correctly
+            headless=False,  # 必须为 True，否则报错：Most likely you need to configure your SUID sandbox correctly
             options=self.options,
             executablePath=self.path)
         # self.chrome_process_id = self.browser.process.pid
@@ -163,10 +162,7 @@ class PyppteerChromeBrowser:
         track = self.handle_distance(position['x'])
 
         for dis in track:
-            await page.mouse.move(page.mouse._x + dis, page.mouse._y, {
-                'delay': random.randint(500, 1000),
-                'steps': 3
-            })
+            await page.mouse.move(page.mouse._x + dis, page.mouse._y, {'delay': random.randint(500, 1000), 'steps': 3})
 
         await page.mouse.up()
 
@@ -194,19 +190,15 @@ def login_pyppteer(url):
 
         pyppteer_instance = PyppteerChromeBrowser()
 
-        for _ in range(20):
+        for i in range(1, 21):
             async with pyppteer_instance as browser:
                 page = await browser.newPage()
                 await page.setUserAgent(
                     'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                     'Chrome/104.0.0.0 Safari/537.36')
-                await page.setViewport({
-                    'width': 1920,
-                    'height': 1080
-                })  # 设置页面大小
-                await page.evaluateOnNewDocument(
-                    '() =>{ Object.defineProperties(navigator,'
-                    '{ webdriver:{ get: () => false } }) }')  # 去掉驱动检测
+                await page.setViewport({'width': 1920, 'height': 1080})  # 设置页面大小
+                await page.evaluateOnNewDocument('() =>{ Object.defineProperties(navigator,'
+                                                 '{ webdriver:{ get: () => false } }) }')  # 去掉驱动检测
 
                 await page.setJavaScriptEnabled(enabled=True)
                 # 防止页面识别出脚本(反爬虫关键语句)
@@ -230,8 +222,7 @@ def login_pyppteer(url):
                     # Move the mouse cursor to the center of the element
                     await page.mouse.move(x, y)
                     await page.mouse.click(x, y)
-                    await page.waitForNavigation(waitUntil='networkidle0',
-                                                 timeout=100000)
+                    await page.waitForNavigation(waitUntil='networkidle0', timeout=100000)
 
                     await asyncio.sleep(2)
 
@@ -239,29 +230,27 @@ def login_pyppteer(url):
 
                 before_input_content = await page.content()
 
-                username = await page.querySelector('input[name="fm-login-id"]'
-                                                    )
+                username = await page.querySelector('input[name="fm-login-id"]')
                 await username.type('2427219623@qq.com')
                 # await asyncio.sleep(3)
-                password = await page.querySelector(
-                    'input[name="fm-login-password"]')
+                password = await page.querySelector('input[name="fm-login-password"]')
                 await password.type("feng33314")
                 # await asyncio.sleep(3)
                 after_input_content = await page.content()
 
-                submit = await page.querySelector(
-                    "button[class='fm-button fm-submit password-login']")
+                submit = await page.querySelector("button[class='fm-button fm-submit password-login']")
                 await submit.click()
-                await asyncio.sleep(2)
 
                 after_submit_content = await page.content()
-                if '账号名/邮箱/手机号' not in after_submit_content:
+
+                logined = await page.querySelector("div[class='site-nav-sign']")
+                if logined:
 
                     await page.close()
-                    print("完成一次登录")
+                    print("完成第{}次登录".format(i))
 
                     continue
-
+                
                 await pyppteer_instance.move_to_gap(page)  # 移动滑块
                 await asyncio.sleep(2)
 
