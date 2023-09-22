@@ -1,5 +1,6 @@
 import asyncio
 import random
+import re
 
 import requests
 from pyppeteer import launch
@@ -238,13 +239,18 @@ def login_pyppteer(url):
                 # await asyncio.sleep(3)
                 after_input_content = await page.content()
 
+                await asyncio.sleep(5)
+
                 submit = await page.querySelector("button[class='fm-button fm-submit password-login']")
+                if not submit:
+                    pass
                 await submit.click()
 
                 after_submit_content = await page.content()
 
-                logined = await page.querySelector("div[class='site-nav-sign']")
-                if logined:
+                # logined = re.findall(r'userid=\d+&', after_submit_content)
+
+                if '<input type="hidden" name="ua"' in after_submit_content:
 
                     await page.close()
                     print("完成第{}次登录".format(i))
