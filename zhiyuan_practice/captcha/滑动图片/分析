@@ -1,0 +1,30 @@
+测试案例
+https://www.geetest.com/demo/slide-float.html
+
+调试步骤
+1、抓包，重要请求分析
+    1）https://www.geetest.com/demo/slide-float.html
+        获取网页基础静态内容
+    2）https://www.geetest.com/demo/gt/register-slide?t=1695627939260
+        获取参数
+            challenge=39876b827e81599bd0e5de0b2c5a352e
+            gt=019924a82c70bb123aae90d483087f94
+    3）https://apiv6.geetest.com/gettype.php?gt=019924a82c70bb123aae90d483087f94&callback=geetest_1695627943437
+        获取滑块需要加载的js
+    4）https://apiv6.geetest.com/get.php?gt=0……&challenge=398……&lang=zh-cn&pt=0&client_type=web&w=……&callback=geetest_1695627944311
+        获取？
+    5）https://api.geetest.com/ajax.php?gt=……&challenge=……&lang=zh-cn&pt=0&client_type=web&w……&callback=geetest_1695627949819
+        获取滑块类型
+    6）https://api.geetest.com/get.php?is_next=true&type=slide3&gt=019924a82c70bb123aae90d483087f94&challenge=39876b827e81599bd0e5de0b2c5a352e&lang=zh-cn&https=true&protocol=https%3A%2F%2F&offline=false&product=embed&api_server=api.geetest.com&isPC=true&autoReset=true&width=100%25&callback=geetest_1695627953011
+        获取图片信息
+            得到缺口补丁图片
+            得到背景底图（乱码图片）
+            得到滑块图标
+    7）https://api.geetest.com/ajax.php?gt=……&challenge=……&lang=zh-cn&%24_BCe=0&client_type=web&w=……&callback=geetest_1695627954147
+        验证滑块
+2、找到还原图片的顺序
+    滑块基本加密逻辑，将图片切割成若干等分，通过流程控制将图片按照既定顺序还原
+    找到顺序的关键内容（即：特征码），例如数组、对象（key-value映射？）
+3、与轨迹相关的W参数
+    找到W参数生成位置及生成逻辑
+
