@@ -1,0 +1,54 @@
+1、 w 调试值
+"https://api.geetest.com/ajax.php?gt=019924a82c70bb123aae90d483087f94&challenge=034107e49de5c02d8d839d5a244a53379y&lang=zh-cn&%24_BCe=0&client_type=web
+&w=2Lo()OORYp5CpExu6lHrNZlyQIEKm29gBhT00)QaH45cGQ)HOsHwja31yrj64Z)zmhP7aQ(chN1L6Tz90VYRyvuwWafsleI)FR2BBuGlfz5bgfDTmFjEBz03wfJBjruSwxlnwks8fEMblltVIjYwldkyLnQuS9kyuD3Y6m8bb(SpX))BwUzVvpkYwHHSgy0SaDR7NK1tAC5hQKzXc(SVck)ruAtjt8LaIlOV0xSvg63TfmuiSinzgBC6zX1gxnyS(fuTZOPjLprPaw8aWg9xe2)XpULM4njXEtw0hhHpmvdnIs44wwsEalrxqgPFKh5guyMEouR7qlhSf1niHMp0FE2QSEZ)ru1ex6DDGrlEjj4Zm((sYVYtRle2nHPxU4QTFSrn4hlBBKQ)IiZCQBRtyrXGg3FHrBCqkvmrnRqkF71ELSpqwt19QpRdKhYatbNDC5NgQnCukvJrr0j85Yk5WQNbuA(9o3dcA0m2NP(fq6JIHF5blyK6eDVgOebvU2uQ)xuayHbHuMYPS8BW3sTlbg3B9KwugSPMyeBAIYrRV)y7BJZP0hlTV7)UieBIPqYD0NaejVPn7wuN3wqXTS8R68oar3NtAmuDBzeoCa(WiYQKTDf8P3ylKn69WVOE5Fck4nWpN(l5Ud6IHCjuVw2QQp50as3G38nBsXCGAXNA2OJXTICxMKnzTmeGZ)wBH4K507PtEk1kAhm0i44da1)R3pg4LLqQ49jj7RgGPZtdUDDL6YlvNUJJuRxf1rFC)MuJOUbAYL)7YY7VKBjYFsDIC(TMWjE4my(T0j7V86YRA6U.36eecb12ace682338dabec69688c0fb80218cded53205f70296073741398e8805a4b3a12ed7889bd62af1e4d40e380d3beabb10bf4fd5ee02d3e079fe5fa96a30356bd69be8a46525094635d6a87499558151fe1415a485f1949ca6e5b4335cc07be4aa7d148d770c54388dc718e2e2cb299be4fd9959e200f4721a9e84198b3&callback=geetest_1695698474648"
+
+2、生成w的地方
+"\u0077": h + u    ---> "\u0077" 是特征码
+
+3、生成h的地方
+h = m[$_CAEFd(747)](l)
+
+4、生成u的地方
+var u = r[$_CAEEx(750)]()
+    代码：
+        "\u0024\u005f\u0043\u0041\u0049\u0075": function(t) {
+            var $_CBCEa = KqDXn.$_Cq
+            , $_CBCDA = ['$_CBCHp'].concat($_CBCEa)
+            , $_CBCFZ = $_CBCDA[1];
+            $_CBCDA.shift();
+            var $_CBCGT = $_CBCDA[0];
+            var e = new U()[$_CBCEa(363)](this[$_CBCFZ(706)](t));
+            while (!e || 256 !== e[$_CBCFZ(127)])
+                e = new U()[$_CBCEa(363)](this[$_CBCEa(706)](!0));
+            return e;
+        },
+
+核心问题
+一、加密函数在哪里？
+二、加密函数使用了哪些值？
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

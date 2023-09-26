@@ -1,0 +1,9 @@
+1、setPublic 是 rsa 加密的特有方法
+2、动态js会导致调试的断点经过刷新后失效
+3、RSA加密流程
+    1）new 一个 RSA对象
+    2）setPublic 设置密钥
+    3）encypt
+4、rsa破解思路
+    1）扣取加密算法代码
+    2）找出pubkey
