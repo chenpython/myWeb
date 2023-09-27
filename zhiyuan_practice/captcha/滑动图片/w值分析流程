@@ -3,7 +3,8 @@
 &w=2Lo()OORYp5CpExu6lHrNZlyQIEKm29gBhT00)QaH45cGQ)HOsHwja31yrj64Z)zmhP7aQ(chN1L6Tz90VYRyvuwWafsleI)FR2BBuGlfz5bgfDTmFjEBz03wfJBjruSwxlnwks8fEMblltVIjYwldkyLnQuS9kyuD3Y6m8bb(SpX))BwUzVvpkYwHHSgy0SaDR7NK1tAC5hQKzXc(SVck)ruAtjt8LaIlOV0xSvg63TfmuiSinzgBC6zX1gxnyS(fuTZOPjLprPaw8aWg9xe2)XpULM4njXEtw0hhHpmvdnIs44wwsEalrxqgPFKh5guyMEouR7qlhSf1niHMp0FE2QSEZ)ru1ex6DDGrlEjj4Zm((sYVYtRle2nHPxU4QTFSrn4hlBBKQ)IiZCQBRtyrXGg3FHrBCqkvmrnRqkF71ELSpqwt19QpRdKhYatbNDC5NgQnCukvJrr0j85Yk5WQNbuA(9o3dcA0m2NP(fq6JIHF5blyK6eDVgOebvU2uQ)xuayHbHuMYPS8BW3sTlbg3B9KwugSPMyeBAIYrRV)y7BJZP0hlTV7)UieBIPqYD0NaejVPn7wuN3wqXTS8R68oar3NtAmuDBzeoCa(WiYQKTDf8P3ylKn69WVOE5Fck4nWpN(l5Ud6IHCjuVw2QQp50as3G38nBsXCGAXNA2OJXTICxMKnzTmeGZ)wBH4K507PtEk1kAhm0i44da1)R3pg4LLqQ49jj7RgGPZtdUDDL6YlvNUJJuRxf1rFC)MuJOUbAYL)7YY7VKBjYFsDIC(TMWjE4my(T0j7V86YRA6U.36eecb12ace682338dabec69688c0fb80218cded53205f70296073741398e8805a4b3a12ed7889bd62af1e4d40e380d3beabb10bf4fd5ee02d3e079fe5fa96a30356bd69be8a46525094635d6a87499558151fe1415a485f1949ca6e5b4335cc07be4aa7d148d770c54388dc718e2e2cb299be4fd9959e200f4721a9e84198b3&callback=geetest_1695698474648"
 
 2、生成w的地方
-"\u0077": h + u    ---> "\u0077" 是特征码
+"\u0077": h + u
+        ---> "\u0077" 是特征码
 
 3、生成h的地方
 h = m[$_CAEFd(747)](l)
@@ -22,6 +23,103 @@ var u = r[$_CAEEx(750)]()
                 e = new U()[$_CBCEa(363)](this[$_CBCEa(706)](!0));
             return e;
         },
+
+        this[$_CBCFZ(706)](t) 生成一串字符串：
+            ---> 关键代码："\u0024\u005f\u0043\u0041\u004a\u0062": (Ot = rt(),……)
+                ---> 关键代码 rt()：return t() + t() + t() + t();
+                    ---> 关键代码：生成随机数
+                        return (65536 * (1 + Math[$_BFAFA(27)]()) | 0)[$_BFAEN(212)](16)[$_BFAFA(428)](1);
+                        等同于
+                        return (65536 * (1 + Math['random']()) | 0)['toString'](16)['substring'](1);
+                    ---> 关键代码替换为：
+                        function random_str() {
+                            var result = '';
+                            for (var i = 0; i < 4; i++) {
+                                result += (65536 * (1 + Math['random']()) | 0)['toString'](16)['substring'](1);
+                            }
+                            return result;
+                        }
+            ,
+
+        new U()[$_CBCEa(363)]：调用encypt方法加密
+
+            ---> 关键代码：
+                function lt(t) {
+                var $_BABJQ = KqDXn.$_Cq
+                  , $_BABIx = ['$_BACCI'].concat($_BABJQ)
+                  , $_BACAQ = $_BABIx[1];
+                ……
+                var r = n[$_BABJQ(212)](16);
+                return 0 == (1 & r[$_BACAQ(127)]) ? r : $_BACAQ(42) + r;
+            }
+                ---> 生成 publicKey
+                    function a(t, e) {
+                        var $_BACEY = KqDXn.$_Cq
+                            , $_BACDq = ['$_BACHV'].concat($_BACEY)
+                            , $_BACFP = $_BACDq[1];
+                        $_BACDq.shift();
+                        var $_BACGw = $_BACDq[0];
+                        if (e < t[$_BACEY(127)] + 11)
+                            return console && console[$_BACEY(41)] && console[$_BACFP(41)]($_BACFP(338)),
+                                null;
+                        var n = []
+                            , r = t[$_BACEY(127)] - 1;
+                        while (0 <= r && 0 < e) {
+                            var i = t[$_BACEY(176)](r--);
+                            i < 128 ? n[--e] = i : 127 < i && i < 2048 ? (n[--e] = 63 & i | 128,
+                                n[--e] = i >> 6 | 192) : (n[--e] = 63 & i | 128,
+                                    n[--e] = i >> 6 & 63 | 128,
+                                    n[--e] = i >> 12 | 224);
+                        }
+                        n[--e] = 0;
+                        var o = new l()
+                            , s = [];
+                        while (2 < e) {
+                            s[0] = 0;
+                            while (0 == s[0])
+                                o[$_BACFP(283)](s);
+                            n[--e] = s[0];
+                        }
+                        return n[--e] = 2,
+                            n[--e] = 0,
+                            new y(n);
+                    } (上步骤生成的随机值, 128);
+                ,
+
+                $_BABJQ(319) ---> doPublic 方法：
+                    function ct(t) {
+                        var $_BAAEj = KqDXn.$_Cq
+                        , $_BAADB = ['$_BAAHP'].concat($_BAAEj)
+                        , $_BAAFr = $_BAADB[1];
+                        $_BAADB.shift();
+                        var $_BAAGu = $_BAADB[0];
+                        return t[$_BAAFr(388)](this[$_BAAFr(357)], this[$_BAAEj(302)]);
+                    }
+                ,
+        
+    ---> setPublic
+        function ut(t, e) {
+                var $_BAAJO = KqDXn.$_Cq
+                  , $_BAAIA = ['$_BABCy'].concat($_BAAJO)
+                  , $_BABAt = $_BAAIA[1];
+                $_BAAIA.shift();
+                var $_BABBL = $_BAAIA[0];
+                null != t && null != e && 0 < t[$_BABAt(127)] && 0 < e[$_BABAt(127)] ? (this[$_BAAJO(302)] = function n(t, e) {
+                    var $_BABEW = KqDXn.$_Cq
+                      , $_BABDQ = ['$_BABHh'].concat($_BABEW)
+                      , $_BABFI = $_BABDQ[1];
+                    $_BABDQ.shift();
+                    var $_BABGp = $_BABDQ[0];
+                    return new y(t,e);
+                }(t, 16),
+                this[$_BABAt(357)] = parseInt(e, 16)) : console && console[$_BAAJO(41)] && console[$_BAAJO(41)]($_BAAJO(327));
+            }
+        ,
+        '00C1E3934D1614465B33053E7F48EE4EC87B14B95EF88947713D25EECBFF7E74C7977D02DC1D9451F79DD5D1C10C29ACB6A9B4D6FB7D0A0279B6719E1772565F09AF627715919221AEF91899CAE08C0D686D748B20A3603BE2318CA6BC2B59706592A9219D0BF05C9F65023A21D2330807252AE0066D59CEEFA5F2748EA80BAB81'
+        t 是key，e是模值，t和e是不会变的，可以校验扣取的代码执行是否正确
+    ,
+
+    
 
 核心问题
 一、加密函数在哪里？
