@@ -1,7 +1,7 @@
-a = {};
+function test(){
+    var a = this;
+    debugger;
+}
 
-a['111'] = function ocFunc(x) { console.log('this is ocFunc'); oc += x; return true, oc, false; }
-
-console.log(a);
-
+var t = new test()
 
