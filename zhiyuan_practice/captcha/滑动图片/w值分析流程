@@ -15,13 +15,107 @@ h = m[$_CAEFd(747)](l)
             stringify 方法：将变量转为json字符串
 
             1）gt['stringify'](o) ：返回一段加密内容
-                o对象生成？ 
-                    主要数据来源于 https://api.geetest.com/get.php 请求的返回值
+                o对象主要数据来源于 https://api.geetest.com/get.php 请求的返回值
                     o['aa'] 为轨迹数据，生成代码如下：
                         l = n[$_CJHEU(917)][$_CJHEU(900)](n[$_CJHF_(917)][$_CJHF_(1038)](), n[$_CJHEU(29)][$_CJHF_(1098)], n[$_CJHEU(29)][$_CJHF_(370)]);
 
-                            1.1）n[$_CJHEU(29)][$_CJHF_(370)]
-                                
+                            1.1）n[$_CJHEU(29)][$_CJHF_(1098)] --> 接口返回的 c 参数
+                            1.2）n[$_CJHEU(29)][$_CJHF_(370)] --> 接口返回的 s 参数
+                            1.3）n[$_CJHF_(917)][$_CJHF_(1038)]() --> 轨迹数据
+
+                                加密算法返回：
+                                    r["jion"]("") + "!!" + i["jion"]("") + "!!" + o["jion"]("")
+                                    
+                                    r、i、o 生成：
+                                        new ct(t)[$_BEFJw(36)](function(t) {
+                                            var $_BEGJk = KqDXn.$_Cq
+                                            , $_BEGIA = ['$_BEHCe'].concat($_BEGJk)
+                                            , $_BEHAA = $_BEGIA[1];
+                                            $_BEGIA.shift();
+                                            var $_BEHBG = $_BEGIA[0];
+                                            var e = function(t) {
+                                                var $_BEHEB = KqDXn.$_Cq
+                                                , $_BEHDq = ['$_BEHHM'].concat($_BEHEB)
+                                                , $_BEHFG = $_BEHDq[1];
+                                                $_BEHDq.shift();
+                                                var $_BEHGi = $_BEHDq[0];
+                                                for (var e = [[1, 0], [2, 0], [1, -1], [1, 1], [0, 1], [0, -1], [3, 0], [2, -1], [2, 1]], n = 0, r = e[$_BEHEB(127)]; n < r; n++)
+                                                    if (t[0] == e[n][0] && t[1] == e[n][1])
+                                                        return $_BEHFG(415)[n];
+                                                return 0;
+                                            }(t);
+                                            e ? i[$_BEHAA(194)](e) : (r[$_BEHAA(194)](n(t[0])),
+                                            i[$_BEGJk(194)](n(t[1]))),
+                                            o[$_BEGJk(194)](n(t[2]));
+                                        })
+                                    ，
+                                    生成轨迹的控制流：
+                                        "\u0024\u005f\u0042\u004a\u004f": function(t) {
+                                            var $_BFEJB = KqDXn.$_Cq
+                                            , $_BFEIc = ['$_BFFCm'].concat($_BFEJB)
+                                            , $_BFFAU = $_BFEIc[1];
+                                            $_BFEIc.shift();
+                                            var $_BFFBR = $_BFEIc[0];
+                                            var e = this[$_BFFAU(489)];
+                                            if (e[$_BFEJB(484)])
+                                                return new ct(e[$_BFFAU(484)](t));
+                                            for (var n = [], r = 0, i = e[$_BFEJB(127)]; r < i; r += 1)
+                                                n[r] = t(e[r], r, this);
+                                            return new ct(n);
+                                        }
+
+                                    ，
+
+                                    加密坐标函数：
+                                        function n(t) {
+                                            var $_DBBEm = KqDXn.$_DI()[3][25];
+                                            for (; $_DBBEm !== KqDXn.$_DI()[6][21]; ) {
+                                                switch ($_DBBEm) {
+                                                case KqDXn.$_DI()[9][25]:
+                                                    var e = $_BEGAX(475)
+                                                    , n = e[$_BEFJw(127)]
+                                                    , r = $_BEGAX(37)
+                                                    , i = Math[$_BEGAX(382)](t)
+                                                    , o = parseInt(i / n);
+                                                    $_DBBEm = KqDXn.$_DI()[0][24];
+                                                    break;
+                                                case KqDXn.$_DI()[15][24]:
+                                                    n <= o && (o = n - 1),
+                                                    o && (r = e[$_BEGAX(117)](o));
+                                                    $_DBBEm = KqDXn.$_DI()[0][23];
+                                                    break;
+                                                case KqDXn.$_DI()[9][23]:
+                                                    var s = $_BEFJw(37);
+                                                    $_DBBEm = KqDXn.$_DI()[12][22];
+                                                    break;
+                                                case KqDXn.$_DI()[9][22]:
+                                                    return t < 0 && (s += $_BEGAX(440)),
+                                                    r && (s += $_BEFJw(429)),
+                                                    s + r + e[$_BEGAX(117)](i %= n);
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                    
+                                    ，
+                                    对原始轨迹做处理：
+                                        var t = function(t) {
+                                            var $_BEGEE = KqDXn.$_Cq
+                                            , $_BEGDK = ['$_BEGHr'].concat($_BEGEE)
+                                            , $_BEGFB = $_BEGDK[1];
+                                            $_BEGDK.shift();
+                                            var $_BEGGX = $_BEGDK[0];
+                                            for (var e, n, r, i = [], o = 0, s = 0, a = t[$_BEGEE(127)] - 1; s < a; s++)
+                                                e = Math[$_BEGEE(162)](t[s + 1][0] - t[s][0]),
+                                                n = Math[$_BEGEE(162)](t[s + 1][1] - t[s][1]),
+                                                r = Math[$_BEGFB(162)](t[s + 1][2] - t[s][2]),
+                                                0 == e && 0 == n && 0 == r || (0 == e && 0 == n ? o += r : (i[$_BEGFB(194)]([e, n, r + o]),
+                                                o = 0));
+                                            return 0 !== o && i[$_BEGFB(194)]([e, n, o]),
+                                            i;
+                                        }(this[$_BEFJw(358)])
+
+
 
                 
             ，
@@ -120,7 +214,9 @@ var u = r[$_CAEEx(750)]()
                         return t[$_BAAFr(388)](this[$_BAAFr(357)], this[$_BAAEj(302)]);
                     }
                 ,
-        
+        ，
+
+
     ---> setPublic
         function ut(t, e) {
                 var $_BAAJO = KqDXn.$_Cq
