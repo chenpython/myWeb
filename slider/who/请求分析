@@ -1,0 +1,204 @@
+请求地址：
+https://www.chictr.org.cn/searchproj.html
+
+
+网络分析：
+1、https://www.chictr.org.cn/searchproj.html  请求网页
+    返回了html页面，页面有TraceID: 781bad2016968401967433326e4e25
+    Set-Cookie: acw_tc=781bad2016968401967433326e4e258890af0c57655b8c0e413a5c3c95ddf9;path=/;HttpOnly;Max-Age=1800
+
+2、https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/analyze.jsonp?
+    校验轨迹
+    a=CF_APP_WAF（应用标识）
+    &t=570277ef-1d3a-47cf-a29b-b61e30ed6941
+    &n=226!v22Fi0wTblMeShbvah0gVzJb2twZOGpzS3PncGpkNNV4WheiRErEvYHon1n8QfmI1AScI6%2Fqddjwb63%2Fq%2FNru6iG31OQvp%2BG3i6ROFjbvgN0r%2BacVQy9RlWVZMlOuNbeFWwczeTJw2SvFRoOtFAvQlrrXJ%2FNpWF25lijvY5bA4UjZ6EIh%2FF9RbNRIrHfX%2BiDFnvcMA4m1L9LGedvJewwbAB9%2FpH%2FqzhKrXvSwtEnR5V5v3ct6ajhUvFd2685MszxJhaIml5pNaZrfEYL7pjKYQMu8Am%2B9Co%2BWrITZYpDOTrayuvh%2BNdSoSmUiQgqYsXsj7tD5Bf%2FX1M2gB91vFlaneTR3BTlyKmhzO9O2%2FJ6lA12gB9ZyVaanyTsPfEKRDmR89BLhobhQmT3TJt%2FMDr%2B%2FvJHW1MxqoMvsqlo3Ualp9v29E%2Fq8D1n0RznaH1eRon%2FRtK5Ke35%2FUv8lzy9HDoeycWKV7ztqcr0IIYyKqMTleEhvaGJBbTMyWiAVrTheciHXql6hK59yOze%2BEVY8DkEs5MUUHr85tgmIeH0K2ivegkbJQt%2BlD1QvhmGVk5cbugMgeypV%2Foe0va2uNHonbf%2ByhQNAnucg0nHg4Y%2BWI5vsOM0nr%2FBESwfstQ838Qlyamhzm9o5LtGTXD2dB9ZyncGrZ0s9BOHRKccbudZcKnWs%2FJBEnSudZ76g4wUcnbzygiqbXyZhIoHy%2FJ%2FvrBKpU1C5suAAniasvogb9djkUalp9b2NBNCehMpsgbQ%2FlY7r6bUssUMfsM%2BpQf%2FWta8UXxKq1oY6Ey1ndnTWFH3t3L%2FX1SB4fQM%2BpNb7MkH%2BXN0IKwPzovNVeh5cSHBoGBf5hknNt4v5pf%2BZsmQyLsH4XW47ITHeOE6JeRj9iUQ22nsziortiejPqJEUwNiRb9HQI8nLYs%2BnrtCJyyPH3kBpp%2FPpe2QYWcj%2B5zqTKj9y4f12FEQZuijW8YxZgkby9jfFnI0q%2FIMl38Tm8r2Gmi9jkDJKXX%2BRxWAsaJ4vZweMLFr74CMDfwyw4FMeBk2gPGd9Sst1TGXQEsyGxCTPulOwN02prCxAn9NJTIhDCPSKsGm%2Fu%2BsFEojic0A2%2FGwdPvoBHpNt7kwSKqdDKGQ5P0FUVlIaHfbNL%2FIKULfWIUi%2B7kjhJFg4fFU9UzD%2F%2Bfm%2BSebVmBOm0Gp%2BQD4U0jhfJYUwJEkUjJS%2FnmR8c8KBaRBWqnBGzfY25lYlIbcSKdVJmDWN5mW0pzpJ1T5Ah%3D%3D
+    &p=%7B%22key1%22%3A%22code100%22%2C%22user%22%3A%22default%22%2C%22ncbtn%22%3A%22818.5396728515625%7C292.7283630371094%7C47.98678207397461%7C47.98678207397461%7C292.7283630371094%7C340.715145111084%7C818.5396728515625%7C866.5264549255371%22%2C%22umidToken%22%3A%22GC59F9F85930D31D452CA3324C3335F1B2E55C43298695537FD%22%2C%22ncSessionID%22%3A%225e70dec350ef%22%7D&scene=register&asyn=0&lang=cn&v=1&callback=jsonp_06128488548309976
+
+    返回结果：
+        csessionid=01U0sBpoNZC58LxPg95IdP-6C96-Qa1nAiZCvPcTf90Pwya3XxiC-LzqdM22YSl-5_IJcQ8ULWOG471EtstAFlQ9sq8AL43dpOnCClYrgFm6o
+        value=05H69Va14FVJPvFhEaQm8EDWX1djvEnvmvvUxXQ4Yc91LHX2AWdqY9NGV1im3o4JdL1F_nA-GkuIOkr3BXG4gYwxDRG8gK6JKMSePUAf5XPtcneVWuVhcOu2PlEj0LNwRLGw4MDKZzcWkv7RopxRjGjK4HoVF5YYmMqoF5X9xgiVbUZ1dgf7XpvgRA1ucJdNHGksmHjM0JOodanL5-M1Qs1br0e5NGL9dPljWKVSVdVU1fExKc9UQxGzneQ1GkSe6006Hg7uRUwG0Ru8jgj94rqWIY8r-CCevo31_l4AX9mLfY94r_LXIIil3Y3aVPRGAe
+
+3、携带轨迹校验请求网页
+    https://www.chictr.org.cn/searchproj.html?
+        u_atoken=570277ef-1d3a-47cf-a29b-b61e30ed6941
+        &u_asession=01U0sBpoNZC58LxPg95IdP-6C96-Qa1nAiZCvPcTf90Pwya3XxiC-LzqdM22YSl-5_IJcQ8ULWOG471EtstAFlQ9sq8AL43dpOnCClYrgFm6o
+        &u_asig=05H69Va14FVJPvFhEaQm8EDWX1djvEnvmvvUxXQ4Yc91LHX2AWdqY9NGV1im3o4JdL1F_nA-GkuIOkr3BXG4gYwxDRG8gK6JKMSePUAf5XPtcneVWuVhcOu2PlEj0LNwRLGw4MDKZzcWkv7RopxRjGjK4HoVF5YYmMqoF5X9xgiVbUZ1dgf7XpvgRA1ucJdNHGksmHjM0JOodanL5-M1Qs1br0e5NGL9dPljWKVSVdVU1fExKc9UQxGzneQ1GkSe6006Hg7uRUwG0Ru8jgj94rqWIY8r-CCevo31_l4AX9mLfY94r_LXIIil3Y3aVPRGAe
+        &u_aref=Xt6xfjU2F16JXW5hBI%2BDCcyRFTw%3D（未知!!!!!!）
+    携带cookie：acw_tc=781bad2016968401967433326e4e258890af0c57655b8c0e413a5c3c95ddf9（首次请求返回）
+
+
+
+生成轨迹分析：
+    analyze === https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/analyze.jsonp
+找到给url设置参数的地方
+
+----携带轨迹校验请求网页分析-----
+    校验成功的方法定义：
+        var NC_Opt = {
+            renderTo: "nocaptcha",//渲染到DOM ID
+            appkey: "CF_APP_WAF", // 应用标识
+            scene: "register",
+            trans: {"key1": "code100", "user": "default"},
+            token: requestInfo.token,//umid token
+            language: "cn",//语言包，默认中文
+            isEnabled: true,
+            times: 3,
+            success: function (data) {
+                document.getElementById("nc_1_n1z").innerHTML='✓'
+                document.getElementsByClassName('nc-lang-cnt')[0].innerHTML='<b style="margin-left:60px;-webkit-text-fill-color:#FF6A00 !important">验证成功！</b>'
+
+                if (requestInfo.type === 'GET'){
+                    // 轨迹校验通过，执行请求
+                    var d = {
+                        u_atoken: data.token,
+                        u_asession: data.sessionId,
+                        u_asig: data.sig,
+                        u_aref: requestInfo.refer
+                    };
+                    // location.href = requestInfo.url + addQuery(requestInfo.data, d);
+                    var parsedUrl = parseURL(requestInfo.url);
+                    parsedUrl.search = addQuery(parsedUrl.search,d)
+                    // location.href = combineUrl(parsedUrl);
+                    location.replace(combineUrl(parsedUrl));
+                }else{
+                    var d = {
+                        u_atoken: data.token,
+                        u_asession: data.sessionId,
+                        u_asig: data.sig,
+                        u_aref: requestInfo.refer
+                    };
+                    reform(d);
+                }
+            },
+            // 滑动验证失败时触发该回调参数。
+            fail: function (failCode) {
+                window.console && console.log(s);
+            },
+            // 验证码加载出现异常时触发该回调参数。
+            error: function (errorCode) {
+                window.console && console.log(errorCode)
+            }
+        };
+    
+    成功触发调用：
+        在 nc.js 文件中执行：
+            function g(e) {
+                var t = 0;
+                e.timeout = e.timeout || 3e3,
+                e.times = e.times || 3;
+                var n;
+                if (e = e || {},
+                !e.url || !e.callback)
+                    throw new Error("\u53c2\u6570\u4e0d\u5408\u6cd5");
+                var i = ("jsonp_" + Math.random()).replace(".", "")
+                , a = y.getElementsByTagName("script")[0]
+                , s = "";
+                e.data ? (e.data[e.callback] = i,
+                s += u(e.data)) : s += e.callback + "=" + i;
+                var o = y.createElement("script");
+                a.parentNode.insertBefore(o, a),
+                b[i] = function(t) {
+                    b[i] = function() {
+                        report("\u56de\u8c03\u5df2\u6267\u884c\u8fc7,\u4e0d\u518d\u6267\u884c"),
+                        b[i] = null
+                    }
+                    ;
+                    try {
+                        o.parentNode && o.parentNode.removeChild(o)
+                    } catch (e) {}
+                    clearInterval(n),
+                    e.success && e.success(t) // 校验成功后重新发起请求
+                }
+                ,
+                o.src = e.url + (-1 == e.url.indexOf("?") ? "?" : "&") + s,
+                e.timeout && (n = setInterval(function() {
+                    t++;
+                    var a;
+                    if (t >= e.times) {
+                        b[i] = function() {}
+                        ,
+                        clearInterval(n);
+                        try {
+                            o.parentNode && o.parentNode.removeChild(o)
+                        } catch (e) {}
+                        e.fail && e.fail(1)
+                    } else
+                        try {
+                            o.parentNode && o.parentNode.removeChild(o),
+                            o = y.createElement("script"),
+                            a = y.getElementsByTagName("script")[0],
+                            a.parentNode.insertBefore(o, a),
+                            o.src = e.url + (-1 == e.url.indexOf("?") ? "?" : "&") + s + "&t=" + Math.random()
+                        } catch (e) {}
+                }, e.timeout))
+            }
+        
+        传入参数e：
+            {
+                "url": "https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/analyze.jsonp",
+                "callback": "callback",
+                "data": {
+                    "a": "CF_APP_WAF",
+                    "t": "70f980ae-694f-44e5-8b17-470aa76df824",
+                    "n": "226!0HLhHnVSblMeGhbvLhQ2B8gu2twZOGpzS3PncGpkNNV4WheiRErEvYHon1n8QfmI1AScI6/qddjwb63/q/Nru6iG31OQvp+G3i6ROFjbvgN0xWvt/7JcJuA2pBNVaeUNHEdS80N2oXNYB73jNhn/xX/oE9f7CV1M6g9XgvgEl4CeyXAIcMb+UP99siGbvhiIdegW0EExWxdpU5Hx+PYJqjtvpY0uJV2lE0ic+XL7Ryk3n4B8DKAdwKUDhzZonPGknRS32H65mgZDgY4hj1ZVxoejf83PurKPuEeV5pciEuT7GMTjLBQ9w1OdYLfCt0WUQYluSM43nt6SYka+o6c+D5PDQRW2ThycbvsFPVrJlc5C6Gn2y0BbD1GOBMMfEfPZ8eJ83INOyJ3gLvG/Y+uw2fpTrTVIyqfKNmr+35eiOEPDHCInC3lU0Pa/f9eRbSQyzm/oLuBtFXbZg8/ZyUkaneTR7JhV/trLzm/o3DaNyfGcexN9wDwQgXoAYfzsM/Ey8eIMWAT69hc4e1H/6U3quvvt38QlyVcczcSsUSkH9ugy9lyGbDJXbUnkOwWY0siu9ZtvotkzsDfJTaYyMDr+u5ONDkDAeyhjnuldK/Weqv16niCenbf+yOUtArTORUkybjSENjkHXg0qQQeC9OnOQ5WZow1xRbOHs4/njt7H/RMQdaG5nsb5/0bDKiW3soRlJhdt1Xbl9Uf/drSbn5uXeOuNj30ORvTquX6bAjEVpvM2XY92yUNEneQR3qn3n45h4O9Z3Mq/oXzZNZjZyDwf2ZMy395BqK0tAo4D3iAppXU2gMHOpyr154MXkr7Cqe7IuSXuhK1ky5mKvrX0/yOuX4QicniKzyinwj901Ka6yAT2+n6upyofnyQR3RY/WKvlbcausbUMYFjhr/Ru/st+bciMVbB/HmFR+PwBZ/Dj1h3Wvixg7epnb5DIUwcISON7v8W2NWBtiihZoho+doBPhFUwU48yJHgJcuL3a+2ioC/GP/5kcG6wfHIFfazG1UDdLYdADstbOrsmbrm/PdS6pmJgD0OrEryGYv7k3f4kDJpFsv5i3l4352j5D+PuvbQ0PfhVUL4HFyb5d1DSp86iLjom9chzVajNMsWHjII/wg/r8Y1EljSXJBp8er2PaXDfh2zr+5crhbfw7w1ULM32BdSTpAh3sH8dCoP/K/CvcRxgQu6A27dwNqJ5+8WmNOyUpMzdITFSnb+9SrzuiHtubQiSLiX6VcJdDa//5sbkXUotgeHWcZlGUAVNN8ds4/ZlyiQVrUWvNBHMoBrabK42KVAuYkZh8OmkhKvyZviK5RBh0HorFD/LDIovNJq4/9xgGCtFzSVsDL+z5Y0OhMzitBGaEsqgtIMkrwM=",
+                    "p": "{\"key1\":\"code100\",\"user\":\"default\",\"ncbtn\":\"810.3666381835938|92.7283706665039|47.98678207397461|47.98678207397461|92.7283706665039|140.71515274047852|810.3666381835938|858.3534202575684\",\"umidToken\":\"G6CE5AFF952B655110B48DB57F489A9588FC9D15A147BA9236E\",\"ncSessionID\":\"5e70dec14e36\"}",
+                    "scene": "register",
+                    "asyn": 0,
+                    "lang": "cn",
+                    "v": 1
+                }
+            }
+
+            data 数据 nc.js 文件生成：
+                var a = {
+                    a: e.appkey,
+                    t: e.token,
+                    n: o.__fy.getFYToken(o.__fy_options),
+                    p: c.obj2str(n),
+                    scene: e.scene || "",
+                    asyn: 0,
+                    lang: e.language,
+                    v: p.jsv
+                }
+
+
+
+主要携带的轨迹参数如下：
+
+&u_atoken=16c94171-7a19-453b-803e-ba7dd2bc68f7
+&u_asession=01kkw0F-KFhR3haoVlR1cqAevOwxrWFXd6yP24nIjKiVtpO3LIhGbmsWEQmcK7Is1bxyAUg7FZxJ5O3GqPfLyOWdsq8AL43dpOnCClYrgFm6o
+&u_asig=05cF4-Fb5ir7EKKUHdHPGVw3fJ6ILh0geC9lCxReIZCtJcWqeqE8ekgtqcGpN9342hH3tOWVXZdP0KJUbm9C8V3-Mno9d7nPJhnrORfSFPakLoBWld24CMuP_T-E6f8nfg93uHXxOEDy13R_XGNHAGfwn5d1zKovdS6N1uMlqta3-cIR0QdYqqplo-0U4FjoYzksmHjM0JOodanL5-M1Qs1YTrK590n54lhg6_ozg9_v-xvogs7af97AjvVIL1xiNYEyHvTQWBH_XQ_O7Q4dZBJX7mAeFLt4QZ64taEqGir0bY94r_LXIIil3Y3aVPRGAe
+&u_aref=gRzoyffDlIZ1HlG8cMUeW76SVJo%3D
+
+
+生成轨迹算法文件：fireyejs.js
+    控制流在：function i(o, r, l, u, g, C)
+        主要涉及的case值：10，24（最多），14
+
+        o 为 MouseEvent，{
+                "isTrusted": true
+            }
+
+            
+var a = {
+    a: e.appkey,
+    t: e.token,
+    n: o.__fy.getFYToken(o.__fy_options),
+    p: c.obj2str(n),
+    scene: e.scene || "",
+    asyn: 0,
+    lang: e.language,
+    v: p.jsv
+}
+
+'{"a":"CF_APP_WAF","t":"a7a061f6-1579-4343-8411-094448a5f14d","n":"226!9Yg2sTLiblM0HhbvZhlhAx142twZOGpzS3PncGpkNNV4WheiRExgtl7Gl8yDlAEKGOcU6Q55w5dEUvp4nd38i+CLJwc8hxgAMUVrzYxXN80Bvnrk+gdrdNn2yWHCovFazKONkGiBmhcJszlTiRzNPFmZQwDcXcSbIvOs9Kj//2PJUo3QuOpPPS2K7OEOHp1BUJ8s+44OtyVmojRSyQbqg6b7OwqRym97XUWkAhOcnE0HAOPeZ1QYfv8L0XtVhkKxYhtDO1Cc+w94nmuwOZhSx8679IS5QYfl8Vt+a7blfaRxyxNDBtan0h4Y7B4YqlSiHjWTy0V8Y0e6d/qSvDlekJWhWO2EG+7kbugaptVwrcpB3drRUwBZhBhWdGeXin10k6i80xNJUdRmsgJ94+wC1VU9UfoGbvxs/3L+be5bum7Q0dAFHDskROuDQXVAx2Vofnbxt9RN/MyXNEYQ887hXJrtVdcoysouBpkokRyMwRLJ8UpMm3QxmmBlO5UB/mZRkkqNDMDyCx1jJFCqOi4BfbVvVGenCOHD7ObVADTkebLxV/AaqGG+oC+Lp2kRSenEFj22kLRaWAhueSDrV/ySgKORMTOPGoib2C5vWZgjG49f1km3hoTNMASSDYHsbmfXzm/oLuBtFXbZg8/ZyUkaneTR7JhV/trLzm/o3DaNyfGcexN9wDwQgXoAYfzsM/Ey8eIMWAT69hc4e1H/6U3quvvt3golyVcczcSsUSkH9ugy9lyGbDJXbUnkOwWY0siu9ZtvotkzsDfJTaYyMDr+u5ONDkDAeyhjnuldK/Weqv16niCenbf+yOUtArTORUkybjSENjkHXg0qQQeC9OnOQ5WZow1xRbOHs4/njt7H/RMQdaG5nsb5/0bDKiW3soRlJhdt1Xbl9Uf/drSbn5uXeOuNj30ORvTquX6bAjEVpvM2IB92yUNEneQR3g+ZFZ53zV2o3gjvdCJog40DqD7Wnugq3u0zy4ut5mpWXU50J9bZnGpBwURl5sQtAdJzqtcsuR6ukVDGH502nMtoevi6gIbRhMEjzD7XbR94hhraHOb/vLHjehN4neQRJVRBshf/Mv0b/stFYx/hQvvQ/M3vQheouJMNXa0x7DLMVnI/jzSEf7TAmovguTylCOn4+D0q85vZZqUz533aP/Tq+MmQvJYgY0UV1St8+g5n/VKd69wZDLTlqEnds/CRMvhI8aud6pI5ntDVsCqEjSQSqv84K6siXn/JzYnUKDCA7c46gro3lX89ifRQcoKNLfqxji+QuoT1rpM3WRcIrRiNWIvsmV7+ML3d1auTqQJOLgggpQOIJuArRZnUDmmjv1q0DiVJ1NUMrUJBvjDlQi1B3xWtroZQQagFq0R+A4z77YCQHmbWp16mffkGvuGBIG0ZittcSUBNj0SVgXXys0alGHPrnSbVEBqOX5ORYhu6PO9Z7DzfglGCtVRODLa/Gn4H10ounEF2aRczCzxSWHLjZE9MK4BJUnfBbpIduS9ZvQ3CbajM4tZGGHC2gOG40ASIm0yev9FXgaFUH9QX9RHN90Ws+TaEAR1VxTa7+JeW+du1Qv7YL7ZwO0TIwqKmIbr/foN7weLxaPEK2I5yy85VG2Ex5Qh3LR2gp7Kq2F6bblnJmbvWYYgo9YRzeQjxkeDWaG/9GxETS/VBgsPQVJ/sTl3vgXC61CXGbIpd7mxj81RTQ/GSt75F94eMle93TfjoAsbKeQ/c6BN9x2WjIQ3nurvkCGyvsclxV4IIvFhYrCc2zlgkoLjb/Zwbf8+FYu/ydnZIyHwUr7a9H0+lvs==","p":"{\\"key1\\":\\"code100\\",\\"user\\":\\"default\\",\\"ncbtn\\":\\"810.3666381835938|92.7283706665039|47.98678207397461|47.98678207397461|92.7283706665039|140.71515274047852|810.3666381835938|858.3534202575684\\",\\"umidToken\\":\\"G99274139ECFA16B1D2BD0A08CCF30CA049E272A70E3F11BCDA\\",\\"ncSessionID\\":\\"5e70dec14e36\\"}","scene":"register","asyn":0,"lang":"cn","v":1}'
+
+u_atoken 对应 t
+
+
+
+
+
+
+
+
