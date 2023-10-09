@@ -1623,7 +1623,7 @@ function KqDXn() { }
                     , $_GJAN = $_GIIc[1];
                 $_GIIc.shift();
                 var $_GJBs = $_GIIc[0];
-                var e = this[$_GIJL(263)](t);
+                var e = window.m["\u0024\u005f\u0046\u0041\u0065"](t);
                 return e[$_GIJL(271)] + e[$_GJAN(215)];
             },
             "\u0024\u005f\u0046\u0044\u0051": function (t, o) {
@@ -1688,6 +1688,7 @@ function KqDXn() { }
                 !n && r), y = /Mobi/i[$_CIEj(183)](ht[$_CIEj(120)]), w = /msie 6\.0/i[$_CIEj(183)](ht[$_CIFh(120)]), b = (/msie 7\.0/i[$_CIFh(183)](ht[$_CIEj(120)]),
                     u[$_CIFh(252)]), x = (parseFloat(ht[$_CIEj(120)][$_CIFh(154)](ht[$_CIEj(120)][$_CIFh(160)]($_CIFh(251)) + 8)),
                         parseFloat(ht[$_CIFh(120)][$_CIEj(154)](ht[$_CIEj(120)][$_CIEj(160)]($_CIEj(251)) + 8)) < 4.4), E = -1 < ht[$_CIEj(120)][$_CIFh(160)]($_CIFh(251));
+        window.m = m;
         function C(t) {
             var $_DAIEv = KqDXn.$_DI()[6][25];
             for (; $_DAIEv !== KqDXn.$_DI()[6][24];) {
@@ -8266,16 +8267,14 @@ function getU() {
     var pubCommObj = new window.pubComm;
     var tmp_h_val = pubCommObj['encrypt'](random_val);
 
-    console.log('Generate h val: ', tmp_h_val);
+    // console.log('Generate h val: ', tmp_h_val);
+    return tmp_h_val;
 }
 
 function get_l(track_list, c, s){
     var result = window.get_full_track_str(window.get_track(track_list), c, s);
     return result;
 };
-
-
-
 
 
 
@@ -8529,13 +8528,18 @@ function getLParams(){
         "h9s9": "1816378497",
         "rp": "017fbf2f65336e510301fa49727d4ae8"
     };
-    var fullL = window.vObj["encrypt"](window.l_stringify(o), random_str());
-    console.log('生成的l值：', fullL)
+    var params_1 = window.l_stringify(o);
+    var params_2 =  random_str();
+    var fullL = window.vObj["encrypt"](params_1, params_2);
+    // console.log('生成的l值：', fullL)
     return fullL;
 };
 
 function getW(){
-
+    var fullU = getU();
+    var fullL = getLParams();
+    var fullH = window.m["\u0024\u005f\u0046\u0043\u0070"](fullL);
+    return fullU + fullH;
 };
 
 
