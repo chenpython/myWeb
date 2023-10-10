@@ -161,7 +161,30 @@ https://www.chictr.org.cn/searchproj.html
                     v: p.jsv
                 }
 
-
+e的值分析：
+    执行到 o.nc_wrapper.innerHTML = ""; e 的值为
+        {
+            "renderTo": "nocaptcha",
+            "appkey": "CF_APP_WAF",
+            "scene": "register",
+            "trans": {
+                "key1": "code100",
+                "user": "default"
+            },
+            "token": "d7e3ebba-272f-4f97-95f2-7bb5cf7a0d42",
+            "language": "cn",
+            "isEnabled": true,
+            "times": 3,
+            "apimap": {
+                "analyze": "https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/analyze.jsonp",
+                "initialize": "https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/initialize.jsonp"
+            },
+            "width": 300,
+            "height": 34,
+            "fontSize": 12,
+            "timeout": 3000,
+            "hideErrorCode": false
+        }
 
 主要携带的轨迹参数如下：
 
