@@ -26,6 +26,12 @@ https://www.chictr.org.cn/searchproj.html
         &u_aref=Xt6xfjU2F16JXW5hBI%2BDCcyRFTw%3D（未知!!!!!!）
     携带cookie：acw_tc=781bad2016968401967433326e4e258890af0c57655b8c0e413a5c3c95ddf9（首次请求返回）
 
+主要携带的轨迹参数如下：
+
+&u_atoken=16c94171-7a19-453b-803e-ba7dd2bc68f7
+&u_asession=01kkw0F-KFhR3haoVlR1cqAevOwxrWFXd6yP24nIjKiVtpO3LIhGbmsWEQmcK7Is1bxyAUg7FZxJ5O3GqPfLyOWdsq8AL43dpOnCClYrgFm6o
+&u_asig=05cF4-Fb5ir7EKKUHdHPGVw3fJ6ILh0geC9lCxReIZCtJcWqeqE8ekgtqcGpN9342hH3tOWVXZdP0KJUbm9C8V3-Mno9d7nPJhnrORfSFPakLoBWld24CMuP_T-E6f8nfg93uHXxOEDy13R_XGNHAGfwn5d1zKovdS6N1uMlqta3-cIR0QdYqqplo-0U4FjoYzksmHjM0JOodanL5-M1Qs1YTrK590n54lhg6_ozg9_v-xvogs7af97AjvVIL1xiNYEyHvTQWBH_XQ_O7Q4dZBJX7mAeFLt4QZ64taEqGir0bY94r_LXIIil3Y3aVPRGAe
+&u_aref=gRzoyffDlIZ1HlG8cMUeW76SVJo%3D
 
 
 生成轨迹分析：
@@ -160,38 +166,158 @@ https://www.chictr.org.cn/searchproj.html
                     lang: e.language,
                     v: p.jsv
                 }
+，
 
-e的值分析：
-    执行到 o.nc_wrapper.innerHTML = ""; e 的值为
-        {
-            "renderTo": "nocaptcha",
-            "appkey": "CF_APP_WAF",
-            "scene": "register",
-            "trans": {
+
+
+当前问题
+1、token如何生成
+    从返回页面中的 requestInfo.token 获取
+2、n如何生成
+    生成函数：o.__fy.getFYToken(o.__fy_options)
+        getFYToken ==== 
+        function() {
+                        return this.fyObj.getFYToken(a)
+                    }
+                =====
+                fireyejs.js ：
+                    function(e) {
+                                    var o;
+                                    return i(2, e)
+                                }
+
+        o.__fy_options =====
+            {
+                "MaxMTLog": 300,
+                "MTInterval": 4,
+                "MinMTDwnLog": 30,
+                "MaxKSLog": 14,
+                "MaxFocusLog": 6,
+                "MaxNGPLog": 200,
+                "NGPInterval": 4,
+                "Enable": 3,
+                "location": "cn",
+                "_umopt_npfp": 1,
+                "timeout": 2000
+            }  
+        ，
+
+3、p如何生成
+    c.obj2str(n)
+
+        c.obj2str ===== 
+            function f(e) {
+                var t, n = [], i = f;
+                if ("string" == typeof e)
+                    return '"' + e.replace(/(['"\\])/g, "\\$1").replace(/(\n)/g, "\\n").replace(/(\r)/g, "\\r").replace(/(\t)/g, "\\t") + '"';
+                if (void 0 === e)
+                    return "undefined";
+                if ("object" == (void 0 === e ? "undefined" : v(e))) {
+                    if (null === e)
+                        return "null";
+                    if (e.sort) {
+                        for (t = 0; t < e.length; t++)
+                            n.push(i(e[t]));
+                        n = "[" + n.join() + "]"
+                    } else {
+                        for (t in e)
+                            e.hasOwnProperty(t) && n.push('"' + t + '":' + i(e[t]));
+                        n = "{" + n.join() + "}"
+                    }
+                    return n
+                }
+                return e.toString()
+            }
+
+
+        n ==== 
+            {
                 "key1": "code100",
-                "user": "default"
-            },
-            "token": "d7e3ebba-272f-4f97-95f2-7bb5cf7a0d42",
-            "language": "cn",
-            "isEnabled": true,
-            "times": 3,
-            "apimap": {
-                "analyze": "https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/analyze.jsonp",
-                "initialize": "https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/initialize.jsonp"
-            },
-            "width": 300,
-            "height": 34,
-            "fontSize": 12,
-            "timeout": 3000,
-            "hideErrorCode": false
-        }
+                "user": "default",
+                "ncbtn": "810.3666381835938|161.95913696289062|47.98678207397461|47.98678207397461|161.95913696289062|209.94591903686523|810.3666381835938|858.3534202575684",
+                "umidToken": "",
+                "ncSessionID": "5e70dec14e36"
+            }
+        /"，
 
-主要携带的轨迹参数如下：
+4、{
+    "key1": "code100",
+    "user": "default",
+    "ncbtn": "810.3666381835938|161.95913696289062|47.98678207397461|47.98678207397461|161.95913696289062|209.94591903686523|810.3666381835938|858.3534202575684",
+    "umidToken": "",
+    "ncSessionID": "5e70dec14e36"
+    }n对象来源
+            主要代码：
+                var n = (new Date,
+                e.trans || {});
+                n.umidToken = o.__fy.getUidToken(); // 需替换
+                try {
+                    n.ncSessionID = function(e) {
+                        return parseInt(e.offsetWidth + "a" + e.offsetHeight + "a" + d(e) + "a" + h(e), 11).toString(16)
+                    }(f.getElementById("nc_" + o.wrapperId + "_n1t"))
+                } catch (e) {
+                    n.ncSessionID = "0"
+                }
 
-&u_atoken=16c94171-7a19-453b-803e-ba7dd2bc68f7
-&u_asession=01kkw0F-KFhR3haoVlR1cqAevOwxrWFXd6yP24nIjKiVtpO3LIhGbmsWEQmcK7Is1bxyAUg7FZxJ5O3GqPfLyOWdsq8AL43dpOnCClYrgFm6o
-&u_asig=05cF4-Fb5ir7EKKUHdHPGVw3fJ6ILh0geC9lCxReIZCtJcWqeqE8ekgtqcGpN9342hH3tOWVXZdP0KJUbm9C8V3-Mno9d7nPJhnrORfSFPakLoBWld24CMuP_T-E6f8nfg93uHXxOEDy13R_XGNHAGfwn5d1zKovdS6N1uMlqta3-cIR0QdYqqplo-0U4FjoYzksmHjM0JOodanL5-M1Qs1YTrK590n54lhg6_ozg9_v-xvogs7af97AjvVIL1xiNYEyHvTQWBH_XQ_O7Q4dZBJX7mAeFLt4QZ64taEqGir0bY94r_LXIIil3Y3aVPRGAe
-&u_aref=gRzoyffDlIZ1HlG8cMUeW76SVJo%3D
+
+
+        e.trans 提供：
+            {
+            "key1": "code100",
+            "user": "default",
+            "ncbtn": "810.3666381835938|11.959135055541992|47.98678207397461|47.98678207397461|11.959135055541992|59.9459171295166|810.3666381835938|858.3534202575684"
+            }
+        
+        umidToken 来源于 o.__fy.getUidToken()
+            ===== awsc.js?t=2060
+                function() {
+                            return this.fyObj.getUidToken(a)
+                        }
+        ncSessionID 来源：
+            parseInt(e.offsetWidth + "a" + e.offsetHeight + "a" + d(e) + "a" + h(e), 11).toString(16)
+
+            d(e) 代码：
+            h(e) 代码：
+
+5、e 对象 的 ncbtn 生成
+{
+    "renderTo": "nocaptcha",
+    "appkey": "CF_APP_WAF",
+    "scene": "register",
+    "trans": {
+        "key1": "code100",
+        "user": "default",
+        "ncbtn": "810.3666381835938|11.959135055541992|47.98678207397461|47.98678207397461|11.959135055541992|59.9459171295166|810.3666381835938|858.3534202575684"
+    },
+    "token": "79e59da9-0784-4a4c-87d0-df328f2ae3c6",
+    "language": "cn",
+    "isEnabled": true,
+    "times": 3,
+    "apimap": {
+        "analyze": "https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/analyze.jsonp",
+        "initialize": "https://cf-app-waf.cfc.aliyuncs.com/nocaptcha/initialize.jsonp"
+    },
+    "width": 300,
+    "height": 34,
+    "fontSize": 12,
+    "timeout": 3000,
+    "hideErrorCode": false
+}
+    _ ==> 可否为固定值？
+        {
+        "x": 810.3666381835938,
+        "y": 11.959135055541992,
+        "width": 47.98678207397461,
+        "height": 47.98678207397461,
+        "top": 11.959135055541992,
+        "right": 858.3534202575684,
+        "bottom": 59.9459171295166,
+        "left": 810.3666381835938
+    }
+    ncbtn = _.x + "|" + _.y + "|" + _.width + "|" + _.height + "|" + _.top + "|" + _.bottom + "|" + _.left + "|" + _.right
+
+
+
 
 
 生成轨迹算法文件：fireyejs.js
@@ -203,20 +329,6 @@ e的值分析：
             }
 
             
-var a = {
-    a: e.appkey,
-    t: e.token,
-    n: o.__fy.getFYToken(o.__fy_options),
-    p: c.obj2str(n),
-    scene: e.scene || "",
-    asyn: 0,
-    lang: e.language,
-    v: p.jsv
-}
-
-'{"a":"CF_APP_WAF","t":"a7a061f6-1579-4343-8411-094448a5f14d","n":"226!9Yg2sTLiblM0HhbvZhlhAx142twZOGpzS3PncGpkNNV4WheiRExgtl7Gl8yDlAEKGOcU6Q55w5dEUvp4nd38i+CLJwc8hxgAMUVrzYxXN80Bvnrk+gdrdNn2yWHCovFazKONkGiBmhcJszlTiRzNPFmZQwDcXcSbIvOs9Kj//2PJUo3QuOpPPS2K7OEOHp1BUJ8s+44OtyVmojRSyQbqg6b7OwqRym97XUWkAhOcnE0HAOPeZ1QYfv8L0XtVhkKxYhtDO1Cc+w94nmuwOZhSx8679IS5QYfl8Vt+a7blfaRxyxNDBtan0h4Y7B4YqlSiHjWTy0V8Y0e6d/qSvDlekJWhWO2EG+7kbugaptVwrcpB3drRUwBZhBhWdGeXin10k6i80xNJUdRmsgJ94+wC1VU9UfoGbvxs/3L+be5bum7Q0dAFHDskROuDQXVAx2Vofnbxt9RN/MyXNEYQ887hXJrtVdcoysouBpkokRyMwRLJ8UpMm3QxmmBlO5UB/mZRkkqNDMDyCx1jJFCqOi4BfbVvVGenCOHD7ObVADTkebLxV/AaqGG+oC+Lp2kRSenEFj22kLRaWAhueSDrV/ySgKORMTOPGoib2C5vWZgjG49f1km3hoTNMASSDYHsbmfXzm/oLuBtFXbZg8/ZyUkaneTR7JhV/trLzm/o3DaNyfGcexN9wDwQgXoAYfzsM/Ey8eIMWAT69hc4e1H/6U3quvvt3golyVcczcSsUSkH9ugy9lyGbDJXbUnkOwWY0siu9ZtvotkzsDfJTaYyMDr+u5ONDkDAeyhjnuldK/Weqv16niCenbf+yOUtArTORUkybjSENjkHXg0qQQeC9OnOQ5WZow1xRbOHs4/njt7H/RMQdaG5nsb5/0bDKiW3soRlJhdt1Xbl9Uf/drSbn5uXeOuNj30ORvTquX6bAjEVpvM2IB92yUNEneQR3g+ZFZ53zV2o3gjvdCJog40DqD7Wnugq3u0zy4ut5mpWXU50J9bZnGpBwURl5sQtAdJzqtcsuR6ukVDGH502nMtoevi6gIbRhMEjzD7XbR94hhraHOb/vLHjehN4neQRJVRBshf/Mv0b/stFYx/hQvvQ/M3vQheouJMNXa0x7DLMVnI/jzSEf7TAmovguTylCOn4+D0q85vZZqUz533aP/Tq+MmQvJYgY0UV1St8+g5n/VKd69wZDLTlqEnds/CRMvhI8aud6pI5ntDVsCqEjSQSqv84K6siXn/JzYnUKDCA7c46gro3lX89ifRQcoKNLfqxji+QuoT1rpM3WRcIrRiNWIvsmV7+ML3d1auTqQJOLgggpQOIJuArRZnUDmmjv1q0DiVJ1NUMrUJBvjDlQi1B3xWtroZQQagFq0R+A4z77YCQHmbWp16mffkGvuGBIG0ZittcSUBNj0SVgXXys0alGHPrnSbVEBqOX5ORYhu6PO9Z7DzfglGCtVRODLa/Gn4H10ounEF2aRczCzxSWHLjZE9MK4BJUnfBbpIduS9ZvQ3CbajM4tZGGHC2gOG40ASIm0yev9FXgaFUH9QX9RHN90Ws+TaEAR1VxTa7+JeW+du1Qv7YL7ZwO0TIwqKmIbr/foN7weLxaPEK2I5yy85VG2Ex5Qh3LR2gp7Kq2F6bblnJmbvWYYgo9YRzeQjxkeDWaG/9GxETS/VBgsPQVJ/sTl3vgXC61CXGbIpd7mxj81RTQ/GSt75F94eMle93TfjoAsbKeQ/c6BN9x2WjIQ3nurvkCGyvsclxV4IIvFhYrCc2zlgkoLjb/Zwbf8+FYu/ydnZIyHwUr7a9H0+lvs==","p":"{\\"key1\\":\\"code100\\",\\"user\\":\\"default\\",\\"ncbtn\\":\\"810.3666381835938|92.7283706665039|47.98678207397461|47.98678207397461|92.7283706665039|140.71515274047852|810.3666381835938|858.3534202575684\\",\\"umidToken\\":\\"G99274139ECFA16B1D2BD0A08CCF30CA049E272A70E3F11BCDA\\",\\"ncSessionID\\":\\"5e70dec14e36\\"}","scene":"register","asyn":0,"lang":"cn","v":1}'
-
-u_atoken 对应 t
 
 
 

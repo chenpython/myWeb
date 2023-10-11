@@ -823,7 +823,7 @@
             })
         }
         function n() {
-            function t(t) {
+            function t(t) {//绑定的点击事件
                 function i() {
                     k.onmousedown = null,
                     c.removeEvt(f, "mousemove", s),
@@ -1016,6 +1016,7 @@
                 } else
                     i(t.success)
             }
+            // 初始化滑块
             o.nc_wrapper.innerHTML = "";
             var v = f.createElement("div");
             v.id = "nc_" + o.wrapperId + "_n1t",
@@ -1073,7 +1074,7 @@
             }),
             e.fail && e.fail(t)
         }
-        var o = this;
+        var o = this; // 执行到此行，e中的token值已存在
         o.options = e,
         o.wrapperId = ++u.__awscnc_wrapper_id__,
         function(t) {
@@ -1208,7 +1209,7 @@
                 o(e),
                 e.reportUrl && r(e),
                 d.initializationReport(e);
-                var t = new s(e)
+                var t = new s(e) //进入赋值内部
             } catch (t) {
                 e.reportUrl && c.getNCPunish(e, "initError", t.message)
             }
