@@ -273,11 +273,21 @@ https://www.chictr.org.cn/searchproj.html
                 function() {
                             return this.fyObj.getUidToken(a)
                         }
+            日志打印：
+                'xi -> ', xi, 'Oi -> ', Oi, 'Si -> ', Si, 'wi -> ', wi, 'yi -> ', yi, 'Ei -> ', Ei
+                'Oi -> ', Oi, 'Si -> ', Si, 'wi -> ', wi, 'Ei -> ', Ei
+                i方法的出口：
+                    return Yo;
+                    出口上一层调用：
+                        ge = i(24, 2, le = ge),
+                比对过步骤流程无问题，但是返回的Yo有问题
+
+
         ncSessionID 来源：
             parseInt(e.offsetWidth + "a" + e.offsetHeight + "a" + d(e) + "a" + h(e), 11).toString(16)
 
-            d(e) 代码：
-            h(e) 代码：
+            d(e) 代码：----
+            h(e) 代码：----
 
 5、e 对象 的 ncbtn 生成
 {

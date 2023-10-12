@@ -92,7 +92,7 @@
     function i(o, r, l, u, g, C) {
         // 鼠标一聚焦到滑块区域就执行
         var f, m, b, j, k, A, S, x, O, w, y, E, R, _, T, L, D, P, B, I, M, z, N, F, H, U, W, V, X, G, q, Y, J, Z, K, $, Q, ee, oe, ie, te, re, ne, se, he, ae, de, pe, ce, ve, le, ue, ge, Ce, fe, me, be, je, ke, Ae, Se, xe, Oe, we, ye, Ee, Re, _e, Te, Le, De, Pe, Be, Ie, Me, ze, Ne, Fe, He, Ue, We, Ve, Xe, Ge, qe, Ye, Je, Ze, Ke, $e, Qe, eo, oo, io, to, ro, no, so, ho, ao, po, co, vo, lo, uo, go, Co, fo, mo, bo, jo, ko, Ao, So, xo, Oo, wo, yo, Eo, Ro, _o, To, Lo, Do, Po, Bo, Io, Mo, zo, No, Fo, Ho, Uo, Wo, Vo, Xo, Go, qo, Yo, Jo, Zo, Ko, $o, Qo, ei, oi, ii, ti, ri, ni, si, hi, ai, di, pi, ci, vi, li, ui, gi, Ci, fi, mi, bi, ji, ki, Ai;
-        hi = this, // document对象
+        hi = this, // window 对象
         ni = -1,
         pi = 0;
         try {
@@ -12662,45 +12662,61 @@
                     }, 1),
                     clearInterval(l)) : !r && l && clearInterval(l)
                 }
+                debugger;
+                var o_obj = {
+                    "MaxMTLog": 300,
+                    "MTInterval": 4,
+                    "MinMTDwnLog": 30,
+                    "MaxKSLog": 14,
+                    "MaxFocusLog": 6,
+                    "MaxNGPLog": 200,
+                    "NGPInterval": 4,
+                    "Enable": 3,
+                    "location": "cn",
+                    "_umopt_npfp": 1,
+                    "timeout": 2000
+                }; // 事件对象
+
                 var n = (new Date,
                 e.trans || {});
-                // n.umidToken = o.__fy.getUidToken();
+                n.umidToken = window.iFunc(4, o_obj);
+                var slider_obj = {
+                    offsetWidth: 300,
+                    offsetHeight:48,
+                    offsetLeft: 0,
+                    offsetTop: 0,
+                    offsetParent:{
+                        offsetLeft: 810,
+                        offsetTop: 293,
+                        offsetParent: {
+                            offsetLeft: 0,
+                            offsetTop: 0,
+                            offsetParent: null
+                        }
+                    }
+                }; // 滑块的元素对象
                 try {
-                    debugger;
                     n.ncSessionID = function(e) {
                         return parseInt(e.offsetWidth + "a" + e.offsetHeight + "a" + d(e) + "a" + h(e), 11).toString(16)
-                    }({
-                        offsetWidth: 300,
-                        offsetHeight:48,
-                        offsetLeft: 0,
-                        offsetTop: 0,
-                        offsetParent:{
-                            offsetLeft: 810,
-                            offsetTop: 293,
-                            offsetParent: {
-                                offsetLeft: 0,
-                                offsetTop: 0,
-                                offsetParent: null
-                            }
-                        }
-                    })
+                    }(slider_obj)
                 } catch (e) {
                     n.ncSessionID = "0"
                 }
                 var a = {
                     a: e.appkey,
                     t: e.token,
-                    n: o.__fy.getFYToken(o.__fy_options),
+                    n: window.iFunc(2, o_obj),
                     p: c.obj2str(n),
                     scene: e.scene || "",
                     asyn: 0,
                     lang: e.language,
                     v: p.jsv
                 }
-                  , s = 0
-                  , r = !0;
-                t();
-                var l = setInterval(t, 20)
+                //   , s = 0
+                //   , r = !0;
+                // t();
+                // var l = setInterval(t, 20)
+                return a;
             }
             function _(t) {
                 k.className = "nc_iconfont btn_ok",
