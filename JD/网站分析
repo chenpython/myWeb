@@ -282,8 +282,11 @@ https://api.m.jd.com/?appid=search-pc-java&functionId=pc_search_s_new&
 
     从 cookie 中获取 "__jda=" 的value值 为 uuid 的值
 
-    
 
+四、area 参数生成
+var url = colorApi+'?appid=search-pc-java&client=pc&clientVersion=1.0.0&loginType=3&cthr=1'
+               +'&functionId='+functionId+'&body='+JSON.stringify(paramJson)
+               +'&uuid='+jda+'&area='+ area + '&t='+new Date().getTime()
 
 
 
