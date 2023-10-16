@@ -1,0 +1,292 @@
+京东平台：
+    可提供的数据
+        1、名称，价格，销量，规格，店铺名称，功能主治，用法用量，使用禁忌，处方药/非处方药，店铺资质，产品图片
+        2、平台优惠、评价数、厂商授权药房图片、药监认证（链接错误，暂时未能打开）
+        3、国产/进口、商品毛重、类别（西药/中药）
+        4、产品参数：品牌，批准文号，生产企业……
+
+    技术分析
+        1、首页关键字搜索完获取到搜索数据后，页面会控制跳转到登录页
+        2、详情页
+        3、翻页
+        4、登录需要滑块验证
+        5、详情页价格必须登录
+            https://color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc&clientVersion=1.0.0&t=1697184636591&body=%7B%22skuId%22%3A100018280931%2C%22cat%22%3A%2213314%2C21909%2C21917%22%2C%22area%22%3A%221_72_2799_0%22%2C%22shopId%22%3A%221000349323%22%2C%22venderId%22%3A1000349323%2C%22paramJson%22%3A%22%7B%5C%22platform2%5C%22%3A%5C%22100000000001%5C%22%2C%5C%22specialAttrStr%5C%22%3A%5C%22p0ppppppppp2ppppppppppp1pppp%5C%22%2C%5C%22skuMarkStr%5C%22%3A%5C%2200%5C%22%7D%22%2C%22num%22%3A1%2C%22bbTraffic%22%3A%22%22%7D&h5st=20231013161036678%3B9n5mzg3ggt3t3gh9%3Bfb5df%3Btk02wcba11cd641lMSsxeDJ4MngxrpTYbV543z7x-IYdsjtx_sMtl8JQ10LGw9YvZbAwlld_RlXYtGzIBEhL42YZe7Mz%3Ba9c5ca47dba8f0177a3ffa1fd79c470e%3B4.1%3B1697184636678%3Bee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a3980acde1a10effcc27fd84ad69b6a255fa2bacbfc5a0cc8222e4ac53b669906820b1461c75971601a3f031b5c1f40b721502f3b79e32d29b726ebec75a213493a818f67211b187fcf51e032e0b772bee8c70e4a1d7502aa775b148a504a31d6278c2322370cf6495cae14518eaaa725ab761cc06dcd13dd323ae35c697a0b2eed968dc46f1bad47d8a733d681af5bd1ff591d5a7e1c2e0a369c9cdf518af350a2b98522a45985619a9fbf67dffc625cd71e4fe121a65a8665272524bea9e1e7bd&x-api-eid-token=jdd037M5AVFZ2HT2SA5SZC7BICJSWBJG7U4KSIYNBOHHIL7EBR7WW63CSB3P6KRACYGZ553JLWA3Q5CN3FDSAJLW5OU2HOUAAAAMLFALFGNAAAAAACUMRMI5AE2HE7EX&loginType=3&uuid=125919621.1697184636130458986659.1697184636.1697184636.1697184636.1
+
+
+当前关注技术点：
+1、京东、淘宝接口更新都需要登录，是否可以绕过登录拿到数据？
+2、一定要登录的情况下，账号以何种方式，以最小风险获取到？
+
+
+京东平台：https://www.jd.com/?country=CN
+测试药品：盐酸氨基葡萄糖
+    搜索关键字无需登录，可以获取到商品及价格
+        缺点：商品数量只有30条，正常网页会加载一次，在第一页展示60条
+            分析：
+                正常网页在加载一页时会进行翻页，因此相当于展示了两页的信息
+                翻页获取的数据为动态数据
+
+        https://item.jd.com/10022937741193.html
+    详情页不登录，无法获取到评价数、评价内容等，可以获取到产品基本信息
+
+
+sku_id=100018094294
+
+翻页请求封装：
+var e = {
+            appid: "search-pc-java",
+            functionId: a,
+            client: "pc",
+            clientVersion: "1.0.0",
+            t: d
+        };
+        var f = b;
+        var g = "";
+        f && (e.body = SHA256(JSON.stringify(f))),
+        window.PSign.sign(e).then(function(a) {
+            g += "&h5st=" + encodeURI(a.h5st);
+            try {
+                getJsToken(function(a) {
+                    a && a.jsToken && (g += "&x-api-eid-token=" + a.jsToken),
+                    c(g, d)
+                }, 600)
+            } catch (b) {}
+        })
+    };
+    a.getColorApi = c,
+    a.postDraData = d,
+    a.signH5Fn = f
+    
+
+，
+
+
+
+================= 6次翻页信息 =========================
+appid	search-pc-java
+functionId	pc_search_s_new
+client	pc
+clientVersion	1.0.0
+t	1697439285877
+body	{
+    "keyword":"盐酸氨基葡萄糖",
+    "wq":"盐酸氨基葡萄糖",
+    "pvid":"a018441fdc93463f8aa17598e8e36751",
+    "page":"6",
+    "s":"146",
+    "scrolling":"y",
+    "log_id":"1697439284508.4008",
+    "tpl":"1_M",
+    "isList":0,
+    "show_items":""}
+loginType	3
+uuid	122270672.1697438399263105998130.1697438399.1697438399.1697438399.1
+area	19_1601_0_0
+h5st	20231016145445882;g6t9tttn3miz59q1;f06cc;tk03w828f1b6a18nWB1sXQLbSUNJNZ06wy2Umz0v34cwEjm6-X0IGYYWFYcIcwP9mAad8_F6m_GEfilIW8PqwjzC9E2d;f44a8c401a432ac138eb1d2194f8bfc1;4.1;1697439285882;ee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a397ae8268c7f7c5fb3780158b8fa4e73d08336abe4b79d34906258dbb79cecd4769b752da1b84c54d1a95071351c73c853facadf62b978ecd13b1a6133cc8a4f632965b1dc24a78d93c75b5552c8a341a09a0662c4eb6974e0cad76d47a49883bfb54b5165533d8628b88d6a530be05fcdc4ce45c80539fcc2172334d54413e612dd743ab8ea95233f1e5875c1150057aadbb0b87b49e5067f3349c3af38eb48f17c92e267840a6148339136d7c7c9e67e9543f9721fb9d6f19291d67ecba387c03672ccfcbdb196abd63babe8b1480843420e3981cebf2df2cd36603404f9ac56aaf8c79c94d68e1be1a0e4d4eaaa71e9
+x-api-eid-token	jdd037M5AVFZ2HT2SA5SZC7BICJSWBJG7U4KSIYNBOHHIL7EBR7WW63CSB3P6KRACYGZ553JLWA3Q5CN3FDSAJLW5OU2HOUAAAAMLG5BIO3QAAAAACDEV2L5VMPC3KQX
+
+
+appid	search-pc-java
+functionId	pc_search_s_new
+client	pc
+clientVersion	1.0.0
+t	1697439284219
+body	{
+    "keyword":"盐酸氨基葡萄糖",
+    "wq":"盐酸氨基葡萄糖",
+    "pvid":"a018441fdc93463f8aa17598e8e36751",
+    "isList":0,
+    "page":"5",
+    "s":"116",
+    "click":"0",
+    "log_id":"1697439280566.1332",
+    "show_items":""
+    }
+loginType	3
+uuid	122270672.1697438399263105998130.1697438399.1697438399.1697438399.1
+area	19_1601_0_0
+h5st	20231016145444239;g6t9tttn3miz59q1;f06cc;tk03w828f1b6a18nWB1sXQLbSUNJNZ06wy2Umz0v34cwEjm6-X0IGYYWFYcIcwP9mAad8_F6m_GEfilIW8PqwjzC9E2d;22f4bf9c1012d0ab9d846eb74166746e;4.1;1697439284239;ee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a397ae8268c7f7c5fb3780158b8fa4e73d08336abe4b79d34906258dbb79cecd4769b752da1b84c54d1a95071351c73c853facadf62b978ecd13b1a6133cc8a4f632965b1dc24a78d93c75b5552c8a341a09a0662c4eb6974e0cad76d47a49883bfb54b5165533d8628b88d6a530be05fcd9a18233f88cbcfdf032d25ba362584dbc01558ef287f6469f119dedca7ceabd7e0c2a08d6986a9b4042b0695e4ecf9d9f9587d0900f4710e59e56a062c9781f9e0f64fa6d3ccc11eb81c2cfb968dab7cd35ef573edc0ffed5ea668aaf6b07ab704e954914bb674f7d61b25e8f55e8705883c6be7722663898bde8700a9e8a5bd
+x-api-eid-token	jdd037M5AVFZ2HT2SA5SZC7BICJSWBJG7U4KSIYNBOHHIL7EBR7WW63CSB3P6KRACYGZ553JLWA3Q5CN3FDSAJLW5OU2HOUAAAAMLG5BIO3QAAAAACDEV2L5VMPC3KQX
+
+appid	search-pc-java
+functionId	pc_search_s_new
+client	pc
+clientVersion	1.0.0
+t	1697439280132
+body	{
+    "keyword":"盐酸氨基葡萄糖",
+    "wq":"盐酸氨基葡萄糖",
+    "pvid":"a018441fdc93463f8aa17598e8e36751",
+    "page":"4",
+    "s":"86",
+    "scrolling":"y",
+    "log_id":"1697439277131.1494",
+    "tpl":"1_M",
+    "isList":0,
+    "show_items":""
+    }
+loginType	3
+uuid	122270672.1697438399263105998130.1697438399.1697438399.1697438399.1
+area	19_1601_0_0
+h5st	20231016145440138;g6t9tttn3miz59q1;f06cc;tk03w828f1b6a18nWB1sXQLbSUNJNZ06wy2Umz0v34cwEjm6-X0IGYYWFYcIcwP9mAad8_F6m_GEfilIW8PqwjzC9E2d;0442d6b9bbde94a6543f5613dba4cfcb;4.1;1697439280138;ee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a397ae8268c7f7c5fb3780158b8fa4e73d08336abe4b79d34906258dbb79cecd4769b752da1b84c54d1a95071351c73c853facadf62b978ecd13b1a6133cc8a4f632965b1dc24a78d93c75b5552c8a341a09a0662c4eb6974e0cad76d47a49883bfb54b5165533d8628b88d6a530be05fcd261df7858b7140e1daec0f057d48e79c5f56ff4fa53732b78d245955ad44ad0bf5ab227bbc38b0c3080c3b1099df139a417286c50356c934e5054783d0aebb1436caaafcdd1711706d09c9d0ac04eb708049269e4d03c440bb86fd8381f7dba48a212cd58a99864fbbd0c74724157fb5012ac9021f8a6513b88248c82aed862b
+x-api-eid-token	jdd037M5AVFZ2HT2SA5SZC7BICJSWBJG7U4KSIYNBOHHIL7EBR7WW63CSB3P6KRACYGZ553JLWA3Q5CN3FDSAJLW5OU2HOUAAAAMLG5BIO3QAAAAACDEV2L5VMPC3KQX
+
+
+appid	search-pc-java
+functionId	pc_search_s_new
+client	pc
+clientVersion	1.0.0
+t	1697439276845
+body	{
+    "keyword":"盐酸氨基葡萄糖",
+    "wq":"盐酸氨基葡萄糖",
+    "pvid":"a018441fdc93463f8aa17598e8e36751",
+    "isList":0,
+    "page":"3",
+    "s":"57",
+    "click":"0",
+    "log_id":"1697439266421.4864",
+    "show_items":""
+    }
+loginType	3
+uuid	122270672.1697438399263105998130.1697438399.1697438399.1697438399.1
+area	19_1601_0_0
+h5st	20231016145436871;g6t9tttn3miz59q1;f06cc;tk03w828f1b6a18nWB1sXQLbSUNJNZ06wy2Umz0v34cwEjm6-X0IGYYWFYcIcwP9mAad8_F6m_GEfilIW8PqwjzC9E2d;aad13f3cd2e077938b9036645dbd053b;4.1;1697439276871;ee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a397ae8268c7f7c5fb3780158b8fa4e73d08336abe4b79d34906258dbb79cecd4769b752da1b84c54d1a95071351c73c853facadf62b978ecd13b1a6133cc8a4f632965b1dc24a78d93c75b5552c8a341a09a0662c4eb6974e0cad76d47a49883bfb54b5165533d8628b88d6a530be05fcd6de1b608568bdcca1aef37d344dfcf02b033dda9f38189d4628db2ee8fb63a8e9c02039e86026b60b061e8e8c0ca0546e0e5e7f059de4f0b5deb63a08bf4b9893d51ce67b2a72e6bb2bf540d0240c7c98b2f54d5b666dbe7589fad7be2521a02dbfb6995a17b6ca1cf0b2ad37035179170d20302aa2a37367cee7aa3d86895e8
+x-api-eid-token	jdd037M5AVFZ2HT2SA5SZC7BICJSWBJG7U4KSIYNBOHHIL7EBR7WW63CSB3P6KRACYGZ553JLWA3Q5CN3FDSAJLW5OU2HOUAAAAMLG5BIO3QAAAAACDEV2L5VMPC3KQX
+
+
+appid	search-pc-java
+functionId	pc_search_s_new
+client	pc
+clientVersion	1.0.0
+t	1697439265929
+body	{
+    "keyword":"盐酸氨基葡萄糖",
+    "wq":"盐酸氨基葡萄糖",
+    "pvid":"a018441fdc93463f8aa17598e8e36751",
+    "page":"2",
+    "s":"29",
+    "scrolling":"y",
+    "log_id":"1697439241549.7197",
+    "tpl":"1_M",
+    "isList":0,
+    "show_items":""
+    }
+loginType	3
+uuid	122270672.1697438399263105998130.1697438399.1697438399.1697438399.1
+area	19_1601_0_0
+h5st	20231016145425935;g6t9tttn3miz59q1;f06cc;tk03w828f1b6a18nWB1sXQLbSUNJNZ06wy2Umz0v34cwEjm6-X0IGYYWFYcIcwP9mAad8_F6m_GEfilIW8PqwjzC9E2d;72c6ece6973cbaf9fc2e66715e103955;4.1;1697439265935;ee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a397ae8268c7f7c5fb3780158b8fa4e73d08336abe4b79d34906258dbb79cecd4769b752da1b84c54d1a95071351c73c853facadf62b978ecd13b1a6133cc8a4f632965b1dc24a78d93c75b5552c8a341a09a0662c4eb6974e0cad76d47a49883bfb54b5165533d8628b88d6a530be05fcd33fd0ab6ec8da0a3c4ca9aef0ea86a1ed193aaf457309c1d34e8656074d4f6a04336770f663b7cd948391ebb6db97eb374eff15c56bd6282ac3c5f6097dfe96828b04d9d2829dcbee09040a171f0350d404405e872eaf03be310ab4075415f58453e530b36669441d3091ecf2ed53fff3484393f3fcc72a8cb75d42aa7ad9759
+x-api-eid-token	jdd037M5AVFZ2HT2SA5SZC7BICJSWBJG7U4KSIYNBOHHIL7EBR7WW63CSB3P6KRACYGZ553JLWA3Q5CN3FDSAJLW5OU2HOUAAAAMLG5BIO3QAAAAACDEV2L5VMPC3KQX
+
+第一次查询
+keyword	盐酸氨基葡萄糖
+enc	utf-8
+wq	盐酸氨基葡萄糖
+pvid	a018441fdc93463f8aa17598e8e36751
+
+
+翻页参数
+{
+    "keyword":"盐酸氨基葡萄糖",
+    "wq":"盐酸氨基葡萄糖",
+    "pvid":"a018441fdc93463f8aa17598e8e36751",
+    "page":"6",
+    "s":"146",
+    "scrolling":"y",
+    "log_id":"1697439284508.4008",
+    "tpl":"1_M",
+    "isList":0,
+    "show_items":""
+}
+
+当前问题，翻页？
+1、cookie不影响翻页
+2、body 中的 log_id 不能为空，且每次请求值不一致
+3、body 中的 s为记录游标
+4、body 中的 scrolling 不能为空，在2、4、6次翻页都有，判定为页面加载结束的标志
+5、s 和 page 与服务器有一些绑定关系
+6、click 表示界面用户点击翻页；tpl + scrolling 是用户下滑页面翻页
+7、show_items、isList、keyword、wq 固定参数，不变
+8、pvid？？
+9、s、page ？？
+10、log_id 的值？？
+11、x-api-eid-token、uuid、area、h5st？？
+
+
+
+
+https://www.jd.com
+
+翻頁地址：
+https://search.jd.com/Search
+https://api.m.jd.com/?appid=search-pc-java&functionId=pc_search_s_new&
+
+
+
+一、pvid的生成
+    在 index.chunk.js 文件
+         if ("string" == typeof l && "" != l && (o += "&ev=" + l),
+                t = encodeURIComponent(t),
+                n = (n = (n = r.replace(/\{keyword}/, t)).replace(/\{enc}/, "utf-8")).replace(/\{additional}/, o),
+                "object" === ("undefined" == typeof $o ? "undefined" : _typeof($o)) && ("string" == typeof $o.lastKeyword && (n += "&wq=" + encodeURIComponent($o.lastKeyword)),
+                "string" == typeof $o.pvid && (n += "&pvid=" + $o.pvid)),
+        
+        ，
+    来源于 $o.pvid
+        genPvid: function() {
+                        var e = (new Date).getTime();
+                        return "xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx".replace(/[xy]/g, function(t) {
+                            var n = (e + 16 * Math.random()) % 16 | 0;
+                            return e = Math.floor(e / 16),
+                            ("x" == t ? n : 3 & n | 8).toString(16)
+                        })
+                    },
+                    
+    ，
+，
+
+
+二、x-api-eid-token 的生成
+    来源于服务器返回的cookie
+        哪个请求返回的cookie？
+        jdd037M5AVFZ2HT2SA5SZC7BICJSWBJG7U4KSIYNBOHHIL7EBR7WW63CSB3P6KRACYGZ553JLWA3Q5CN3FDSAJLW5OU2HOUAAAAMLG7FAIPYAAAAADFMKU2FQHLC57EX
+    collectConfig.store[_riskFpMode].jsTokenKey 是 VM 代码初始化获取 "3AB9D23F7A4B3CSS"
+
+    jdtRiskStorageManager.load ===
+    function(m, n, g) {
+                "undefined" == typeof n && (n = !0);
+                g = g || function(d) {
+                    return !!d
+                }
+                ;
+                var f = null;
+                if (n)
+                    try {
+                        if (f = jdtRiskCookieManager.getCookie(m),
+                        g(f))
+                            return f
+                    } catch (d) {}
+                return f
+            }
+    ，
+
+    "3AB9D23F7A4B3CSS" 是否一直不变？
+，
+
+
+三、uuid 的生成
+    122270672.1697438399263105998130.1697438399.1697438399.1697438399.1 
+        1697438399263105998130 从搜索返回的页面中提取，uuid 值在每次请求中均不变
+    122270672.1697442342690739755431.1697442343.1697442343.1697445133.2
+
+    从 cookie 中获取 "__jda=" 的value值 为 uuid 的值
+
+    
+
+
+
+
+
+
+
