@@ -1,0 +1,950 @@
+{
+    "extendWarrantyInfo": {
+        "descUrl": "https://baozhang.jd.com/static/serviceDesc",
+        "detailUrl": "https://b.jr.jd.com/service/serveIntroduce/#/introduce3?mainSkuId={mainSkuId}&brandId={brandId}&thirdCategoryId={cid3}&bindSkuId={bindSku}",
+        "serviceItems": []
+    },
+    "rankUnited": {
+        "revertItem": {
+            "floorBgImage": "https://m.360buyimg.com/rank/jfs/t1/220210/4/8105/116413/61bc3900E23032be5/9c15402c352382e4.png",
+            "floorIcon": "https://img10.360buyimg.com/img/jfs/t1/20724/31/20118/5100/6386d180Ef7435661/b73a0d4e3f653a22.png",
+            "floorPosition": 2,
+            "floorRightArrowIcon": "https://m.360buyimg.com/rank/jfs/t1/206038/6/18674/1888/61bc390aE2a46f19b/321efee30a5a8e65.png",
+            "h5JumpUrl": "https://pro.m.jd.com/mall/active/31rhHxMvPQ3A3K1ckTXFz1wdrd4f/index.html?showhead=no&has_native=0&indParam=%7B%22rankId%22:%222085437%22,%22fromName%22:%22Productdetail%22,%22preSrc%22:%22null%22,%22currSku%22:%22100041060474%22%7D",
+            "id": "100041060474",
+            "jump": "openapp.jdmobile://virtual?params={\"ishidden\":true,\"des\":\"jdreactcommon\",\"appname\":\"JDReactRankingList\",\"param\":{\"detailPageType\":\"5\",\"rankType\":\"10\",\"contentId\":\"2085437\",\"fromSkuId\":\"100041060474\"},\"fromName\":\"Productdetail\",\"modulename\":\"JDReactRankingList\",\"category\":\"jump\"}",
+            "jumpTypeInt": 1,
+            "name": "国产瓶装氨糖软骨素热卖榜·第1名",
+            "rankId": "2085437",
+            "rankNum": 1,
+            "rankTextColor": "#FA2C19",
+            "rankTypeInt": 10
+        }
+    },
+    "hasPlusBalance": false,
+    "promiseFxgInfo": {
+        "fxgCode": "0",
+        "oldTsfwCodes": "s33,"
+    },
+    "hasWarranty": false,
+    "soldOversea": {
+        "isSoldOversea": true,
+        "soldOverseaService": {
+            "soldOverseaIcon": "http://m.360buyimg.com/cc/jfs/t4984/195/1172610074/2110/e12abb06/58ede3e4Nfc650507.png",
+            "soldOverseaText": "售全球",
+            "soldOverseaDesc": "支持收货地址为海外或港澳台地区"
+        },
+        "soldOverseaStr": "1"
+    },
+    "isInstallNow": false,
+    "price": {
+        "epp": "",
+        "hagglePromotion": false,
+        "id": "100041060474",
+        "m": "129.90",
+        "nup": "",
+        "op": "69.90",
+        "p": "59.90",
+        "plusTag": {
+            "limit": false,
+            "min": 0,
+            "max": 0,
+            "overlying": false
+        },
+        "pp": "",
+        "sdp": "",
+        "sfp": "",
+        "sp": "",
+        "tkp": "",
+        "tpp": ""
+    },
+    "ipCityCode": "1601",
+    "canAddCart": false,
+    "shopInfo": {
+        "shopTag": {
+            "priority": 1,
+            "shopMark": "zy",
+            "tagIcon": "tab_054"
+        },
+        "shop": {
+            "avgEfficiencyScore": 0.0,
+            "avgServiceScore": 0.0,
+            "avgWareScore": 0.0,
+            "brief": "【京东京造】京东自有品牌—好生活，选京造",
+            "cardType": 3,
+            "cateGoodShop": 0,
+            "diamond": false,
+            "efficiencyScore": 0.0,
+            "followCount": 14369997,
+            "followText": "关注人数",
+            "giftIcon": "",
+            "goodShop": 0,
+            "hasCoupon": false,
+            "hotcates": [
+                {
+                    "cid": 14000320,
+                    "cname": "家居家纺",
+                    "commendSkuId": 100021935165,
+                    "imgPath": "http://m.360buyimg.com/n1/jfs/t1/206735/31/35190/77102/652a550bF9de428e4/ac9544e8078fb785.jpg"
+                },
+                {
+                    "cid": 19166178,
+                    "cname": "家具建材",
+                    "commendSkuId": 100014527855,
+                    "imgPath": "http://m.360buyimg.com/n1/jfs/t1/96526/5/44275/96168/652cdb77F4a4fd5e7/433436ab326e19a7.jpg"
+                },
+                {
+                    "cid": 14000731,
+                    "cname": "餐厨水具",
+                    "commendSkuId": 100020023573,
+                    "imgPath": "http://m.360buyimg.com/n1/jfs/t1/221906/19/30333/45821/648fc563Fe677152e/f129a8b3c5cda8bf.jpg"
+                },
+                {
+                    "cid": 14000685,
+                    "cname": "家用电器",
+                    "commendSkuId": 100019631248,
+                    "imgPath": "http://m.360buyimg.com/n1/jfs/t1/171870/3/40073/73264/652c123bFd90610f3/95de3bc258285183.jpg"
+                }
+            ],
+            "hotcatestr": "【京东京造】京东自有品牌—好生活，选京造",
+            "isSquareLogo": true,
+            "logisticsText": "物流",
+            "logo": "http://img30.360buyimg.com/popshop/jfs/t1/24146/35/20065/4283/650abb89F3014a6e8/239695209ed0d3d2.png",
+            "name": "京东京造自营官方旗舰店",
+            "nameB": "京东京造自营官方旗舰店",
+            "newNum": 0,
+            "promotionNum": 0,
+            "promotions": [
+                {
+                    "name": "限时秒杀",
+                    "url": "openApp.jdMobile://virtual?params={\"category\":\"jump\",\"des\":\"jshopMain\",\"jumpTab\":\"secKill\",\"shopId\":\"1000096602\",\"venderId\":\"1000096602\",\"shopName\":\"京东京造自营官方旗舰店\",\"logoUrl\":\"http://img30.360buyimg.com/popshop/jfs/t1/24146/35/20065/4283/650abb89F3014a6e8/239695209ed0d3d2.png\",\"signboardUrl\":\"http://img14.360buyimg.com/cms/jfs/t1/186831/4/2034/50622/6096456cE8f3b06ed/dedf6c97c67701b7.jpg\",\"activityTabInfo\":{},\"source\":{\"moduleId\":\"app-productDetail\",\"entrance\":\"商详卡片\"}}"
+                },
+                {
+                    "name": "满7减6元",
+                    "url": "openApp.jdMobile://virtual?params={\"category\":\"jump\",\"des\":\"jshopMain\",\"jumpTab\":\"activity\",\"shopId\":\"1000096602\",\"venderId\":\"1000096602\",\"shopName\":\"京东京造自营官方旗舰店\",\"logoUrl\":\"http://img30.360buyimg.com/popshop/jfs/t1/24146/35/20065/4283/650abb89F3014a6e8/239695209ed0d3d2.png\",\"signboardUrl\":\"http://img14.360buyimg.com/cms/jfs/t1/186831/4/2034/50622/6096456cE8f3b06ed/dedf6c97c67701b7.jpg\",\"activityTabInfo\":{\"promotionTitleId\":\"200429218299\"},\"source\":{\"moduleId\":\"app-productDetail\",\"entrance\":\"商详卡片\"}}"
+                },
+                {
+                    "name": "满29减7元",
+                    "url": "openApp.jdMobile://virtual?params={\"category\":\"jump\",\"des\":\"jshopMain\",\"jumpTab\":\"activity\",\"shopId\":\"1000096602\",\"venderId\":\"1000096602\",\"shopName\":\"京东京造自营官方旗舰店\",\"logoUrl\":\"http://img30.360buyimg.com/popshop/jfs/t1/24146/35/20065/4283/650abb89F3014a6e8/239695209ed0d3d2.png\",\"signboardUrl\":\"http://img14.360buyimg.com/cms/jfs/t1/186831/4/2034/50622/6096456cE8f3b06ed/dedf6c97c67701b7.jpg\",\"activityTabInfo\":{\"promotionTitleId\":\"200455580563\"},\"source\":{\"moduleId\":\"app-productDetail\",\"entrance\":\"商详卡片\"}}"
+                },
+                {
+                    "name": "每满36.9减10元",
+                    "url": "openApp.jdMobile://virtual?params={\"category\":\"jump\",\"des\":\"jshopMain\",\"jumpTab\":\"activity\",\"shopId\":\"1000096602\",\"venderId\":\"1000096602\",\"shopName\":\"京东京造自营官方旗舰店\",\"logoUrl\":\"http://img30.360buyimg.com/popshop/jfs/t1/24146/35/20065/4283/650abb89F3014a6e8/239695209ed0d3d2.png\",\"signboardUrl\":\"http://img14.360buyimg.com/cms/jfs/t1/186831/4/2034/50622/6096456cE8f3b06ed/dedf6c97c67701b7.jpg\",\"activityTabInfo\":{\"promotionTitleId\":\"200455289535\"},\"source\":{\"moduleId\":\"app-productDetail\",\"entrance\":\"商详卡片\"}}"
+                }
+            ],
+            "score": 0.0,
+            "serverText": "服务",
+            "serviceScore": 0.0,
+            "shopActivityTotalNum": 0,
+            "shopId": 1000096602,
+            "shopImage": "http://img14.360buyimg.com/cms/jfs/t1/115801/16/41526/79361/65289558Fe1ade555/eb584318ba5361fb.jpg",
+            "shopStateText": "店铺动态",
+            "signboardUrl": "http://img14.360buyimg.com/cms/jfs/t1/186831/4/2034/50622/6096456cE8f3b06ed/dedf6c97c67701b7.jpg",
+            "skuCntText": "全部商品",
+            "skuText": "商品",
+            "squareLogo": "http://img30.360buyimg.com/popshop/jfs/t1/120866/34/41466/8108/650abb89F46476603/aa6ea59e0ef4c3f5.jpg",
+            "telephone": "",
+            "totalNum": 4107,
+            "venderType": "1",
+            "wareScore": 0.0
+        },
+        "customerService": {
+            "hasChat": false,
+            "hasJimi": false,
+            "mLink": "http://m.jd.com/product/100041060474.html",
+            "online": false
+        }
+    },
+    "ad": "1400mg盐酸氨基葡萄糖 | 425.2mg硫酸软骨素 | 380mg 钙",
+    "servicesInfoUnited": {
+        "bdsSymbol": "[{\"channelList\":[{\"channelId\":92,\"channelName\":\"商详页外露及品牌楼层\"}],\"symbolId\":10887,\"symbolName\":\"京东健康\"}]",
+        "hasWarranty": false,
+        "icon": true,
+        "isSupport": 0,
+        "promiseFxgInfo": {
+            "fxgCode": "0",
+            "oldTsfwCodes": "s33,"
+        },
+        "servIconRelations": [
+            {
+                "iconType": "exclamation",
+                "iconValue": "detail_006"
+            },
+            {
+                "iconType": "right",
+                "iconValue": "detail_005"
+            }
+        ],
+        "serviceInfo": {
+            "basic": {
+                "iconList": [
+                    {
+                        "iconType": "right",
+                        "imageUrl": "https://m.360buyimg.com/cc/jfs/t4984/195/1172610074/2110/e12abb06/58ede3e4Nfc650507.png",
+                        "jdPostAndService": false,
+                        "jichu": false,
+                        "show": true,
+                        "sortId": 3,
+                        "text": "可配送全球",
+                        "tip": "支持港澳台及海外收货地址下单，由于各地区政策不同，具体请以结算页详情为准"
+                    },
+                    {
+                        "code": "free_cuxiaobaoyou",
+                        "helpLink": "http://help.jd.com/user/issue/103-983.html",
+                        "iconType": "right",
+                        "imageUrl": "http://static.360buyimg.com/item/assets/picon/mianyunfei.png",
+                        "jdPostAndService": false,
+                        "jichu": false,
+                        "show": true,
+                        "sortId": 7,
+                        "text": "包邮",
+                        "tip": "享受无门槛包邮"
+                    },
+                    {
+                        "code": "service_jiabaoanxinxiang",
+                        "helpLink": "https://help.jd.com/user/issue/291-548.html",
+                        "iconType": "right",
+                        "imageUrl": "http://m.360buyimg.com/babel/jfs/t1/69231/23/645/841/5cee3d6aE94907616/110d81f8a22f01cf.png",
+                        "jdPostAndService": false,
+                        "jichu": false,
+                        "show": true,
+                        "sortId": 7,
+                        "text": "30天价保",
+                        "tip": "在订单签收30天内，商品出现降价可享受价保服务"
+                    }
+                ],
+                "title": "服务说明"
+            }
+        },
+        "soldOversea": {
+            "isSoldOversea": true,
+            "soldOverseaService": {
+                "soldOverseaIcon": "http://m.360buyimg.com/cc/jfs/t4984/195/1172610074/2110/e12abb06/58ede3e4Nfc650507.png",
+                "soldOverseaText": "售全球",
+                "soldOverseaDesc": "支持收货地址为海外或港澳台地区"
+            },
+            "soldOverseaStr": "1"
+        },
+        "stockInfo": {
+            "deliveryInfo": {
+                "state": "SUPPORT",
+                "support": true
+            },
+            "isPlus": false,
+            "code": 1,
+            "promiseInfo": {
+                "cOD": false,
+                "exchange": false,
+                "featureService": false,
+                "gSDa": false,
+                "has211": false,
+                "iconCodeList": [
+                    "service_qitiantuihuo",
+                    "free_cuxiaobaoyou",
+                    "service_jiabaoanxinxiang"
+                ],
+                "iconInfoList": [
+                    {
+                        "code": "free_cuxiaobaoyou",
+                        "helpLink": "http://help.jd.com/user/issue/103-983.html",
+                        "iconServiceType": 4,
+                        "imageUrl": "http://static.360buyimg.com/item/assets/picon/mianyunfei.png",
+                        "jichu": false,
+                        "name": "包邮",
+                        "tip": "享受无门槛包邮"
+                    },
+                    {
+                        "code": "service_jiabaoanxinxiang",
+                        "helpLink": "https://help.jd.com/user/issue/291-548.html",
+                        "iconServiceType": 3,
+                        "imageUrl": "http://m.360buyimg.com/babel/jfs/t1/69231/23/645/841/5cee3d6aE94907616/110d81f8a22f01cf.png",
+                        "jichu": false,
+                        "name": "30天价保",
+                        "tip": "在订单签收30天内，商品出现降价可享受价保服务"
+                    }
+                ],
+                "relaxType": 0,
+                "resultCode": 0,
+                "selfTrustworthy": false,
+                "trustworthy": false,
+                "weightFareTitle": "30天价保",
+                "yejianpei": false
+            },
+            "promiseResult": "",
+            "serviceInfo": "由 <span class='hl_red'>京东</span> 发货, 并提供售后服务. ",
+            "stockDesc": "<strong>有货</strong>",
+            "fxgCode": "0",
+            "is7ToReturn": "支持7天无理由退货（一次性包装破损不支持）",
+            "stockState": 33,
+            "stockInfo": {
+                "ae": 0,
+                "ag": "-1",
+                "ah": -1,
+                "at": "-1",
+                "availableNum": -1,
+                "businessType": -1,
+                "ca": -1,
+                "da": "-1",
+                "date": "",
+                "dcId": 10,
+                "dcIdDely": 10,
+                "ef": 0,
+                "eh": -1,
+                "ej": "-1",
+                "ek": -1,
+                "freshEdi": 0,
+                "popPatType": -1,
+                "preStore": -1,
+                "railModel": 0,
+                "reservationType": "OTHER",
+                "rid": -1,
+                "sidDely": 88,
+                "siteId4Dada": -1,
+                "stDely": 51,
+                "stockM": 0,
+                "stockState": "AVAILABLE",
+                "stockV": 0,
+                "storeId": 88,
+                "storeId4Dada": -1,
+                "storeState4Dada": -1,
+                "storeType": 51,
+                "useStockNum": 0
+            },
+            "supportHKMOShip": true,
+            "serverIcon": {
+                "relaxType": 0,
+                "wlfwIcons": [],
+                "basicIcons": [
+                    {
+                        "iconType": "right",
+                        "imageUrl": "https://m.360buyimg.com/cc/jfs/t4984/195/1172610074/2110/e12abb06/58ede3e4Nfc650507.png",
+                        "jdPostAndService": false,
+                        "jichu": false,
+                        "show": true,
+                        "sortId": 3,
+                        "text": "可配送全球",
+                        "tip": "支持港澳台及海外收货地址下单，由于各地区政策不同，具体请以结算页详情为准"
+                    },
+                    {
+                        "code": "free_cuxiaobaoyou",
+                        "helpLink": "http://help.jd.com/user/issue/103-983.html",
+                        "iconType": "right",
+                        "imageUrl": "http://static.360buyimg.com/item/assets/picon/mianyunfei.png",
+                        "jdPostAndService": false,
+                        "jichu": false,
+                        "show": true,
+                        "sortId": 7,
+                        "text": "包邮",
+                        "tip": "享受无门槛包邮"
+                    },
+                    {
+                        "code": "service_jiabaoanxinxiang",
+                        "helpLink": "https://help.jd.com/user/issue/291-548.html",
+                        "iconType": "right",
+                        "imageUrl": "http://m.360buyimg.com/babel/jfs/t1/69231/23/645/841/5cee3d6aE94907616/110d81f8a22f01cf.png",
+                        "jdPostAndService": false,
+                        "jichu": false,
+                        "show": true,
+                        "sortId": 7,
+                        "text": "30天价保",
+                        "tip": "在订单签收30天内，商品出现降价可享受价保服务"
+                    }
+                ]
+            },
+            "support": [],
+            "isStock": true
+        },
+        "wareExtendWarrantyInfo": {
+            "descUrl": "https://baozhang.jd.com/static/serviceDesc",
+            "detailUrl": "https://b.jr.jd.com/service/serveIntroduce/#/introduce3?mainSkuId={mainSkuId}&brandId={brandId}&thirdCategoryId={cid3}&bindSkuId={bindSku}",
+            "serviceItems": []
+        },
+        "wareStockInfo": {
+            "is7ToReturn": true,
+            "is7shortService": "七天退货"
+        },
+        "warmTips": [
+            {
+                "fontColor": "",
+                "imageUrl": "http://m.360buyimg.com/mobilecms/jfs/t1918/274/1086575987/1970/bc766f2d/5680f4b3N24b48659.png",
+                "text": "支持7天无理由退货"
+            }
+        ]
+    },
+    "couponInfo": [
+        {
+            "addDays": 0,
+            "anotherType": 0,
+            "applicability": true,
+            "area": 1,
+            "batchId": 959592114,
+            "beginHour": "00:00",
+            "beginTime": "2023.10.01",
+            "businessLabel": "0",
+            "couponId": "959592114",
+            "couponKind": 1,
+            "couponStyle": 0,
+            "couponType": 1,
+            "discount": 8,
+            "discountText": "以下商品可使用满9减8的优惠券",
+            "encryptedKey": "gfu2iddaeb2b012944aec077a4dc1340",
+            "endHour": "23:59",
+            "endTime": "2023.10.31",
+            "labelTxt": "限品类东券",
+            "limitType": 5,
+            "milliSecond": 0,
+            "multipleDiscount": false,
+            "name": "仅可购买京东京造部分商品",
+            "overlap": false,
+            "personalCoupon": false,
+            "platform": 0,
+            "plusCoupon": false,
+            "quota": 9,
+            "roleId": 123236091,
+            "timeDesc": "有效期2023-10-01 00:00至2023-10-31 23:59",
+            "toUrl": "www.jd.com",
+            "userRiskLevel": 0
+        }
+    ],
+    "baitiaoPlanShowResVo": "{\"act\":0,\"bp\":12,\"creditStatus\":1,\"dt\":\"白条享12期息费9折\",\"isAva\":true,\"isBtUser\":true,\"isDiscountAll\":true,\"isFull\":true,\"isItemAva\":true,\"isLogin\":true,\"isScc\":false,\"isShopAva\":true,\"isSkuAva\":true,\"key\":\"266BB43C05F166748E973629FC78DE71\",\"marketingText\":\"12期息费9折\",\"noAvaInfo\":\"\",\"planInfos\":[{\"curTotal\":59.90,\"fee\":0.00,\"firstPay\":59.90,\"firstRepayDate\":\"2023-11-17\",\"isDiscount\":false,\"laterPay\":59.90,\"maxDiscount\":false,\"plan\":1,\"planFee\":0.00,\"rate\":0.00,\"total\":59.90},{\"curTotal\":20.64,\"fee\":1.98,\"firstPay\":20.63,\"firstRepayDate\":\"2023-11-17\",\"isDiscount\":false,\"laterPay\":20.64,\"maxDiscount\":false,\"plan\":3,\"planFee\":0.66,\"rate\":1.10,\"total\":61.88},{\"curTotal\":10.66,\"fee\":3.96,\"firstPay\":10.64,\"firstRepayDate\":\"2023-11-17\",\"isDiscount\":false,\"laterPay\":10.66,\"maxDiscount\":false,\"plan\":6,\"planFee\":0.66,\"rate\":1.10,\"total\":63.86},{\"curTotal\":5.60,\"discountList\":[{\"activityCode\":\"1706587648228954880_656956\",\"activityType\":\"MX\",\"couponCode\":\"nothing_1706587648228954880\",\"couponInfo\":\"12期息费9折\",\"discountAmount\":\"90\"}],\"fee\":7.08,\"firstPay\":5.58,\"firstRepayDate\":\"2023-11-17\",\"isDiscount\":true,\"laterPay\":5.60,\"maxDiscount\":true,\"plan\":12,\"planFee\":0.59,\"rate\":0.99,\"total\":66.98},{\"curTotal\":3.29,\"fee\":15.84,\"firstPay\":3.16,\"firstRepayDate\":\"2023-11-17\",\"isDiscount\":false,\"laterPay\":3.29,\"maxDiscount\":false,\"plan\":24,\"planFee\":0.66,\"rate\":1.10,\"total\":75.74}],\"propMarketText\":\"12期息费9折\",\"result\":{\"code\":\"00000\",\"info\":\"success\",\"success\":true},\"sccBt\":false,\"ver\":\"1\"}",
+    "warrantyInfo": {
+        "descUrl": "https://baozhang.jd.com/static/serviceDesc",
+        "detailUrl": "https://b.jr.jd.com/service/serveIntroduce/#/introduce3?mainSkuId={mainSkuId}&brandId={brandId}&thirdCategoryId={cid3}&bindSkuId={bindSku}",
+        "serviceItems": []
+    },
+    "shopUrl": "http://jingzao.jd.com",
+    "giftShoppingInfo": {
+        "gaoduanGift": false,
+        "hasGift": false,
+        "huodongGift": false
+    },
+    "jdddFlag": false,
+    "isSamMember": false,
+    "askDoctorInfo": {
+        "pcBubble": "https://image.healthjd.com/nethpim/jfs/t1/201589/29/35438/5063/650c09bbFa9401634/9047b52300ffcddd.png",
+        "pcEntranceText": "营养师",
+        "proportion": 100
+    },
+    "actions": {},
+    "warmTips": [
+        {
+            "fontColor": "",
+            "imageUrl": "http://m.360buyimg.com/mobilecms/jfs/t1918/274/1086575987/1970/bc766f2d/5680f4b3N24b48659.png",
+            "text": "支持7天无理由退货"
+        }
+    ],
+    "whiteBarInfo": {
+        "creditStatus": 1,
+        "isAva": true,
+        "isBtUser": true,
+        "isDiscountAll": true,
+        "isFull": true,
+        "isItemAva": true,
+        "isLogin": true,
+        "isShopAva": true,
+        "isSkuAva": true,
+        "key": "266BB43C05F166748E973629FC78DE71",
+        "marketingText": "12期息费9折",
+        "noAvaInfo": "",
+        "planInfos": [
+            {
+                "curTotal": 59.9,
+                "fee": 0.0,
+                "feeText": "0服务费",
+                "firstPay": 59.9,
+                "firstRepayDate": "2023-11-17",
+                "isDiscount": false,
+                "isMaxDiscount": false,
+                "laterPay": 59.9,
+                "mainTitle": "不分期",
+                "plan": 1,
+                "planFee": 0.0,
+                "rate": 0.0,
+                "secondTitle": "无服务费",
+                "total": 59.9
+            },
+            {
+                "curTotal": 20.64,
+                "fee": 1.98,
+                "feeText": "含服务费",
+                "firstPay": 20.63,
+                "firstRepayDate": "2023-11-17",
+                "isDiscount": false,
+                "isMaxDiscount": false,
+                "laterPay": 20.64,
+                "mainTitle": "￥20.64 x 3期",
+                "plan": 3,
+                "planFee": 0.66,
+                "rate": 1.1,
+                "secondTitle": "含服务费：费率1.10%，￥0.66&times;3期",
+                "total": 61.88
+            },
+            {
+                "curTotal": 10.66,
+                "fee": 3.96,
+                "feeText": "含服务费",
+                "firstPay": 10.64,
+                "firstRepayDate": "2023-11-17",
+                "isDiscount": false,
+                "isMaxDiscount": false,
+                "laterPay": 10.66,
+                "mainTitle": "￥10.66 x 6期",
+                "plan": 6,
+                "planFee": 0.66,
+                "rate": 1.1,
+                "secondTitle": "含服务费：费率1.10%，￥0.66&times;6期",
+                "total": 63.86
+            },
+            {
+                "curTotal": 5.6,
+                "discountList": [
+                    {
+                        "activityCode": "1706587648228954880_656956",
+                        "activityType": "MX",
+                        "couponCode": "nothing_1706587648228954880",
+                        "couponInfo": "12期息费9折",
+                        "discountAmount": "90"
+                    }
+                ],
+                "fee": 7.08,
+                "feeText": "含服务费",
+                "firstPay": 5.58,
+                "firstRepayDate": "2023-11-17",
+                "isDiscount": true,
+                "isMaxDiscount": false,
+                "laterPay": 5.6,
+                "mainTitle": "￥5.60 x 12期",
+                "plan": 12,
+                "planFee": 0.59,
+                "rate": 0.99,
+                "secondTitle": "含服务费：费率0.99%，￥0.59&times;12期",
+                "total": 66.98
+            },
+            {
+                "curTotal": 3.29,
+                "fee": 15.84,
+                "feeText": "含服务费",
+                "firstPay": 3.16,
+                "firstRepayDate": "2023-11-17",
+                "isDiscount": false,
+                "isMaxDiscount": false,
+                "laterPay": 3.29,
+                "mainTitle": "￥3.29 x 24期",
+                "plan": 24,
+                "planFee": 0.66,
+                "rate": 1.1,
+                "secondTitle": "含服务费：费率1.10%，￥0.66&times;24期",
+                "total": 75.74
+            }
+        ],
+        "propMarketText": "12期息费9折",
+        "url": "//bt.jd.com/v3/activity/open?rid=1697532470939",
+        "ver": "1"
+    },
+    "adText": "1400mg盐酸氨基葡萄糖 | 425.2mg硫酸软骨素 | 380mg 钙",
+    "wareInfo": {
+        "allnum": "0",
+        "book": "false",
+        "brandId": "299330",
+        "brandName": "京东京造",
+        "cBrand": "京东京造",
+        "category": "27983;27989;28044",
+        "color": "黄金软骨素 日常养护30天",
+        "colorSequence": "1",
+        "erpPid": "100051011815",
+        "extend": {
+            "canUseDQ": true,
+            "canUseJQ": true,
+            "cjxp": "0",
+            "companyType": "0",
+            "fdms": 0,
+            "features": {
+                "jdcsk": "1",
+                "isYjyChannelPool": "1",
+                "gypsshyzt": "107_1,103_1",
+                "isrc": "1",
+                "shortTitle": "京东京造 氨糖软骨素+钙片 30天"
+            },
+            "giftsGoods": "0",
+            "is7ToReturn": "1",
+            "isCanUseDQ": true,
+            "isCanUseJQ": true,
+            "isFlashPurchase": "0",
+            "isJDMarket": "1",
+            "isJIT": "0",
+            "isLqkt": "0",
+            "isNewGoods": "1",
+            "isOTCCat": "0",
+            "isOverseaPurchase": "0",
+            "isPrescriptCat": "0",
+            "isdangergoods": "0",
+            "itemId": "-1",
+            "jzfp": false,
+            "mspd": "0",
+            "nationallySetWare": "2",
+            "packType": "1",
+            "platform": "1",
+            "productFeatures": {},
+            "schf": "0",
+            "sendService": "0",
+            "soldOversea": "1",
+            "spuId": "0",
+            "stockOwner": "",
+            "storeProperty": "0",
+            "tax": "consumptionVAT:0,inputVAT:13,outputVAT:13",
+            "thwa": "2",
+            "tssp": 0,
+            "vender_bizid": "",
+            "wjtyd": "1",
+            "ydsjfw": {}
+        },
+        "hasOverallViewAnchor": false,
+        "height": "62",
+        "imageurl": "jfs/t1/188199/1/40696/108187/652ddfbfF202eb30d/75398154a6f59c75.png",
+        "isDelete": "1",
+        "isJDexpress": false,
+        "length": "120",
+        "maxPurchQty": "0",
+        "model": "保健食品",
+        "phone": "",
+        "platform": "1",
+        "productArea": "中国大陆",
+        "saleDate": "2023-02-16 11:40:29",
+        "salesAttr": "",
+        "sellPoint": "",
+        "shangJia": "xljkkj",
+        "shopId": "1000096602",
+        "showQJImg": false,
+        "site": "",
+        "size": "",
+        "sizeSequence": "0",
+        "skuMark": "0",
+        "spec": "",
+        "specName": "",
+        "specSequence": "0",
+        "state": "1",
+        "taxInfo": "consumptionVAT:0,inputVAT:13,outputVAT:13",
+        "timelinessId": "",
+        "upc": "6924217162105",
+        "valuePayFirst": "0",
+        "venderColType": "0",
+        "venderId": "1000096602",
+        "wareId": "100041060474",
+        "wareInfoMap": {
+            "thwa": "2",
+            "cn_brand": "京东京造",
+            "SendService": "0",
+            "vender_name": "上海东隆羽绒制品有限公司",
+            "timeliness_id": "",
+            "isPrescriptCat": "0",
+            "unLimit_cid": "28044",
+            "buyer": "tianyanyan3",
+            "shop_id": "1000096602",
+            "buyer_post": "6993",
+            "size": "",
+            "packType": "1",
+            "img_dfs_url": "jfs/t1/188199/1/40696/108187/652ddfbfF202eb30d/75398154a6f59c75.png",
+            "sale_attributes": "[{\"dim\":1,\"saleName\":\"颜色\",\"saleValue\":\"黄金软骨素 日常养护30天\",\"sequenceNo\":1}]",
+            "category_id": "28044",
+            "is_sn": "0",
+            "IsYouShelfLife": "1",
+            "wjtyd": "1",
+            "isJIT": "0",
+            "jdcsk": "1",
+            "shop_category": "14000798 14000797 ",
+            "nationallySetWareJdcom": "2",
+            "shop_name": "京东京造自营官方旗舰店",
+            "official_website": "",
+            "spec_sequence": "0",
+            "companyType": "0",
+            "length": "120",
+            "nationallySetWare": "2",
+            "isCanUseDQ": "1",
+            "IsLqkt": "0",
+            "warranty": "无质保",
+            "otc_user": "yangshenglong3",
+            "model": "保健食品",
+            "color_sequence": "1",
+            "storeProperty": "0",
+            "IsNewGoods": "1",
+            "on_shelves_time": "1676518829000",
+            "isOConsultCat": "0",
+            "vender_bizid": "",
+            "features2": "gypsshyzt:107_1,103_1;isYjyChannelPool:1;isrc:1;jdcsk:1;shortTitle:京东京造 氨糖软骨素+钙片 30天",
+            "attributes": "",
+            "sorting_centre": "",
+            "cjxp": "0",
+            "unit": "瓶",
+            "IsJDMarket": "1",
+            "spwq": "0",
+            "sku_tag": "0",
+            "en_brand": "京东京造",
+            "is7ToReturn": "1",
+            "product_id": "100041060474",
+            "height": "62",
+            "mspd": "0",
+            "product_features": "",
+            "upc_code": "6924217162105",
+            "isdangergoods": "0",
+            "jc_saler": "",
+            "day_limited_sales": "0",
+            "service_tel": "",
+            "vender_attribute": "",
+            "features": "consumptionVAT:0,inputVAT:13,outputVAT:13",
+            "pay_first": "0",
+            "weight": "0.164",
+            "brand_id": "299330",
+            "size_sequence": "0",
+            "color": "黄金软骨素 日常养护30天",
+            "shelf_life": "730",
+            "vender_id": "1000096602",
+            "isQdh": "0",
+            "category_id1": "27983",
+            "category_id2": "27989",
+            "delivery": "",
+            "sku_status": "1",
+            "sell_point": "",
+            "spec_name": "",
+            "main_sku_id": "100051011815",
+            "yn": "1",
+            "sale_atts": "",
+            "sku_name": "京东京造 氨糖软骨素加钙片120片 盐酸氨基葡萄糖硫酸软骨素 成人中老年人骨骼蓝帽营养保健",
+            "supply_unit": "xljkkj",
+            "GiftsGoods": "0",
+            "place_of_production": "中国大陆",
+            "product_code": "100041060474",
+            "sfylqx": "0",
+            "vender_col_type": "0",
+            "sysp": "0",
+            "width": "62",
+            "schf": "0",
+            "saler": "tuhuanrui",
+            "shortTitle": "京东京造 氨糖软骨素+钙片 30天",
+            "package_type": "120",
+            "spec": "",
+            "off_shelves_time": "1676271961000",
+            "SoldOversea": "1",
+            "isFlashPurchase": "0",
+            "spu_id": "0",
+            "created": "1671418570000",
+            "tax": "consumptionVAT:0,inputVAT:13,outputVAT:13",
+            "product_name": "京东京造 氨糖软骨素加钙片120片 盐酸氨基葡萄糖硫酸软骨素 成人中老年人骨骼蓝帽营养保健",
+            "isOverseaPurchase": "0",
+            "platform": "1",
+            "sku_mark": "0",
+            "item_id": "-1",
+            "refillFreight": "0",
+            "category_ext_id": "0",
+            "isOTCCat": "0"
+        },
+        "wareType": 0,
+        "weight": "0.164",
+        "width": "62",
+        "wname": "京东京造 氨糖软骨素加钙片120片 盐酸氨基葡萄糖硫酸软骨素 成人中老年人骨骼蓝帽营养保健",
+        "wserve": "无质保"
+    },
+    "hasFinanceCoupon": false,
+    "bybtInfo": {
+        "bybt": false,
+        "mgbp": false,
+        "shield": false
+    },
+    "stockInfo": {
+        "deliveryInfo": {
+            "state": "SUPPORT",
+            "support": true
+        },
+        "isPlus": false,
+        "code": 1,
+        "promiseInfo": {
+            "cOD": false,
+            "exchange": false,
+            "featureService": false,
+            "gSDa": false,
+            "has211": false,
+            "iconCodeList": [
+                "service_qitiantuihuo",
+                "free_cuxiaobaoyou",
+                "service_jiabaoanxinxiang"
+            ],
+            "iconInfoList": [
+                {
+                    "code": "free_cuxiaobaoyou",
+                    "helpLink": "http://help.jd.com/user/issue/103-983.html",
+                    "iconServiceType": 4,
+                    "imageUrl": "http://static.360buyimg.com/item/assets/picon/mianyunfei.png",
+                    "jichu": false,
+                    "name": "包邮",
+                    "tip": "享受无门槛包邮"
+                },
+                {
+                    "code": "service_jiabaoanxinxiang",
+                    "helpLink": "https://help.jd.com/user/issue/291-548.html",
+                    "iconServiceType": 3,
+                    "imageUrl": "http://m.360buyimg.com/babel/jfs/t1/69231/23/645/841/5cee3d6aE94907616/110d81f8a22f01cf.png",
+                    "jichu": false,
+                    "name": "30天价保",
+                    "tip": "在订单签收30天内，商品出现降价可享受价保服务"
+                }
+            ],
+            "relaxType": 0,
+            "resultCode": 0,
+            "selfTrustworthy": false,
+            "trustworthy": false,
+            "weightFareTitle": "30天价保",
+            "yejianpei": false
+        },
+        "promiseResult": "",
+        "serviceInfo": "由 <span class='hl_red'>京东</span> 发货, 并提供售后服务. ",
+        "stockDesc": "<strong>有货</strong>",
+        "fxgCode": "0",
+        "is7ToReturn": "支持7天无理由退货（一次性包装破损不支持）",
+        "stockState": 33,
+        "stockInfo": {
+            "ae": 0,
+            "ag": "-1",
+            "ah": -1,
+            "at": "-1",
+            "availableNum": -1,
+            "businessType": -1,
+            "ca": -1,
+            "da": "-1",
+            "date": "",
+            "dcId": 10,
+            "dcIdDely": 10,
+            "ef": 0,
+            "eh": -1,
+            "ej": "-1",
+            "ek": -1,
+            "freshEdi": 0,
+            "popPatType": -1,
+            "preStore": -1,
+            "railModel": 0,
+            "reservationType": "OTHER",
+            "rid": -1,
+            "sidDely": 88,
+            "siteId4Dada": -1,
+            "stDely": 51,
+            "stockM": 0,
+            "stockState": "AVAILABLE",
+            "stockV": 0,
+            "storeId": 88,
+            "storeId4Dada": -1,
+            "storeState4Dada": -1,
+            "storeType": 51,
+            "useStockNum": 0
+        },
+        "supportHKMOShip": true,
+        "serverIcon": {
+            "relaxType": 0,
+            "wlfwIcons": [],
+            "basicIcons": [
+                {
+                    "iconType": "right",
+                    "imageUrl": "https://m.360buyimg.com/cc/jfs/t4984/195/1172610074/2110/e12abb06/58ede3e4Nfc650507.png",
+                    "jdPostAndService": false,
+                    "jichu": false,
+                    "show": true,
+                    "sortId": 3,
+                    "text": "可配送全球",
+                    "tip": "支持港澳台及海外收货地址下单，由于各地区政策不同，具体请以结算页详情为准"
+                },
+                {
+                    "code": "free_cuxiaobaoyou",
+                    "helpLink": "http://help.jd.com/user/issue/103-983.html",
+                    "iconType": "right",
+                    "imageUrl": "http://static.360buyimg.com/item/assets/picon/mianyunfei.png",
+                    "jdPostAndService": false,
+                    "jichu": false,
+                    "show": true,
+                    "sortId": 7,
+                    "text": "包邮",
+                    "tip": "享受无门槛包邮"
+                },
+                {
+                    "code": "service_jiabaoanxinxiang",
+                    "helpLink": "https://help.jd.com/user/issue/291-548.html",
+                    "iconType": "right",
+                    "imageUrl": "http://m.360buyimg.com/babel/jfs/t1/69231/23/645/841/5cee3d6aE94907616/110d81f8a22f01cf.png",
+                    "jdPostAndService": false,
+                    "jichu": false,
+                    "show": true,
+                    "sortId": 7,
+                    "text": "30天价保",
+                    "tip": "在订单签收30天内，商品出现降价可享受价保服务"
+                }
+            ]
+        },
+        "support": [],
+        "isStock": true
+    },
+    "userInfoMap": {
+        "flagInfoByPin": "0500000000000000000000000000010900101000002000006300001000000060000000000000000000000000000000000000",
+        "idAuthThrough": false,
+        "jingXiangScore": 4668,
+        "plusMember": "5",
+        "samMember": false,
+        "unJdUserFlag": false
+    },
+    "isPlusMember": "5",
+    "wozheFlag": false,
+    "isJdkd": false,
+    "couponIconText": "领券",
+    "isJdwl": false,
+    "promotion": {
+        "activity": [
+            {
+                "value": "满2件，总价打9.50折",
+                "customTag": {},
+                "text": "多买优惠",
+                "skuId": "",
+                "typeNumber": "19",
+                "proId": "200574506882",
+                "link": "",
+                "activityType": "19",
+                "promoId": "200574506882"
+            },
+            {
+                "value": "满2件，总价打9折",
+                "customTag": {},
+                "text": "多买优惠",
+                "skuId": "",
+                "typeNumber": "19",
+                "proId": "200574612142",
+                "link": "",
+                "activityType": "19",
+                "promoId": "200574612142"
+            }
+        ],
+        "activityTip": "以下\"多买优惠\"仅可任选其一，可在购物车更改",
+        "attach": [],
+        "canReturnHaggleInfo": false,
+        "customtag": {},
+        "gift": [],
+        "giftTips": "",
+        "isBargain": false,
+        "isTwoLine": false,
+        "limitBuyInfo": {
+            "limitNum": "0",
+            "noSaleFlag": "0",
+            "resultExt": {
+                "noSaleFlag": "0",
+                "strategyFlag": "0",
+                "isPlusLimit": "0",
+                "limitUserFlag": "1",
+                "limitAreaFlag": "1",
+                "limitPeopleFlag": "1"
+            }
+        },
+        "normalMark": "tab_var_071",
+        "plusMark": "tab_var_124",
+        "prompt": "",
+        "screenLiPurMap": {},
+        "tip": "",
+        "tipImage": "https://m.360buyimg.com/mobilecms/jfs/t3307/72/5314423715/1964/bdf8e959/586ca1efN7daf7c96.png",
+        "tips": [
+            "以下\"多买优惠\"仅可任选其一，可在购物车更改"
+        ],
+        "upgradePurchaseMap": {}
+    }
+}

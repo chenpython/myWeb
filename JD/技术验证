@@ -1,0 +1,48 @@
+
+2、京东店铺
+    京东京造自营官方旗舰店
+            关注人数    √ 
+            shopId    √ 
+            商品分类：（保健食品/？）
+            服务态度得分    √ 
+            店铺评分    √ 
+    好评率
+    粉丝数
+    描述相符
+    服务态度
+    物流服务
+    店铺区域
+
+
+3、优惠信息
+    满几件打几折    √ 
+            https://api.m.jd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc&clientVersion=1.0.0&t=1697532470243&body=%7B%22skuId%22%3A100041060474%2C%22cat%22%3A%2227983%2C27989%2C28044%22%2C%22area%22%3A%2219_1601_0_0%22%2C%22shopId%22%3A%221000096602%22%2C%22venderId%22%3A1000096602%2C%22paramJson%22%3A%22%7B%5C%22platform2%5C%22%3A%5C%221%5C%22%2C%5C%22specialAttrStr%5C%22%3A%5C%22p0ppppppppp2ppppppppppppppp%5C%22%2C%5C%22skuMarkStr%5C%22%3A%5C%2200%5C%22%7D%22%2C%22num%22%3A1%2C%22bbTraffic%22%3A%22%22%7D&h5st=20231017164750313%3Bgniniign36tzm5q0%3Bfb5df%3Btk02wc0b51bc641lMisxU2NJOEtzn-X3wi3rYvWk4vpnx_bc54sTx8gzcHE42HOgUfe-Oyg_A4TRdPH7751l0D-M4nRq%3Bb64f3fb5eb1cf84b9b503027a20cbd77%3B4.1%3B1697532470313%3Bee3cf7f6b94dc20e9265d83066bb9ceece4bb89e2b7e8bf5afb1bfd928788174bfa06c210ddd4437d8a2e234330c3a397ae8268c7f7c5fb3780158b8fa4e73d08336abe4b79d34906258dbb79cecd4769b752da1b84c54d1a95071351c73c853facadf62b978ecd13b1a6133cc8a4f632965b1dc24a78d93c75b5552c8a341a09a0662c4eb6974e0cad76d47a49883bfb54b5165533d8628b88d6a530be05fcd4386d3eabf30f2228d0db76f7cb5c7a73c08f7c3f5ffa81f38152a7603ee69c3e35b9d9d7c7421be711ae1ce52705bb3aa92b41f35bb0eb4192ee7fad752b67127d1a600839af1576ea10d109f4e50b6659b3dcc67020517c7ab9f1b81cb7ebfd5bca1e66b118e269cc6f2304cc8aa26&x-api-eid-token=jdd037M5AVFZ2HT2SA5SZC7BICJSWBJG7U4KSIYNBOHHIL7EBR7WW63CSB3P6KRACYGZ553JLWA3Q5CN3FDSAJLW5OU2HOUAAAAMLHTI6CJYAAAAACNZLK7BVKYVQ2UX&loginType=3&uuid=122270672.1697530972717526180674.1697530973.1697530973.1697530973.1
+    优惠券明细    √ 
+
+
+
+4、商品实际价格、折后价格
+5、限购条件
+6、库存、销量
+7、店铺资质
+8、商品信息
+    好评度
+    评价内容
+    是否有货    √ 
+
+
+8、技术难点
+    京东手机号+密码登录，必须经过滑块验证
+    需要测试购买账号是否需要绑定手机号使用
+
+
+
+
+
+待讨论问题：
+1、网上药店和药厂之间的授权是什么形式？
+2、药厂关注的价格红线是什么颗粒度？和互联网上展示的SKU之间的联系
+
+
+
+

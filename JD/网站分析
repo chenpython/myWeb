@@ -215,6 +215,8 @@ pvid	a018441fdc93463f8aa17598e8e36751
 
 
 
+http://api.m.jd.com:443
+
 
 https://www.jd.com
 
@@ -225,6 +227,7 @@ https://api.m.jd.com/?appid=search-pc-java&functionId=pc_search_s_new&
 
 
 一、pvid的生成
+    不带 pvid 参数不影响搜索请求
     在 index.chunk.js 文件
          if ("string" == typeof l && "" != l && (o += "&ev=" + l),
                 t = encodeURIComponent(t),
@@ -281,14 +284,39 @@ https://api.m.jd.com/?appid=search-pc-java&functionId=pc_search_s_new&
     122270672.1697442342690739755431.1697442343.1697442343.1697445133.2
 
     从 cookie 中获取 "__jda=" 的value值 为 uuid 的值
+，
+
 
 
 四、area 参数生成
-var url = colorApi+'?appid=search-pc-java&client=pc&clientVersion=1.0.0&loginType=3&cthr=1'
-               +'&functionId='+functionId+'&body='+JSON.stringify(paramJson)
-               +'&uuid='+jda+'&area='+ area + '&t='+new Date().getTime()
+    area 的原始数据 djd 来源于 cookie 中的 ipLoc-djd，似乎是固定值 19_1601_0_0
+    var getColorApiUrl2 = function(functionId,paramUrl){
+            var colorApi = SEARCH.colorApiDomain && SEARCH.colorApiDomain.length>0 ? SEARCH.colorApiDomain : "//api.m.jd.com"
+            var jda = readCookie('__jda')
+            var djd = readCookie('ipLoc-djd')
+            var area = (djd!=null && djd.length>0)?djd.split('.')[0].replace(new RegExp("-", 'g'),'_'):"";
+            var url = colorApi+'?appid=search-pc-java&client=pc&clientVersion=1.0.0&loginType=3'
+                +'&functionId='+functionId+'&' + paramUrl
+                +'&uuid='+jda+'&area='+ area + '&t='+new Date().getTime()
+            return url;
+        }
+        url地址：
+            //api.m.jd.com?
+            appid=search-pc-java&
+            client=pc&clientVersion=1.0.0
+            &loginType=3&functionId=pc_club_productCommentSummaries
+            &referenceIds=1959053206,10061861366245,10078255002562,10052811784230,3150756,3121091,10055206307715,100040794733,100000059068,100019847307,3195916,10085520266501,1590901,1993576190,11301748705,10083841527720,10060143676072,3091810,100013288334,10087772685452,54365030298,10022937741194,10081136528050,10077152430150,100032790613,10086907015069,10052811784231,10057982364488,10075915934124,10078655243922
+            &callback=?&uuid=122270672.1697506612182654416587.1697506612.1697506612.1697506612.1
+            &area=19_1601_0_0
+            &t=1697507598287
 
+，
 
+五、h5st 的生成
+    var getColorDataByUrlSignAjax = {}
+    window.PSign.sign(colorParamSign).then(function(signedParams){
+            var h5stURI = encodeURI(signedParams.h5st)}}
+    ，
 
 
 
