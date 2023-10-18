@@ -9584,7 +9584,7 @@ var ParamsSign = function() {
         function lv(t, r, n, e) {
             return Dw(r - Vr, n)
         }
-        return fv.vBTGe(Pd, sv, [{
+        var params_list = [{
             key: fv[vv(mr, -66)],
             value: function(t) {
                 var r = t[d(oc, ic, ac)]
@@ -10748,7 +10748,9 @@ var ParamsSign = function() {
                     // vn 固定值
                 }
             }()
-        }]),
+        }];
+        var last_func = params_list[-1];
+        return fv.vBTGe(Pd, sv, params_list),
         sv
     }(), Mw = {};
     return Mw[(Bw = 643,
