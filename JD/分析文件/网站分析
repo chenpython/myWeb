@@ -317,7 +317,20 @@ https://api.m.jd.com/?appid=search-pc-java&functionId=pc_search_s_new&
     window.PSign.sign(colorParamSign).then(function(signedParams){
             var h5stURI = encodeURI(signedParams.h5st)}}
     ，
+        sign === 
+        function(t) {
+                        var r = {
+                            _0x42389c: 86,
+                            _0x44a452: 631
+                        };
+                        function n(t, n, e, o) {
+                            return v(t - 303, n - r._0x42389c, t, n - r._0x44a452)
+                        }
+                        return f[n(1565, vn)](this, arguments)
+                    }
 
+        signedParams === sign方法返回的对象
+，
 
 
 
