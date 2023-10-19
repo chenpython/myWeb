@@ -1,16 +1,21 @@
-import time
+import pdb
 
-from DrissionPage import ChromiumPage
+from DrissionPage import ChromiumOptions, ChromiumPage
 
 # ubuntu启动chrome命令：google-chrome-stable
 # from DrissionPage.easy_set import set_paths
 # 配置已保存到文件：/home/feng/workspace/myWeb/.venv/lib/python3.10/site-packages/DrissionPage/configs/configs.ini
 # set_paths(browser_path='/usr/bin/google-chrome-stable')
 
+co = ChromiumOptions()
+co.set_argument('--incognito')
+co.set_argument('--no-sandbox')
+
 page = ChromiumPage()
 page.get('https://www.baidu.com/')
 
-
+# pdb.set_trace()
+page.quit()
 # # 创建页面对象，并启动或接管浏览器
 # page = ChromiumPage()
 # # 跳转到登录页面
