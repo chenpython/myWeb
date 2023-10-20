@@ -54,6 +54,16 @@
     手机号注册无需实名认证
         但对于新账号有严格监测，需要手机验证码验证，触发条件：ip切换？
 
+1、京东淘宝各自网站反爬限制
+    各类滑块
+    图形验证码
+    账号限制
+        ip限制
+        账号获取
+2、违禁分析
+    图片识别
+    语义分析
+
 
 当前任务
     1、搞到测试账号，测试账号的风控
@@ -64,6 +74,31 @@
 
 登录页面：
 https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F
+
+京东需要在详情页获取大的且清晰的图片，提高识别率
+Free OCR
+一、要求
+    1、提供接口
+    2、性价比
+    3、在线地址识别？
+    
+二、调研平台
+    1、paddle：https://github.com/PaddlePaddle/PaddleOCR/blob/release/2.7/ppstructure/docs/quickstart.md
+        免费，可自己部署训练
+        文件类型转换限制
+        精度较低
+    2、易飞：https://catocr.com/#/
+        收费？
+        接口？ 无
+        文件类型兼容
+        精度高
+    3、腾讯：https://cloud.tencent.com/act/event/ocrdemo
+        图片加载异常
+
+
+
+
+https://gitee.com/cyahua/cnocr?_from=gitee_search
 
 
 
@@ -77,7 +112,7 @@ https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F
         2、切换ip会导致登录失效，但不一定会触发手机号验证
     
     推荐使用接码平台注册账号实现抓取，注册流程简单，无需实名认证，设置密码后只有触发风控才会需要验证码，成本较低
-    
+，
 
 
 
@@ -97,7 +132,6 @@ https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F
 3、违规商品预警信息中包含 销量 和 库存 的作用是什么？
 4、优惠信息中，会员促销、复购优惠、平台促销、店铺促销等优惠类型需要向客户确认是否有意义
     且会员促销、复购优惠这种和账号深度绑定的信息不太能长期稳定提供，爬虫账号可能被封禁等，且账号不实施下单行为，不能模拟复购
-
 
 
 

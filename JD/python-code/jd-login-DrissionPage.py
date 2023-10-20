@@ -1,32 +1,35 @@
-import pdb
+import os
 
 from DrissionPage import ChromiumOptions, ChromiumPage
 
-# ubuntu启动chrome命令：google-chrome-stable
 # from DrissionPage.easy_set import set_paths
 # 配置已保存到文件：/home/feng/workspace/myWeb/.venv/lib/python3.10/site-packages/DrissionPage/configs/configs.ini
 # set_paths(browser_path='/usr/bin/google-chrome-stable')
+# 弹出浏览器窗口，启动浏览器：google-chrome-stable  --remote-debugging-port=9222，通过代码接管当前浏览器
+base_dir = os.path.dirname(os.path.dirname(__file__))
+
 
 co = ChromiumOptions()
-co.set_argument('--incognito')
-co.set_argument('--no-sandbox')
+co.set_paths(local_port=9222)   # 弹出浏览器窗口
+page = ChromiumPage(addr_driver_opts=co)
 
-page = ChromiumPage()
-page.get('https://www.baidu.com/')
+url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F"
 
-# pdb.set_trace()
-page.quit()
-# # 创建页面对象，并启动或接管浏览器
-# page = ChromiumPage()
-# # 跳转到登录页面
-# page.get('https://gitee.com/login')
-
-# # 定位到账号文本框，获取文本框元素
-# ele = page.ele('#user_login')
-# # 输入对文本框输入账号
-# ele.input('您的账号')
-# # 定位到密码文本框并输入密码
-# page.ele('#user_password').input('您的密码')
-# # 点击登录按钮
-# page.ele('@value=登 录').click()
+page.get(url)
+page.wait.load_start()
+bf_content = page.html
+with open(os.path.join(base_dir, 'htmls/bf_content.html'), 'w') as f:
+    f.write(bf_content)
+print('登录之前')
+ele = page.ele('#loginname')
+ele.input('jlsl123456')
+page.ele('#nloginpwd').input('250Kuai4Mao1')
+page.ele('@value=item item-fore5').click()
+page.wait.load_start()
+af_content = page.html
+with open(os.path.join(base_dir, 'htmls/af_content.html'), 'w') as f:
+    f.write(af_content)
+print('登录之后')
+page.close_tabs()
+# page.quit()
 print('end')
