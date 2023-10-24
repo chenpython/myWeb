@@ -22,10 +22,10 @@ with open(os.path.join(base_dir, 'htmls/bf_content.html'), 'w') as f:
     f.write(bf_content)
 print('登录之前')
 ele = page.ele('#loginname')
-ele.input('jlsl123456')
+ele.input('JDtest123456888')
 page.ele('#nloginpwd').input('250Kuai4Mao1')
-page.ele('@value=item item-fore5').click()
-page.wait.load_start()
+# page.ele('@value=item item-fore5').click()
+# page.wait.load_start()
 af_content = page.html
 with open(os.path.join(base_dir, 'htmls/af_content.html'), 'w') as f:
     f.write(af_content)

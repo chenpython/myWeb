@@ -1,1044 +1,419 @@
-<!DOCTYPE html><html lang="zh-CN"><head><style type="text/css">.tippy-iOS{cursor:pointer!important}.tippy-notransition{transition:none}.tippy-popper{transition-timing-function:cubic-bezier(.165,.84,.44,1);max-width:calc(100% - 10px);pointer-events:none;outline:0}.tippy-popper[x-placement^=top] .tippy-backdrop{border-radius:40% 40% 0 0}.tippy-popper[x-placement^=top] .tippy-roundarrow{bottom:-8px;-webkit-transform-origin:50% 0;transform-origin:50% 0}.tippy-popper[x-placement^=top] .tippy-roundarrow svg{position:absolute;left:0;-webkit-transform:rotate(180deg);transform:rotate(180deg)}.tippy-popper[x-placement^=top] .tippy-arrow{border-top:8px solid #333;border-right:8px solid transparent;border-left:8px solid transparent;bottom:-7px;margin:0 6px;-webkit-transform-origin:50% 0;transform-origin:50% 0}.tippy-popper[x-placement^=top] .tippy-backdrop{-webkit-transform-origin:0 25%;transform-origin:0 25%}.tippy-popper[x-placement^=top] .tippy-backdrop[data-state=visible]{-webkit-transform:scale(1) translate(-50%,-55%);transform:scale(1) translate(-50%,-55%)}.tippy-popper[x-placement^=top] .tippy-backdrop[data-state=hidden]{-webkit-transform:scale(.2) translate(-50%,-45%);transform:scale(.2) translate(-50%,-45%);opacity:0}.tippy-popper[x-placement^=top] [data-animation=shift-toward][data-state=visible]{-webkit-transform:translateY(-10px);transform:translateY(-10px)}.tippy-popper[x-placement^=top] [data-animation=shift-toward][data-state=hidden]{opacity:0;-webkit-transform:translateY(-20px);transform:translateY(-20px)}.tippy-popper[x-placement^=top] [data-animation=perspective]{-webkit-transform-origin:bottom;transform-origin:bottom}.tippy-popper[x-placement^=top] [data-animation=perspective][data-state=visible]{-webkit-transform:perspective(700px) translateY(-10px) rotateX(0);transform:perspective(700px) translateY(-10px) rotateX(0)}.tippy-popper[x-placement^=top] [data-animation=perspective][data-state=hidden]{opacity:0;-webkit-transform:perspective(700px) translateY(0) rotateX(60deg);transform:perspective(700px) translateY(0) rotateX(60deg)}.tippy-popper[x-placement^=top] [data-animation=fade][data-state=visible]{-webkit-transform:translateY(-10px);transform:translateY(-10px)}.tippy-popper[x-placement^=top] [data-animation=fade][data-state=hidden]{opacity:0;-webkit-transform:translateY(-10px);transform:translateY(-10px)}.tippy-popper[x-placement^=top] [data-animation=shift-away][data-state=visible]{-webkit-transform:translateY(-10px);transform:translateY(-10px)}.tippy-popper[x-placement^=top] [data-animation=shift-away][data-state=hidden]{opacity:0;-webkit-transform:translateY(0);transform:translateY(0)}.tippy-popper[x-placement^=top] [data-animation=scale]{-webkit-transform-origin:bottom;transform-origin:bottom}.tippy-popper[x-placement^=top] [data-animation=scale][data-state=visible]{-webkit-transform:translateY(-10px) scale(1);transform:translateY(-10px) scale(1)}.tippy-popper[x-placement^=top] [data-animation=scale][data-state=hidden]{opacity:0;-webkit-transform:translateY(-10px) scale(.5);transform:translateY(-10px) scale(.5)}.tippy-popper[x-placement^=bottom] .tippy-backdrop{border-radius:0 0 30% 30%}.tippy-popper[x-placement^=bottom] .tippy-roundarrow{top:-8px;-webkit-transform-origin:50% 100%;transform-origin:50% 100%}.tippy-popper[x-placement^=bottom] .tippy-roundarrow svg{position:absolute;left:0;-webkit-transform:rotate(0);transform:rotate(0)}.tippy-popper[x-placement^=bottom] .tippy-arrow{border-bottom:8px solid #333;border-right:8px solid transparent;border-left:8px solid transparent;top:-7px;margin:0 6px;-webkit-transform-origin:50% 100%;transform-origin:50% 100%}.tippy-popper[x-placement^=bottom] .tippy-backdrop{-webkit-transform-origin:0 -50%;transform-origin:0 -50%}.tippy-popper[x-placement^=bottom] .tippy-backdrop[data-state=visible]{-webkit-transform:scale(1) translate(-50%,-45%);transform:scale(1) translate(-50%,-45%)}.tippy-popper[x-placement^=bottom] .tippy-backdrop[data-state=hidden]{-webkit-transform:scale(.2) translate(-50%);transform:scale(.2) translate(-50%);opacity:0}.tippy-popper[x-placement^=bottom] [data-animation=shift-toward][data-state=visible]{-webkit-transform:translateY(10px);transform:translateY(10px)}.tippy-popper[x-placement^=bottom] [data-animation=shift-toward][data-state=hidden]{opacity:0;-webkit-transform:translateY(20px);transform:translateY(20px)}.tippy-popper[x-placement^=bottom] [data-animation=perspective]{-webkit-transform-origin:top;transform-origin:top}.tippy-popper[x-placement^=bottom] [data-animation=perspective][data-state=visible]{-webkit-transform:perspective(700px) translateY(10px) rotateX(0);transform:perspective(700px) translateY(10px) rotateX(0)}.tippy-popper[x-placement^=bottom] [data-animation=perspective][data-state=hidden]{opacity:0;-webkit-transform:perspective(700px) translateY(0) rotateX(-60deg);transform:perspective(700px) translateY(0) rotateX(-60deg)}.tippy-popper[x-placement^=bottom] [data-animation=fade][data-state=visible]{-webkit-transform:translateY(10px);transform:translateY(10px)}.tippy-popper[x-placement^=bottom] [data-animation=fade][data-state=hidden]{opacity:0;-webkit-transform:translateY(10px);transform:translateY(10px)}.tippy-popper[x-placement^=bottom] [data-animation=shift-away][data-state=visible]{-webkit-transform:translateY(10px);transform:translateY(10px)}.tippy-popper[x-placement^=bottom] [data-animation=shift-away][data-state=hidden]{opacity:0;-webkit-transform:translateY(0);transform:translateY(0)}.tippy-popper[x-placement^=bottom] [data-animation=scale]{-webkit-transform-origin:top;transform-origin:top}.tippy-popper[x-placement^=bottom] [data-animation=scale][data-state=visible]{-webkit-transform:translateY(10px) scale(1);transform:translateY(10px) scale(1)}.tippy-popper[x-placement^=bottom] [data-animation=scale][data-state=hidden]{opacity:0;-webkit-transform:translateY(10px) scale(.5);transform:translateY(10px) scale(.5)}.tippy-popper[x-placement^=left] .tippy-backdrop{border-radius:50% 0 0 50%}.tippy-popper[x-placement^=left] .tippy-roundarrow{right:-16px;-webkit-transform-origin:33.33333333% 50%;transform-origin:33.33333333% 50%}.tippy-popper[x-placement^=left] .tippy-roundarrow svg{position:absolute;left:0;-webkit-transform:rotate(90deg);transform:rotate(90deg)}.tippy-popper[x-placement^=left] .tippy-arrow{border-left:8px solid #333;border-top:8px solid transparent;border-bottom:8px solid transparent;right:-7px;margin:3px 0;-webkit-transform-origin:0 50%;transform-origin:0 50%}.tippy-popper[x-placement^=left] .tippy-backdrop{-webkit-transform-origin:50% 0;transform-origin:50% 0}.tippy-popper[x-placement^=left] .tippy-backdrop[data-state=visible]{-webkit-transform:scale(1) translate(-50%,-50%);transform:scale(1) translate(-50%,-50%)}.tippy-popper[x-placement^=left] .tippy-backdrop[data-state=hidden]{-webkit-transform:scale(.2) translate(-75%,-50%);transform:scale(.2) translate(-75%,-50%);opacity:0}.tippy-popper[x-placement^=left] [data-animation=shift-toward][data-state=visible]{-webkit-transform:translateX(-10px);transform:translateX(-10px)}.tippy-popper[x-placement^=left] [data-animation=shift-toward][data-state=hidden]{opacity:0;-webkit-transform:translateX(-20px);transform:translateX(-20px)}.tippy-popper[x-placement^=left] [data-animation=perspective]{-webkit-transform-origin:right;transform-origin:right}.tippy-popper[x-placement^=left] [data-animation=perspective][data-state=visible]{-webkit-transform:perspective(700px) translateX(-10px) rotateY(0);transform:perspective(700px) translateX(-10px) rotateY(0)}.tippy-popper[x-placement^=left] [data-animation=perspective][data-state=hidden]{opacity:0;-webkit-transform:perspective(700px) translateX(0) rotateY(-60deg);transform:perspective(700px) translateX(0) rotateY(-60deg)}.tippy-popper[x-placement^=left] [data-animation=fade][data-state=visible]{-webkit-transform:translateX(-10px);transform:translateX(-10px)}.tippy-popper[x-placement^=left] [data-animation=fade][data-state=hidden]{opacity:0;-webkit-transform:translateX(-10px);transform:translateX(-10px)}.tippy-popper[x-placement^=left] [data-animation=shift-away][data-state=visible]{-webkit-transform:translateX(-10px);transform:translateX(-10px)}.tippy-popper[x-placement^=left] [data-animation=shift-away][data-state=hidden]{opacity:0;-webkit-transform:translateX(0);transform:translateX(0)}.tippy-popper[x-placement^=left] [data-animation=scale]{-webkit-transform-origin:right;transform-origin:right}.tippy-popper[x-placement^=left] [data-animation=scale][data-state=visible]{-webkit-transform:translateX(-10px) scale(1);transform:translateX(-10px) scale(1)}.tippy-popper[x-placement^=left] [data-animation=scale][data-state=hidden]{opacity:0;-webkit-transform:translateX(-10px) scale(.5);transform:translateX(-10px) scale(.5)}.tippy-popper[x-placement^=right] .tippy-backdrop{border-radius:0 50% 50% 0}.tippy-popper[x-placement^=right] .tippy-roundarrow{left:-16px;-webkit-transform-origin:66.66666666% 50%;transform-origin:66.66666666% 50%}.tippy-popper[x-placement^=right] .tippy-roundarrow svg{position:absolute;left:0;-webkit-transform:rotate(-90deg);transform:rotate(-90deg)}.tippy-popper[x-placement^=right] .tippy-arrow{border-right:8px solid #333;border-top:8px solid transparent;border-bottom:8px solid transparent;left:-7px;margin:3px 0;-webkit-transform-origin:100% 50%;transform-origin:100% 50%}.tippy-popper[x-placement^=right] .tippy-backdrop{-webkit-transform-origin:-50% 0;transform-origin:-50% 0}.tippy-popper[x-placement^=right] .tippy-backdrop[data-state=visible]{-webkit-transform:scale(1) translate(-50%,-50%);transform:scale(1) translate(-50%,-50%)}.tippy-popper[x-placement^=right] .tippy-backdrop[data-state=hidden]{-webkit-transform:scale(.2) translate(-25%,-50%);transform:scale(.2) translate(-25%,-50%);opacity:0}.tippy-popper[x-placement^=right] [data-animation=shift-toward][data-state=visible]{-webkit-transform:translateX(10px);transform:translateX(10px)}.tippy-popper[x-placement^=right] [data-animation=shift-toward][data-state=hidden]{opacity:0;-webkit-transform:translateX(20px);transform:translateX(20px)}.tippy-popper[x-placement^=right] [data-animation=perspective]{-webkit-transform-origin:left;transform-origin:left}.tippy-popper[x-placement^=right] [data-animation=perspective][data-state=visible]{-webkit-transform:perspective(700px) translateX(10px) rotateY(0);transform:perspective(700px) translateX(10px) rotateY(0)}.tippy-popper[x-placement^=right] [data-animation=perspective][data-state=hidden]{opacity:0;-webkit-transform:perspective(700px) translateX(0) rotateY(60deg);transform:perspective(700px) translateX(0) rotateY(60deg)}.tippy-popper[x-placement^=right] [data-animation=fade][data-state=visible]{-webkit-transform:translateX(10px);transform:translateX(10px)}.tippy-popper[x-placement^=right] [data-animation=fade][data-state=hidden]{opacity:0;-webkit-transform:translateX(10px);transform:translateX(10px)}.tippy-popper[x-placement^=right] [data-animation=shift-away][data-state=visible]{-webkit-transform:translateX(10px);transform:translateX(10px)}.tippy-popper[x-placement^=right] [data-animation=shift-away][data-state=hidden]{opacity:0;-webkit-transform:translateX(0);transform:translateX(0)}.tippy-popper[x-placement^=right] [data-animation=scale]{-webkit-transform-origin:left;transform-origin:left}.tippy-popper[x-placement^=right] [data-animation=scale][data-state=visible]{-webkit-transform:translateX(10px) scale(1);transform:translateX(10px) scale(1)}.tippy-popper[x-placement^=right] [data-animation=scale][data-state=hidden]{opacity:0;-webkit-transform:translateX(10px) scale(.5);transform:translateX(10px) scale(.5)}.tippy-tooltip{position:relative;color:#fff;border-radius:4px;font-size:.9rem;padding:.3rem .6rem;line-height:1.4;text-align:center;will-change:transform;background-color:#333}.tippy-tooltip[data-size=small]{padding:.2rem .4rem;font-size:.75rem}.tippy-tooltip[data-size=large]{padding:.4rem .8rem;font-size:1rem}.tippy-tooltip[data-animatefill]{overflow:hidden;background-color:transparent}.tippy-tooltip[data-interactive],.tippy-tooltip[data-interactive] path{pointer-events:auto}.tippy-tooltip[data-inertia][data-state=visible]{transition-timing-function:cubic-bezier(.54,1.5,.38,1.11)}.tippy-tooltip[data-inertia][data-state=hidden]{transition-timing-function:ease}.tippy-arrow,.tippy-roundarrow{position:absolute;width:0;height:0}.tippy-roundarrow{width:24px;height:8px;fill:#333;pointer-events:none}.tippy-backdrop{position:absolute;will-change:transform;background-color:#333;border-radius:50%;width:calc(110% + 2rem);left:50%;top:50%;z-index:-1;transition:all cubic-bezier(.46,.1,.52,.98);-webkit-backface-visibility:hidden;backface-visibility:hidden}.tippy-backdrop:after{content:"";float:left;padding-top:100%}.tippy-backdrop+.tippy-content{transition-property:opacity;will-change:opacity}.tippy-backdrop+.tippy-content[data-state=visible]{opacity:1}.tippy-backdrop+.tippy-content[data-state=hidden]{opacity:0}</style>
-<title>登录 - Gitee.com</title>
-<meta content="on" http-equiv="x-dns-prefetch-control">
-<link href="//e.gitee.com" rel="dns-prefetch">
-<link href="//files.gitee.com" rel="dns-prefetch">
-<link href="//toscode.gitee.com" rel="dns-prefetch">
-<link href="https://cn-assets.gitee.com" rel="dns-prefetch">
-<link href="https://portrait.gitee.com" rel="dns-prefetch">
-<link rel="shortcut icon" type="image/vnd.microsoft.icon" href="https://cn-assets.gitee.com/assets/favicon-9007bd527d8a7851c8330e783151df58.ico">
+<!DOCTYPE html><html><head>
+    <meta charset="GBK">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>京东-欢迎登录</title>
+    <link rel="icon" href="//www.jd.com/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="//misc.360buyimg.com/user/passport/1.0.0/widget/base/base.css" source="widget">
+    <link type="text/css" rel="stylesheet" href="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/widget/common-2016-1124/common-2016-1124.css" source="widget">
+    <link type="text/css" rel="stylesheet" href="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/widget/login-form-2018-0827/login-form-2018-0827.css" source="widget">
+    <link type="text/css" rel="stylesheet" href="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/widget/login-banner/login-banner.css" source="widget">
+    <link type="text/css" rel="stylesheet" href="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/widget/safe-step/safe-step.css" source="widget">
+    <link type="text/css" rel="stylesheet" href="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/css/tinyscrollbar-170524.css">
+    <script type="text/javascript" async="" src="//static.360buyimg.com/risk-cdn/seq/s.js?v=6"></script><script type="text/javascript" async="" src="https://wl.jd.com/wl.js"></script><script type="text/javascript" src="//misc.360buyimg.com/jdf/lib/jquery-1.6.4.js"></script>
+    <script type="text/javascript" src="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/js/underscore-min.js"></script>
+    <script type="text/javascript" src="//ivs.jd.com/slide/js/jdSlide.1.0.min.js"></script>
+    <script type="text/javascript" src="https://jrsecstatic.jdpay.com/jr-sec-dev-static/summer-cryptico-h5.min.js"></script>
+    <script type="text/javascript" src="//passport.jd.com/new/js/aks.js"></script>
+    <script type="text/javascript" src="/new/js/ziwuxianwrapper.js"></script>
+    <script src="/new/js/sign.js"></script>
+    <script src="https://storage.360buyimg.com/webcontainer/js_security_v3_0.1.5.js"></script>
 
-<meta charset="utf-8">
-<meta content="always" name="referrer">
-<meta content="Gitee" property="og:site_name">
-<meta content="Object" property="og:type">
-<meta content="https://gitee.com/login" property="og:url">
-<meta content="https://gitee.com/static/images/logo_themecolor.png" itemprop="image" property="og:image">
-<meta content="登录 - Gitee.com" itemprop="name" property="og:title">
-<meta content="Gitee.com（码云） 是 OSCHINA.NET 推出的代码托管平台，支持 Git 和 SVN，提供免费的私有仓库托管。目前已有超过 1000 万的开发者选择 Gitee。" property="og:description">
-<meta content="码云,Gitee,代码托管,Git,Git@OSC,Gitee.com,开源,内源,项目管理,版本控制,开源代码,代码分享,项目协作,开源项目托管,免费代码托管,Git代码托管,Git托管服务" name="Keywords">
-<meta content="Gitee.com（码云） 是 OSCHINA.NET 推出的代码托管平台，支持 Git 和 SVN，提供免费的私有仓库托管。目前已有超过 1000 万的开发者选择 Gitee。" itemprop="description" name="Description">
-<meta content="pc,mobile" name="applicable-device">
-
-<meta content="IE=edge" http-equiv="X-UA-Compatible">
-<meta name="csrf-param" content="authenticity_token">
-<meta name="csrf-token" content="34c6IayUzccEcKHyVHM2m6dTEgn/haXozOyZUKWu7Q5ihZFeRDIJshHjpg14LwpKVW8IKE/v0luqwRUy1ga4XQ==">
-
-<link rel="stylesheet" media="all" href="https://cn-assets.gitee.com/assets/application-ec793cdf9a74183654ca046c20a4c35d.css">
-<script charset="utf-8" src="https://hmcdn.baidu.com/static/tongji/plugins/UrlChangeTracker.js"></script><script async="" charset="utf-8" src="https://assets-cli.s4.udesk.cn/im_client/js/udeskApi.js"></script><script src="https://hm.baidu.com/hm.js?24f17767262929947cc3631f99bfd274"></script><script async="" src="https://cn-assets.gitee.com/assets/static/sensors-sdk-2f850fa5b654ad55ac0993fda2f37ba5.js" charset="UTF-8"></script><script>
-//<![CDATA[
-window.gon = {};gon.locale="zh-CN";gon.sentry_dsn=null;gon.baidu_register_hm_push=null;gon.sensor={"server_url":"https://haveaniceday.gitee.com:3443/sa?project=production","sdk_url":"https://cn-assets.gitee.com/assets/static/sensors-sdk-2f850fa5b654ad55ac0993fda2f37ba5.js","page_type":"其他"};gon.info={"controller_path":"sessions","action_name":"new","current_user":false};gon.tour_env={"current_user":null,"action_name":"new","original_url":"https://gitee.com/login","controller_path":"sessions"};gon.yunpian_key=false;gon.encrypt={"enabled":true,"separator":"$gitee$","password_key":"-----BEGIN PUBLIC KEY-----\nMIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIrn+WB2Yi4ABAL5Tq6E09tumY\nqVTFdpU01kCDUmClczJOCGZriLNMrshmN9NJxazpqizPthwS1OIK3HwRLEP9D3GL\n7gCnvN6lpIpoVwppWd65f/rK2ewv6dstN0fCmtVj4WsLUchWlgNuVTfWljiBK/Dc\nYkfslRZzCq5Fl3ooowIDAQAB\n-----END PUBLIC KEY-----\n"};gon.oversea_login=false;
-//]]>
-</script>
-<script src="https://cn-assets.gitee.com/assets/static/sensor-6269b9ad61bbcdaff20078e5dcff62d5.js"></script>
-<script src="https://cn-assets.gitee.com/assets/static/sentry-5.1.0-a823fb0be1b61c5d7ca4a89f0536cb0a.js"></script>
-<script src="https://cn-assets.gitee.com/assets/application-7169872a7f3a9d6f6ae1a1ff8733a480.js"></script>
-<script src="https://cn-assets.gitee.com/assets/lib/jquery.timeago.zh-CN-4a4818e98c1978d2419ab19fabcba740.js"></script>
-
-<script src="/static/javascripts/polyfill-7.4.3.min.js"></script>
-<script src="/static/javascripts/yunpian/riddler-sdk-0.2.2.js?t=1629687362163"></script><style type="text/css">.yp-riddler {
-  color: black;
-}
-.yp-riddler .yp-riddler-winbox {
-  margin: 100px auto 0 auto;
-  border-radius: 2px;
-}
-.yp-riddler .yp-riddler-win {
-  -webkit-touch-callout: none;
-  /* iOS Safari */
-  -webkit-user-select: none;
-  /* Chrome/Safari/Opera */
-  -khtml-user-select: none;
-  /* Konqueror */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* Internet Explorer/Edge */
-  user-select: none;
-  -moz-box-sizing: content-box;
-  -webkit-box-sizing: content-box;
-  box-sizing: content-box;
-  background-color: white;
-  padding: 10px;
-}
-.yp-riddler .yp-riddler-tip-text-container {
-  text-align: left;
-}
-.yp-riddler .yp-riddler-tip-text-container > * {
-  vertical-align: middle;
-}
-.yp-riddler .yp-riddler-tip-text-container span {
-  color: black;
-}
-.yp-riddler .yp-riddler-tip-text-container img {
-  width: 24%;
-  margin-left: 5px;
-}
-.yp-riddler .yp-riddler-click-img-container {
-  position: relative;
-}
-.yp-riddler .yp-riddler-click-img-container .yp-riddler-power-img {
-  height: 18px;
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-}
-.yp-riddler .yp-riddler-click-position {
-  width: 32px;
-  height: 32px;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100%;
-  position: absolute;
-  background-color: rgba(83, 159, 254, 0.8);
-  box-sizing: border-box;
-  box-shadow: 0 0 10px black;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 26px;
-  border: 3px solid white;
-  color: #fff;
-}
-.yp-riddler .yp-riddler-slide-img-container {
-  position: relative;
-}
-.yp-riddler .yp-riddler-slide-img-container > .yp-riddler-slider-bg,
-.yp-riddler .yp-riddler-slide-img-container .yp-riddler-slider-front {
-  display: block;
-}
-.yp-riddler .yp-riddler-slide-img-container .yp-riddler-slider-front {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: auto;
-}
-.yp-riddler .yp-riddler-slide-img-container .yp-riddler-power-img {
-  height: 18px;
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-}
-.yp-riddler .yp-riddler-slider-area {
-  margin-top: 10px;
-  background: #E6E7EB;
-  line-height: 40px;
-  height: 40px;
-  text-align: center;
-  position: relative;
-  font-weight: 300;
-  font-size: 5px;
-  cursor: default;
-  user-select: none;
-  text-shadow: none;
-  border-radius: 2px;
-}
-.yp-riddler .yp-riddler-slider-area .yp-riddler-slider-tip-default {
-  white-space: nowrap;
-  overflow: hidden;
-  padding-left: 40px;
-  font-size: 12px;
-  color: #88949d;
-}
-.yp-riddler .yp-riddler-slider-area .yp-riddler-slider-btn {
-  height: 40px;
-  width: 40px;
-  position: absolute;
-  top: 0;
-  background-color: #FFFFFF;
-  box-sizing: border-box;
-  cursor: move;
-  border-radius: 2px;
-  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-@keyframes gogogo {
-  from {
-    padding-left: -5px;
-  }
-  to {
-    padding-left: 5px;
-  }
-}
-.yp-riddler .yp-riddler-slider-area .yp-riddler-slider-btn .yp-riddler-slider-btn-sign {
-  width: 16px;
-  pointer-events: none;
-}
-.yp-riddler .yp-riddler-slider-area .yp-riddler-slider-btn .yp-riddler-slider-btn-mask {
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  animation: myfirst 2s;
-  -moz-animation: myfirst 2s;
-  /* Firefox */
-  -webkit-animation: myfirst 2s;
-  /* Safari 和 Chrome */
-  -o-animation: myfirst 2s;
-  top: 0;
-  background: #fff;
-  left: 0;
-}
-@keyframes myfirst {
-  0% {
-    left: 0;
-    width: 40px;
-  }
-  100% {
-    left: 40px;
-    width: 0px;
-  }
-}
-@-moz-keyframes myfirst {
-  /* Firefox */
-  0% {
-    left: 0;
-    width: 40px;
-  }
-  100% {
-    left: 40px;
-    width: 0px;
-  }
-}
-@-webkit-keyframes myfirst {
-  /* Safari 和 Chrome */
-  0% {
-    left: 0;
-    width: 40px;
-  }
-  100% {
-    left: 40px;
-    width: 0px;
-  }
-}
-@-o-keyframes myfirst {
-  /* Opera */
-  0% {
-    left: 0;
-    width: 40px;
-  }
-  100% {
-    left: 40px;
-    width: 0px;
-  }
-}
-.yp-riddler .yp-riddler-slider-area .yp-riddler-slider-trajectory {
-  height: inherit;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #EAEFFF;
-  border-radius: 2px;
-}
-.yp-riddler.yp-flat .yp-riddler-win-masker {
-  margin: 0;
-}
-.yp-riddler.yp-flat .yp-riddler-winbox {
-  border: 1px solid #eeeeee;
-  margin: 0;
-}
-.yp-riddler.yp-float .yp-riddler-winbox {
-  border: none;
-  box-shadow: 0 0 5px grey;
-}
-.yp-riddler.yp-float .yp-riddler-win-masker {
-  z-index: 3;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding-bottom: 50px;
-  display: none;
-}
-.yp-riddler.yp-float .yp-riddler-win {
-  margin: 0;
-}
-.yp-riddler.yp-external .yp-riddler-winbox {
-  border: none;
-  box-shadow: 0 0 5px grey;
-  -webkit-animation-name: fadeIn;
-  /*动画名称*/
-  -webkit-animation-duration: 500ms;
-  /*动画持续时间*/
-  -webkit-animation-iteration-count: 1;
-  /*动画次数*/
-  -webkit-animation-delay: 0s;
-  /*延迟时间*/
-}
-.yp-riddler.yp-external .yp-riddler-win-masker {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding-bottom: 50px;
-  display: none;
-}
-.yp-riddler.yp-external .yp-riddler-win {
-  margin: 0;
-}
-.yp-riddler.yp-dialog .yp-riddler-win-masker {
-  cursor: auto;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: auto;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 999;
-}
-.yp-riddler .yp-riddler-refresh {
-  pointer-events: auto;
-  display: block;
-  width: 18px;
-  height: 18px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  transition: 200ms;
-  cursor: pointer;
-  transition: all 500ms ease-in-out;
-}
-.yp-riddler .yp-riddler-win-masker {
-  background: rgba(0, 0, 0, 0);
-  display: none;
-}
-.yp-riddler .yp-riddler-result-alert-success {
-  width: 100%;
-  height: 24px;
-  line-height: 24px;
-  text-align: center;
-  position: absolute;
-  bottom: 0px;
-  background-color: #52c41a;
-  color: #fff;
-  font-size: 12px;
-  font-family: PingFangSC-Regular;
-  transition: height 0.4s ease-out, opacity 0.2s ease-in, visibility 0.2s ease-in;
-}
-.yp-riddler .yp-riddler-result-alert-error {
-  width: 100%;
-  line-height: 24px;
-  text-align: center;
-  position: absolute;
-  bottom: 0px;
-  background-color: #fee8ea;
-  color: #f5222d;
-  font-size: 12px;
-  font-family: PingFangSC-Regular;
-  transition: height 0.4s ease-out, opacity 0.2s ease-in, visibility 0.2s ease-in;
-}
-.yp-riddler.yp-riddler-button {
-  position: relative;
-  line-height: 40px;
-  height: 40px;
-  cursor: pointer;
-  font-family: "PingFang SC", "Microsoft yahei", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
-  user-select: none;
-  text-align: center;
-  width: 100%;
-  outline: none;
-  text-decoration: none;
-  border: 1px solid #D9D9D9;
-  background-color: #F7F9FA;
-  border-radius: 2px;
-  font-size: 14px;
-  color: #757575;
-}
-.yp-riddler.yp-riddler-button:hover {
-  font-size: 14px;
-  color: #1792FA;
-}
-.yp-riddler.yp-riddler-button .yp-riddler-button_logo {
-  display: inline-block;
-  width: 25px;
-  height: 25px;
-  box-sizing: border-box;
-  transition: 200ms;
-  margin-right: 10px;
-  line-height: 25px;
-  position: relative;
-  top: 6.5px;
-}
-.yp-riddler.yp-riddler-button .yp-riddler-button_logo .yp-riddler-btn_a {
-  width: 100%;
-  height: 100%;
-  background: #145cff;
-  border-radius: 100px;
-  opacity: 0.5;
-  box-shadow: 0 0 6px grey;
-}
-.yp-riddler.yp-riddler-button .yp-riddler-button_logo .yp-riddler-btn_b {
-  width: 17px;
-  height: 17px;
-  background: #145cff;
-  border-radius: 100px;
-  opacity: 0.5;
-  position: absolute;
-  top: 4px;
-  left: 4px;
-}
-.yp-riddler.yp-riddler-button:hover .yp-riddler-button_logo {
-  padding: 4px;
-}
-.yp-riddler .yp-riddler-button-sucButton_logo {
-  display: inline-block;
-  width: 19px;
-  vertical-align: middle;
-  background: #26C267;
-  border-radius: 50%;
-  box-shadow: #26C267 0px 0px 10px;
-  padding: 5px;
-}
-.yp-riddler .yp-riddler-button-sucButton_text {
-  display: inline-block;
-  margin: 0 0 0 10px;
-  color: #26C267;
-}
-@-webkit-keyframes fadeIn {
-  0% {
-    opacity: 0;
-    /*初始状态 透明度为0*/
-  }
-  50% {
-    opacity: 0;
-    /*中间状态 透明度为0*/
-  }
-  100% {
-    opacity: 1;
-    /*结尾状态 透明度为1*/
-  }
-}
-</style>
-<script src="https://cn-assets.gitee.com/assets/encrypt-d49cb3adc96d2acf1f8d85390cecb54d.js"></script>
-<script src="https://cn-assets.gitee.com/assets/devise/application-456e5eb8f32659bd3c393c6df1d561b9.js"></script>
-
-<script src="//res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
-<script>
-  var title = document.title.replace(/( - Gitee| - 码云)$/, '')
-      imgUrl = '';
-  
-  document.addEventListener('DOMContentLoaded', function(event) {
-    var imgUrlEl = document.querySelector('.readme-box .markdown-body > img, .readme-box .markdown-body :not(a) > img');
-    imgUrl = imgUrlEl && imgUrlEl.getAttribute('src');
-  
-    if (!imgUrl) {
-      imgUrlEl = document.querySelector('meta[itemprop=image]');
-      imgUrl = imgUrlEl && imgUrlEl.getAttribute('content');
-      imgUrl = imgUrl || "https://gitee.com/static/images/logo_themecolor.png";
-    }
-  
-    wx.config({
-      debug: false,
-      appId: "wxff219d611a159737",
-      timestamp: "1697794105",
-      nonceStr: "1e9e61d37994db30719fe7803144381c",
-      signature: "abdcb62911556207afaf26365c43e7e8a22a44f9",
-      jsApiList: [
-        'onMenuShareTimeline',
-        'onMenuShareAppMessage'
-      ]
-    });
-  
-    wx.ready(function () {
-      wx.onMenuShareTimeline({
-        title: title, // 分享标题
-        link: "https://gitee.com/login", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        imgUrl: imgUrl // 分享图标
-      });
-      wx.onMenuShareAppMessage({
-        title: title, // 分享标题
-        link: "https://gitee.com/login", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-        desc: document.querySelector('meta[name=Description]').getAttribute('content'),
-        imgUrl: imgUrl // 分享图标
-      });
-    });
-    wx.error(function(res){
-      console.error('err', res)
-    });
-  })
-</script>
-
-<script type="text/x-mathjax-config;executed=true">
-MathJax.Hub.Config({
-  tex2jax: {
-    inlineMath: [['$','$'], ['\\(','\\)']],
-    displayMath: [["$$","$$"],["\\[","\\]"]],
-    processEscapes: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-    ignoreClass: "container|files",
-    processClass: "markdown-body"
-  }
-});
-</script>
-<script src="https://cn-assets.gitee.com/uploads/resources/MathJax-2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-
-<script>
-  (function () {
-    var messages = {
-      'zh-CN': {
-        addResult: '增加 <b>{term}</b>',
-        count: '已选择 {count}',
-        maxSelections: '最多 {maxCount} 个选择',
-        noResults: '未找到结果',
-        serverError: '连接服务器时发生错误'
-      },
-      'zh-TW': {
-        addResult: '增加 <b>{term}</b>',
-        count: '已選擇 {count}',
-        maxSelections: '最多 {maxCount} 個選擇',
-        noResults: '未找到結果',
-        serverError: '連接服務器時發生錯誤'
-      }
-    }
-  
-    if (messages[gon.locale]) {
-      $.fn.dropdown.settings.message = messages[gon.locale]
-    }
-  }());
-</script>
-
-<script>
-  var userAgent = navigator.userAgent;
-  var isLessIE11 = userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1;
-  if(isLessIE11){
-    var can_access = ""
-    if (can_access != "true"){
-      window.location.href = "/incompatible.html";
-    }
-  }
-  document.addEventListener("error", function (ev) {
-    var elem = ev.target;
-    if (elem.tagName.toLowerCase() === 'img') {
-      elem.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAADICAAAAACIM/FCAAACh0lEQVR4Ae3ch5W0OgyG4dt/mQJ2xgQPzJoM1m3AbALrxzrf28FzsoP0HykJEEAAAUQTBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEkKK0789+GK/I2ezfQB522PnS1qc8pGgXvr4tE4aY0XOUWlGImThWgyCk6DleixzE7qwBkg/MGiDPlVVAyp1VQGrPKiACDhFI6VkF5LmzCki+sg7IwDoglnVAil0IMkeG9CyUiwsxLFUVFzJJOQaKCjFCDN9RXMjIX7W6ztZXZDKKCyn8sWJvH+nca7WHDN9lROlAliPH9iRKCPI4cswFJQWxB46toLQgQ9jhn5QYZA9DOkoMUoQde5YapAxDWkoNYsOQR3KQd9CxUnIQF4S49CB9ENKlBxmDEKsFUgMCCCCAAHIrSF61f6153Ajy8nyiPr8L5MXnmm4CyT2fzN4DUvHZ+ntA2tOQBRBAAAEEEEAAAQQQ7ZBaC6TwSiDUaYHQ2yuB0MN+ft+43whyrs4rgVCjBUKTFshLC6TUAjGA3AxSaYFYLZBOC2RUAsk8h5qTg9QcbEoOsoQhQ2qQhsO5xCD5dgB5JQaZ+KBKGtKecvR81Ic0ZDjByKdDx0rSEDZ/djQbH+bkIdvfJFm98BfV8hD2zprfVdlu9PxVeyYAkciREohRAplJCaRSAplJCcQogTjSAdlyHRBvSAekJR0QRzogA+mADJkOiCPSAPEtqYBshlRAXC43hxix2QiOuEZkVERykGyNo9idIZKE0HO7XrG6OiMShlDWjstVzdPgXtUH9v0CEidAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQAABBBBAAAEEEEAAAQQQQP4HgjZxTpdEii0AAAAASUVORK5CYII=";
-    }
-  }, true);
-</script>
-<style type="text/css">.MathJax_Hover_Frame {border-radius: .25em; -webkit-border-radius: .25em; -moz-border-radius: .25em; -khtml-border-radius: .25em; box-shadow: 0px 0px 15px #83A; -webkit-box-shadow: 0px 0px 15px #83A; -moz-box-shadow: 0px 0px 15px #83A; -khtml-box-shadow: 0px 0px 15px #83A; border: 1px solid #A6D ! important; display: inline-block; position: absolute}
-.MathJax_Menu_Button .MathJax_Hover_Arrow {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 4px; -webkit-border-radius: 4px; -moz-border-radius: 4px; -khtml-border-radius: 4px; font-family: 'Courier New',Courier; font-size: 9px; color: #F0F0F0}
-.MathJax_Menu_Button .MathJax_Hover_Arrow span {display: block; background-color: #AAA; border: 1px solid; border-radius: 3px; line-height: 0; padding: 4px}
-.MathJax_Hover_Arrow:hover {color: white!important; border: 2px solid #CCC!important}
-.MathJax_Hover_Arrow:hover span {background-color: #CCC!important}
-</style><style type="text/css">#MathJax_About {position: fixed; left: 50%; width: auto; text-align: center; border: 3px outset; padding: 1em 2em; background-color: #DDDDDD; color: black; cursor: default; font-family: message-box; font-size: 120%; font-style: normal; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 15px; -webkit-border-radius: 15px; -moz-border-radius: 15px; -khtml-border-radius: 15px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-#MathJax_About.MathJax_MousePost {outline: none}
-.MathJax_Menu {position: absolute; background-color: white; color: black; width: auto; padding: 5px 0px; border: 1px solid #CCCCCC; margin: 0; cursor: default; font: menu; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; z-index: 201; border-radius: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -khtml-border-radius: 5px; box-shadow: 0px 10px 20px #808080; -webkit-box-shadow: 0px 10px 20px #808080; -moz-box-shadow: 0px 10px 20px #808080; -khtml-box-shadow: 0px 10px 20px #808080; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-.MathJax_MenuItem {padding: 1px 2em; background: transparent}
-.MathJax_MenuArrow {position: absolute; right: .5em; padding-top: .25em; color: #666666; font-size: .75em}
-.MathJax_MenuActive .MathJax_MenuArrow {color: white}
-.MathJax_MenuArrow.RTL {left: .5em; right: auto}
-.MathJax_MenuCheck {position: absolute; left: .7em}
-.MathJax_MenuCheck.RTL {right: .7em; left: auto}
-.MathJax_MenuRadioCheck {position: absolute; left: .7em}
-.MathJax_MenuRadioCheck.RTL {right: .7em; left: auto}
-.MathJax_MenuLabel {padding: 1px 2em 3px 1.33em; font-style: italic}
-.MathJax_MenuRule {border-top: 1px solid #DDDDDD; margin: 4px 3px}
-.MathJax_MenuDisabled {color: GrayText}
-.MathJax_MenuActive {background-color: #606872; color: white}
-.MathJax_MenuDisabled:focus, .MathJax_MenuLabel:focus {background-color: #E8E8E8}
-.MathJax_ContextMenu:focus {outline: none}
-.MathJax_ContextMenu .MathJax_MenuItem:focus {outline: none}
-#MathJax_AboutClose {top: .2em; right: .2em}
-.MathJax_Menu .MathJax_MenuClose {top: -10px; left: -10px}
-.MathJax_MenuClose {position: absolute; cursor: pointer; display: inline-block; border: 2px solid #AAA; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; font-family: 'Courier New',Courier; font-size: 24px; color: #F0F0F0}
-.MathJax_MenuClose span {display: block; background-color: #AAA; border: 1.5px solid; border-radius: 18px; -webkit-border-radius: 18px; -moz-border-radius: 18px; -khtml-border-radius: 18px; line-height: 0; padding: 8px 0 6px}
-.MathJax_MenuClose:hover {color: white!important; border: 2px solid #CCC!important}
-.MathJax_MenuClose:hover span {background-color: #CCC!important}
-.MathJax_MenuClose:hover:focus {outline: none}
-</style><style type="text/css">.MathJax_Preview .MJXf-math {color: inherit!important}
-</style><style type="text/css">.MJX_Assistive_MathML {position: absolute!important; top: 0; left: 0; clip: rect(1px, 1px, 1px, 1px); padding: 1px 0 0 0!important; border: 0!important; height: 1px!important; width: 1px!important; overflow: hidden!important; display: block!important; -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none}
-.MJX_Assistive_MathML.MJX_Assistive_MathML_Block {width: 100%!important}
-</style><style type="text/css">#MathJax_Zoom {position: absolute; background-color: #F0F0F0; overflow: auto; display: block; z-index: 301; padding: .5em; border: 1px solid black; margin: 0; font-weight: normal; font-style: normal; text-align: left; text-indent: 0; text-transform: none; line-height: normal; letter-spacing: normal; word-spacing: normal; word-wrap: normal; white-space: nowrap; float: none; -webkit-box-sizing: content-box; -moz-box-sizing: content-box; box-sizing: content-box; box-shadow: 5px 5px 15px #AAAAAA; -webkit-box-shadow: 5px 5px 15px #AAAAAA; -moz-box-shadow: 5px 5px 15px #AAAAAA; -khtml-box-shadow: 5px 5px 15px #AAAAAA; filter: progid:DXImageTransform.Microsoft.dropshadow(OffX=2, OffY=2, Color='gray', Positive='true')}
-#MathJax_ZoomOverlay {position: absolute; left: 0; top: 0; z-index: 300; display: inline-block; width: 100%; height: 100%; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
-#MathJax_ZoomFrame {position: relative; display: inline-block; height: 0; width: 0}
-#MathJax_ZoomEventTrap {position: absolute; left: 0; top: 0; z-index: 302; display: inline-block; border: 0; padding: 0; margin: 0; background-color: white; opacity: 0; filter: alpha(opacity=0)}
-</style><style type="text/css">.MathJax_Preview {color: #888}
-#MathJax_Message {position: fixed; left: 1em; bottom: 1.5em; background-color: #E6E6E6; border: 1px solid #959595; margin: 0px; padding: 2px 8px; z-index: 102; color: black; font-size: 80%; width: auto; white-space: nowrap}
-#MathJax_MSIE_Frame {position: absolute; top: 0; left: 0; width: 0px; z-index: 101; border: 0px; margin: 0px; padding: 0px}
-.MathJax_Error {color: #CC0000; font-style: italic}
-</style><script src="https://1588039.s4.udesk.cn/spa1/im_web_plugins/2649/out_config?company_code=1hhcdjh&amp;language=&amp;session_key=&amp;callback=udesk_jsonp0"></script><style type="text/css">.MJXp-script {font-size: .8em}
-.MJXp-right {-webkit-transform-origin: right; -moz-transform-origin: right; -ms-transform-origin: right; -o-transform-origin: right; transform-origin: right}
-.MJXp-bold {font-weight: bold}
-.MJXp-italic {font-style: italic}
-.MJXp-scr {font-family: MathJax_Script,'Times New Roman',Times,STIXGeneral,serif}
-.MJXp-frak {font-family: MathJax_Fraktur,'Times New Roman',Times,STIXGeneral,serif}
-.MJXp-sf {font-family: MathJax_SansSerif,'Times New Roman',Times,STIXGeneral,serif}
-.MJXp-cal {font-family: MathJax_Caligraphic,'Times New Roman',Times,STIXGeneral,serif}
-.MJXp-mono {font-family: MathJax_Typewriter,'Times New Roman',Times,STIXGeneral,serif}
-.MJXp-largeop {font-size: 150%}
-.MJXp-largeop.MJXp-int {vertical-align: -.2em}
-.MJXp-math {display: inline-block; line-height: 1.2; text-indent: 0; font-family: 'Times New Roman',Times,STIXGeneral,serif; white-space: nowrap; border-collapse: collapse}
-.MJXp-display {display: block; text-align: center; margin: 1em 0}
-.MJXp-math span {display: inline-block}
-.MJXp-box {display: block!important; text-align: center}
-.MJXp-box:after {content: " "}
-.MJXp-rule {display: block!important; margin-top: .1em}
-.MJXp-char {display: block!important}
-.MJXp-mo {margin: 0 .15em}
-.MJXp-mfrac {margin: 0 .125em; vertical-align: .25em}
-.MJXp-denom {display: inline-table!important; width: 100%}
-.MJXp-denom > * {display: table-row!important}
-.MJXp-surd {vertical-align: top}
-.MJXp-surd > * {display: block!important}
-.MJXp-script-box > *  {display: table!important; height: 50%}
-.MJXp-script-box > * > * {display: table-cell!important; vertical-align: top}
-.MJXp-script-box > *:last-child > * {vertical-align: bottom}
-.MJXp-script-box > * > * > * {display: block!important}
-.MJXp-mphantom {visibility: hidden}
-.MJXp-munderover {display: inline-table!important}
-.MJXp-over {display: inline-block!important; text-align: center}
-.MJXp-over > * {display: block!important}
-.MJXp-munderover > * {display: table-row!important}
-.MJXp-mtable {vertical-align: .25em; margin: 0 .125em}
-.MJXp-mtable > * {display: inline-table!important; vertical-align: middle}
-.MJXp-mtr {display: table-row!important}
-.MJXp-mtd {display: table-cell!important; text-align: center; padding: .5em 0 0 .5em}
-.MJXp-mtr > .MJXp-mtd:first-child {padding-left: 0}
-.MJXp-mtr:first-child > .MJXp-mtd {padding-top: 0}
-.MJXp-mlabeledtr {display: table-row!important}
-.MJXp-mlabeledtr > .MJXp-mtd:first-child {padding-left: 0}
-.MJXp-mlabeledtr:first-child > .MJXp-mtd {padding-top: 0}
-.MJXp-merror {background-color: #FFFF88; color: #CC0000; border: 1px solid #CC0000; padding: 1px 3px; font-style: normal; font-size: 90%}
-.MJXp-scale0 {-webkit-transform: scaleX(.0); -moz-transform: scaleX(.0); -ms-transform: scaleX(.0); -o-transform: scaleX(.0); transform: scaleX(.0)}
-.MJXp-scale1 {-webkit-transform: scaleX(.1); -moz-transform: scaleX(.1); -ms-transform: scaleX(.1); -o-transform: scaleX(.1); transform: scaleX(.1)}
-.MJXp-scale2 {-webkit-transform: scaleX(.2); -moz-transform: scaleX(.2); -ms-transform: scaleX(.2); -o-transform: scaleX(.2); transform: scaleX(.2)}
-.MJXp-scale3 {-webkit-transform: scaleX(.3); -moz-transform: scaleX(.3); -ms-transform: scaleX(.3); -o-transform: scaleX(.3); transform: scaleX(.3)}
-.MJXp-scale4 {-webkit-transform: scaleX(.4); -moz-transform: scaleX(.4); -ms-transform: scaleX(.4); -o-transform: scaleX(.4); transform: scaleX(.4)}
-.MJXp-scale5 {-webkit-transform: scaleX(.5); -moz-transform: scaleX(.5); -ms-transform: scaleX(.5); -o-transform: scaleX(.5); transform: scaleX(.5)}
-.MJXp-scale6 {-webkit-transform: scaleX(.6); -moz-transform: scaleX(.6); -ms-transform: scaleX(.6); -o-transform: scaleX(.6); transform: scaleX(.6)}
-.MJXp-scale7 {-webkit-transform: scaleX(.7); -moz-transform: scaleX(.7); -ms-transform: scaleX(.7); -o-transform: scaleX(.7); transform: scaleX(.7)}
-.MJXp-scale8 {-webkit-transform: scaleX(.8); -moz-transform: scaleX(.8); -ms-transform: scaleX(.8); -o-transform: scaleX(.8); transform: scaleX(.8)}
-.MJXp-scale9 {-webkit-transform: scaleX(.9); -moz-transform: scaleX(.9); -ms-transform: scaleX(.9); -o-transform: scaleX(.9); transform: scaleX(.9)}
-.MathJax_PHTML .noError {vertical-align: ; font-size: 90%; text-align: left; color: black; padding: 1px 3px; border: 1px solid}
-</style><link type="text/css" rel="stylesheet" href="https://1588039.s4.udesk.cn/im_client/css/ui/emotion.css"><style type="text/css">#udesk_pop_dialog .udesk_im_client_emoji { background-image: url("https://1588039.s4.udesk.cn/im_client/images/im-emoji-big-1.png")}</style><script src="https://basevistor.s4.udesk.cn/customerApi/key?_=&amp;is_invite=1&amp;code=1hhcdjh&amp;url=https%3A%2F%2Fgitee.com%2Flogin&amp;referrer=&amp;keyword=&amp;title=%E7%99%BB%E5%BD%95%20-%20Gitee.com&amp;scaleScreen=1920*1080&amp;callback=udesk_jsonp1"></script><style type="text/css">#udesk_panel{position:fixed;bottom:-574px;right:60px;z-index:-1;width:364px;height:572px;overflow:hidden;display:none;background-color:transparent;box-shadow:0px 4px 8px rgba(0, 0, 0, 0.25);border-radius: 4px;-webkit-overflow-scrolling:touch;border:1px solid #ddd\9;transition:bottom 0.3s;-webkit-transition:bottom 0.3s;-moz-transition:bottom 0.3s;-ms-transition:bottom 0.3s;-o-transition:bottom 0.3s;}
-@media (max-width: 768px) {#udesk_panel{left:0;right:0;bottom:0;top:0%;height:auto;width:auto;}}</style><script src="https://1588039.s4.udesk.cn/agents/free?im_web_plugin_id=2649&amp;session_key=&amp;callback=udesk_jsonp2"></script></head>
-
-<body class="home session-body ui_basic" style=""><div id="MathJax_Message" style="display: none;"></div>
-<div class="site-content">
-<div class="fixed-notice-infos">
-<div class="all-messages">
-</div>
-<div class="ui container">
-<div class="flash-messages" id="messages-container"></div>
-</div>
-<script>
-  (function() {
-    $(function() {
-      var $error_box, alertTip, notify_content, notify_options, template;
-      template = '<div data-notify="container" class="ui {0} message" role="alert">' + '<i data-notify="dismiss" class="close icon"></i>' + '<span data-notify="message">{2}</span>' + '</div>';
-      notify_content = null;
-      notify_options = {};
-      alertTip = '';
-      $error_box = $(".flash_error.flash_error_box");
-      if (notify_options.type === 'error' && $error_box.length > 0 && !$.isEmptyObject(notify_content.message)) {
-        if (notify_content.message === 'captcha_fail') {
-          alertTip = "验证码不正确";
-        } else if (notify_content.message === 'captcha_expired') {
-          alertTip = "验证码已过期，请点击刷新";
-        } else if (notify_content.message === 'not_found_in_database') {
-          alertTip = "帐号或者密码错误";
-        } else if (notify_content.message === 'not_found_and_show_captcha') {
-          alertTip = "帐号或者密码错误";
-        } else if (notify_content.message === 'phone_captcha_fail') {
-          alertTip = "手机验证码不通过";
-        } else {
-          alertTip = notify_content.message;
-        }
-        return $error_box.html(alertTip).show();
-      } else if (notify_content) {
-        if ("new" === 'third_party_binding') {
-          return $('#third_party_binding-message').html(notify_content.message).addClass('ui message red');
-        }
-        notify_options.delay = 3000;
-        notify_options.template = template;
-        notify_options.offset = {
-          x: 10,
-          y: 30
-        };
-        notify_options.element = '#messages-container';
-        return $.notify(notify_content, notify_options);
-      }
-    });
-  
-  }).call(this);
-</script>
-
-</div>
-<script>
-  (function() {
-    $(function() {
-      var setCookie;
-      setCookie = function(name, value) {
-        $.cookie(name, value, {
-          path: '/',
-          expires: 365
+    <script type="text/javascript">
+        $(function(){
+            window.SysConfig = {
+            encryptInfo:  true ,
+                ssoArr : ["sso.jd.com","sso.jcloud.com","sso.jd.hk","sso.yiyaojd.com","sso.wangyin.com","sso.jdpay.com","sso.baitiao.com","sso.jdfcloud.com","sso.yixun.com","sso.jd-ex.com","sso.jdwl.com","sso.blackdragon.com","sso.ocwms.com","ssa.7fresh.com","sso.tjjt360.com","sso.jclps.com","sso.jdcloud.com","signin.joybuy.com","signin.jd.ru","signin.jd.id","signin.joybuy.es","sso.jdworldwide.com","sso.jkcsjd.com","sso.healthjd.com","jdsso.allianz.cn","sso.jdyunxiang.com","sso.wuliujie.com","sso.jingxi.com","sso.buyjingxi.com","sso.allianz360.com","sso.jyhcjd.com","sso.logiseasy.com","sso.chinabank.com.cn","sso.jdlearn.com.cn","sso.jdl.cn","ssa.jdl.cn","sso.jdl.com","sso.jhscm.com","sso.jdbusiness.com","sso.vipmro.com","ssa.zhongyouex.com","sso.jdallianz.com","sso.vipmro.net","sso.duolabao.com","sso.51epei.com","sso.five-star.cn","sso.yunpei.com","sso.yunxiu.com","sso.dd-advisor.com","sso.ybscjp.com","ssa.7fresh.com","sso.jdh.com","sso.jddj.com","sso.jingdong.com"]
+            };
+            window.ParamsSign = ParamsSign;
         });
-      };
-      $('#remove-bulletin, #remove-bulletin-dashboard').on('click', function() {
-        setCookie('remove_bulletin', "gitee-maintain-1697422742");
-        $('#git-bulletin').hide();
-      });
-      $('#remove-member-bulletin').on('click', function() {
-        setCookie('remove_member_bulletin', "gitee_member_bulletin");
-        $(this).parent().hide();
-      });
-      return $('#remove-gift-bulletin').on('click', function() {
-        setCookie('remove_gift_bulletin', "gitee-gift-bulletin");
-        $(this).parent().hide();
-      });
-    });
-  
-  }).call(this);
-</script>
-<script>
-  function closeMessageBanner(pthis, type, val) {
-    var json = {}
-  
-    val = typeof val === 'undefined' ? null : val
-    $(pthis).parent().remove()
-    if (type === 'out_of_enterprise_member') {
-      json = {type: type, data: val}
-    } else if (type === 'enterprise_overdue') {
-      json = {type: type, data: val}
-    }
-    $.post('/profile/close_flash_tip', json)
-  }
-</script>
+        window.firstShowAccountLoginPage =  true ;
+        window.firstShowAccountLoginTab =  true ;
+        window.closeHistoryAccountLogin =  true ;
+    </script>
+        <link charset="utf-8" rel="stylesheet" href="https://storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/css/foreign-number-layer.css"><script src="https://seq.jd.com/jseq.html?d=7TJI7tFPWdZpzlDd7TZ37B<uwIWPw4wdiQPmSg6d7TZ37t3bWtZ*zt7jhlp4hlZXzf9szlJpzP9*ieWPw4wdFgxPzgfuJ<P47eAB6SW*7eAe6eJBFh<d7TZ37lFXitfB7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*7eAB6TcPw4wdFgP47eAB6SJiZ4PZfPF0wjk3SNZ0ZfJIf<PLZjFO6kwlwjCTA<NIA4ZfTk7KTk7<ZjEcgfwefN4ewkF<f<F0Ak7cfANwfPpc6k7wgAffSfFyg<kTfj9ARfNFZ<RcS<7h6H6d7T7L7tFbzIWPwj<dwSWPw4wditRpzgAd7TZ3wTiEOL<BOTajZHceZGAtR2/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_0307936245601389" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dz09dygEuigkP7eAe6eJBFh<d7TZ37lFXitfB7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*FgZpig*d7TZ37B2d7T7L7tZ*7eAB6TwPw4wdJQfeWlPXzGWPwj<dwSD*7eAe6eJPyg6d7TZ37kalSAkgf4iBTANcAjikfj7ASAwtR4ELABiBSkZ66A7S6kf5A4p5A46tT4bFAB7AgTcBf4RAR4FTA4bf6Axgg4bLA4xFRff7fPpiTfZhTkRNAf4jR<bc6PJIZIWPw4wdJQNs7eAB6SWx7eAe6eJHJ0PCFSWPwj<xZH4DwTwEOL6lwHcD7TJ<22/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_015217840119040948" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dz09dygEuigkP7eAe6eJBFh<d7TZ37lCPqgRXJlDd7T7L7tZPWtZpzlE7FIWPwj<dZH2DZL<jwHijwBWjZH<jZLatwGWPw4wdWt3PilPbzIWPwj<dwIWPw4wdWt2d7TZ3ZIAe6eJlFh7Byg9u7eAB6SWxvH2d7T7L7lfpFIWPwj<dgLF7TfFgRHZZ6AbTRHfh6PR76BJ0T4ZTZHZvAk336P7LfA9SS49SRLJOSNPTwPRFwHZgRNR0RPZSSNf3TNFyS<ZSTNPNfAPggPbZAkJ5f<fRgTR<S<bIfjcj7eAe6eJlig*d7TZ3ZHAPw4wditRpzgAd7TZ3wTiEOL<BOTajZHceOSAtR2/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_09662929323950218" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dz09dygEuigkP7eAe6eJBFh<d7TZ37lCPqhf*7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*FgZpig*d7TZ37B2d7T7L7tZ*7eAB6TAPw4wdJQfeWlPXzGWPwj<dwSD*7eAe6eJPyg6d7TZ37kalSAkgf4iBTANcAjikfj7ASAwtR4ELABiBSkZ66A7S6kf5A4p5A46tT4bFAB7AgTcBf4RAR4FTA4bf6Axgg4bLA4xFRff7fPpiTfZhTkRNAf4jR<bc6PJIZIWPw4wdJQNs7eAB6Tik7T7L7lZjygkP7eAB6T<lOTaxwB4DZLiewBwPZj6/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_02632483927582647" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dz09dygEuigkP7eAe6eJBFh<d7TZ37lCPqgRXJlDd7T7L7tZPWtZpzlE7FIWPwj<dZH2DZL<jwHijwBWjZH<jZLatwGWPw4wdWt3PilPbzIWPwj<dwIWPw4wdWt2d7TZ3ZGAe6eJlFh7Byg9u7eAB6SWxvH2d7T7L7lfpFIWPwj<dgLF7TfFgRHZZ6AbTRHfh6PR76BJ0T4ZTZHZvAk336P7LfA9SS49SRLJOSNPTwPRFwHZgRNR0RPZSSNf3TNFyS<ZSTNPNfAPggPbZAkJ5f<fRgTR<S<bIfjcj7eAe6eJlig*d7TZ3ZLiPw4wditRpzgAd7TZ3wTiEOL<BOTajZHcBZGAtR2/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_005367406901320759" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dz09dygEuigkP7eAe6eJBFh<d7TZ37lCPqhf*7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*FgZpig*d7TZ37B2d7T7L7tZ*7eAB6TWPw4wdJQfeWlPXzGWPwj<dwSD*7eAe6eJPyg6d7TZ37kalSAkgf4iBTANcAjikfj7ASAwtR4ELABiBSkZ66A7S6kf5A4p5A46tT4bFAB7AgTcBf4RAR4FTA4bf6Axgg4bLA4xFRff7fPpiTfZhTkRNAf4jR<bc6PJIZIWPw4wdJQNs7eAB6T6l7T7L7lZjygkP7eAB6T<lOTaxwB4DZLiewBaPZj6/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_06133193764179807" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dz09dygEuigkP7eAe6eJBFh<d7TZ37lPuW1fj7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*FgZpig*d7TZ37B2d7T7L7tZ*7eAB6TaPw4wdJQfeWlPXzGWPwj<dwSD*7eAe6eJPyg6d7TZ37kalSAkgf4iBTANcAjikfj7ASAwtR4ELABiBSkZ66A7S6kf5A4p5A46tT4bFAB7AgTcBf4RAR4FTA4bf6Axgg4bLA4xFRff7fPpiTfZhTkRNAf4jR<bc6PJIZIWPw4wdJQNs7eAB6T<k7T7L7lZjygkP7eAB6T<lOTaxwB4DZLieZLcPZj6/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_02672842539961877" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dz09dygEuigkP7eAe6eJBFh<d7TZ37lZoigEdFSWPw4wdWlfBWlPXz4P47eAB6SWlwLajwT6eZH6BZB6lwT6jOLWe7eAe6eJBW0fHygNs7eAB6SW*7eAe6eJBWIWPwj<E7T7L7tFPWdZpzlDd7TZ37B<uwIWPw4wdFgP47eAB6SJiZ4PZfPF0wjk3SNZ0ZfJIf<PLZjFO6kwlwjCTA<NIA4ZfTk7KTk7<ZjEcgfwefN4ewkF<f<F0Ak7cfANwfPpc6k7wgAffSfFyg<kTfj9ARfNFZ<RcS<7h6H6d7T7L7tFbzIWPwj<xZSAe6eJHJ0PCFSWPwj<xZH4DwTwEOL6lwHAt7TJ<22/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_05700492004399409" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dz09dygEuigkP7eAe6eJBFh<d7TZ37l7sJhcd7T7L7tZPWtZpzlE7FIWPwj<dZH2DZL<jwHijwBWjZH<jZLatwGWPw4wdWt3PilPbzIWPwj<dwIWPw4wdWt2d7TZ3wT2Pw4wdJQfeWlPXzGWPwj<dwSD*7eAe6eJPyg6d7TZ37kalSAkgf4iBTANcAjikfj7ASAwtR4ELABiBSkZ66A7S6kf5A4p5A46tT4bFAB7AgTcBf4RAR4FTA4bf6Axgg4bLA4xFRff7fPpiTfZhTkRNAf4jR<bc6PJIZIWPw4wdJQNs7eAB6SWx7eAe6eJHJ0PCFSWPwj<xZH4DwTwEOL6lwHAE7TJ<22/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_09419673851929216" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dzQxXFlPuW1J47eAe6eJBFh<d7TZ37lFXitfB7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*FgZpig*d7TZ37B<d7T7L7tZ*7eAB6T<x7T7L7tFPWdZpzlDd7TZ37B<uwIWPw4wdFgP47eAB6SJiZ4PZfPF0wjk3SNZ0ZfJIf<PLZjFO6kwlwjCTA<NIA4ZfTk7KTk7<ZjEcgfwefN4ewkF<f<F0Ak7cfANwfPpc6k7wgAffSfFyg<kTfj9ARfNFZ<RcS<7h6H6d7T7L7tFbzIWPwj<dwSWPw4wditRpzgAd7TZ3wTiEOL<BOTajZHclwSAtR2/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_07520850345393701" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dzQxXFlPuW1J47eAe6eJBFh<d7TZ37lCPqgRXJlDd7T7L7tZPWtZpzlE7FIWPwj<dZH2DZL<jwHijwBWjZH<jZLatwGWPw4wdWt3PilPbzIWPwj<dwSWPw4wdWt2d7TZ3wTcPw4wdJQfeWlPXzGWPwj<dwSD*7eAe6eJPyg6d7TZ37kalSAkgf4iBTANcAjikfj7ASAwtR4ELABiBSkZ66A7S6kf5A4p5A46tT4bFAB7AgTcBf4RAR4FTA4bf6Axgg4bLA4xFRff7fPpiTfZhTkRNAf4jR<bc6PJIZIWPw4wdJQNs7eAB6SJG7eAe6eJHJ0PCFSWPwj<xZH4DwTwEOL6lwB<D7TJ<22/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_028052912099593175" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dzQxXFlPuW1J47eAe6eJBFh<d7TZ37lCPqhf*7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*FgZpig*d7TZ37B<d7T7L7tZ*7eAB6T<B7T7L7tFPWdZpzlDd7TZ37B<uwIWPw4wdFgP47eAB6SJiZ4PZfPF0wjk3SNZ0ZfJIf<PLZjFO6kwlwjCTA<NIA4ZfTk7KTk7<ZjEcgfwefN4ewkF<f<F0Ak7cfANwfPpc6k7wgAffSfFyg<kTfj9ARfNFZ<RcS<7h6H6d7T7L7tFbzIWPwj<diGWPw4wditRpzgAd7TZ3wTiEOL<BOTajZHwewIAtR2/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_01600006056168286" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dzQxXFlPuW1J47eAe6eJBFh<d7TZ37lCPqgRXJlDd7T7L7tZPWtZpzlE7FIWPwj<dZH2DZL<jwHijwBWjZH<jZLatwGWPw4wdWt3PilPbzIWPwj<dwSWPw4wdWt2d7TZ3wT6Pw4wdJQfeWlPXzGWPwj<dwSD*7eAe6eJPyg6d7TZ37kalSAkgf4iBTANcAjikfj7ASAwtR4ELABiBSkZ66A7S6kf5A4p5A46tT4bFAB7AgTcBf4RAR4FTA4bf6Axgg4bLA4xFRff7fPpiTfZhTkRNAf4jR<bc6PJIZIWPw4wdJQNs7eAB6T6l7T7L7lZjygkP7eAB6T<lOTaxwB4DZLiBwH6PZj6/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_06903947440888429" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dzQxXFlPuW1J47eAe6eJBFh<d7TZ37lCPqhf*7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*FgZpig*d7TZ37B<d7T7L7tZ*7eAB6T<k7T7L7tFPWdZpzlDd7TZ37B<uwIWPw4wdFgP47eAB6SJiZ4PZfPF0wjk3SNZ0ZfJIf<PLZjFO6kwlwjCTA<NIA4ZfTk7KTk7<ZjEcgfwefN4ewkF<f<F0Ak7cfANwfPpc6k7wgAffSfFyg<kTfj9ARfNFZ<RcS<7h6H6d7T7L7tFbzIWPwj<jZGAe6eJHJ0PCFSWPwj<xZH4DwTwEOL6lwBct7TJ<22/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_08663556899433154" type="text/javascript"></script><script src="https://seq.jd.com/jseq.html?d=7TJI7l7pq4P47eAB6SJ*ihZBW09eJN9UFN9HzlkVz09dygEVW0wd7T7L7lfsFgkPzdR7FIWPwj<dzQxXFlPuW1J47eAe6eJBFh<d7TZ37lPuW1fj7eAe6eJBFhZByg9uSg6d7TZ37Bi*OL6xZLclZLwtZLixZL6DZBcd7T7L7tZ*FgZpig*d7TZ37B<d7T7L7tZ*7eAB6T<l7T7L7tFPWdZpzlDd7TZ37B<uwIWPw4wdFgP47eAB6SJiZ4PZfPF0wjk3SNZ0ZfJIf<PLZjFO6kwlwjCTA<NIA4ZfTk7KTk7<ZjEcgfwefN4ewkF<f<F0Ak7cfANwfPpc6k7wgAffSfFyg<kTfj9ARfNFZ<RcS<7h6H6d7T7L7tFbzIWPwj<xwGAe6eJHJ0PCFSWPwj<xZH4DwTwEOL6lwBcE7TJ<22/&amp;p=&amp;loc=https://passport.jd.com/new/login.aspx?ReturnUrl=https%253A%252F%252Fwww.jd.com%252F&amp;callback=jsonp_0029082824485210823" type="text/javascript"></script></head>
+<body>
+<input type="hidden" id="pageSource" name="pageSource" value="login2023">
+<input type="hidden" id="pageLocation" name="pageLocation" value="">
 
-<script>
-  var userAgent = navigator.userAgent;
-  var isLessIE11 = userAgent.indexOf('compatible') > -1 && userAgent.indexOf('MSIE') > -1;
-  if(isLessIE11){
-    var can_access = ""
-    if (can_access != "true"){
-      window.location.href = "/incompatible.html";
-    }
-  }
-</script>
+<!-- SDK 登录 -->
+<div class="w">
+    <div id="logo">
+        <a href="//www.jd.com/" clstag="pageclick|keycount|20150112ABD|45">
+            <img src="//misc.360buyimg.com/lib/img/e/logo-201305-b.png" alt="京东" width="170" height="60">
+        </a>
+        <b></b>
+    </div>
+            <a href="//wj-dongjian.jd.com/q/61a05143f2ec2b00b35e40a6" target="_blank" clstag="pageclick|keycount|passport_main|click_inves_qusetion" class="q-link"><b></b>登录页面，调查问卷</a>
+    </div>
+<div id="content">
+    <div class="tips-wrapper"><div class="tips-inner"><div class="cont-wrapper"><i class="icon-tips"></i><p>依据《网络安全法》，为保障您的账户安全和正常使用，请尽快完成手机号验证！ 新版<a href="https://about.jd.com/privacy/" class="black" target="_blank">《京东隐私政策》</a>已上线，将更有利于保护您的个人隐私。</p></div></div></div><div class="login-wrap">
+        <div class="w">
 
-<script src="https://cn-assets.gitee.com/assets/new-editor/bootstrap/transition-d4dc20bf5896a91450f177b5d763ae4a.js"></script>
-<script src="https://cn-assets.gitee.com/assets/new-editor/bootstrap/carousel-b36e4e6094e970507a7144098fc191da.js"></script>
-<style>
-  #udesk_container #udesk_btn a{
-    margin: 18px 14px 14px 18px !important;
-  }
-</style>
-<div class="session-wrapper lang-zh">
-<div class="ui container">
-<div class="session__body">
-<div class="session-sidebox">
-<div class="session-sidebox__container">
-<div class="session-sidebox__header">
-<div class="session-sidebox__logo">
-<img alt="logo" src="/static/images/logo.svg?t=158106664">
-</div>
-<h1 class="session-sidebox__title">
-</h1>
-<h2 class="session-sidebox__subtitle">
-企业级 DevOps 研发管理平台
-</h2>
-</div>
-<div class="session-sidebox__content">
-<div class="session-sidebox-content__container"> <div class="session-sidebox-comments__header"> <span class="session-sidebox-comments__title">霍泰稳</span> <span class="session-sidebox-comments__position">极客邦科技创始人</span> </div> <div class="session-sidebox-comments__content">类似 GitHub 这样的代码托管服务，是软件研发过程中不可缺少的一环，在国内目前还没有特别好的服务，Gitee 很好地填补了这个空白。一起努力，越来越好，为中国技术人群提供更多更贴心的服务。</div> </div>
-</div>
-<div class="session-sidebox__footer">
-<a target="_blank" sa_evt="click_GiteeCommunity_login_GiteeEnhot" href="/enterprises?from=login"><strong class="session-sidebox__icon-hot">Gitee 企业版</strong>
-<span class="session-sidebox__divider">-</span>
-企业级 DevOps 研发管理平台
-<i class="iconfont icon-arrow-circle-right "></i>
-</a></div>
-</div>
+            <div class="login-form-border">
 
-</div>
-<div class="session-form">
-<div class="session-form__container is-login">
-<header class="session-form__header" style="opacity: 0;">
-<h2 class="session-form__title">
-<span>登录</span>
-</h2>
-<span class="pull-right">
-没有帐号？
-<a sa_evt="click_GiteeCommunity_login_signup" href="/signup#lang=zh-CN">点此注册</a>
-</span>
-</header>
-<div class="session__flash-error" style="opacity: 0;">
-<div class="ui message error flash_error flash_error_box"></div>
-</div>
-<form class="ui custom form session__control session-login__form session-login__with-password " data-need-verify="false" data-control="password" data-encrypt="true" data-key="password" id="new_user" action="/login" accept-charset="UTF-8" method="post" style="opacity: 0;"><input type="hidden" name="encrypt_key" value="password"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="34c6IayUzccEcKHyVHM2m6dTEgn/haXozOyZUKWu7Q5ihZFeRDIJshHjpg14LwpKVW8IKE/v0luqwRUy1ga4XQ=="><input type="hidden" name="redirect_to_url" id="redirect_to_url">
-<div class="session-login__body">
-<div class="session-form__fields">
-<div class="git-login-form-fields">
-<div class="field" id="git-login">
-<input placeholder="手机／邮箱／个人空间地址" class="login-password__account-input" type="text" name="user[login]" id="user_login">
-</div>
-<div class="field">
-<input type="hidden" name="encrypt_data[user[password]]" value="QKvxGNHu1RlSYtiH5q46z0f1vbEjL4Xvda33MAfeECULVdTOhxYXtr5+sMBHkCTD6lteaht5B3e//MznQSg1OwaHu3o3KB489GxJ4sViMm97g/Zksxsi+vw5M27bhyc02rp0EEyf5VWV6BY+HgWZYCmhoXH/gbziyCpfDPvIXxM="><input placeholder="请输入密码" data-encrypt="true" type="password" id="user_password">
-</div>
-<div class="two fields">
-<div class="field">
-<div class="ui checkbox js-checkbox" sa_evt="click_GiteeCommunity_login_remember"><input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" tabindex="0" class="hidden"><label>记住我</label></div>
-</div>
-<div class="field" style="text-align: right">
-<a class="session__toggle-button" data-control="phone" sa_evt="click_GiteeCommunity_login_sms" href="">短信验证登录</a>
-</div>
-</div>
-<div class="field">
-<input type="submit" name="commit" value="登 录" class="ui fluid orange submit button large" sa_evt="click_GiteeCommunity_login_login" disabled="">
-</div>
-<div class="field text-center">
-<a class="forget-password" sa_evt="click_GiteeCommunity_login_forget" href="/password/new">已有帐号，忘记密码？</a>
-</div>
-</div>
-</div>
-</div>
-</form>
+                <div class="login-form" style="opacity: 1;"><div class="tips-wrapper"><div class="tips-inner"><div class="cont-wrapper"><i class="icon-tips"></i><p>京东不会以任何理由要求您转账，谨防诈骗</p></div></div></div>
 
-<form class="ui custom form session__control session-login__form session-login__with-phone hide" data-control="phone" id="new_user" action="/login" accept-charset="UTF-8" method="post" style="opacity: 0;"><input name="utf8" type="hidden" value="✓"><input type="hidden" name="authenticity_token" value="34c6IayUzccEcKHyVHM2m6dTEgn/haXozOyZUKWu7Q5ihZFeRDIJshHjpg14LwpKVW8IKE/v0luqwRUy1ga4XQ=="><input value="sms" type="hidden" name="user[login_type]" id="user_login_type">
-<input type="hidden" name="redirect_to_url" id="redirect_to_url">
-<input class="placeholder__autofill-text">
-<div class="field">
-<input class="session-login__phone-input" placeholder="手机号码" sa_evt="click_GiteeCommunity_login_input" type="text" name="user[login]" id="user_login">
-</div>
-<div class="field">
-<div class="ui right labeled input captcha-labeled">
-<input disabled="disabled" class="session-login__captcha-input" placeholder="手机验证码" type="text" name="user[account_captcha]" id="user_account_captcha">
-<div class="ui basic orange button session-login__captcha-button" sa_evt="click_GiteeCommunity_login_captcha">
-发送验证码
-</div>
 
-<div class="ui danger popup captcha-popup">
-<p style="min-width: 162px;">
-收不到验证码？
-<a href="/self_services">获取帮助</a>
-</p>
-</div>
-<script>
-  $(function () {
-    var $captchaPopup = $('.captcha-popup');
-    var $targetButton = $captchaPopup.prev();
-  
-    if ($targetButton && $targetButton.length) {
-      $targetButton.popup({
-        popup: $captchaPopup,
-        on: 'manual',
-        position: 'right center',
-        variation: 'large',
-        transition: 'fade',
-        duration: 500,
-        lastResort: 'top center',
-        prefer: 'adjacent'
-      });
-    }
-  });
-</script>
-</div>
-</div>
-<div class="two fields">
-<div class="field">
-<div class="ui checkbox js-checkbox"><input name="user[remember_me]" type="hidden" value="0"><input type="checkbox" value="1" name="user[remember_me]" id="user_remember_me" tabindex="0" class="hidden"><label>记住我</label></div>
-</div>
-<div class="field" style="text-align: right">
-<a class="session__toggle-button" data-control="password" sa_evt="click_GiteeCommunity_login_password" href="/login">用户名密码登录</a>
-</div>
-</div>
-<div class="field">
-<input type="submit" name="commit" value="登 录" class="ui fluid orange submit button large" sa_evt="click_GiteeCommunity_login_login">
-</div>
-<div class="field text-center">
-<a class="forget-password" href="/password/new">已有帐号，忘记密码？</a>
-</div>
-</form>
+                                            <!-- nothing here -->
+                    
+                    <div class="login-form-body">
 
-<div class="session-login-oauth" style="opacity: 0;">
-<div class="session-login__oschina">
-<a sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="oschina" href="https://gitee.com/auth/oschina"><i class="icon-logo-osc iconfont osc"></i>
-<span>
-使用 OSChina 帐号登录
-</span>
-</a></div>
-<div class="session-login-oauth__container">
-<div class="field">
-<div class="ui horizontal divider session-login__oauth-title">
-<span class="text-muted">
-其他方式登录
-</span>
-</div>
-</div>
-<div class="ui horizontal list session-oauth__list">
-<div class="item">
-<a sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="aliyun" href="https://gitee.com/auth/aliyun"><div class="git-other-login-icon">
-<i class="aliyun icon-logo_aliyun iconfont" title="使用阿里云帐号登录"></i>
-</div>
-</a></div>
-<div class="item">
-<a sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="gitlab" href="https://gitee.com/auth/gitlab"><div class="git-other-login-icon">
-<i class="gitlab icon-logo-gitlab iconfont" title="使用 GitLab 帐号登录"></i>
-</div>
-</a></div>
-<div class="item">
-<a sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="huawei" href="https://gitee.com/auth/huawei"><div class="git-other-login-icon">
-<i class="huawei icon-logo_huawei iconfont" title="使用华为帐号登录"></i>
-</div>
-</a></div>
-<div class="item">
-<a sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="github" href="https://gitee.com/auth/github"><div class="git-other-login-icon">
-<i class="github icon-logo-github iconfont" title="使用 GitHub 帐号登录"></i>
-</div>
-</a></div>
-<div class="item">
-<span class="session-oauth__other-icon js-popup-default" data-popup-hoverable="true" data-position="left center">
-<i class="iconfont icon-ic-action-more "></i>
-</span>
-<div class="ui flowing popup session-oauth__other">
-<div class="session-oauth__other-list">
-<a class="item" sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="weibo" href="https://gitee.com/auth/weibo"><div class="git-other-login-icon">
-<i class="icon-logo-weibo iconfont weibo" title="使用 Weibo 帐号登录"></i>
-</div>
-</a><a class="item" sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="qq_connect" href="https://gitee.com/auth/qq_connect"><div class="git-other-login-icon">
-<i class="icon-logo-qq iconfont qq" title="使用 QQ 帐号登录"></i>
-</div>
-</a><a class="item" sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="windowslive" href="https://gitee.com/auth/windowslive"><div class="git-other-login-icon">
-<i class="icon-logo-windows iconfont windows" title="使用 WindowsLive 帐号登录"></i>
-</div>
-</a><a class="item" sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="wechat" href="https://gitee.com/auth/wechat"><div class="git-other-login-icon">
-<i class="icon-logo_wechat iconfont wechat" title="使用微信帐号登录"></i>
-</div>
-</a><a class="item" sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="dingding" href="https://gitee.com/auth/dingding"><div class="git-other-login-icon">
-<i class="dingding icon-logo-dingding iconfont" title="使用钉钉帐号登录"></i>
-</div>
-</a><a class="item" sa_evt="click_GiteeCommunity_login_thirdparty" sa_click_bottom="trustie" href="https://gitee.com/auth/trustie"><div class="git-other-login-icon">
-<i class="icon-logo_trustie iconfont trustie" title="使用 Trustie 帐号登录"></i>
-</div>
-</a></div>
-</div>
-</div>
-</div>
-</div>
+                        <div class="login-tab login-tab-l">
+                            <a href="javascript:void(0)" clstag="pageclick|keycount|passport_main|click_qrcode_login"></a>
+                        </div>
+                        <div class="login-tab login-tab-r" style="display: none;">
+                            <a href="javascript:void(0)" clstag="pageclick|keycount|passport_main|click_account_pwd_login" class="checked"></a>
+                        </div>
 
-</div>
+                        <div class="login-box" style="visibility: visible;">
 
-<script style="opacity: 0;">
-  if (window.sensors) {
-    window.sensors.track('view_GiteeCommunity_login');
-  }
-</script>
-<div class="session__2verify " style="display: block;"><div class="session__2verify-container"><h2 class="session__2verify-header">机器验证</h2><div class="session__2verify-image" style="display: block;"><form action="/"><img class="js-captcha-image" src="/rucaptcha?1697794117502"><div class="ui input session__2verify-input"><input placeholder="请输入上方的图形验证码"></div><button class="ui button orange session__2verify-button disabled" type="submit">验证</button></form></div><div class="session__2verify-yunpian" style="display: none;"></div></div></div></div>
+                     <span class="tooltip-left qrcode-guide-tooltip" style="visibility: visible;opacity: 1">扫码登录安全快捷</span>
 
-<a id="udeskBtn">
-<img alt="udesk" width="40" height="40" src="https://cn-assets.gitee.com/assets/udesk_btn-2281240ad5574e66b38192030789f521.png">
-</a>
-<div class="ui popup dark left center transition hidden js-udesk_name">智能客服</div>
-<div class="ui popup dark left center transition hidden js-udesk-first-tip text-left" style="white-space: normal;">
-<div class="content" style="width: 218px;font-size: 14px;font-weight: 400;">
-<div class="text mb-1">使用过程中有任何问题，可以在帮助中心查询哦～</div>
-<a class="btn cursor-pointer hover-color" style="color: #FE7201">我知道了</a>
+
+                            <div class="form-login-type-toggle">
+
+                                <div id="pwd-login" class="form-login-type  select-toggle ">
+                                    <!-- 账号密码登录组件 -->
+                                    密码登录
+                                </div>
+
+                                <div id="sms-login" class="form-login-type  ">
+                                    <!-- 短信登录组件 -->
+                                    短信登录
+                                </div>
+                            </div>
+
+
+                            <div class="mc">
+                                <div class="form">
+                                    <form id="formlogin" style="display:block ;" method="post" onsubmit="return false;">
+                                        <input type="hidden" id="sa_token" name="sa_token" value="B68C442BE645754F33277E70120805905E88F11B17C0C5B96C2EE9A9393C192FBC596B9541FCB498516597D597CCBD748CB0C366A5F340FB7FD38B77A239043A9EAC1A051315BF4E3C4D071F5012A9C2C6BB4F7831C190A67E0EFD6941FC5D62FDEBC3C995B8418ABCE557C28B58D955C20ECEA50DD6A8DB07BC0CA1EAB4340A14F69A21BAB849C22680B7E766D5590E3E700679B67D39D4B9C53F612A5E9CD079BA9FBA70BB56C652F9AC980A2AF3A2F69828F791BA3E6F4684D4C2124BC5B11B6C30DD8643D30EBF7C42A4E302D18ACE7BE1D8DADE7B09192D36604914DDD818A6EEA49BD638C13E7772C47DFCCEC875F98063F770479BE9AABDB7A4820442ABA66826707848DC4E5005849FC9357070FAC20E7D206683083EE26CCA4E94652CD33B9485C2DBFC93785F8313D87651CD40E6408BAC6352045D44F13A0A22654322B35C8324BD412B84FE4F9C38EDA8EB97F004BC88D0D9886832FCBADE05FC308919AEE68631FB6DE81EA2AA6A2E2697E6BB151CEE15B2A7283EF37B387B53E855EF72B643A4963DF2AEDDA5108E7A05B773648D18E47AA94CE7B6FA4655AF388F92AE3C38C961F37BBE3F191610172117670AF5C2E198985D22C02864BC88">
+                                        <input type="hidden" id="uuid" name="uuid" value="9d553d9b-6be7-4ef8-ba49-aa0e5c0d4d7d">
+                                        <input type="hidden" name="eid" id="eid" value="X6IMVVF3MAHSF5WBTIC7FNCS63KSPABRCUORJORD7NHYS2TY23VDTFFSRHUALVZHCRLYEUIVZXMSWOTEQY4DHHBWB4" class="hide">
+                                        <input type="hidden" name="fp" id="sessionId" value="e8ef08e8868033ff3771111a4dfc0687" class="hide">
+                                        <input type="hidden" name="_t" id="token" value="_t" class="hide">
+                                        <input type="hidden" name="loginType" id="loginType" value="f" class="hide">
+                                        <input type="hidden" name="main_flag" id="main_flag" value="main_flag" class="hide">
+                                        <input type="hidden" name="pubKey" id="pubKey" value="MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDC7kw8r6tq43pwApYvkJ5laljaN9BZb21TAIfT/vexbobzH7Q8SUdP5uDPXEBKzOjx2L28y7Xs1d9v3tdPfKI2LR7PAzWBmDMn8riHrDDNpUpJnlAGUqJG9ooPn8j7YNpcxCa1iybOlc2kEhmJn5uwoanQq+CA6agNkqly2H4j6wIDAQAB" class="hide">
+                                        <input type="hidden" id="slideAppId" value="1604ebb2287" class="hide">
+                                        <input type="hidden" name="useSlideAuthCode" id="useSlideAuthCode" value="1" class="hide">
+                                        <input type="hidden" name="firstShowAccountLoginPage" id="firstShowAccountLoginPage" value="f" class="hide">
+                                                                                <div class="item item-fore1">
+                                            <input id="loginname" clstag="pageclick|keycount|passport_main|click_input_loginname" type="text" class="itxt" name="loginname" tabindex="1" _input="true" autocomplete="off" value="" placeholder="邮箱/账号名/登录手机">
+                                            <span class="clear-btn" style="display: none;"></span>
+                                        </div>
+
+                                        <div id="entry" class="item item-fore2 item-focus" style="visibility: visible;">
+                                            <input type="password" clstag="pageclick|keycount|passport_main|click_input_pwd" id="nloginpwd" name="nloginpwd" class="itxt itxt-error" tabindex="2" autocomplete="off" _input="true" placeholder="密码">
+                                            <span class="clear-btn" style="display: none;"></span>
+                                            <span class="capslock" style="display: none;"><b></b>大小写锁定已打开</span>
+                                        </div>
+
+                                                                                                                                                                                                        
+                                        <div id="o-authcode" class="item item-vcode item-fore3  hide ">
+                                            <input id="authcode" type="text" class="itxt itxt02" name="authcode" clstag="pageclick|keycount|passport_main|click_input_image_code" tabindex="3">
+                                            <img id="JD_Verification1" class="verify-code" clstag="pageclick|keycount|passport_main|click_image_code" src2="//authcode.jd.com/verify/image?srcid=passport&amp;a=1&amp;acid=9d553d9b-6be7-4ef8-ba49-aa0e5c0d4d7d&amp;uid=9d553d9b-6be7-4ef8-ba49-aa0e5c0d4d7d" onclick="this.src= document.location.protocol +'//authcode.jd.com/verify/image?srcid=passport&amp;a=1&amp;acid=9d553d9b-6be7-4ef8-ba49-aa0e5c0d4d7d&amp;uid=9d553d9b-6be7-4ef8-ba49-aa0e5c0d4d7d&amp;yys='+new Date().getTime();$('#authcode').val('');">
+                                            <a href="javascript:void(0)" onclick="$('#JD_Verification1').click();" clstag="pageclick|keycount|passport_main|click_image_code_not_clear">看不清换一张</a>
+                                        </div>
+
+                                        <div class="msg-wrap" data-country-code="loginname">
+                                            <div class="msg-error hide pwd-login-err-msg"><b></b></div>
+                                        </div>
+
+                                        <div class="item item-fore4">
+
+
+                                            <div class="safe choose-parent">
+                                                <div class="choose-child hover-element" style="display: none ;">
+
+                                                    <label>
+                                                        <input id="rememberMe" type="checkbox">
+                                                        <span></span>记住我
+                                                    </label>
+
+                                                    <span class="tooltip-bottom remember-me-tooltip">
+                                                            <p>勾选“记住我”后，系统会保存当前登录的账号信息，下次在该设备上登录当前账号，可通过“历史账号”点击当前账号信息一键免密登录。</p>
+                                                    </span>
+
+                                                </div>
+                                                <div id="go-history-login-btn" class="choose-child" style="display: none ;">历史账号</div>
+                                                <div class="forget-pw-safe choose-child">
+                                                    <a href="//passport.jd.com/uc/links?tag=safe" class="" target="_blank" clstag="pageclick|keycount|passport_main|click_forget_pwd">忘记密码</a>
+                                                </div>
+
+
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="item item-fore5">
+                                            <div class="login-btn submit-btn submit-btn-disable submit-btn-active">
+                                                <a href="javascript:;" class="btn-img btn-entry" id="loginsubmit" tabindex="6" _submit="true" clstag="pageclick|keycount|passport_main|click_login_submit_button">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>
+                                            </div>
+                                        </div>
+                                    </form>
+
+                                    <div id="sms-login-form" style="display:  none ;">
+
+                                        <div>
+                                            <!--手机号码、验证码输入框主体-->
+
+                                            <form id="smslogin" method="post" onsubmit="return false;">
+                                                <div class="phone-input">
+
+                                                    <div class="area-code" data-country-code="area-code-value">
+                                                        <span id="area-code-value">+86</span>
+                                                        <span id="area-code-icon">
+                                                            <svg width="8" height="4" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd" clip-rule="evenodd" d="M0.295756 1.5128C0.0101637 1.34554 -0.0850334 0.979175 0.082962 0.694842C0.250957 0.410509 0.618547 0.315732 0.904139 0.482986C1.93611 1.08749 2.96808 1.6916 4.00005 2.2961C5.03162 1.6916 6.06359 1.08749 7.09557 0.482987C7.38116 0.315732 7.74915 0.41051 7.91714 0.694842C8.08514 0.979175 7.98954 1.34554 7.70395 1.5128C6.57078 2.17664 5.43721 2.84008 4.30404 3.50392C4.08445 3.63255 3.91525 3.63255 3.69566 3.50392C2.56249 2.84008 1.42892 2.17664 0.295756 1.5128Z" fill="#757575"></path>
+                                                            </svg>
+                                                        </span>
+                                                    </div>
+
+                                                    <div class="hover-element">
+                                                        <input type="number" pattern="\d*" id="mobile-number" maxlength="30" name="mobileNumber" placeholder="请输入手机号" value="">
+                                                        <!--
+                                                        <span class="history-mobile-select-tooltip tooltip-bottom">
+                                                                <p>手机号码</p>
+                                                        </span>
+                                                         -->
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="sms-box-error-msg mobile-input-notice" style="display: none" data-country-code="area-code-value">
+                                                    请输入手机号
+                                                </div>
+
+                                                <div class="captcha-input">
+                                                    <input class="captcha-code" type="text" id="sms-code" maxlength="6" name="smsCode" placeholder="请输入验证码">
+                                                    <button id="send-sms-code-btn" disabled="disabled">获取验证码</button>
+                                                </div>
+                                                                                                    <div class="slide-authCode-wraper">
+                                                        <a class="arrow"></a>
+                                                        <a class="close"></a>
+                                                        <div id="slideAuthCode" class="JDValidate-wrap"></div>
+                                                    </div>
+                                                                                                <div class="sms-box-error-msg" data-country-code="area-code-value" style="display: none;"></div>
+
+                                                <div class="sms-login-submit-box">
+                                                    <!-- 登录按钮 -->
+                                                    <button id="sms-login-submit" disabled="" class="submit-btn submit-btn-disable">登&nbsp;&nbsp;&nbsp;&nbsp;录
+                                                    </button>
+                                                </div>
+                                            </form>
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qrcode-login" style="display: none;">
+                        <div class="mc">
+                            <div class="qrcode-error-2016">
+                                <div class="qrcode-error-mask">
+                                </div>
+                                <p class="err-cont">服务器出错</p>
+                                <a href="javascript:void(0)" class="refresh-btn" clstag="pageclick|keycount|passport_main|click_qrcode_refresh">刷新</a>
+                            </div>
+                            <div class="qrcode-main">
+                                <div class="qrcode-img">
+                                    <img id="passport-main-qrcode-img" src="//qr.m.jd.com/show?appid=133&amp;size=147&amp;t=" alt="" exptag="pageexp|keycount|passport_main|export_qrcode"><div class="qrcode-error02 hide" id="J-qrcoderror">							<a href="#none">								<span class="error-icon"></span>								<div class="txt">网络开小差咯<span class="ml10">刷新二维码</span></div>							</a>						</div>
+                                </div>
+                                <div class="qrcode-help" style="display: none; "></div>
+                            </div>
+                            <div class="qrcode-panel">
+                                <ul>
+                                    <li class="fore1">
+                                        <span>打开</span>
+                                        <a href="/uc/links?tag=apps" target="_blank" clstag="pageclick|keycount|passport_main|click_my_jd">
+                                            <span class="red">手机京东</span></a>
+                                    </li>
+                                    <li>扫描二维码</li>
+                                </ul>
+                            </div>
+                            <div class="coagent qr-coagent" id="qrCoagent">
+                                <ul>
+                                    <li><b></b><em>免输入</em></li>
+                                    <li><b class="faster"></b><em>更快&nbsp;</em></li>
+                                    <li><b class="more-safe"></b><em>更安全</em></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                                 <div class="coagent" id="kbCoagent">
+                    <ul>
+                        						                        <li>
+                            <b></b>
+                            <a href="javascript:void(0)" onclick="qqLogin();return false;" clstag="pageclick|keycount|passport_main|click_qq_login" class="pdl"><b class="QQ-icon"></b><span>QQ</span></a>
+                                                        <span class="line">|</span>
+                                                    </li>
+                        <script type="text/javascript">
+                            function qqLogin() {
+                                let suffix = window.location.search;
+                                if (suffix.startsWith("?")) {
+                                    suffix = window.location.search + "&eq=" + $("#eid").val();
+                                }else {
+                                    suffix = "?eq=" + $("#eid").val();
+                                }
+                                window.location = "//qq.jd.com/new/qq/login.aspx" + suffix + "&ps=passport&pst=c";
+                            }
+                        </script>
+                                                                        <li>
+                            <a href="javascript:void(0)" onclick="wxLogin();return false;" clstag="pageclick|keycount|passport_main|click_wx_login" class="pdl"><b class="weixin-icon"></b><span>微信</span></a>
+								                        </li>
+                        <script type="text/javascript">
+                            function wxLogin() {
+                                let suffix=window.location.search;
+                                if (suffix.startsWith("?")) {
+                                    suffix = window.location.search + "&eq=" + $("#eid").val();
+                                } else {
+                                    suffix = "?eq=" + $("#eid").val();
+                                }
+                                window.location = "//qq.jd.com/new/wx/login.aspx" + suffix + "&ps=passport&pst=c";
+                            }
+                        </script>
+                                                                                                <li class="extra-r">
+                            <div>
+                                                                    <div class="regist-link"><a href="//reg.jd.com/p/regPage?ignore=1" clstag="pageclick|keycount|passport_main|click_quick_register" target="_blank"><b></b>立即注册</a></div>
+                                                            </div>
+                        </li>
+                    </ul>
+                </div>                </div>
+
+            </div>
+        </div>
+        <div class="login-banner" clstag="pageclick|keycount|passport_main|click_ad_content">
+            <div class="w">
+                <div id="banner-bg" class="i-inner" style="background: url(/new/misc/2015/background.png) 0px 0px no-repeat;">
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-</div>
-<script>
-  ;(function(){
-    ;(function (a, h, c, b, f, g) {
-      a['UdeskApiObject'] = f
-      a[f] =
-        a[f] ||
-        function () {
-          ;(a[f].d = a[f].d || []).push(arguments)
+    <div class="w">
+    <div id="footer-2013">
+        <div class="links">
+            <a rel="nofollow" target="_blank" href="//about.jd.com/">
+                关于我们
+            </a>
+            |
+            <a rel="nofollow" target="_blank" href="//www.jd.com/contact/">
+                联系我们
+            </a>
+            |
+            <a rel="nofollow" target="_blank" href="//zhaopin.jd.com/">
+                人才招聘
+            </a>
+            |
+            <a rel="nofollow" target="_blank" href="//lai.jd.com/">
+                商家入驻
+            </a>
+            |
+            <a rel="nofollow" target="_blank" href="//jzt.jd.com/">
+                广告服务
+            </a>
+            |
+            <a rel="nofollow" target="_blank" href="//app.jd.com/">
+                手机京东
+            </a>
+            |
+            <a target="_blank" href="//club.jd.com/links.aspx">
+                友情链接
+            </a>
+            |
+            <a target="_blank" href="//media.jd.com/">
+                销售联盟
+            </a>
+            |
+            <a href="//pro.jd.com/mall/active/3WA2zN8wkwc9fL9TxAJXHh5Nj79u/index.html" target="_blank">
+                京东社区
+            </a>
+            |
+            <a href="//gongyi.jd.com" target="_blank">
+                京东公益
+            </a>
+        </div>
+        <div class="copyright">
+            Copyright&nbsp;©&nbsp;2004-2023&nbsp;&nbsp;京东JD.com&nbsp;版权所有
+        </div>
+    </div>
+</div><script type="text/javascript" src="//misc.360buyimg.com/jdf/1.0.0/unit/base/1.0.0/base.js"></script>
+        <script type="text/javascript" src="/new/js/jdJsencrypt.min.js"></script>
+    
+<script language="javascript" type="text/javascript">
+    seajs.config({
+        comboExcludes: function(uri) {
+            if (uri.indexOf('jdc_user_passport') > 0) {
+                return true;
+            }
         }
-      g = h.createElement(c)
-      g.async = 1
-      g.charset = 'utf-8'
-      g.src = b
-      c = h.getElementsByTagName(c)[0]
-      c.parentNode.insertBefore(g, c)
-  
-    })(window, document, 'script', 'https://assets-cli.s4.udesk.cn/im_client/js/udeskApi.js', 'ud')
-    ud({
-      code: '1hhcdjh',
-      link: 'https://1588039.s4.udesk.cn/im_client/?web_plugin_id=2649',
-      "onReady": function() {
-        $(document).trigger('udeskOnload')
-      },
-      targetSelector: '#udeskBtn'
     });
-  
-    $(document).on('udeskOnload', function() {
-      var $udeskBtn = $('#udeskBtn')
-      $udeskBtn.popup({
-        popup: '.js-udesk_name'
-      })
+    window.logType1=window.ziwuxian.LOG_TYPE1.PASSPORT_MAIN;
+</script>
+
+
+<script type="text/javascript" charset="UTF-8" src="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/js/login.index.2023.js" source="widget"></script>
+<script type="text/javascript" charset="UTF-8" src="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/js/new/misc/js/login2023.js"></script>
+            <script type="text/javascript">
+    (function () {
+        var ja = document.createElement('script');
+        ja.type = 'text/javascript';
+        ja.async = true;
+        ja.src = document.location.protocol +'//wl.jd.com/wl.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ja, s);
+    })();
+</script>
+<script src="//gias.jd.com/js/td.js"></script><script src="https://gia.jd.com/y.html?v=0.07878454096164988&amp;o=passport.jd.com/new/login.aspx"></script>
+<script language="JavaScript">
+    function loginGetEid(count) {
+        if(count >= 4) {
+            return;
+        }
+        try {
+            if(typeof(getJdEid) == "function") {
+                getJdEid(function(eid,fp,udfp){
+                    $("#eid").prop("value", eid);
+                    $("#sessionId").prop("value", fp);
+                });
+            } else {
+                count ++;
+                setTimeout('loginGetEid('+count+')', 300);
+            }
+        }catch(e){
+            $("#eid").prop("value", "unknown");
+            $("#sessionId").prop("value", "unknown");
+        }
+    }
+
+    setTimeout('loginGetEid(0)', 1000);
+</script>
+<script type="text/javascript" src="//seq.jd.com/jseqf.html?bizId=passport_jd_com_login_pc&amp;platform=js&amp;version=1"></script>
+
+<!-- SDK 登录 -->
+
+
+
+
+
+<link type="text/css" rel="stylesheet" href="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/css/login.css">
+<script type="text/javascript" charset="UTF-8" src="//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/js/newLogin/login.js"></script>
+<script language="javascript" type="text/javascript">
+    seajs.use('//storage.jd.com/retail-mall/jdc_user_passport/pc/user/passport/1.0.12/js/newLogin/mobileLogin.js', function (login) {
+        login.init();
     })
-  })();
 </script>
-<style>
-  #udeskBtn {
-    right: 14px;
-    bottom: 14px;
-    position: fixed; }
-</style>
-
-
-</div>
-</div>
-<div class="session__footer container">
-<span class="session__footer-item">
-<a target="_blank" sa_evt="click_GiteeCommunity_signup_login_bottomtab" sa_click_bottom="Gitee.com" href="https://gitee.com/">© Gitee.com</a>
-</span>
-<span class="session__footer-item">
-<a sa_evt="click_GiteeCommunity_signup_login_bottomtab" sa_click_bottom="关于我们" href="/about_us">关于我们</a>
-</span>
-<span class="session__footer-item">
-<a sa_evt="click_GiteeCommunity_signup_login_bottomtab" sa_click_bottom="使用条款" href="/terms">使用条款</a>
-</span>
-<span class="session__footer-item">
-<a sa_evt="click_GiteeCommunity_signup_login_bottomtab" sa_click_bottom="帮助文档" href="https://help.gitee.com">帮助文档</a>
-</span>
-<span class="session__footer-item">
-<a sa_evt="click_GiteeCommunity_signup_login_bottomtab" sa_click_bottom="在线自助服务" href="/self_services">在线自助服务</a>
-</span>
-<span class="session__footer-item">
-<a sa_evt="click_GiteeCommunity_signup_login_bottomtab" sa_click_bottom="重发激活邮件" href="/user/activate">重发激活邮件</a>
-</span>
-</div>
-
-</div>
-</div>
-<script>
-  window.gon.is_oversea = false
-</script>
-
 
 <script>
-  gon.globalLang = {
-    login: "帐号",
-    username: "用户名",
-    nickname: "姓名",
-    path: "个人空间地址",
-    phone: "手机号码",
-    email: "邮箱",
-    phone_or_email: "手机或邮箱",
-    password: "密码",
-    code: "识别码",
-    sending: "正在发送...",
-    sended: "已发送",
-    resend: "秒后可重发",
-    captcha: "验证码",
-    resend_captcha: "重发验证码",
-    phone_captcha: "手机验证码",
-    email_captcha: "邮箱验证",
-    read_and_accept_clause: "请阅读并同意我们的服务条款",
-  
-    user_name_error: "昵称不能为空，或包含空格",
-    namespace_name_error: "仅支持至少两位，中文/英文/数字/下划线/中划线/圆括号，不能以下划线/中划线开头或结尾，不可包含 /",
-    username_format_error: "地址只允许字母、数字或者下划线（_）、中划线（-），至少 2 个字符，必须以字母开头，不能以特殊字符结尾",
-    account_invalid_error: "请输入正确的手机号码（支持澳门台湾）或邮箱",
-    password_invalid_error: "密码必须包含数字，且必须包含字母或其它符号（!@_#$%^&*()-+=,.?）",
-    phone_error: "手机号码格式不正确",
-    captcha_fail: "验证码不正确",
-    captcha_expired: "验证码已过期，请点击刷新",
-    not_found_in_database: "帐号或者密码错误",
-    not_found_and_show_captcha: "帐号或者密码错误",
-    account: "手机号码"
-  };
-</script>
-
-</div>
-
-
-<div id="udesk_container"><div id="udesk_panel"><iframe id="udesk_iframe" frameborder="0" scrolling="no" allowtransparency="true" style="width:1px;min-width:100%;*width:100%;height:0;border:none;padding:0;margin:0;float:none;background:none;transition:height 0.1s;-webkit-transition:height 0.1s;-moz-transition:height 0.1s;-ms-transition:height 0.1s;-o-transition:height 0.1s;" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen=""></iframe></div></div></body></html>
+    // 设置opacity为1
+    setTimeout(function () {
+        $('.login-form').css('opacity', 1);
+    }, 2000);
+</script><link rel="stylesheet" type="text/css" href="//ivs.jd.com//slide/css/style.6.1.0.min.css"><script type="text/javascript" charset="UTF-8" async="" src="//ivs.jd.com//slide/js/slide.6.1.2.min.js"></script><script src="//gias.jd.com/js/td.js"></script></body><div id="8fkudy" class="country_code_layer"><div><a class="arrow"></a><div class="search-bar"><b class="search-icon"></b><input type="text" placeholder="搜索您的国家和地区" class="inputSearch"></div><div class="result"><div class="capital-list"><ul></ul></div><div class="current-capital"><span class="currentCapital">A</span><span class="line"></span></div><div class="country-list"><div class="scrollbar2"><div class="scrollbar"><div class="track"><div class="thumb"><div class="end"></div></div></div></div><div class="viewport"><div class="overview"><ul></ul></div></div></div></div></div><div class="no-result">未找到国家或地区</div></div></div></html>
