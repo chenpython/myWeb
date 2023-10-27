@@ -24,7 +24,11 @@ class JDCrawler:
     # page = ChromiumPage(addr_driver_opts=co)
 
     def __init__(self) -> None:
-        self.init_page = WebPage('d')
+        co = ChromiumOptions()
+        co.set_proxy('http://59.58.211.243:8888')
+        co.set_no_imgs(True)
+        self.init_page = WebPage('d', driver_or_options=co)
+
         self.down_img_count = 90
         self.down_dir = os.path.join(self.imgs_path, 'jd4')
 
@@ -69,6 +73,8 @@ class JDCrawler:
         print('--------------------end--------------------')
 
     def search(self, url, product):
+        start_t = time.perf_counter()
+        print(f'--------------------开始: {start_t} --------------------')
         tab_id = self.init_page.new_tab(url)
         page = self.init_page.get_tab(tab_id)
         page.wait.load_start()
@@ -101,6 +107,11 @@ class JDCrawler:
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
 
+        else:
+            end_t = time.perf_counter()
+            spend_t = end_t - start_t
+            print('--------------------结束耗时: {:.8f} --------------------'.format(spend_t))
+
         finally:
             self.init_page.close_tabs(tab_id)  # 关闭当前页面
 
@@ -116,13 +127,14 @@ class JDCrawler:
         try:
             for product in products:
                 p_img_obj = product.xpath('div[@class="p-img"]/a/img')[0].attrib
-                p_img = 'https:' + p_img_obj.get('src') or p_img_obj.get('data-lazy-img') or ''
+                p_img = 'https:' + (p_img_obj.get('src') or p_img_obj.get('data-lazy-img') or '')
                 p_price = product.xpath('div[@class="p-price"]/strong/i')[0].text
                 p_name = product.xpath('div[@class="p-name p-name-type-2"]/a/em')[0].xpath('string(.)')
-                p_detail_addr = 'https:' + product.xpath('div[@class="p-name p-name-type-2"]/a')[0].attrib.get('href')
+                p_detail_addr = 'https:' + (product.xpath('div[@class="p-name p-name-type-2"]/a')[0].attrib.get('href')
+                                            or '')
                 p_commit = product.xpath('div[@class="p-commit"]/strong/a')[0].xpath('string(.)')  # 评价
                 p_shop_name = product.xpath('div[@class="p-shop"]/span/a')[0].xpath('string(.)')
-                p_shop_addr = 'https' + product.xpath('div[@class="p-shop"]/span/a')[0].attrib.get('href')
+                p_shop_addr = 'https' + (product.xpath('div[@class="p-shop"]/span/a')[0].attrib.get('href') or '')
                 p_icons = product.xpath('div[@class="p-icons"]/i/text()')
                 print('--------------------准备获取详情--------------------')
                 print(f'{p_name}: {p_price} {p_shop_name} {p_detail_addr}')
@@ -146,29 +158,32 @@ class JDCrawler:
                 })
                 time.sleep(random.randrange(1, 5))
 
-            with open(os.path.join(self.base_dir, "result.csv"), "w", newline="", encoding='utf-8') as file:
-                writer = csv.writer(file)
-                writer.writerow(results)
-                print('--------------------写入CSV完成--------------------')
-
-            return results
-
         except Exception as e:
             print('获取商品信息失败，{}'.format(e))
+
+        finally:
+            if results:
+                with open(os.path.join(self.base_dir, "result.csv"), "w", newline="", encoding='utf-8') as file:
+                    writer = csv.writer(file)
+                    writer.writerow(results)
+            print('--------------------写入CSV完成--------------------')
 
     def view_detail(self, url):
 
         results = {}
-        
+
         try:
-
-            self.init_page.wait.set_targets('color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc')
-
-            tab_id = self.init_page.new_tab(url)
-            resp_data = self.init_page.wait.data_packets()
-
+            tab_id = self.init_page.new_tab()
             page = self.init_page.get_tab(tab_id)
+            page.wait.set_targets(
+                'color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc')
+            page.get(url)
             page.wait.load_start()
+            resp = page.wait.data_packets()
+            if resp:
+                resp_data = resp if isinstance(resp, dict) else resp.body
+            else:
+                resp_data = {}
 
             detail_content = page.html
             self.save_page('htmls/detail_content.html', detail_content)
@@ -220,9 +235,14 @@ class JDCrawler:
                 'choose_attrs': choose_attrs,
                 "parameter_brand": parameter_brand,
                 "parameter_brand_info": parameter_brand_info,
-                "Ptable": Ptable
+                "Ptable": Ptable,
+                'shopInfo': resp_data
             }
 
+            star_div = selector.xpath('//div[@class="star"]/div[@class="star-bg"]/div[@class="star-gray"]')
+            if star_div:
+                star = star_div[0].attrib['title']
+                results['shopInfo']['star'] = star
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
 
@@ -464,6 +484,17 @@ class JDCrawler:
         page_snap_obj = Image.open(full_snap)
         return page_snap_obj
 
+    def test(self):
+        url = "https://item.jd.com/100018280931.html"
+        tab_id = self.init_page.new_tab()
+        page = self.init_page.get_tab(tab_id)
+
+        page.wait.set_targets('color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc')
+        page.get(url)
+        page.wait.load_start()
+        resp_data = page.wait.data_packets()
+        print(resp_data)
+
 
 if __name__ == '__main__':
     login_url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F"
@@ -475,3 +506,5 @@ if __name__ == '__main__':
     # test_file_path = os.path.join(crawl.base_dir, 'htmls/af_search.html')
     # cnt = crawl.read_page(test_file_path)
     # crawl.catch_products(cnt)
+
+    # crawl.test()
