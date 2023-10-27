@@ -1,3 +1,4 @@
+import csv
 import os
 import random
 import time
@@ -57,7 +58,7 @@ class JDCrawler:
             self.save_page('cookies/af_cookie', str(page.cookies))
             print('--------------------点击登录之后--------------------')
 
-            self.captch(3, page, logbtn)
+            # self.captch(3, page, logbtn)  # 滑块验证码
 
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
@@ -77,7 +78,7 @@ class JDCrawler:
 
             search_key = page.ele('#key', timeout=30)
             for val in product:
-                time.sleep(0.2)
+                time.sleep(0.5)
                 search_key.input(val, clear=False)
 
             time.sleep(1)
@@ -91,92 +92,144 @@ class JDCrawler:
             self.save_page('cookies/af_search_cookie', str(page.cookies))
             print('--------------------点击搜索之后--------------------')
 
+            self.screen_shot(page, 'images/search_result.png')
+
+            print('--------------------开始获取商品信息--------------------')
+            self.catch_products(af_content)
+            print('--------------------获取商品信息结束--------------------')
+
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
 
-        # finally:
-        #     self.init_page.close_tabs(tab_id)   # 关闭当前页面
+        finally:
+            self.init_page.close_tabs(tab_id)  # 关闭当前页面
 
         print('--------------------end--------------------')
 
     def catch_products(self, html):
-        
+
         selector = etree.HTML(html)
         results = []
-        products = selector.xpath('//div[@id="J_goodsList"]/ul[@class="gl-warp clearfix"]/li[@class="gl-item"]/div[@class="gl-i-wrap"]')
+        products = selector.xpath(
+            '//div[@id="J_goodsList"]/ul[@class="gl-warp clearfix"]/li[@class="gl-item"]/div[@class="gl-i-wrap"]')
 
-        for product in products[:3]:
-            p_img = 'https:' + product.xpath('div[@class="p-img"]/a/img')[0].attrib['src']
-            p_price = product.xpath('div[@class="p-price"]/strong/i')[0].text
-            p_name = product.xpath('div[@class="p-name p-name-type-2"]/a/em')[0].xpath('string(.)')
-            p_detail_addr = 'https:' + product.xpath('div[@class="p-name p-name-type-2"]/a')[0].attrib['href']
-            p_commit = product.xpath('div[@class="p-commit"]/strong/a')[0].xpath('string(.)')   # 评价
-            p_shop_name = product.xpath('div[@class="p-shop"]/span/a')[0].xpath('string(.)')
-            p_shop_addr = 'https' + product.xpath('div[@class="p-shop"]/span/a')[0].attrib['href']
-            p_icons = product.xpath('div[@class="p-icons"]/i/text()')
-            detail_info = self.view_detail(p_detail_addr)
+        try:
+            for product in products:
+                p_img_obj = product.xpath('div[@class="p-img"]/a/img')[0].attrib
+                p_img = 'https:' + p_img_obj.get('src') or p_img_obj.get('data-lazy-img') or ''
+                p_price = product.xpath('div[@class="p-price"]/strong/i')[0].text
+                p_name = product.xpath('div[@class="p-name p-name-type-2"]/a/em')[0].xpath('string(.)')
+                p_detail_addr = 'https:' + product.xpath('div[@class="p-name p-name-type-2"]/a')[0].attrib.get('href')
+                p_commit = product.xpath('div[@class="p-commit"]/strong/a')[0].xpath('string(.)')  # 评价
+                p_shop_name = product.xpath('div[@class="p-shop"]/span/a')[0].xpath('string(.)')
+                p_shop_addr = 'https' + product.xpath('div[@class="p-shop"]/span/a')[0].attrib.get('href')
+                p_icons = product.xpath('div[@class="p-icons"]/i/text()')
+                print('--------------------准备获取详情--------------------')
+                print(f'{p_name}: {p_price} {p_shop_name} {p_detail_addr}')
+                try:
+                    detail_info = self.view_detail(p_detail_addr)
+                except Exception as e:
+                    print('获取详情失败，{}'.format(e))
+                    detail_info = {}
+                print('--------------------获取详情结束--------------------')
 
-            results.append({
-                'p_img': p_img,
-                'p_price': p_price,
-                'p_name': p_name,
-                'p_detail_addr': p_detail_addr,
-                'p_commit': p_commit,
-                'p_shop_name': p_shop_name,
-                'p_shop_addr': p_shop_addr,
-                'p_icons': p_icons,
-                'detail_info': detail_info
-            })
-        
-        for r in range(1, len(results) + 1):
-            print('第 {} 条结果'.format(r))
-            print(results[r-1])
-        return results
-    
+                results.append({
+                    'p_img': p_img,
+                    'p_price': p_price,
+                    'p_name': p_name,
+                    'p_detail_addr': p_detail_addr,
+                    'p_commit': p_commit,
+                    'p_shop_name': p_shop_name,
+                    'p_shop_addr': p_shop_addr,
+                    'p_icons': p_icons,
+                    'detail_info': detail_info
+                })
+                time.sleep(random.randrange(1, 5))
+
+            with open(os.path.join(self.base_dir, "result.csv"), "w", newline="", encoding='utf-8') as file:
+                writer = csv.writer(file)
+                writer.writerow(results)
+                print('--------------------写入CSV完成--------------------')
+
+            return results
+
+        except Exception as e:
+            print('获取商品信息失败，{}'.format(e))
 
     def view_detail(self, url):
-        tab_id = self.init_page.new_tab(url)
-        page = self.init_page.get_tab(tab_id)
-        page.wait.load_start()
 
-        detail_content = page.html
-        self.save_page('htmls/detail_content.html', detail_content)
-        self.save_page('cookies/detail_content_cookie', str(page.cookies))
-
-        selector = etree.HTML(detail_content)
-
-        sku_name = selector.xpath('//div[@class="sku-name"]')[0].text
-        p_price = selector.xpath('//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@class="summary-price J-summary-price"]/div[@class="dd"]/span[@class="p-price"]/span')[1].text
-        summary_quan = selector.xpath('//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="summary-quan"]')[0].xpath('string(.)')
-        J_summary_top = selector.xpath('//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="J-summary-top"]')[0].xpath('string(.)')
-        summary_stock = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@class="summary-stock"]')[0].xpath('string(.)')
-        SelfAssuredPurchase_li = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@class="SelfAssuredPurchase li"]')[0].xpath('string(.)')
-        summary_supply = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-supply"]')[0].xpath('string(.)')
-        summary_weight = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-weight"]')[0].xpath('string(.)')
-        choose_attrs = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="choose-attrs"]')[0].xpath('string(.)')
-
-        parameter_brand = selector.xpath('//div[@class="p-parameter"]/ul[@id="parameter-brand"]/li')[0].xpath('string(.)')
-        parameter_brand_info = {i.text.split('：')[0]: i.text.split('：')[-1] for i in selector.xpath('//div[@class="p-parameter"]/ul[@class="parameter2 p-parameter-list"]/li')}
-        Ptable = {i.getchildren()[0].text : i.getchildren()[1].text for i in selector.xpath('//div[@class="Ptable"]/div[@class="Ptable-item"]/dl//dl')}
+        results = {}
         
-        results = {
-            'sku_name': sku_name,
-            'p_price': p_price,
-            'summary_quan': summary_quan,
-            'J_summary_top': J_summary_top,
-            'summary_stock': summary_stock,
-            'SelfAssuredPurchase_li': SelfAssuredPurchase_li,
-            'summary_supply': summary_supply,
-            'summary_weight': summary_weight,
-            'choose_attrs': choose_attrs,
-            "parameter_brand": parameter_brand,
-            "parameter_brand_info": parameter_brand_info,
-            "Ptable": Ptable
-        }
+        try:
+
+            self.init_page.wait.set_targets('color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc')
+
+            tab_id = self.init_page.new_tab(url)
+            resp_data = self.init_page.wait.data_packets()
+
+            page = self.init_page.get_tab(tab_id)
+            page.wait.load_start()
+
+            detail_content = page.html
+            self.save_page('htmls/detail_content.html', detail_content)
+            self.save_page('cookies/detail_content_cookie', str(page.cookies))
+
+            selector = etree.HTML(detail_content)
+
+            sku_name = selector.xpath('//div[@class="sku-name"]')[0].text
+            p_price = selector.xpath(
+                '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@class="summary-price J-summary-price"]/div[@class="dd"]/span[@class="p-price"]/span'
+            )[1].text
+            summary_quan = selector.xpath(
+                '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="summary-quan"]'
+            )[0].xpath('string(.)')
+            J_summary_top = selector.xpath(
+                '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="J-summary-top"]'
+            )[0].xpath('string(.)')
+            summary_stock = selector.xpath(
+                '//div[@class="summary p-choose-wrap"]/div[@class="summary-stock"]')[0].xpath('string(.)')
+            SelfAssuredPurchase_li = selector.xpath(
+                '//div[@class="summary p-choose-wrap"]/div[@class="SelfAssuredPurchase li"]')[0].xpath('string(.)')
+            summary_supply = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-supply"]')[0].xpath(
+                'string(.)')
+            summary_weight = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-weight"]')[0].xpath(
+                'string(.)')
+            choose_attrs = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="choose-attrs"]')[0].xpath(
+                'string(.)')
+
+            parameter_brand = selector.xpath('//div[@class="p-parameter"]/ul[@id="parameter-brand"]/li')[0].xpath(
+                'string(.)')
+            parameter_brand_info = {
+                i.text.split('：')[0]: i.text.split('：')[-1]
+                for i in selector.xpath('//div[@class="p-parameter"]/ul[@class="parameter2 p-parameter-list"]/li')
+            }
+            Ptable = {
+                i.getchildren()[0].text: i.getchildren()[1].text
+                for i in selector.xpath('//div[@class="Ptable"]/div[@class="Ptable-item"]/dl//dl')
+            }
+
+            results = {
+                'sku_name': sku_name,
+                'p_price': p_price,
+                'summary_quan': summary_quan,
+                'J_summary_top': J_summary_top,
+                'summary_stock': summary_stock,
+                'SelfAssuredPurchase_li': SelfAssuredPurchase_li,
+                'summary_supply': summary_supply,
+                'summary_weight': summary_weight,
+                'choose_attrs': choose_attrs,
+                "parameter_brand": parameter_brand,
+                "parameter_brand_info": parameter_brand_info,
+                "Ptable": Ptable
+            }
+
+        except Exception as e:
+            print('操作页面失败，错误：{}'.format(e))
+
+        finally:
+            self.init_page.close_tabs(tab_id)  # 关闭当前页面
 
         return results
-
-
 
     def save_page(self, file_name, content):
         # 文档编码模式获取：进入浏览器控制台，输入 document.charset
@@ -189,7 +242,7 @@ class JDCrawler:
 
         with open(file_name, 'r') as f:
             content = f.read()
-        
+
         return content
 
     def screen_shot(self, page, file_name='images/screen_shot.png'):
@@ -413,13 +466,12 @@ class JDCrawler:
 
 
 if __name__ == '__main__':
-    # login_url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F"
+    login_url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F"
     search_url = "https://www.jd.com/"
     crawl = JDCrawler()
     # crawl.auto_login(login_url)
-    # crawl.search(search_url, '盐酸氨基葡萄糖')
+    crawl.search(search_url, '盐酸氨基葡萄糖')
 
-    test_file_path = os.path.join(crawl.base_dir, 'htmls/af_search.html')
-    cnt = crawl.read_page(test_file_path)
-    crawl.catch_products(cnt)
-
+    # test_file_path = os.path.join(crawl.base_dir, 'htmls/af_search.html')
+    # cnt = crawl.read_page(test_file_path)
+    # crawl.catch_products(cnt)
