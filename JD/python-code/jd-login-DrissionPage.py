@@ -4,7 +4,7 @@ import random
 import time
 
 from DrissionPage import ChromiumOptions, ChromiumPage, WebPage
-from DrissionPage.common import ActionChains
+from DrissionPage.common import ActionChains, Keys
 from lxml.html import etree
 from PIL import Image
 
@@ -18,6 +18,10 @@ class JDCrawler:
     # 开启无痕模式：google-chrome --remote-debugging-port=9222 --incognito
     base_dir = os.path.dirname(os.path.dirname(__file__))
     imgs_path = os.path.join(base_dir, 'images')
+
+    captch_items = {
+        '验证',
+    }
 
     # co = ChromiumOptions()
     # co.set_paths(local_port=9222)   # 弹出浏览器窗口
@@ -72,6 +76,12 @@ class JDCrawler:
 
         print('--------------------end--------------------')
 
+    def check_is_captch_page(self, title):
+        for item in self.captch_items:
+            if item in title:
+                return True
+        return False
+
     def search(self, url, product):
         start_t = time.perf_counter()
         print(f'--------------------开始: {start_t} --------------------')
@@ -81,6 +91,9 @@ class JDCrawler:
         print('--------------------进入搜索页面: {} --------------------'.format(tab_id))
 
         try:
+            title = page.ele('tag:title').text
+            if self.check_is_captch_page(title):
+                return
 
             search_key = page.ele('#key', timeout=30)
             for val in product:
@@ -93,16 +106,36 @@ class JDCrawler:
             submit.click()
             page.wait.load_start()
 
-            af_content = page.html
-            self.save_page('htmls/af_search.html', af_content)
-            self.save_page('cookies/af_search_cookie', str(page.cookies))
             print('--------------------点击搜索之后--------------------')
 
-            self.screen_shot(page, 'images/search_result.png')
+            # af_content = page.html
+            # self.save_page('htmls/af_search.html', af_content)
+            # self.save_page('cookies/af_search_cookie', str(page.cookies))
+            # self.screen_shot(page, 'images/search/search_result.png')
+
+            print('--------------------开始滑动页面--------------------')
+            page.scroll.to_half()
+            page.wait.load_start()
+
+            af_scroll_content = page.html
+            self.save_page('htmls/af_scroll_content.html', af_scroll_content)
+            self.save_page('cookies/af_scroll_content_cookie', str(page.cookies))
+            # self.screen_shot(page, 'images/search/af_scroll_content_result.png')
 
             print('--------------------开始获取商品信息--------------------')
-            self.catch_products(af_content)
-            print('--------------------获取商品信息结束--------------------')
+            # self.catch_products(af_scroll_content)
+
+            print('--------------------开始翻页--------------------')
+            ac = ActionChains(page)
+            ac.key_down(Keys.RIGHT) # 翻页
+            page.wait.load_start()
+
+            af_flip_content = page.html
+            self.save_page('htmls/af_flip_content.html', af_flip_content)
+            self.save_page('cookies/af_flip_content_cookie', str(page.cookies))
+            self.screen_shot(page, 'images/search/af_flip_content_result.png')
+
+            print('--------------------翻页结束--------------------')
 
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
@@ -113,28 +146,42 @@ class JDCrawler:
             print('--------------------结束耗时: {:.8f} --------------------'.format(spend_t))
 
         finally:
-            self.init_page.close_tabs(tab_id)  # 关闭当前页面
-
-        print('--------------------end--------------------')
+            # self.init_page.close_tabs(tab_id)  # 关闭当前页面
+            print('--------------------end--------------------')
 
     def catch_products(self, html):
 
         selector = etree.HTML(html)
         results = []
         products = selector.xpath(
-            '//div[@id="J_goodsList"]/ul[@class="gl-warp clearfix"]/li[@class="gl-item"]/div[@class="gl-i-wrap"]')
+            '//div[@id="J_goodsList"]/ul[@class="gl-warp clearfix"]/li/div[@class="gl-i-wrap"]')
 
         try:
+            if not products:
+                raise Exception('检索页面异常，未发现商品')
+            print('--------------------当前采集的商品数：{} --------------------'.format(len(products)))
+
             for product in products:
                 p_img_obj = product.xpath('div[@class="p-img"]/a/img')[0].attrib
                 p_img = 'https:' + (p_img_obj.get('src') or p_img_obj.get('data-lazy-img') or '')
-                p_price = product.xpath('div[@class="p-price"]/strong/i')[0].text
-                p_name = product.xpath('div[@class="p-name p-name-type-2"]/a/em')[0].xpath('string(.)')
-                p_detail_addr = 'https:' + (product.xpath('div[@class="p-name p-name-type-2"]/a')[0].attrib.get('href')
-                                            or '')
-                p_commit = product.xpath('div[@class="p-commit"]/strong/a')[0].xpath('string(.)')  # 评价
-                p_shop_name = product.xpath('div[@class="p-shop"]/span/a')[0].xpath('string(.)')
-                p_shop_addr = 'https' + (product.xpath('div[@class="p-shop"]/span/a')[0].attrib.get('href') or '')
+                p_price = product.xpath('div[@class="p-price"]/strong/i')
+                if p_price:
+                    p_price = p_price[0].text
+                p_name = product.xpath('div[@class="p-name p-name-type-2"]/a/em')
+                if p_name:
+                    p_name = p_name[0].xpath('string(.)')
+                p_detail_addr = product.xpath('div[@class="p-name p-name-type-2"]/a')
+                if p_detail_addr:
+                    p_detail_addr = 'https:' + (p_detail_addr[0].attrib.get('href') or '')
+                p_commit = product.xpath('div[@class="p-commit"]/strong/a')
+                if p_commit:
+                    p_commit = p_commit[0].xpath('string(.)')  # 评价
+                p_shop_name = product.xpath('div[@class="p-shop"]/span/a')
+                if p_shop_name:
+                    p_shop_name = p_shop_name[0].xpath('string(.)')
+                p_shop_addr = product.xpath('div[@class="p-shop"]/span/a')
+                if p_shop_addr:
+                    p_shop_addr = 'https' + (p_shop_addr[0].attrib.get('href') or '')
                 p_icons = product.xpath('div[@class="p-icons"]/i/text()')
                 print('--------------------准备获取详情--------------------')
                 print(f'{p_name}: {p_price} {p_shop_name} {p_detail_addr}')
@@ -163,7 +210,7 @@ class JDCrawler:
 
         finally:
             if results:
-                with open(os.path.join(self.base_dir, "result.csv"), "w", newline="", encoding='utf-8') as file:
+                with open(os.path.join(self.base_dir, "result.csv"), "a+", newline="", encoding='utf-8') as file:
                     writer = csv.writer(file)
                     writer.writerow(results)
             print('--------------------写入CSV完成--------------------')
@@ -175,44 +222,75 @@ class JDCrawler:
         try:
             tab_id = self.init_page.new_tab()
             page = self.init_page.get_tab(tab_id)
+
             page.wait.set_targets(
                 'color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc')
             page.get(url)
             page.wait.load_start()
-            resp = page.wait.data_packets()
-            if resp:
-                resp_data = resp if isinstance(resp, dict) else resp.body
-            else:
-                resp_data = {}
+            print('--------------------进入详情页完成--------------------')
 
             detail_content = page.html
             self.save_page('htmls/detail_content.html', detail_content)
             self.save_page('cookies/detail_content_cookie', str(page.cookies))
 
+            title = page.ele('tag:title').text
+            if self.check_is_captch_page(title):
+                file_name = url.split('/')[-1].split('.')[0]
+                self.screen_shot(page, 'images/search/{}.png'.format(file_name))
+                raise Exception('出现验证页面')
+
+            print('--------------------抓包数据--------------------')
+            resp = page.wait.data_packets()
+            if resp:
+                resp_data = resp if isinstance(resp, dict) else resp.body
+            else:
+                resp_data = {}
+            
+            print('--------------------开始解析页面--------------------')
             selector = etree.HTML(detail_content)
 
-            sku_name = selector.xpath('//div[@class="sku-name"]')[0].text
+            sku_name = selector.xpath('//div[@class="sku-name"]')
+            if sku_name:
+                sku_name = sku_name[0].text
             p_price = selector.xpath(
-                '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@class="summary-price J-summary-price"]/div[@class="dd"]/span[@class="p-price"]/span'
-            )[1].text
+                '//div[@class="summary-price-wrap"]/div[@class="summary-price J-summary-price"]/div[@class="dd"]/span[@class="p-price"]/span'
+            )
+            if p_price:
+                p_price = p_price[1].text if len(p_price) > 1 else p_price[0].text
             summary_quan = selector.xpath(
                 '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="summary-quan"]'
-            )[0].xpath('string(.)')
+            )
+            if summary_quan:
+                summary_quan = summary_quan[0].xpath('string(.)')
             J_summary_top = selector.xpath(
                 '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="J-summary-top"]'
-            )[0].xpath('string(.)')
+            )
+            if J_summary_top:
+                J_summary_top = J_summary_top[0].xpath('string(.)')
             summary_stock = selector.xpath(
-                '//div[@class="summary p-choose-wrap"]/div[@class="summary-stock"]')[0].xpath('string(.)')
+                '//div[@class="summary p-choose-wrap"]/div[@class="summary-stock"]')
+            if summary_stock:
+                summary_stock = summary_stock[0].xpath('string(.)')
             SelfAssuredPurchase_li = selector.xpath(
-                '//div[@class="summary p-choose-wrap"]/div[@class="SelfAssuredPurchase li"]')[0].xpath('string(.)')
-            summary_supply = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-supply"]')[0].xpath(
+                '//div[@class="summary p-choose-wrap"]/div[@class="SelfAssuredPurchase li"]')
+            if SelfAssuredPurchase_li:
+                SelfAssuredPurchase_li = SelfAssuredPurchase_li[0].xpath('string(.)')
+            summary_supply = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-supply"]')
+            if summary_supply:
+                summary_supply = summary_supply[0].xpath(
                 'string(.)')
-            summary_weight = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-weight"]')[0].xpath(
+            summary_weight = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-weight"]')
+            if summary_weight:
+                summary_weight = summary_weight[0].xpath(
                 'string(.)')
-            choose_attrs = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="choose-attrs"]')[0].xpath(
+            choose_attrs = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="choose-attrs"]')
+            if choose_attrs:
+                choose_attrs = choose_attrs[0].xpath(
                 'string(.)')
 
-            parameter_brand = selector.xpath('//div[@class="p-parameter"]/ul[@id="parameter-brand"]/li')[0].xpath(
+            parameter_brand = selector.xpath('//div[@class="p-parameter"]/ul[@id="parameter-brand"]/li')
+            if parameter_brand:
+                parameter_brand = parameter_brand[0].xpath(
                 'string(.)')
             parameter_brand_info = {
                 i.text.split('：')[0]: i.text.split('：')[-1]
@@ -243,6 +321,7 @@ class JDCrawler:
             if star_div:
                 star = star_div[0].attrib['title']
                 results['shopInfo']['star'] = star
+
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
 
