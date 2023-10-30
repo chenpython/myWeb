@@ -3,6 +3,8 @@ import os
 import random
 import time
 
+import cv2
+import numpy as np
 from DrissionPage import ChromiumOptions, ChromiumPage, WebPage
 from DrissionPage.common import ActionChains, Keys
 from lxml.html import etree
@@ -36,6 +38,45 @@ class JDCrawler:
         self.down_img_count = 90
         self.down_dir = os.path.join(self.imgs_path, 'jd4')
 
+    @staticmethod
+    def img2cv(img_data):
+
+        img = cv2.imdecode(np.fromstring(img_data, np.uint8), cv2.COLOR_RGB2BGR)
+        return img
+
+    @staticmethod
+    def img2xy(bg_img, tp_img):
+        # 识别图片边缘
+        bg_edge = cv2.Canny(bg_img, 100, 200)
+        tp_edge = cv2.Canny(tp_img, 100, 200)
+        # 转换图片格式
+        bg_pic = cv2.cvtColor(bg_edge, cv2.COLOR_GRAY2RGB)
+        tp_pic = cv2.cvtColor(tp_edge, cv2.COLOR_GRAY2RGB)
+        # 缺口匹配
+        res = cv2.matchTemplate(bg_pic, tp_pic, cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)  # 寻找最优匹配
+        tl = max_loc  # 左上角点的坐标
+        # 返回缺口的左上角X坐标
+        # 绘制矩形框
+        th, tw = tp_pic.shape[:2]
+        br = (tl[0] + tw, tl[1] + th)  # 右下角点的坐标
+        cv2.rectangle(bg_img, tl, br, (0, 0, 255), 2)  # 绘制矩形
+        cv2.imwrite(os.path.join(imag_dir, "result_new.png"), bg_img)  # 保存在本地
+        return max_loc
+
+    def slider(self, page):
+        # 保存背景图片、缺口图片
+        # 背景图片
+        bg_img = page.ele('xpath://div[@class="JDJRV-bigimg"]/img')
+        bg = self.img2cv(bg_img)
+        # 缺口图片
+        patch_img = page.ele('xpath://div[@class="JDJRV-smallimg"]/img')
+        patch = self.img2cv(patch_img)
+        # 识别图片缺口位置
+        location = self.img2xy(bg, patch)
+        # 模拟轨迹，移动滑块
+        print(location)
+
     def auto_login(self, url):
 
         tab_id = self.init_page.new_tab(url)  # 会导致截图、或者获取html内容只能拿到默认打开的无效标签页
@@ -67,6 +108,7 @@ class JDCrawler:
             print('--------------------点击登录之后--------------------')
 
             # self.captch(3, page, logbtn)  # 滑块验证码
+            self.slider(page)
 
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
