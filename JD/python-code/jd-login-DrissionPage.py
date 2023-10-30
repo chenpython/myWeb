@@ -71,10 +71,9 @@ class JDCrawler:
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
 
-        # finally:
-        #     self.init_page.close_tabs(tab_id)   # 关闭当前页面
-
-        print('--------------------end--------------------')
+        finally:
+            #     self.init_page.close_tabs(tab_id)   # 关闭当前页面
+            print('--------------------end--------------------')
 
     def check_is_captch_page(self, title):
         for item in self.captch_items:
@@ -123,19 +122,21 @@ class JDCrawler:
             # self.screen_shot(page, 'images/search/af_scroll_content_result.png')
 
             print('--------------------开始获取商品信息--------------------')
-            # self.catch_products(af_scroll_content)
+            self.catch_products(af_scroll_content)
 
             print('--------------------开始翻页--------------------')
-            ac = ActionChains(page)
-            ac.key_down(Keys.RIGHT) # 翻页
+            page.ele('xpath://a[@class="pn-next"]').click()
             page.wait.load_start()
-
             af_flip_content = page.html
             self.save_page('htmls/af_flip_content.html', af_flip_content)
             self.save_page('cookies/af_flip_content_cookie', str(page.cookies))
             self.screen_shot(page, 'images/search/af_flip_content_result.png')
 
-            print('--------------------翻页结束--------------------')
+            # curr_page = page.ele('xpath://span[@class="p-num"]//a[@class="curr"]').text
+            # print(f'当前页：{curr_page}')
+
+            print('--------------------开始获取商品信息--------------------')
+            self.catch_products(af_scroll_content)
 
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
@@ -146,15 +147,14 @@ class JDCrawler:
             print('--------------------结束耗时: {:.8f} --------------------'.format(spend_t))
 
         finally:
-            # self.init_page.close_tabs(tab_id)  # 关闭当前页面
+            self.init_page.close_tabs(tab_id)  # 关闭当前页面
             print('--------------------end--------------------')
 
     def catch_products(self, html):
 
         selector = etree.HTML(html)
         results = []
-        products = selector.xpath(
-            '//div[@id="J_goodsList"]/ul[@class="gl-warp clearfix"]/li/div[@class="gl-i-wrap"]')
+        products = selector.xpath('//div[@id="J_goodsList"]/ul[@class="gl-warp clearfix"]/li/div[@class="gl-i-wrap"]')
 
         try:
             if not products:
@@ -245,7 +245,7 @@ class JDCrawler:
                 resp_data = resp if isinstance(resp, dict) else resp.body
             else:
                 resp_data = {}
-            
+
             print('--------------------开始解析页面--------------------')
             selector = etree.HTML(detail_content)
 
@@ -258,17 +258,14 @@ class JDCrawler:
             if p_price:
                 p_price = p_price[1].text if len(p_price) > 1 else p_price[0].text
             summary_quan = selector.xpath(
-                '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="summary-quan"]'
-            )
+                '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="summary-quan"]')
             if summary_quan:
                 summary_quan = summary_quan[0].xpath('string(.)')
             J_summary_top = selector.xpath(
-                '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="J-summary-top"]'
-            )
+                '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="J-summary-top"]')
             if J_summary_top:
                 J_summary_top = J_summary_top[0].xpath('string(.)')
-            summary_stock = selector.xpath(
-                '//div[@class="summary p-choose-wrap"]/div[@class="summary-stock"]')
+            summary_stock = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@class="summary-stock"]')
             if summary_stock:
                 summary_stock = summary_stock[0].xpath('string(.)')
             SelfAssuredPurchase_li = selector.xpath(
@@ -277,21 +274,17 @@ class JDCrawler:
                 SelfAssuredPurchase_li = SelfAssuredPurchase_li[0].xpath('string(.)')
             summary_supply = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-supply"]')
             if summary_supply:
-                summary_supply = summary_supply[0].xpath(
-                'string(.)')
+                summary_supply = summary_supply[0].xpath('string(.)')
             summary_weight = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-weight"]')
             if summary_weight:
-                summary_weight = summary_weight[0].xpath(
-                'string(.)')
+                summary_weight = summary_weight[0].xpath('string(.)')
             choose_attrs = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="choose-attrs"]')
             if choose_attrs:
-                choose_attrs = choose_attrs[0].xpath(
-                'string(.)')
+                choose_attrs = choose_attrs[0].xpath('string(.)')
 
             parameter_brand = selector.xpath('//div[@class="p-parameter"]/ul[@id="parameter-brand"]/li')
             if parameter_brand:
-                parameter_brand = parameter_brand[0].xpath(
-                'string(.)')
+                parameter_brand = parameter_brand[0].xpath('string(.)')
             parameter_brand_info = {
                 i.text.split('：')[0]: i.text.split('：')[-1]
                 for i in selector.xpath('//div[@class="p-parameter"]/ul[@class="parameter2 p-parameter-list"]/li')
@@ -579,8 +572,8 @@ if __name__ == '__main__':
     login_url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F"
     search_url = "https://www.jd.com/"
     crawl = JDCrawler()
-    # crawl.auto_login(login_url)
-    crawl.search(search_url, '盐酸氨基葡萄糖')
+    crawl.auto_login(login_url)
+    # crawl.search(search_url, '盐酸氨基葡萄糖')
 
     # test_file_path = os.path.join(crawl.base_dir, 'htmls/af_search.html')
     # cnt = crawl.read_page(test_file_path)

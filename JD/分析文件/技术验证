@@ -108,6 +108,9 @@ https://gitee.com/cyahua/cnocr?_from=gitee_search
 
     rhftestaccount
     feng33314
+
+    JDszkjtest1
+    Qwer1234
     
     分析：
         1、隔一段时间登录需要验证码验证
@@ -161,6 +164,15 @@ https://color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusine
     登录滑块（绝大概率出现）
     详情页滑块，小概率出现
     翻页
+9、京东注册流程，接码平台能否满足需求
+    注册必须要满足代理和手机号在同一国家，因此需要还海外代理
+    注册成功的案例：
+        美国账号，美国代理，价格8.6卢布到25.9卢布，人民币 0.86 到 1.97 一条短信
+        https://5sim.net/zh/order/519361647 支持API接口
+    注册流程有滑块验证码
+    注册的手机号码短时间内有效，因此无法进行后续账号异常的验证
+
+
 
 
 
