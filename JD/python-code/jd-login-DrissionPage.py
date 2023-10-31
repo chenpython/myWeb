@@ -1,3 +1,4 @@
+import base64
 import csv
 import os
 import random
@@ -20,6 +21,7 @@ class JDCrawler:
     # 开启无痕模式：google-chrome --remote-debugging-port=9222 --incognito
     base_dir = os.path.dirname(os.path.dirname(__file__))
     imgs_path = os.path.join(base_dir, 'images')
+    slider_path = os.path.join(imgs_path, 'slider_imags')
 
     captch_items = {
         '验证',
@@ -39,13 +41,36 @@ class JDCrawler:
         self.down_dir = os.path.join(self.imgs_path, 'jd4')
 
     @staticmethod
-    def img2cv(img_data):
+    def handle_distance(distance):
+        """将直线距离转为缓慢的轨迹"""
 
+        slow_distance = []
+        while sum(slow_distance) <= distance:
+            slow_distance.append(random.uniform(1, 4))
+
+        if sum(slow_distance) != distance:
+            slow_distance.append(distance - sum(slow_distance))
+        return slow_distance
+
+    @staticmethod
+    def img2cv(img_data):
+        """openCV 读取 base64 图片"""
+        data = img_data.replace('data:image/png;base64,', '')
+        img_data = base64.b64decode(data)
         img = cv2.imdecode(np.fromstring(img_data, np.uint8), cv2.COLOR_RGB2BGR)
         return img
 
     @staticmethod
     def img2xy(bg_img, tp_img):
+        """识别图片缺口位置
+
+        Args:
+            bg_img : 背景图片
+            tp_img : 缺口图片
+
+        Returns:
+            返回缺口的左上角、右下角坐标
+        """
         # 识别图片边缘
         bg_edge = cv2.Canny(bg_img, 100, 200)
         tp_edge = cv2.Canny(tp_img, 100, 200)
@@ -56,26 +81,60 @@ class JDCrawler:
         res = cv2.matchTemplate(bg_pic, tp_pic, cv2.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)  # 寻找最优匹配
         tl = max_loc  # 左上角点的坐标
-        # 返回缺口的左上角X坐标
-        # 绘制矩形框
+
         th, tw = tp_pic.shape[:2]
         br = (tl[0] + tw, tl[1] + th)  # 右下角点的坐标
-        cv2.rectangle(bg_img, tl, br, (0, 0, 255), 2)  # 绘制矩形
-        cv2.imwrite(os.path.join(imag_dir, "result_new.png"), bg_img)  # 保存在本地
-        return max_loc
+
+        # cv2.rectangle(bg_img, tl, br, (0, 0, 255), 2)  # 绘制矩形
+        cv2.imwrite(os.path.join(JDCrawler.slider_path, "result_new.png"), bg_img)  # 保存在本地
+
+        return max_loc, br
 
     def slider(self, page):
         # 保存背景图片、缺口图片
         # 背景图片
-        bg_img = page.ele('xpath://div[@class="JDJRV-bigimg"]/img')
+        bg_ele = page.ele('xpath://div[@class="JDJRV-bigimg"]/img')
+        bg_img = bg_ele.attr('src')
         bg = self.img2cv(bg_img)
         # 缺口图片
-        patch_img = page.ele('xpath://div[@class="JDJRV-smallimg"]/img')
+        patch_ele = page.ele('xpath://div[@class="JDJRV-smallimg"]/img')
+        patch_img = patch_ele.attr('src')
         patch = self.img2cv(patch_img)
+        if bg is None or patch is None:
+            raise Exception('滑块图片定位异常')
         # 识别图片缺口位置
         location = self.img2xy(bg, patch)
+        print(f'缺口识别坐标：{location}')
         # 模拟轨迹，移动滑块
-        print(location)
+        upper_left = location[0]  # 缺口框的左上角坐标
+        patch_position = patch_ele.location  #  滑块左上角坐标
+        patch_size = patch_ele.size
+        # 移动距离
+        distance = upper_left[0] / 1.487603305785124
+        # distance = abs((upper_left[0] + bg_ele.location[0])  # 缺口左上角x
+        #                - patch_position[0]  # 缺口图片的左上角x
+        #                - patch_size[1]  # 滑块宽度
+        #                )
+        tracks = self.handle_distance(distance + random.uniform(-1, 1))
+        print(f'移动距离：{distance}，移动轨迹：{tracks}')
+
+        button = page.ele('xpath://div[@class="JDJRV-slide-inner JDJRV-slide-btn"]')
+
+        print('缺口图片的坐标：{}，滑动按钮的坐标：{}，背景图片坐标：{}'.format(patch_position, button.location, bg_ele.location))
+        ac = ActionChains(page)
+        print('开始移动滑块')
+        ac.move_to(button)
+        ac.hold(button)
+        # 移动滑块
+        for pos in tracks:
+            y = random.uniform(-1, 2)
+            ac.move(pos, y)
+        # ac.move_to(button, distance + patch_size[0]).hold()
+        self.screen_shot(page, 'images/slider_imags/slider_screen.png')
+        ac.release(button)
+        page.wait.load_start()
+        time.sleep(5)
+        print('滑动滑块完成')
 
     def auto_login(self, url):
 
@@ -107,14 +166,18 @@ class JDCrawler:
             self.save_page('cookies/af_cookie', str(page.cookies))
             print('--------------------点击登录之后--------------------')
 
-            # self.captch(3, page, logbtn)  # 滑块验证码
-            self.slider(page)
+            for _ in range(5):
+                slider_ele = page.ele('xpath://div[@class="JDJRV-suspend-slide"]')
+                if slider_ele:
+                    self.slider(page)
+
+            print('登录成功')
 
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
 
         finally:
-            #     self.init_page.close_tabs(tab_id)   # 关闭当前页面
+            self.init_page.close_tabs(tab_id)  # 关闭当前页面
             print('--------------------end--------------------')
 
     def check_is_captch_page(self, title):
@@ -384,219 +447,6 @@ class JDCrawler:
 
     def end(self):
         self.init_page.quit()
-
-    def captch(self, step, page, logbtn):
-        slider = page.ele('.JDJRV-suspend-slide')
-        if slider:
-            print("--------------------进入滑块验证码流程--------------------")
-            if step == 1:
-                print("--------------------第一次登录开始下载素材--------------------")
-                for i in range(self.down_img_count - 1):
-                    self.get_images(page, step)
-            elif step == 2:
-                print("--------------------已下载过素材合并素材--------------------")
-                img_path = os.path.join(self.imgs_path, '/jd3')
-                i = 1
-                while i <= 10:
-                    if os.path.exists(img_path + str(i) + "d.png") and os.path.exists(img_path + str(i) + "u.png"):
-                        imgu = Image.open(img_path + str(i) + "u.png")
-                        imgd = Image.open(img_path + str(i) + "d.png")
-                        img_temp = imgu.crop((0, 0, imgu.width, imgu.height / 2))
-                        #img_temp.show();
-                        imgd.paste(img_temp, (0, 0))
-                        imgd.save(self.down_dir + str(i) + "m.png")
-                        print("合并第" + str(i) + "张")
-                    i = i + 1
-            elif step == 3:
-                print("--------------------已有素材开始登录--------------------")
-                if slider:
-                    for i in range(50):
-                        self.do_login(page, step)
-                        time.sleep(1.7)
-                        title = page.title
-                        if title == "京东-欢迎登录":
-                            continue
-                        else:
-                            print("--------------------登录成功 {} --------------------".format(title))
-                            break
-                else:
-                    time.sleep(1.2)
-                    logbtn.click()
-
-        else:
-            print('--------------------页面未发现滑块直接登录--------------------')
-            time.sleep(0.5)
-            logbtn.click()
-
-    def do_login(self, page, step):
-        print("--------------------enter do_login--------------------")
-        curent_img = self.get_images(page, step)
-        curent_img.save(self.imgs_path + '/current.png')
-        files = os.listdir(self.down_dir)
-        simi_dict = dict()
-
-        for f in files:
-            temp_img = Image.open(self.down_dir + f)
-            simi_val = self.compare2(temp_img, curent_img)
-            simi_dict[f] = simi_val
-
-        mini = min(simi_dict, key=simi_dict.get)
-        image1 = Image.open(self.down_dir + mini)
-        gap = self.get_gap(image1, curent_img)
-        print(gap)
-
-        track = self.get_track7(gap + 20.85)
-        self.dragging(page, track)
-        print("--------------------exit do_login--------------------")
-
-    def get_images(self, page, step, find_this_img=""):
-        print("--------------------enter get_images--------------------")
-        time.sleep(0.8)
-        btn_refesh = page.ele('.JDJRV-img-refresh')
-        img = page.ele('.JDJRV-bigimg')
-        location = img.location
-        size = img.size
-        left = location[0]  # x 坐标
-        top = location[1]  # y 坐标
-        right = left + size[0]  # width
-        bottom = top + size[1]  # height
-
-        time.sleep(0.99)
-        page_snap_obj = self.get_snap(page)
-        image_obj = page_snap_obj.crop((left, top, right, bottom))  # 返回图片的矩形区域
-
-        # 图片相似才保存
-        if find_this_img != "":
-            dog = Image.open(find_this_img)
-            if self.compare2(dog, image_obj) < 0.6:
-                image_obj.save(self.imgs_path + '/image_' + str(time.time()) + '.png')
-        else:
-            image_obj.save(self.imgs_path + '/image_obj_' + str(time.time()) + '.png')
-        if step == 1:
-            btn_refesh.click()
-        print("--------------------exit get_images--------------------")
-        return image_obj
-
-    def get_gap(self, img1, img2):
-        """
-        获取缺口偏移量
-        :param img1: 不带缺口图片
-        :param img2: 带缺口图片
-        :return:
-        """
-        left = 45
-        for i in range(left, img1.size[0]):
-            for j in range(img1.size[1]):
-                if not self.is_pixel_equal(img1, img2, i, j):
-                    left = i
-                    return left
-        return left
-
-    def is_pixel_equal(self, img1, img2, x, y):
-        """
-        判断两个像素是否相同
-        :param image1: 图片1
-        :param image2: 图片2
-        :param x: 位置x
-        :param y: 位置y
-        :return: 像素是否相同
-        """
-        # 取两个图片的像素点
-        pix1 = img1.load()[x, y]
-        pix2 = img2.load()[x, y]
-        threshold = 60
-        if (abs(pix1[0] - pix2[0] < threshold) and abs(pix1[1] - pix2[1] < threshold)
-                and abs(pix1[2] - pix2[2] < threshold)):
-            return True
-        else:
-            return False
-
-    def get_track7(self, distance):
-        """
-        根据偏移量和手动操作模拟计算移动轨迹
-        :param distance: 偏移量
-        :return: 移动轨迹
-        """
-        # 移动轨迹
-        tracks = []
-        # 当前位移
-        current = 0
-        # 减速阈值
-        mid = distance * 4 / 5
-        # 时间间隔
-        t = 0.2
-        # 初始速度
-        v = 0
-
-        while current < distance:
-            if current < mid:
-                a = random.uniform(2, 5)
-            else:
-                a = -(random.uniform(12.5, 13.5))
-            v0 = v
-            v = v0 + a * t
-            x = v0 * t + 1 / 2 * a * t * t
-            current += x
-
-            if 0.6 < current - distance < 1:
-                x = x - 0.53
-                tracks.append(round(x, 2))
-
-            elif 1 < current - distance < 1.5:
-                x = x - 1.4
-                tracks.append(round(x, 2))
-            elif 1.5 < current - distance < 3:
-                x = x - 1.8
-                tracks.append(round(x, 2))
-
-            else:
-                tracks.append(round(x, 2))
-
-        print(sum(tracks))
-        return tracks
-
-    def compare2(self, image1, image2):
-        '''
-        :图片相识度简单对比 图片越像返回值越趋近于0，返回 0-1 认为图片非常相似
-        :param image1: 图片1对象
-        :param image2: 图片2对象
-        :return: 返回对比的结果
-        '''
-
-        histogram1 = image1.histogram()
-        histogram2 = image2.histogram()
-
-        differ = math.sqrt(
-            reduce(operator.add, list(map(lambda a, b: (a - b)**2, histogram1, histogram2))) / len(histogram1))
-        return differ / 100
-
-    def dragging(self, tracks, page):
-        # 按照行动轨迹先正向滑动，后反滑动
-        button = page.ele('.JDJRV-slide-btn')
-        ActionChains(page).hold(button)
-
-        for track in tracks:
-            ActionChains(page).move_to(button, offset_x=track, offset_y=0)
-
-        time.sleep(0.18)
-        #反向滑动
-        # tracks_backs = [-3, -3, -2, -2, -2, -2, -2, -1, -1, -1]  #-20
-        # for back in tracks_backs:
-        #      ActionChains(self.dr).move_by_offset(xoffset=back, yoffset=0).perform()
-
-        ActionChains(page).move_to(button, offset_x=-3, offset_y=0)
-        ActionChains(page).move_to(button, offset_x=3, offset_y=0)
-
-        time.sleep(0.7)
-        ActionChains(page).release(button)
-
-    def get_snap(self, page):
-        """
-        屏幕截图对象
-        """
-        full_snap = page.get_screenshot(os.path.join(self.imgs_path, 'full_snap.png'))
-        page_snap_obj = Image.open(full_snap)
-        return page_snap_obj
 
     def test(self):
         url = "https://item.jd.com/100018280931.html"
