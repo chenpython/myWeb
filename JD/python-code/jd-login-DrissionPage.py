@@ -5,11 +5,12 @@ import random
 import time
 
 import cv2
+import ddddocr
 import numpy as np
+import requests
 from DrissionPage import ChromiumOptions, ChromiumPage, WebPage
 from DrissionPage.common import ActionChains, Keys
 from lxml.html import etree
-from PIL import Image
 
 
 class JDCrawler:
@@ -22,6 +23,7 @@ class JDCrawler:
     base_dir = os.path.dirname(os.path.dirname(__file__))
     imgs_path = os.path.join(base_dir, 'images')
     slider_path = os.path.join(imgs_path, 'slider_imags')
+    verify_code_path = os.path.join(imgs_path, 'verify_code')
 
     captch_items = {
         '验证',
@@ -32,8 +34,9 @@ class JDCrawler:
     # page = ChromiumPage(addr_driver_opts=co)
 
     def __init__(self) -> None:
+        self.sys_proxy = '59.58.211.243:8888'
         co = ChromiumOptions()
-        co.set_proxy('http://59.58.211.243:8888')
+        co.set_proxy('http://' + self.sys_proxy)
         co.set_no_imgs(True)
         self.init_page = WebPage('d', driver_or_options=co)
 
@@ -442,8 +445,10 @@ class JDCrawler:
 
         return content
 
-    def screen_shot(self, page, file_name='images/screen_shot.png'):
-        page.get_screenshot(path=os.path.join(self.base_dir, file_name), full_page=True)
+    def screen_shot(self, page, file_name='images/screen_shot.png', **screen_kwargs):
+        full_path = os.path.join(self.base_dir, file_name)
+        page.get_screenshot(path=full_path, **screen_kwargs)
+        return full_path
 
     def end(self):
         self.init_page.quit()
@@ -459,12 +464,81 @@ class JDCrawler:
         resp_data = page.wait.data_packets()
         print(resp_data)
 
+    def business_info(self, url):
+
+        tab_id = self.init_page.new_tab(url)  # 会导致截图、或者获取html内容只能拿到默认打开的无效标签页
+        page = self.init_page.get_tab(tab_id)
+        page.wait.load_start()
+        print('--------------------进入页面: {} --------------------'.format(tab_id))
+
+        try:
+            bf_captch_cnt = page.html
+            self.save_page('htmls/bf_captch_cnt.html', bf_captch_cnt)
+            self.save_page('cookies/bf_captch_cnt_cookie', str(page.cookies))
+            print('--------------------验证之前--------------------')
+
+            captch_img = page.ele('xpath://img[@id="verifyCodeImg"]')
+            loc = captch_img.location
+            right_bottom = (loc[0] + 80, loc[1] + 30)
+
+            screen_kwargs = {'left_top': loc, 'right_bottom': right_bottom, 'full_page': False}
+            print('参数：{}'.format(screen_kwargs))
+            path = self.screen_shot(page, 'images/verify_code/verify_img.png', **screen_kwargs)
+            word = self.captcha_handler_by_file(path)
+            page.ele('#verifyCode').input(word)
+            self.screen_shot(page, 'images/verify_code/input_screen_shot.png')
+            page.ele('xpath://button[@class="btn"]').click()
+            page.wait.load_start()
+            print('--------------------输入验证之后--------------------')
+            self.screen_shot(page, 'images/verify_code/af_verify.png')
+
+        except Exception as e:
+            print('操作页面失败，错误：{}'.format(e))
+
+        finally:
+            self.init_page.close_tabs(tab_id)  # 关闭当前页面
+            print('--------------------end--------------------')
+
+    def img_pre_handler(self, path):
+        """图片预处理"""
+
+        img = cv2.imread(path)  # 读取图片
+
+        Grayimg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # 转为灰度图片
+
+        ret, thresh = cv2.threshold(Grayimg, 150, 255, cv2.THRESH_BINARY)  # 二值化图片，颜色阈值为 0~255
+
+        cv2.imwrite(path, thresh)  # 保存图片
+
+    def extract_word_ddddocr(self, path):
+        """使用ddddocr提取图片中的文字"""
+
+        ocr = ddddocr.DdddOcr(old=True)
+
+        with open(path, 'rb') as f:
+            image = f.read()
+
+        result = ocr.classification(image)
+
+        return result
+
+    def captcha_handler_by_file(self, path):
+        self.img_pre_handler(path)
+
+        word = self.extract_word_ddddocr(path)
+
+        print('识别 {} 验证码：{}'.format(path, ord))
+
+        return word
+
 
 if __name__ == '__main__':
     login_url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F"
     search_url = "https://www.jd.com/"
+    captch_url = "https://mall.jd.com/showLicence-119174.html"
     crawl = JDCrawler()
-    crawl.auto_login(login_url)
+    crawl.business_info(captch_url)
+    # crawl.auto_login(login_url)
     # crawl.search(search_url, '盐酸氨基葡萄糖')
 
     # test_file_path = os.path.join(crawl.base_dir, 'htmls/af_search.html')
