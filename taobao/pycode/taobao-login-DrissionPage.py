@@ -185,23 +185,24 @@ class TBCrawler:
                     self.save_page('htmls/slider_iframe.html', slider_iframe.html)
                     slider = slider_iframe.ele('.nc-lang-cnt')
                     slider_location = slider.location
+                    slider_mid_location = slider.locations.midpoint
+
                     button = slider_iframe.ele('#nc_1_n1z')
-                    print('滑块的内容：{}'.format(button.text))
                     # slider_track_location = page.ele('#nc_1_n1t').location
-                    # print('轨道长度：{}，滑块坐标：{}'.format(slider_track_location, slider_location))
+                    print('{}\n{}'.format(slider_mid_location, slider_location))
 
                     # tracks = self.handle_distance(100)
                     # print('滑块轨迹：{}'.format(tracks))
-                    ac = ActionChains(slider_iframe)
-                    print('开始移动滑块')
-                    ac.hold(button).move(500)
+                    # ac = ActionChains(slider_iframe)
+                    # print('开始移动滑块')
+                    # ac.hold(button).move(100)
                     # 移动滑块
                     # for pos in tracks:
                     #     y = random.uniform(-1, 2)
                     #     ac.move(pos, y)
                     # self.screen_shot(page, 'images/slider_imags/slider_screen.png')
-                    ac.release(button)
-                    page.wait.load_start()
+                    # ac.release(button)
+                    # page.wait.load_start()
                     print('滑动滑块完成')
                     break
 
@@ -211,7 +212,7 @@ class TBCrawler:
             print('操作页面失败，错误：{}'.format(e))
 
         finally:
-            # self.init_page.close_tabs(tab_id)  # 关闭当前页面
+            self.init_page.close_tabs(tab_id)  # 关闭当前页面
             print('--------------------end--------------------')
 
     def check_is_captch_page(self, title):
