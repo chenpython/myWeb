@@ -165,9 +165,9 @@ class TBCrawler:
         print('--------------------进入页面: {} --------------------'.format(tab_id))
 
         try:
-            print('跳转到登录界面')
-            page.ele('tx=亲，请登录').click()
-            page.wait.load_start()
+            # print('跳转到登录界面')
+            # page.ele('tx=亲，请登录').click()
+            # page.wait.load_start()
             print('--------------------等待 {} 页面加载完成--------------------'.format(tab_id))
 
             for _ in range(10):
@@ -185,24 +185,23 @@ class TBCrawler:
                     self.save_page('htmls/slider_iframe.html', slider_iframe.html)
                     slider = slider_iframe.ele('.nc-lang-cnt')
                     slider_location = slider.location
+                    button = slider_iframe.ele('#nc_1_n1z')
+                    print('滑块的内容：{}'.format(button.text))
                     # slider_track_location = page.ele('#nc_1_n1t').location
                     # print('轨道长度：{}，滑块坐标：{}'.format(slider_track_location, slider_location))
 
-                    tracks = self.handle_distance(500)
-                    print('滑块轨迹：{}'.format(tracks))
+                    # tracks = self.handle_distance(100)
+                    # print('滑块轨迹：{}'.format(tracks))
                     ac = ActionChains(slider_iframe)
                     print('开始移动滑块')
-                    ac.move_to(slider)
-                    ac.hold(slider)
+                    ac.hold(button).move(500)
                     # 移动滑块
-                    for pos in tracks:
-                        y = random.uniform(-1, 2)
-                        ac.move(pos, y)
-                    # ac.move_to(button, distance + patch_size[0]).hold()
-                    self.screen_shot(page, 'images/slider_imags/slider_screen.png')
-                    ac.release(slider)
+                    # for pos in tracks:
+                    #     y = random.uniform(-1, 2)
+                    #     ac.move(pos, y)
+                    # self.screen_shot(page, 'images/slider_imags/slider_screen.png')
+                    ac.release(button)
                     page.wait.load_start()
-                    time.sleep(5)
                     print('滑动滑块完成')
                     break
 
@@ -496,7 +495,8 @@ class TBCrawler:
 
 
 if __name__ == '__main__':
-    login_url = "https://www.taobao.com/"
+    home_url =  "https://www.taobao.com/"
+    login_url = "https://login.taobao.com/member/login.jhtml?spm=a21bo.jianhua.754894437.1.5af92a89AhMaFw&f=top&redirectURL=https%3A%2F%2Fwww.taobao.com%2F"
     search_url = "https://www.jd.com/"
     crawl = TBCrawler()
     crawl.auto_login(login_url)
