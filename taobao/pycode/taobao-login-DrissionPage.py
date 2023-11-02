@@ -143,7 +143,7 @@ class TBCrawler:
 
         print('--------------------准备登录--------------------')
         ele = page.ele('#fm-login-id', timeout=30)
-        ele.input('gergesrtr3435@qq.com')
+        ele.input('sfagfwer233')
         page.ele('#fm-login-password', timeout=30).input('rgrty56htyh')
         page.ele('#login').click()  # 不点击输入框外的元素不会弹出滑块？
         page.wait.load_start()
@@ -189,20 +189,20 @@ class TBCrawler:
 
                     button = slider_iframe.ele('#nc_1_n1z')
                     # slider_track_location = page.ele('#nc_1_n1t').location
-                    print('{}\n{}'.format(slider_mid_location, slider_location))
+                    # print('{}\n{}'.format(slider_mid_location, slider_location))
 
-                    # tracks = self.handle_distance(100)
+                    # tracks = self.handle_distance(300)
                     # print('滑块轨迹：{}'.format(tracks))
-                    # ac = ActionChains(slider_iframe)
-                    # print('开始移动滑块')
-                    # ac.hold(button).move(100)
+                    ac = ActionChains(slider_iframe)
+                    print('开始移动滑块')
+                    ac.move_to(button).move(150)
                     # 移动滑块
                     # for pos in tracks:
                     #     y = random.uniform(-1, 2)
                     #     ac.move(pos, y)
-                    # self.screen_shot(page, 'images/slider_imags/slider_screen.png')
-                    # ac.release(button)
-                    # page.wait.load_start()
+                    self.screen_shot(page, 'images/slider_imags/slider_screen.png')
+                    ac.release(button)
+                    page.wait.load_start()
                     print('滑动滑块完成')
                     break
 
