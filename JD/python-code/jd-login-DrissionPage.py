@@ -212,39 +212,30 @@ class JDCrawler:
             submit = page.ele('.button')
             submit.click()
             page.wait.load_start()
-
-            print('--------------------点击搜索之后--------------------')
-
             # af_content = page.html
             # self.save_page('htmls/af_search.html', af_content)
             # self.save_page('cookies/af_search_cookie', str(page.cookies))
             # self.screen_shot(page, 'images/search/search_result.png')
+            print('--------------------点击搜索之后--------------------')
 
-            print('--------------------开始滑动页面--------------------')
-            page.scroll.to_half()
-            page.wait.load_start()
+            while True:
+                self.crawl_total(page)
+                print('--------------------开始翻页--------------------')
 
-            af_scroll_content = page.html
-            self.save_page('htmls/af_scroll_content.html', af_scroll_content)
-            self.save_page('cookies/af_scroll_content_cookie', str(page.cookies))
-            # self.screen_shot(page, 'images/search/af_scroll_content_result.png')
+                next_page = page.ele('xpath://a[@class="pn-next"]')
+                if not next_page:
+                    print('--------------------翻页结束--------------------')
+                    break
+                next_page.click()
+                page.wait.load_start()
+                
+                # af_flip_content = page.html
+                # self.save_page('htmls/af_flip_content.html', af_flip_content)
+                # self.save_page('cookies/af_flip_content_cookie', str(page.cookies))
+                # self.screen_shot(page, 'images/search/af_flip_content_result.png')
 
-            print('--------------------开始获取商品信息--------------------')
-            self.catch_products(af_scroll_content)
-
-            print('--------------------开始翻页--------------------')
-            page.ele('xpath://a[@class="pn-next"]').click()
-            page.wait.load_start()
-            af_flip_content = page.html
-            self.save_page('htmls/af_flip_content.html', af_flip_content)
-            self.save_page('cookies/af_flip_content_cookie', str(page.cookies))
-            self.screen_shot(page, 'images/search/af_flip_content_result.png')
-
-            # curr_page = page.ele('xpath://span[@class="p-num"]//a[@class="curr"]').text
-            # print(f'当前页：{curr_page}')
-
-            print('--------------------开始获取商品信息--------------------')
-            self.catch_products(af_scroll_content)
+                # curr_page = page.ele('xpath://span[@class="p-num"]//a[@class="curr"]').text
+                # print(f'当前页：{curr_page}')
 
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
@@ -258,7 +249,19 @@ class JDCrawler:
             self.init_page.close_tabs(tab_id)  # 关闭当前页面
             print('--------------------end--------------------')
 
+    def crawl_total(self, page):
+        print('--------------------开始滑动页面--------------------')
+        page.scroll.to_half()
+        page.wait.load_start()
+
+        af_scroll_content = page.html
+        # self.save_page('htmls/af_scroll_content.html', af_scroll_content)
+        # self.save_page('cookies/af_scroll_content_cookie', str(page.cookies))
+        # self.screen_shot(page, 'images/search/af_scroll_content_result.png')
+        self.catch_products(af_scroll_content)
+
     def catch_products(self, html):
+        print('--------------------开始获取商品信息--------------------')
 
         selector = etree.HTML(html)
         results = []
@@ -537,9 +540,9 @@ if __name__ == '__main__':
     search_url = "https://www.jd.com/"
     captch_url = "https://mall.jd.com/showLicence-119174.html"
     crawl = JDCrawler()
-    crawl.business_info(captch_url)
+    # crawl.business_info(captch_url)
     # crawl.auto_login(login_url)
-    # crawl.search(search_url, '盐酸氨基葡萄糖')
+    crawl.search(search_url, '盐酸氨基葡萄糖')
 
     # test_file_path = os.path.join(crawl.base_dir, 'htmls/af_search.html')
     # cnt = crawl.read_page(test_file_path)
