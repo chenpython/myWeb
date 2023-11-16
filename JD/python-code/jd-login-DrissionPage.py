@@ -2,6 +2,7 @@ import base64
 import csv
 import os
 import random
+import string
 import time
 
 import cv2
@@ -110,7 +111,7 @@ class JDCrawler:
         print(f'缺口识别坐标：{location}')
         # 模拟轨迹，移动滑块
         upper_left = location[0]  # 缺口框的左上角坐标
-        patch_position = patch_ele.location  #  滑块左上角坐标
+        patch_position = patch_ele.location  # 滑块左上角坐标
         patch_size = patch_ele.size
         # 移动距离
         distance = upper_left[0] / 1.487603305785124
@@ -119,11 +120,12 @@ class JDCrawler:
         #                - patch_size[1]  # 滑块宽度
         #                )
         tracks = self.handle_distance(distance + random.uniform(-1, 1))
-        print(f'移动距离：{distance}，移动轨迹：{tracks}')
+        # print(f'移动距离：{distance}，移动轨迹：{tracks}')
 
         button = page.ele('xpath://div[@class="JDJRV-slide-inner JDJRV-slide-btn"]')
 
-        print('缺口图片的坐标：{}，滑动按钮的坐标：{}，背景图片坐标：{}'.format(patch_position, button.location, bg_ele.location))
+        # print('缺口图片的坐标：{}，滑动按钮的坐标：{}，背景图片坐标：{}'.format(
+        # patch_position, button.location, bg_ele.location))
         ac = ActionChains(page)
         print('开始移动滑块')
         ac.move_to(button)
@@ -139,6 +141,11 @@ class JDCrawler:
         time.sleep(5)
         print('滑动滑块完成')
 
+    @staticmethod
+    def generate_random_string(length):
+        characters = string.ascii_letters + string.digits
+        return ''.join(random.choice(characters) for _ in range(length))
+
     def auto_login(self, url):
 
         tab_id = self.init_page.new_tab(url)  # 会导致截图、或者获取html内容只能拿到默认打开的无效标签页
@@ -151,30 +158,32 @@ class JDCrawler:
             page.wait.ele_display('#loginname', timeout=60)
             print('--------------------等待 {} 页面加载完成--------------------'.format(tab_id))
 
-            bf_content = page.html
-            self.save_page('htmls/bf_content.html', bf_content)
-            self.save_page('cookies/bf_cookie', str(page.cookies))
+            # bf_content = page.html
+            # self.save_page('htmls/bf_content.html', bf_content)
+            # self.save_page('cookies/bf_cookie', str(page.cookies))
             print('--------------------登录之前--------------------')
-
+            user_name = self.generate_random_string(random.randint(10, 15))
+            pass_word = self.generate_random_string(random.randint(8, 10))
             ele = page.ele('#loginname', timeout=30)
-            ele.input('rhftestaccount')
-            page.ele('#nloginpwd', timeout=30).input('feng33314')
+            ele.input(user_name)
+            page.ele('#nloginpwd', timeout=30).input(pass_word)
             logbtn = page.ele('#loginsubmit', timeout=30)
             time.sleep(2)
             logbtn.click()
             page.wait.load_start()
 
-            af_content = page.html
-            self.save_page('htmls/af_content.html', af_content)
-            self.save_page('cookies/af_cookie', str(page.cookies))
+            # af_content = page.html
+            # self.save_page('htmls/af_content.html', af_content)
+            # self.save_page('cookies/af_cookie', str(page.cookies))
             print('--------------------点击登录之后--------------------')
 
             for _ in range(5):
                 slider_ele = page.ele('xpath://div[@class="JDJRV-suspend-slide"]')
                 if slider_ele:
                     self.slider(page)
-
-            print('登录成功')
+                else:
+                    print('登录成功')
+                    break
 
         except Exception as e:
             print('操作页面失败，错误：{}'.format(e))
@@ -228,7 +237,7 @@ class JDCrawler:
                     break
                 next_page.click()
                 page.wait.load_start()
-                
+
                 # af_flip_content = page.html
                 # self.save_page('htmls/af_flip_content.html', af_flip_content)
                 # self.save_page('cookies/af_flip_content_cookie', str(page.cookies))
@@ -265,7 +274,8 @@ class JDCrawler:
 
         selector = etree.HTML(html)
         results = []
-        products = selector.xpath('//div[@id="J_goodsList"]/ul[@class="gl-warp clearfix"]/li/div[@class="gl-i-wrap"]')
+        products = selector.xpath(
+            '//div[@id="J_goodsList"]/ul[@class="gl-warp clearfix"]/li/div[@class="gl-i-wrap"]')
 
         try:
             if not products:
@@ -376,24 +386,29 @@ class JDCrawler:
                 '//div[@class="summary summary-first"]/div[@class="summary-price-wrap"]/div[@id="J-summary-top"]')
             if J_summary_top:
                 J_summary_top = J_summary_top[0].xpath('string(.)')
-            summary_stock = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@class="summary-stock"]')
+            summary_stock = selector.xpath(
+                '//div[@class="summary p-choose-wrap"]/div[@class="summary-stock"]')
             if summary_stock:
                 summary_stock = summary_stock[0].xpath('string(.)')
             SelfAssuredPurchase_li = selector.xpath(
                 '//div[@class="summary p-choose-wrap"]/div[@class="SelfAssuredPurchase li"]')
             if SelfAssuredPurchase_li:
                 SelfAssuredPurchase_li = SelfAssuredPurchase_li[0].xpath('string(.)')
-            summary_supply = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-supply"]')
+            summary_supply = selector.xpath(
+                '//div[@class="summary p-choose-wrap"]/div[@id="summary-supply"]')
             if summary_supply:
                 summary_supply = summary_supply[0].xpath('string(.)')
-            summary_weight = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="summary-weight"]')
+            summary_weight = selector.xpath(
+                '//div[@class="summary p-choose-wrap"]/div[@id="summary-weight"]')
             if summary_weight:
                 summary_weight = summary_weight[0].xpath('string(.)')
-            choose_attrs = selector.xpath('//div[@class="summary p-choose-wrap"]/div[@id="choose-attrs"]')
+            choose_attrs = selector.xpath(
+                '//div[@class="summary p-choose-wrap"]/div[@id="choose-attrs"]')
             if choose_attrs:
                 choose_attrs = choose_attrs[0].xpath('string(.)')
 
-            parameter_brand = selector.xpath('//div[@class="p-parameter"]/ul[@id="parameter-brand"]/li')
+            parameter_brand = selector.xpath(
+                '//div[@class="p-parameter"]/ul[@id="parameter-brand"]/li')
             if parameter_brand:
                 parameter_brand = parameter_brand[0].xpath('string(.)')
             parameter_brand_info = {
@@ -421,7 +436,8 @@ class JDCrawler:
                 'shopInfo': resp_data
             }
 
-            star_div = selector.xpath('//div[@class="star"]/div[@class="star-bg"]/div[@class="star-gray"]')
+            star_div = selector.xpath(
+                '//div[@class="star"]/div[@class="star-bg"]/div[@class="star-gray"]')
             if star_div:
                 star = star_div[0].attrib['title']
                 results['shopInfo']['star'] = star
@@ -461,7 +477,8 @@ class JDCrawler:
         tab_id = self.init_page.new_tab()
         page = self.init_page.get_tab(tab_id)
 
-        page.wait.set_targets('color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc')
+        page.wait.set_targets(
+            'color.yiyaojd.com/?appid=pc-item-soa&functionId=pc_detailpage_wareBusiness&client=pc')
         page.get(url)
         page.wait.load_start()
         resp_data = page.wait.data_packets()
@@ -536,13 +553,15 @@ class JDCrawler:
 
 
 if __name__ == '__main__':
+
     login_url = "https://passport.jd.com/new/login.aspx?ReturnUrl=https%3A%2F%2Fwww.jd.com%2F"
     search_url = "https://www.jd.com/"
     captch_url = "https://mall.jd.com/showLicence-119174.html"
     crawl = JDCrawler()
     # crawl.business_info(captch_url)
-    # crawl.auto_login(login_url)
-    crawl.search(search_url, '盐酸氨基葡萄糖')
+    for _ in range(15):
+        crawl.auto_login(login_url)
+    # crawl.search(search_url, '盐酸氨基葡萄糖')
 
     # test_file_path = os.path.join(crawl.base_dir, 'htmls/af_search.html')
     # cnt = crawl.read_page(test_file_path)
